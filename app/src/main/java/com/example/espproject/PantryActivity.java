@@ -37,5 +37,9 @@ public class PantryActivity extends AppCompatActivity implements AddIngredientDi
 
         //retrieve pantry from the database
         pantry = pantry.retrievePantry(firebaseFirestore);
+
+        // TODO: check if user has a pantry, start PantryFragment or NoPantryFragment accordingly
+
+
     }
 }
