@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/emicu/AndroidStudioProjects/ESPProject/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/emicu/AndroidStudioProjects/ESPProject/app/src/main/res/layout/activity_profile.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/emicu/AndroidStudioProjects/ESPProject/app/src/main/res/layout/activity_recipe.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/emicu/AndroidStudioProjects/ESPProject/app/src/main/res/layout/activity_shopping_list.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/emicu/AndroidStudioProjects/ESPProject/app/src/main/res/layout/dialog_add_ingredient.xml" value="0.190625" />
@@ -12,6 +13,7 @@
         <entry key="..\:/Users/emicu/AndroidStudioProjects/ESPProject/app/src/main/res/layout/fragment_no_pantry.xml" value="0.253125" />
         <entry key="..\:/Users/emicu/AndroidStudioProjects/ESPProject/app/src/main/res/layout/fragment_pantry.xml" value="0.253125" />
         <entry key="..\:/Users/emicu/AndroidStudioProjects/ESPProject/app/src/main/res/layout/fragment_recipe.xml" value="0.253125" />
+        <entry key="..\:/Users/emicu/AndroidStudioProjects/ESPProject/app/src/main/res/layout/fragment_recipe_list.xml" value="0.253125" />
         <entry key="..\:/Users/emicu/AndroidStudioProjects/ESPProject/app/src/main/res/layout/fragment_recipe_menu.xml" value="0.2076923076923077" />
         <entry key="..\:/Users/emicu/AndroidStudioProjects/ESPProject/app/src/main/res/layout/fragment_search.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/emicu/AndroidStudioProjects/ESPProject/app/src/main/res/layout/fragment_selected_items.xml" value="0.253125" />

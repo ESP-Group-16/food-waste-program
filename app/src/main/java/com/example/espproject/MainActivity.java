@@ -14,7 +14,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+// main login page
 public class MainActivity extends AppCompatActivity {
+
+    // TODO: declare UI components as fields
 
     private FirebaseAuth mAuth;
     private TextView txt;
