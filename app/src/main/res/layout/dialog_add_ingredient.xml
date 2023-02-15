@@ -1,13 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/addIngredientLinLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Ingredient:"
+        android:textSize="35sp"
+        android:textColor="@color/black"
+        android:padding="10sp"/>
+
+    <EditText
+        android:id="@+id/pantryAddIngredientName"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:hint="Ingredient name"
+        android:inputType="phone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/pantryAddIngredientQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:hint="Quantity"
+            android:inputType="phone"
+            android:layout_weight="8" />
+
+        <Spinner
+            android:id="@+id/pantryAddIngredientUnitSelector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select expiry date"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:paddingHorizontal="10sp"
+        android:layout_marginTop="20sp"/>
+
+    <DatePicker
+        android:id="@+id/simpleDatePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:datePickerMode="spinner" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share this item" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Ingredient"
-        android:textAllCaps="false"
-        android:id="@+id/btnAddIngredient"/>
+        android:text="Add Item"
+        android:drawableLeft="@drawable/baseline_add_24"
+        android:padding="10sp"
+        android:layout_gravity="center"
+        android:textAllCaps="false"/>
 
-</RelativeLayout>
+
+</LinearLayout>

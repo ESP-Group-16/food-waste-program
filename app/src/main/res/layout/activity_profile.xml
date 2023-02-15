@@ -1,11 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/activityProfileTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:orientation="vertical" >
+        <TextView
+            android:id="@+id/activityProfileTopTextUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome, name!"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:paddingHorizontal="10sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/activityProfileUserStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pantry admin"
+            android:textColor="@color/white"
+            android:paddingHorizontal="10sp"
+            android:paddingBottom="5sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/activityProfileAchievementsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Achievements"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_below="@id/activityProfileTopBar"
+        android:paddingHorizontal="15sp"
+        android:paddingVertical="7sp"/>
+
+    <LinearLayout
+        android:id="@+id/activityProfileAchievementsTable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activityProfileAchievementsTitle"
+        android:paddingHorizontal="20sp">
+
+        <LinearLayout
+            android:id="@+id/activityProfileAchievementsTableLeftColumn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/activityProfileSavedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You have saved"
+                android:textColor="#000"
+                android:paddingVertical="2sp"/>
+
+            <TextView
+                android:id="@+id/activityProfileScoreTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your score"
+                android:textColor="#000"
+                android:paddingVertical="2sp"/>
+
+            <TextView
+                android:id="@+id/activityProfileLeaderboardTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leaderboard position"
+                android:textColor="#000"
+                android:paddingVertical="2sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activityProfileAchievementsTableRightColumn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/activityProfileCO2Saved"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - CO2"
+                android:textColor="#000"
+                android:paddingVertical="2sp"/>
+
+            <TextView
+                android:id="@+id/activityProfileScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" -X- "
+                android:textColor="#000"
+                android:paddingVertical="2sp"/>
+
+            <TextView
+                android:id="@+id/activityProfileLeaderboardPos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" -X- "
+                android:textColor="#000"
+                android:paddingVertical="2sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
+    <TextView
+        android:id="@+id/activityProfileProfileTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_below="@id/activityProfileAchievementsTable"
+        android:paddingHorizontal="15sp"
+        android:paddingTop="10sp"
+        android:paddingBottom="7sp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/activityProfileProfileButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activityProfileProfileTitle"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/activityProfilePreferencesButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Preferences"
+            android:textColor="@color/white"
+            android:layout_marginBottom="-11sp"
+            android:backgroundTint="@color/purple_500"
+            android:drawableRight="@drawable/baseline_arrow_right_alt_24"
+            android:textAllCaps="false"
+            android:gravity="left|center_vertical"/>
+
+        <Button
+            android:id="@+id/activityProfileAllergiesButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Allergies"
+            android:textColor="@color/white"
+            android:drawableRight="@drawable/baseline_arrow_right_alt_24"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/purple_500"
+            android:gravity="left|center_vertical"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/activityProfileSettingsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_below="@id/activityProfileProfileButtons"
+        android:paddingHorizontal="15sp"
+        android:paddingTop="10sp"
+        android:paddingBottom="7sp"/>
+
+    <Button
+        android:id="@+id/activityProfileSettingsNotifButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        android:drawableRight="@drawable/baseline_arrow_right_alt_24"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:gravity="left|center_vertical"
+        android:layout_below="@id/activityProfileSettingsTitle"/>
+
+    <Button
+        android:id="@+id/activityLogoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LogOut"
+        android:textAllCaps="false"
+        android:layout_below="@id/activityProfileSettingsNotifButton"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@color/white"
+        android:paddingHorizontal="50sp"
+        android:paddingVertical="15sp"
+        android:layout_marginTop="20sp"/>
+
+    <LinearLayout
+        android:id="@+id/navBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAVBAR"
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
