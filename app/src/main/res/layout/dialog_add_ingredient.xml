@@ -3,7 +3,8 @@
     android:id="@+id/addIngredientLinLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/add"
@@ -16,10 +17,11 @@
 
     <EditText
         android:id="@+id/pantryAddIngredientName"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
         android:hint="Ingredient name"
-        android:inputType="phone" />
+        android:inputType="phone"
+        android:textSize="25sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:hint="Quantity"
+            android:textSize="25sp"
             android:inputType="phone"
             android:layout_weight="8" />
 
@@ -52,25 +55,36 @@
         android:paddingHorizontal="10sp"
         android:layout_marginTop="20sp"/>
 
+    <!--
     <DatePicker
         android:id="@+id/simpleDatePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:datePickerMode="spinner" />
+        android:layout_width="10sp"
+        android:layout_height="10sp"
+        android:datePickerMode="calendar" />
 
+        !!! UNSURE WHY THIS CAUSES A RENDER ERROR
+
+    -->
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share this item" />
+        android:text="Share this item"
+        android:textSize="15sp"
+        android:paddingHorizontal="10sp"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Item"
         android:drawableLeft="@drawable/baseline_add_24"
         android:padding="10sp"
         android:layout_gravity="center"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:paddingVertical="10sp"
+        android:paddingHorizontal="20sp"
+        android:background="@drawable/rounded_button"/>
 
 
 </LinearLayout>

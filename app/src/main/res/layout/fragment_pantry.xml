@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/pantryTopBar"
@@ -21,7 +22,8 @@
             android:padding="10dp"
             android:text="Pantry Name"
             android:textColor="@color/white"
-            android:textSize="40sp"  />
+            android:textSize="40sp"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/pantryUsersButton"
@@ -30,7 +32,10 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/baseline_supervised_user_circle_24"
             android:text="Users"
+            android:textSize="15sp"
             android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textAlignment="center"
             android:backgroundTint="@color/purple_500"/>
 
 
@@ -53,9 +58,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Fridge"
-                android:textSize="30sp"
+                android:textSize="35sp"
                 android:textColor="@color/black"
-                android:paddingHorizontal="10sp"/>
+                android:paddingHorizontal="10sp"
+                android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pantryRecyclerFridge"
@@ -69,10 +75,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cupboard"
-                android:textSize="30sp"
+                android:textSize="35sp"
                 android:layout_below="@+id/pantryRecyclerFridge"
                 android:textColor="@color/black"
-                android:paddingHorizontal="10sp"/>
+                android:paddingHorizontal="10sp"
+                android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pantryRecyclerCupboard"
@@ -86,10 +93,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Freezer"
-                android:textSize="30sp"
+                android:textSize="35sp"
                 android:layout_below="@+id/pantryRecyclerCupboard"
                 android:textColor="@color/black"
-                android:paddingHorizontal="10sp"/>
+                android:paddingHorizontal="10sp"
+                android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pantryRecyclerFreezer"
@@ -97,23 +105,27 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtPantryFreezer"
                 android:paddingBottom="90sp"
-                android:paddingHorizontal="10sp"/>
+                android:paddingHorizontal="10sp" />
         </RelativeLayout>
 
 
     </ScrollView>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addIngredientButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/navBar"
         android:text="Add Ingredients"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
-        android:textSize="15sp"
+        android:textSize="25sp"
         android:drawableLeft="@drawable/baseline_add_24"
         android:textAllCaps="false"
-        android:backgroundTint="@color/purple_500" />
+        android:background="@drawable/rounded_button"
+        android:paddingHorizontal="20sp"
+        android:paddingVertical="5sp"
+        android:layout_marginBottom="10sp"/>
 
     <LinearLayout
         android:id="@+id/navBar"
