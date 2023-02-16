@@ -1,14 +1,17 @@
-package com.example.espproject;
-
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Pantry {
+import java.util.List;
+
+public class Pantry { // TODO: check access modifiers.
     public static final String fireStoreCollectionName = "pantries";
-    private int id;
+    private int pantryId; // Changed from id to pantryId (per UML diagram)
     private String name;
+    // New added attributes
+    private List<User> userList;
+    private List<Stock> stocks;
 
     public Pantry(int id, String name) {
-        this.id = id;
+        this.pantryId = id;
         this.name = name;
     }
 
@@ -27,11 +30,11 @@ public class Pantry {
     }
 
     public int getId() {
-        return id;
+        return pantryId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.pantryId = id;
     }
 
     public String getName() {
@@ -41,4 +44,24 @@ public class Pantry {
     public void setName(String name) {
         this.name = name;
     }
+
+    // New Attribute Getters and Setters
+
+    public List<User> getUsers() { // Name altered from getUserList() --> getUsers() (per UML diagram)
+        return userList;
+    }
+
+    public void setUsers(List<User> userList) { // setUserList() --> setUsers()
+        this.userList = userList;
+    }
+
+    public List<Stock> getStock() { // Name altered from getStocks() --> getStock() (per UML diagram)
+        return stocks;
+    }
+
+    public void setStock(List<Stock> stocks) { // setStocks() --> setStock()
+        this.stocks = stocks;
+    }
+
+
 }
