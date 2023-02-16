@@ -1,14 +1,14 @@
-import java.util.List;
+import java.util.ArrayList;
 
 public class Recipe { // TODO: check access modifiers.
     private int recipeId;
     private String name;
     private String imageURL;
     private int duration; // In minutes
-    private List<String> dietaryInfo;
-    private List<String> ingredients;
-    private List<String> steps; //TODO: Is this supposed to be a list<string> and not <Integer> or equiv?
-    private List<String> category;
+    private ArrayList<String> dietaryInfo;
+    private ArrayList<String> ingredients;
+    private ArrayList<String> steps; //TODO: Is this supposed to be a ArrayList<string> and not <Integer> or equiv?
+    private ArrayList<String> category;
     private User creator;
 
     public Recipe(){
@@ -52,35 +52,35 @@ public class Recipe { // TODO: check access modifiers.
         this.duration = duration;
     }
 
-    public List<String> getDietaryInfo() {
+    public ArrayList<String> getDietaryInfo() {
         return dietaryInfo;
     }
 
-    public void setDietaryInfo(List<String> dietaryInfo) {
+    public void setDietaryInfo(ArrayList<String> dietaryInfo) {
         this.dietaryInfo = dietaryInfo;
     }
 
-    public List<String> getIngredients() {
+    public ArrayList<String> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<String> ingredients) {
+    public void setIngredients(ArrayList<String> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public List<String> getSteps() {
+    public ArrayList<String> getSteps() {
         return steps;
     }
 
-    public void setSteps(List<String> steps) {
+    public void setSteps(ArrayList<String> steps) {
         this.steps = steps;
     }
 
-    public List<String> getCategory() {
+    public ArrayList<String> getCategory() {
         return category;
     }
 
-    public void setCategory(List<String> category) {
+    public void setCategory(ArrayList<String> category) {
         this.category = category;
     }
 

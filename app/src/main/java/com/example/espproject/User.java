@@ -1,15 +1,15 @@
-import java.util.List;
+import java.util.ArrayList;
 
 public class User {
     private int userId;
     private String userName;
     private String password;
-    private List<Food> dislikes;
+    private ArrayList<Food> dislikes;
     private boolean hasDoneTutorial;
-    private List<Food> allergies;
-    private List<Recipe> favourites; // in UML diagram is listed as List<Recipes>; changed this to <Recipe>.
+    private ArrayList<Food> allergies;
+    private ArrayList<Recipe> favourites; // in UML diagram is ArrayListed as ArrayList<Recipes>; changed this to <Recipe>.
     private int socialCreditScore;
-    private List<Ingredient> shoppingList;
+    private ArrayList<Ingredient> shoppingArrayList;
 
     public static void signUp() { // TODO: Is this the same as login() - seen below?
 
@@ -26,21 +26,21 @@ public class User {
 
     // Requested Methods (from UML)
 
-    public List<Recipe> getRecipes(){
-        List<Recipe> foo = null; // TODO: exchange placeholder.
+    public ArrayList<Recipe> getRecipes(){
+        ArrayList<Recipe> foo = null; // TODO: exchange placeholder.
         return foo;
     }
 
     // getFavouriteRecipes() same functionality as 'getter' getfavourites()
-    public List<Recipe> getFavouriteRecipes() {
+    public ArrayList<Recipe> getFavouriteRecipes() {
         return favourites;
     }
 
     // getAllergies in New Getters and Setters
 
     // TODO: !! I kinda had to guess what we're returning here
-    public List<String> getPreferences(){
-        List<String> foo = null; // TODO: exchange placeholder.
+    public ArrayList<String> getPreferences(){
+        ArrayList<String> foo = null; // TODO: exchange placeholder.
         return foo;
     }
 
@@ -81,11 +81,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Food> getDislikes() {
+    public ArrayList<Food> getDislikes() {
         return dislikes;
     }
 
-    public void setDislikes(List<Food> dislikes) {
+    public void setDislikes(ArrayList<Food> dislikes) {
         this.dislikes = dislikes;
     }
 
@@ -97,17 +97,17 @@ public class User {
         this.hasDoneTutorial = hasDoneTutorial;
     }
 
-    public List<Food> getAllergies() {
+    public ArrayList<Food> getAllergies() {
         return allergies;
     }
 
-    public void setAllergies(List<Food> allergies) {
+    public void setAllergies(ArrayList<Food> allergies) {
         this.allergies = allergies;
     }
 
     // getFavourites would go here.
 
-    public void setFavourites(List<Recipe> favourites) {
+    public void setFavourites(ArrayList<Recipe> favourites) {
         this.favourites = favourites;
     }
 
@@ -119,11 +119,11 @@ public class User {
         this.socialCreditScore = socialCreditScore;
     }
 
-    public List<Ingredient> getShoppingList() {
-        return shoppingList;
+    public ArrayList<Ingredient> getShoppingArrayList() {
+        return shoppingArrayList;
     }
 
-    public void setShoppingList(List<Ingredient> shoppingList) {
-        this.shoppingList = shoppingList;
+    public void setShoppingArrayList(ArrayList<Ingredient> shoppingArrayList) {
+        this.shoppingArrayList = shoppingArrayList;
     }
 }

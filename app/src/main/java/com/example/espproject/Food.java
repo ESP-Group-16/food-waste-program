@@ -1,10 +1,10 @@
 import java.util.Dictionary;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Food { // TODO: check access modifiers.
     private int foodId;
     private String name;
-    private List<String> dietaryInfo;
+    private ArrayList<String> dietaryInfo;
     private int unit;
     private Dictionary<String, Integer> nutritional_info;
     private double carbonFootprint;
@@ -18,11 +18,11 @@ public class Food { // TODO: check access modifiers.
         this.name = name;
     }
 
-    public List<String> getDietaryInfo() {
+    public ArrayList<String> getDietaryInfo() {
         return dietaryInfo;
     }
 
-    public void setDietaryInfo(List<String> dietaryInfo) {
+    public void setDietaryInfo(ArrayList<String> dietaryInfo) {
         this.dietaryInfo = dietaryInfo;
     }
 

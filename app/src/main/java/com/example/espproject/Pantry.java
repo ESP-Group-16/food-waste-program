@@ -1,14 +1,14 @@
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Pantry { // TODO: check access modifiers.
     public static final String fireStoreCollectionName = "pantries";
     private int pantryId; // Changed from id to pantryId (per UML diagram)
     private String name;
     // New added attributes
-    private List<User> userList;
-    private List<Stock> stocks;
+    private ArrayList<User> userArrayList;
+    private ArrayList<Stock> stocks;
 
     public Pantry(int id, String name) {
         this.pantryId = id;
@@ -47,19 +47,19 @@ public class Pantry { // TODO: check access modifiers.
 
     // New Attribute Getters and Setters
 
-    public List<User> getUsers() { // Name altered from getUserList() --> getUsers() (per UML diagram)
-        return userList;
+    public ArrayList<User> getUsers() { // Name altered from getUserArrayList() --> getUsers() (per UML diagram)
+        return userArrayList;
     }
 
-    public void setUsers(List<User> userList) { // setUserList() --> setUsers()
-        this.userList = userList;
+    public void setUsers(ArrayList<User> userArrayList) { // setUserArrayList() --> setUsers()
+        this.userArrayList = userArrayList;
     }
 
-    public List<Stock> getStock() { // Name altered from getStocks() --> getStock() (per UML diagram)
+    public ArrayList<Stock> getStock() { // Name altered from getStocks() --> getStock() (per UML diagram)
         return stocks;
     }
 
-    public void setStock(List<Stock> stocks) { // setStocks() --> setStock()
+    public void setStock(ArrayList<Stock> stocks) { // setStocks() --> setStock()
         this.stocks = stocks;
     }
 
