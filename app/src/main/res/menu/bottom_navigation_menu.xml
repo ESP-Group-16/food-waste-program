@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+  
+      <item
+        android:id="@+id/ShoppingListActivity"
+        android:icon="@drawable/ic_shopping"
+        android:title="@string/title_shop" />
+
+    <item
+        android:id="@+id/RecipeActivity"
+        android:icon="@drawable/ic_recipe_menu"
+        android:title="@string/title_menu" />
+
+    <item
+        android:id="@+id/PantryActivity"
+        android:icon="@drawable/ic_pantry"
+        android:title="@string/title_pantry" />
+
+    <item
+        android:id="@+id/ProfileActivity"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/title_profile" />
 
 </menu>
