@@ -7,7 +7,7 @@
     android:background="@color/white">
 
     <TextView
-        android:id="@+id/add"
+        android:id="@+id/pantryAddIngredientMainTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Ingredient:"
@@ -47,6 +47,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/pantryAddIngredientExpiryDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select expiry date"
@@ -66,6 +67,7 @@
 
     -->
     <CheckBox
+        android:id="@+id/pantryAddIngredientShareBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Share this item"
@@ -73,6 +75,7 @@
         android:paddingHorizontal="10sp"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pantryAddIngredientButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Item"
