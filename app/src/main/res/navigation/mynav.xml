@@ -2,4 +2,94 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mynav" />
+    android:id="@+id/mynav"
+    app:startDestination="@id/recipeMenuFragment">
+    <dialog
+        android:id="@+id/addIngredientDialog"
+        android:name="com.example.espproject.AddIngredientDialog"
+        android:label="dialog_add_ingredient"
+        tools:layout="@layout/dialog_add_ingredient" />
+    <dialog
+        android:id="@+id/createPantryDialog"
+        android:name="com.example.espproject.CreatePantryDialog"
+        android:label="dialog_create_pantry"
+        tools:layout="@layout/dialog_create_pantry" />
+    <dialog
+        android:id="@+id/pantryUsersDialog"
+        android:name="com.example.espproject.PantryUsersDialog"
+        android:label="dialog_pantry_users"
+        tools:layout="@layout/dialog_pantry_users" />
+    <fragment
+        android:id="@+id/noPantryFragment"
+        android:name="com.example.espproject.NoPantryFragment"
+        android:label="fragment_no_pantry"
+        tools:layout="@layout/fragment_no_pantry" >
+        <action
+            android:id="@+id/action_noPantryFragment_self"
+            app:destination="@id/noPantryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pantryFragment"
+        android:name="com.example.espproject.PantryFragment"
+        android:label="fragment_pantry"
+        tools:layout="@layout/fragment_pantry" />
+    <fragment
+        android:id="@+id/recipeFragment"
+        android:name="com.example.espproject.RecipeFragment"
+        android:label="fragment_recipe"
+        tools:layout="@layout/fragment_recipe" />
+    <fragment
+        android:id="@+id/recipeListFragment"
+        android:name="com.example.espproject.RecipeListFragment"
+        android:label="fragment_recipe_list"
+        tools:layout="@layout/fragment_recipe_list" />
+    <fragment
+        android:id="@+id/recipeMenuFragment"
+        android:name="com.example.espproject.RecipeMenuFragment"
+        android:label="fragment_recipe_menu"
+        tools:layout="@layout/fragment_recipe_menu" >
+        <action
+            android:id="@+id/action_recipeMenuFragment_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.espproject.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/selectedItemsFragment"
+        android:name="com.example.espproject.SelectedItemsFragment"
+        android:label="fragment_selected_items"
+        tools:layout="@layout/fragment_selected_items" />
+    <fragment
+        android:id="@+id/shoppingListFragment"
+        android:name="com.example.espproject.ShoppingListFragment"
+        android:label="fragment_shoppinglist"
+        tools:layout="@layout/fragment_shoppinglist" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.espproject.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <activity
+        android:id="@+id/pantryActivity"
+        android:name="com.example.espproject.PantryActivity"
+        android:label="activity_pantry"
+        tools:layout="@layout/activity_pantry" />
+    <activity
+        android:id="@+id/profileActivity"
+        android:name="com.example.espproject.ProfileActivity"
+        android:label="activity_profile"
+        tools:layout="@layout/activity_profile" />
+    <activity
+        android:id="@+id/recipeActivity"
+        android:name="com.example.espproject.RecipeActivity"
+        android:label="activity_recipe"
+        tools:layout="@layout/activity_recipe" />
+    <activity
+        android:id="@+id/shoppingListActivity"
+        android:name="com.example.espproject.ShoppingListActivity"
+        android:label="activity_shopping_list"
+        tools:layout="@layout/activity_shopping_list" />
+</navigation>
