@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/preferencesRelLay1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <TextView
+            android:id="@+id/preferencesHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preferences"
+            android:textSize="70dp"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/preferencesRelLay2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/preferencesRelLay1">
+
+        <TextView
+            android:id="@+id/preferencesSelectAllergy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select your preferences"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/preferencesScrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_below="@id/preferencesRelLay2">
+
+        <RelativeLayout
+            android:id="@+id/preferencesRelLay3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/preferencesList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/preferencesRelLay4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/preferencesScrollView1">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:drawableLeft="@drawable/baseline_arrow_back_24"
+            android:text="Back to settings"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
