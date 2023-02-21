@@ -1,3 +1,5 @@
+package com.example.espproject;
+
 import java.util.Date; // Imported for expiresAt
 
 public class Stock { // TODO: check access modifiers.

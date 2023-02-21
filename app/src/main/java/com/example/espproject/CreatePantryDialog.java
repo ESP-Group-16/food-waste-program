@@ -58,6 +58,6 @@ public class CreatePantryDialog extends DialogFragment {
     // TODO: finish (using the view.findViewById(R.layout.<insert components id>) method
     // method to initialize UI components
     public void initViews(View view) {
-        btnCreate = view.findViewById(R.id.btnCreatePantry);
+        //btnCreate = view.findViewById(R.id.btnCreatePantry);
     }
 }

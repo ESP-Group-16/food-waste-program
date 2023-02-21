@@ -1,3 +1,5 @@
+package com.example.espproject;
+
 public class Ingredient { // TODO: check access modifiers.
     private Food food;
     private double quantity;

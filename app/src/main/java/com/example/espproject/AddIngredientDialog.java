@@ -59,6 +59,6 @@ public class AddIngredientDialog extends DialogFragment {
     // TODO: finish (using the view.findViewById(R.layout.<insert components id>) method)
     // method to initialize UI components
     public void initViews(View view) {
-        btnAddIngredient = view.findViewById(R.id.btnAddIngredient);
+        //btnAddIngredient = view.findViewById(R.id.btnAddIngredient);
     }
 }

@@ -1,3 +1,5 @@
+package com.example.espproject;
+
 import java.util.ArrayList;
 
 public class Recipe { // TODO: check access modifiers.

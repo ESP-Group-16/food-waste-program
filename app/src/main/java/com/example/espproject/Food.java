@@ -1,6 +1,7 @@
+package com.example.espproject;
+
 import java.util.Dictionary;
 import java.util.ArrayList;
-
 public class Food { // TODO: check access modifiers.
     private int foodId;
     private String name;
@@ -8,7 +9,7 @@ public class Food { // TODO: check access modifiers.
     private int unit;
     private Dictionary<String, Integer> nutritional_info;
     private double carbonFootprint;
-    private StorageLocation storageLocation;
+    //private StorageLocation storageLocation;
 
     public String getName() {
         return name;
@@ -50,13 +51,13 @@ public class Food { // TODO: check access modifiers.
         this.carbonFootprint = carbonFootprint;
     }
 
-    public StorageLocation getStorageLocation() {
-        return storageLocation;
-    }
+    //public StorageLocation getStorageLocation() {
+    //    return storageLocation;
+    //}
 
-    public void setStorageLocation(StorageLocation storageLocation) {
-        this.storageLocation = storageLocation;
-    }
+    //public void setStorageLocation(StorageLocation storageLocation) {
+    //    this.storageLocation = storageLocation;
+    //}
 
     public int getFoodId() {
         return foodId;
