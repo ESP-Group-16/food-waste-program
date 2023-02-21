@@ -8,29 +8,29 @@
     tools:context=".RecipeMenuFragment">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/recipe_button"
         android:layout_width="297dp"
         android:layout_height="128dp"
         android:layout_marginBottom="20dp"
         android:text="My Recipes"
-        app:layout_constraintBottom_toTopOf="@+id/button_first"
+        app:layout_constraintBottom_toTopOf="@+id/pantry_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button_first"
+        android:id="@+id/pantry_button"
         android:layout_width="300dp"
         android:layout_height="123dp"
         android:layout_marginBottom="28dp"
         android:text="Use pantry ingredients"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/search_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.558"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/search_button"
         android:layout_width="300dp"
         android:layout_height="133dp"
         android:layout_marginBottom="208dp"
