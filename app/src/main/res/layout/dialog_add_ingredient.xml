@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"
+            android:contentDescription="Checkbox for sharing this item"
             />
     </LinearLayout>
 
@@ -56,16 +57,12 @@
         android:paddingHorizontal="10sp"
         android:layout_marginTop="20sp"/>
 
-    <!--
     <DatePicker
-        android:id="@+id/simpleDatePicker"
-        android:layout_width="10sp"
-        android:layout_height="10sp"
-        android:datePickerMode="calendar" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:datePickerMode="spinner" />
 
-        !!! UNSURE WHY THIS CAUSES A RENDER ERROR
 
-    -->
     <CheckBox
         android:id="@+id/pantryAddIngredientShareBox"
         android:layout_width="wrap_content"
