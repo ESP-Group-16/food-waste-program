@@ -1,4 +1,4 @@
-import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Food { // TODO: check access modifiers.
@@ -6,7 +6,7 @@ public class Food { // TODO: check access modifiers.
     private String name;
     private ArrayList<String> dietaryInfo;
     private int unit;
-    private Dictionary<String, Integer> nutritional_info;
+    private HashMap<String, Integer> nutritional_info;
     private double carbonFootprint;
     private StorageLocation storageLocation;
 
