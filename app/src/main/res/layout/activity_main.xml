@@ -1,10 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="100dp"
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/txtLoginTitle"
+        android:textSize="50sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtLoginTitle"
+        android:text="Email"
+        android:id="@+id/txtEmail" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtEmail"
+        android:layout_alignStart="@+id/txtEmail"
+        android:id="@+id/edtTxtEmail"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/edtTxtEmail"
+        android:id="@+id/txtPassword"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtPassword"
+        android:inputType="textPassword"
+        android:id="@+id/edtTxtPassword"
+        android:layout_below="@+id/txtPassword"/>
+
+
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Log in"
+        android:layout_below="@+id/edtTxtPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textAllCaps="false"
+        android:id="@+id/btnLogin"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account?"
+        android:layout_below="@+id/btnLogin"
+        android:layout_alignStart="@+id/btnRegister"
+        android:id="@+id/txtNoAccount"
+        android:layout_marginTop="20dp"
+        android:textSize="10sp" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtNoAccount"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnRegister"
+        android:text="Register"
+        android:textAllCaps="false" />
+
+</RelativeLayout>
