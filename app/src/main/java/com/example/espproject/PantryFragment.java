@@ -25,20 +25,20 @@ public class PantryFragment extends Fragment {
     }
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.buttonUsers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(PantryFragment.this)
-                        .navigate(R.id.action_pantryFragment_to_pantryUsersDialog);
-            }
-        });
-        binding.buttonAddingredients.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(PantryFragment.this)
-                        .navigate(R.id.action_pantryFragment_to_addIngredientDialog);
-            }
-        });
+//        binding.buttonUsers.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                NavHostFragment.findNavController(PantryFragment.this)
+//                        .navigate(R.id.action_pantryFragment_to_pantryUsersDialog);
+//            }
+//        });
+//        binding.buttonAddingredients.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                NavHostFragment.findNavController(PantryFragment.this)
+//                        .navigate(R.id.action_pantryFragment_to_addIngredientDialog);
+//            }
+//        });
     }
 
 

@@ -21,13 +21,13 @@ public class ShoppingListFragment extends Fragment {
     }
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.buttonAddItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(ShoppingListFragment.this)
-                        .navigate(R.id.action_shoppingListFragment_to_addIngredientDialog);
-            }
-        });
+//        binding.buttonAddItem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                NavHostFragment.findNavController(ShoppingListFragment.this)
+//                        .navigate(R.id.action_shoppingListFragment_to_addIngredientDialog);
+//            }
+//        });
         binding.buttonFinishshop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

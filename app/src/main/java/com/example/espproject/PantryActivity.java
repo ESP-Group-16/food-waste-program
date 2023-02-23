@@ -6,13 +6,7 @@ import android.os.Bundle;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class PantryActivity extends AppCompatActivity implements AddIngredientDialog.AddItem, CreatePantryDialog.CreateNewPantry {
-
-    // CreatePantryDialog passes the name of the new pantry using this method
-    @Override
-    public void onCreateNewPantry(String name) {
-        // TODO: create the new pantry and display the PantryFragment
-    }
+public class PantryActivity extends AppCompatActivity implements AddIngredientDialog.AddItem{
 
     // AddIngredientsDialog passes the new item to be added to the pantry using this method
     @Override
