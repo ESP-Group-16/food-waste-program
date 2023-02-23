@@ -23,11 +23,25 @@ public class RecipeMenuFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.buttonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(RecipeMenuFragment.this)
+                        .navigate(R.id.action_recipeMenuFragment_to_searchFragment);
+            }
+        });
+        binding.buttonRecipelist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(RecipeMenuFragment.this)
+                        .navigate(R.id.action_recipeMenuFragment_to_recipeListFragment);
+            }
+        });
         binding.buttonPantry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(RecipeMenuFragment.this)
-                        .navigate(R.id.action_recipeMenuFragment_to_recipeFragment);
+                        .navigate(R.id.action_recipeMenuFragment_to_recipeListFragment);
             }
         });
     }

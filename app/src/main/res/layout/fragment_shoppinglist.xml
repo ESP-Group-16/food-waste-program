@@ -28,7 +28,7 @@
         android:layout_below="@id/RelativeLayout1">
 
         <Button
-            android:id="@+id/buttonAddItem"
+            android:id="@+id/button_AddItem"
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:text="Add items" />
@@ -115,6 +115,7 @@
         android:layout_below="@id/Scroll1">
 
         <Button
+            android:id="@+id/button_Finishshop"
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"

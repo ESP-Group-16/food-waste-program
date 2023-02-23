@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.example.espproject.databinding.FragmentRecipeBinding;
 
 
 public class RecipeFragment extends Fragment {
-
-    // TODO: declare UI components as fields
 
     private FragmentRecipeBinding binding;
     @Override

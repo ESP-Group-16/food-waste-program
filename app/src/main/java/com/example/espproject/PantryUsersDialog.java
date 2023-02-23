@@ -3,15 +3,25 @@ package com.example.espproject;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.espproject.databinding.DialogPantryUsersBinding;
+
 public class PantryUsersDialog extends DialogFragment {
 
     // TODO: declare UI components as fields
+    private DialogPantryUsersBinding binding;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = DialogPantryUsersBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
 
     @NonNull
     @Override

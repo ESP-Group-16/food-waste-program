@@ -3,12 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mynav"
-    app:startDestination="@id/recipeMenuFragment">
+    app:startDestination="@id/shoppingListFragment">
     <dialog
         android:id="@+id/addIngredientDialog"
         android:name="com.example.espproject.AddIngredientDialog"
         android:label="dialog_add_ingredient"
-        tools:layout="@layout/dialog_add_ingredient" />
+        tools:layout="@layout/dialog_add_ingredient" >
+        <action
+            android:id="@+id/action_addIngredientDialog_to_pantryFragment"
+            app:destination="@id/pantryFragment" />
+    </dialog>
     <dialog
         android:id="@+id/createPantryDialog"
         android:name="com.example.espproject.CreatePantryDialog"
@@ -23,12 +27,6 @@
         android:name="com.example.espproject.PantryUsersDialog"
         android:label="dialog_pantry_users"
         tools:layout="@layout/dialog_pantry_users" />
-    <fragment
-        android:id="@+id/noPantryFragment"
-        android:name="com.example.espproject.NoPantryFragment"
-        android:label="fragment_no_pantry"
-        tools:layout="@layout/fragment_no_pantry" >
-    </fragment>
     <fragment
         android:id="@+id/pantryFragment"
         android:name="com.example.espproject.PantryFragment"

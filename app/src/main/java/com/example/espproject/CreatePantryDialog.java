@@ -3,14 +3,44 @@ package com.example.espproject;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.example.espproject.databinding.DialogCreatePantryBinding;
+
 
 public class CreatePantryDialog extends DialogFragment {
+
+    private DialogCreatePantryBinding binding;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = DialogCreatePantryBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        binding.buttonSubmitcreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(CreatePantryDialog.this)
+                        .navigate(R.id.action_createPantryDialog_to_pantryFragment);
+            }
+        });
+        binding.buttonSubmitjoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(CreatePantryDialog.this)
+                        .navigate(R.id.action_createPantryDialog_to_pantryFragment);
+            }
+        });
+    }
 
     // callback interface for passing data back to PantryActivity
     public interface CreateNewPantry {
