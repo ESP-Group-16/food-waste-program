@@ -1,6 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragmentRecipeRelLay"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/fragmentRecipeTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragmentRecipeBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/baseline_arrow_back_ios_new_24"
+            android:background="@color/purple_500"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:contentDescription="back button"
+            />
+
+        <TextView
+            android:id="@+id/fragmentRecipeRecipeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recipe name"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/fragmentRecipeScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragmentRecipeTopBar">
+        <RelativeLayout
+            android:id="@+id/fragmentRecipeScrollRelLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <!-- Recipe image goes here, cannot figure out how to add this
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fragmentRecipeTopBar"
+                android:contentDescription="Recipe image"
+                android:src="@drawable/placeholder" />
+
+                -->
+
+            <!-- This is a placeholder for the image -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragmentRecipeImage"
+                android:layout_width="match_parent"
+                android:layout_height="300sp"
+                android:text="image" />
+
+            <TextView
+                android:id="@+id/fragmentRecipeIngredientsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingredients:"
+                android:layout_below="@id/fragmentRecipeImage"
+                android:textSize="40sp"
+                android:paddingHorizontal="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragmentRecipeIngredientsRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fragmentRecipeIngredientsTitle" />
+
+            <TextView
+                android:id="@+id/fragmentRecipeMethodTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Method:"
+                android:layout_below="@id/fragmentRecipeIngredientsRecycler"
+                android:textSize="40sp"
+                android:paddingHorizontal="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragmentRecipeMethodRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fragmentRecipeMethodTitle"
+                android:layout_marginBottom="200sp" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/navBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAVBAR"
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+</RelativeLayout>
