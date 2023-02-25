@@ -55,11 +55,12 @@
                 -->
 
             <!-- This is a placeholder for the image -->
-            <androidx.appcompat.widget.AppCompatButton
+            <ImageView
                 android:id="@+id/fragmentRecipeImage"
                 android:layout_width="match_parent"
                 android:layout_height="300sp"
-                android:text="image" />
+                android:src="@drawable/foodPlaceholder"
+                android:contentDescription="Image of food" />
 
             <TextView
                 android:id="@+id/fragmentRecipeIngredientsTitle"
