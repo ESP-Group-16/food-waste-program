@@ -48,7 +48,6 @@
                 android:id="@+id/fragmentRecipeImage"
                 android:layout_width="match_parent"
                 android:layout_height="300sp"
-                android:src="@drawable/foodPlaceholder"
                 android:contentDescription="Image of food" />
 
             <TextView

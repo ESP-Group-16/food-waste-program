@@ -57,9 +57,9 @@ public class RegisterDialog extends DialogFragment {
     }
 
     private void initViews(View view) {
-        btnRegister = view.findViewById(R.id.btnRegisterOk);
-        edtTxtEmail = view.findViewById(R.id.edtTxtRegisterEmail);
-        edtTxtPassword = view.findViewById(R.id.edtTxtRegisterPassword);
-        edtTxtRepeatPassword = view.findViewById(R.id.edtTxtRegisterRepeatPassword);
+        btnRegister = view.findViewById(R.id.dialogRegisterOkButton);
+        edtTxtEmail = view.findViewById(R.id.dialogRegisterEmailEdtTxt);
+        edtTxtPassword = view.findViewById(R.id.dialogRegisterPasswordEdtTxt);
+        edtTxtRepeatPassword = view.findViewById(R.id.dialogRegisterRePasswordEdtTxt);
     }
 }

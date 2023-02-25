@@ -11,35 +11,35 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
+//import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.espproject.databinding.FragmentCreatePantryBinding;
+//import com.example.espproject.databinding.FragmentCreatePantryBinding;
 
 public class CreatePantryFragment extends Fragment {
 
-    private FragmentCreatePantryBinding binding;
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentCreatePantryBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-    }
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        binding.buttonSubmitcreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(CreatePantryFragment.this)
-                        .navigate(R.id.action_createPantryFragment_to_pantryFragment);
-            }
-        });
-        binding.buttonSubmitjoin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(CreatePantryFragment.this)
-                        .navigate(R.id.action_createPantryFragment_to_pantryFragment);
-            }
-        });
-    }
+//    private FragmentCreatePantryBinding binding;
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        binding = FragmentCreatePantryBinding.inflate(inflater, container, false);
+//        return binding.getRoot();
+//    }
+//    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//        binding.buttonSubmitcreate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                NavHostFragment.findNavController(CreatePantryFragment.this)
+//                        .navigate(R.id.action_createPantryFragment_to_pantryFragment);
+//            }
+//        });
+//        binding.buttonSubmitjoin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                NavHostFragment.findNavController(CreatePantryFragment.this)
+//                        .navigate(R.id.action_createPantryFragment_to_pantryFragment);
+//            }
+//        });
+//    }
 
 //    // callback interface for passing data back to PantryActivity
 //    public interface CreateNewPantry {

@@ -5,34 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
+import android.provider.ContactsContract;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.HashMap;
-import java.util.Map;
+public class PantryActivity extends AppCompatActivity implements AddIngredientDialog.AddItem {
 
-public class PantryActivity extends AppCompatActivity implements AddIngredientDialog.AddItem, CreatePantryDialog.CreateNewPantry {
-    
-    private String TAG = "PantryActivity";
-    private FirebaseAuth mAuth;
-    private Map<String, Object> pantryMap = new HashMap<>();
-
-    // CreatePantryDialog passes the name of the new pantry using this method
-    @Override
-    public void onCreateNewPantry(String name) {
-        // TODO: create the new pantry and display the PantryFragment
-    }
+//    // CreatePantryDialog passes the name of the new pantry using this method
+//    @Override
+//    public void onCreateNewPantry(String name) {
+//        // TODO: create the new pantry and display the PantryFragment
+//    }
 
     // AddIngredientsDialog passes the new item to be added to the pantry using this method
     @Override
@@ -41,8 +28,8 @@ public class PantryActivity extends AppCompatActivity implements AddIngredientDi
     }
 
     // TODO: declare UI components as fields
-
-    private TextView txtPantryText;
+    private FrameLayout container;
+    private BottomNavigationView bottomNavigationView;
 
     private FirebaseFirestore firebaseFirestore;
     private Pantry pantry;
@@ -52,42 +39,51 @@ public class PantryActivity extends AppCompatActivity implements AddIngredientDi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantry);
 
-        txtPantryText = findViewById(R.id.txtPantryText);
-
-        //TODO: review where to initialize this in the future
-        firebaseFirestore = FirebaseFirestore.getInstance();
-
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        initViews();
+        initBottomNavBar();
 
         // TODO: check if user has a pantry, start PantryFragment or NoPantryFragment accordingly
-        
-        Intent intent = getIntent();
-        String email = intent.getStringExtra("email");
-        if(email != null) {
-            txtPantryText.setText("Hello " + email + "!");
-        }
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-        //retrieve pantry from the database
-        db.collection("pantries")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                pantryMap = document.getData();
-                                txtPantryText.setText(pantryMap.get("name").toString());
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
+    }
 
+    private void initViews() {
+        container = findViewById(R.id.activityPantryFragmentContainer);
+        bottomNavigationView = findViewById(R.id.activityPantryBottomNavBar);
+    }
+
+    private void initBottomNavBar() {
+        bottomNavigationView.setSelectedItemId(R.id.pantry);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()) {
+                    case R.id.pantry:
+                        // do nothing
+                        break;
+                    case R.id.profile:
+                        // navigate user to ProfileActivity and clear backstack
+                        Intent profileIntent = new Intent(PantryActivity.this, ProfileActivity.class);
+                        profileIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(profileIntent);
+                        break;
+                    case R.id.recipe:
+                        // navigate user to RecipeActivity and clear backstack
+                        Intent recipeIntent = new Intent(PantryActivity.this, RecipeActivity.class);
+                        recipeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(recipeIntent);
+                        break;
+                    case R.id.shoppingList:
+                        // navigate user to ShoppingListActivity and clear backstack
+                        Intent shoppingListIntent = new Intent(PantryActivity.this, ShoppingListActivity.class);
+                        shoppingListIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(shoppingListIntent);
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
     }
 }

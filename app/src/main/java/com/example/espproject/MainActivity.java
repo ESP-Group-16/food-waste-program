@@ -131,9 +131,9 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
     }
 
     private void initViews() {
-        btnLogin = findViewById(R.id.btnLogin);
-        btnRegister = findViewById(R.id.btnRegister);
-        edtTxtEmail = findViewById(R.id.edtTxtEmail);
-        edtTxtPassword = findViewById(R.id.edtTxtPassword);
+        btnLogin = findViewById(R.id.activityMainLoginButton);
+        btnRegister = findViewById(R.id.activityMainRegisterButton);
+        edtTxtEmail = findViewById(R.id.activityMainEmailEdtTxt);
+        edtTxtPassword = findViewById(R.id.activityMainPasswordEdtTxt);
     }
 }
