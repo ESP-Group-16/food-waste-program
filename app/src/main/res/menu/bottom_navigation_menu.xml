@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/shoppingListFragment"
-        android:title="ShoppingList"
+        android:Txt="ShoppingList"
         android:icon="@drawable/shoppinglisticon_foreground"/>
     <item
         android:id="@+id/recipeMenuFragment"
-        android:title="Recipe"
+        android:Txt="Recipe"
         android:icon="@drawable/recipeicon_foreground"/>
     <item
         android:id="@+id/createPantryFragment"
-        android:title="Pantry"
+        android:Txt="Pantry"
         android:icon="@drawable/pantryicon_foreground"/>
     <item
         android:id="@+id/profileActivity"
-        android:title="Person"
+        android:Txt="Person"
         android:icon="@drawable/profileicon_foreground"/>
 </menu>

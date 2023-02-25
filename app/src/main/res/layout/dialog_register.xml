@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:layout_marginBottom="20dp"
-        android:id="@+id/txtRegisterTitle"
+        android:id="@+id/txtRegisterTxt"
         android:textSize="50sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtRegisterTitle"
+        android:layout_below="@+id/txtRegisterTxt"
         android:text="Email"
         android:id="@+id/txtRegisterEmail" />
 

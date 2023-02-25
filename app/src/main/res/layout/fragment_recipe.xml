@@ -24,7 +24,7 @@
             />
 
         <TextView
-            android:id="@+id/fragmentRecipeRecipeTitle"
+            android:id="@+id/fragmentRecipeRecipeTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Recipe name"
@@ -52,7 +52,7 @@
                 android:contentDescription="Image of food" />
 
             <TextView
-                android:id="@+id/fragmentRecipeIngredientsTitle"
+                android:id="@+id/fragmentRecipeIngredientsTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ingredients:"
@@ -66,10 +66,10 @@
                 android:id="@+id/fragmentRecipeIngredientsRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/fragmentRecipeIngredientsTitle" />
+                android:layout_below="@id/fragmentRecipeIngredientsTxt" />
 
             <TextView
-                android:id="@+id/fragmentRecipeMethodTitle"
+                android:id="@+id/fragmentRecipeMethodTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Method:"
@@ -83,7 +83,7 @@
                 android:id="@+id/fragmentRecipeMethodRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/fragmentRecipeMethodTitle"
+                android:layout_below="@id/fragmentRecipeMethodTxt"
                 android:layout_marginBottom="200sp" />
 
 

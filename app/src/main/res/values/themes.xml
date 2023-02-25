@@ -15,7 +15,7 @@
 
     <style name="Theme.ESPProject.NoActionBar">
         <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="windowNoTxt">true</item>
     </style>
 
     <style name="Theme.ESPProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
