@@ -1,11 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ProfileActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/activityProfileTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:orientation="vertical" >
+        <TextView
+            android:id="@+id/activityProfileTopTextUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome, name!"
+            android:textSize="40sp"
+            android:textColor="@color/white"
+            android:paddingHorizontal="10sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/activityProfileUserStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pantry admin"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:paddingHorizontal="10sp"
+            android:paddingBottom="5sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/activityProfileAchievementsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Achievements"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:layout_below="@id/activityProfileTopBar"
+        android:paddingHorizontal="15sp"
+        android:paddingVertical="7sp"/>
+
+    <LinearLayout
+        android:id="@+id/activityProfileAchievementsTable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activityProfileAchievementsTitle"
+        android:paddingHorizontal="20sp">
+
+        <LinearLayout
+            android:id="@+id/activityProfileAchievementsTableLeftColumn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/activityProfileSavedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="You have saved"
+                android:textColor="@color/black"
+                android:paddingVertical="2sp"/>
+
+            <TextView
+                android:id="@+id/activityProfileScoreTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your score"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:paddingVertical="2sp"/>
+
+            <TextView
+                android:id="@+id/activityProfileLeaderboardTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Leaderboard position"
+                android:textColor="@color/black"
+                android:paddingVertical="2sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activityProfileAchievementsTableRightColumn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/activityProfileCO2Saved"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text=" - CO2"
+                android:textColor="@color/black"
+                android:paddingVertical="2sp"/>
+
+            <TextView
+                android:id="@+id/activityProfileScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text=" -X- "
+                android:textColor="@color/black"
+                android:paddingVertical="2sp"/>
+
+            <TextView
+                android:id="@+id/activityProfileLeaderboardPos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text=" -X- "
+                android:textColor="@color/black"
+                android:paddingVertical="2sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
+    <TextView
+        android:id="@+id/activityProfileProfileTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:layout_below="@id/activityProfileAchievementsTable"
+        android:paddingHorizontal="15sp"
+        android:paddingTop="10sp"
+        android:paddingBottom="7sp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/activityProfileProfileButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activityProfileProfileTitle"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/activityProfilePreferencesButton"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Preferences"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="5sp"
+            android:background="@drawable/rounded_button"
+            android:drawableRight="@drawable/baseline_arrow_right_alt_24"
+            android:textAllCaps="false"
+            android:gravity="left|center_vertical"
+            android:paddingHorizontal="20sp"
+            android:layout_gravity="center"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/activityProfileAllergiesButton"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Allergies"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:drawableRight="@drawable/baseline_arrow_right_alt_24"
+            android:textAllCaps="false"
+            android:background="@drawable/rounded_button"
+            android:gravity="left|center_vertical"
+            android:paddingHorizontal="20sp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/activityProfileSettingsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:layout_below="@id/activityProfileProfileButtons"
+        android:paddingHorizontal="15sp"
+        android:paddingTop="10sp"
+        android:paddingBottom="7sp"/>
+
+    <TextView
+        android:id="@+id/activityProfileNotificationDaysTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Days notice for expiry:"
+        android:layout_below="@id/activityProfileSettingsTitle"
+        android:textSize="25sp"
+        android:paddingHorizontal="20sp" />
+
+    <EditText
+        android:id="@+id/activityProfileNotificationDaysInput"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:inputType="number"
+        android:layout_below="@id/activityProfileNotificationDaysTitle"
+        android:hint="e.g. 2"
+        android:textSize="20sp"
+        android:paddingHorizontal="20sp"
+        android:paddingVertical="10sp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/activityLogoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LogOut"
+        android:textAllCaps="false"
+        android:layout_below="@id/activityProfileNotificationDaysInput"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/white"
+        android:paddingHorizontal="50sp"
+        android:paddingVertical="15sp"
+        android:layout_marginTop="20sp"/>
+
+    <LinearLayout
+        android:id="@+id/navBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAVBAR"
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
