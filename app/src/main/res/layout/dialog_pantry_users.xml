@@ -3,11 +3,9 @@
     android:id="@+id/pantryLinUserDialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@color/white"
-    tools:context=".PantryUsersDialog">
+    android:background="@color/main_background">
 
     <TextView
         android:id="@+id/pantryUserDialogTitle"
@@ -16,7 +14,7 @@
         android:text="Users:"
         android:textSize="30sp"
         android:padding="10sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/text_color"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pantryUserRecycler"
