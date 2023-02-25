@@ -3,13 +3,13 @@
     android:id="@+id/fragmentRecipeRelLay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/main_background">
 
     <LinearLayout
         android:id="@+id/fragmentRecipeTopBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_500"
+        android:background="@color/secondary_color_light"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/baseline_arrow_back_ios_new_24"
-            android:background="@color/purple_500"
+            android:background="@color/secondary_color_light"
             android:textSize="30sp"
             android:layout_gravity="center"
             android:contentDescription="back button"
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Recipe name"
-            android:textColor="@color/white"
+            android:textColor="@color/main_background"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -43,18 +43,7 @@
             android:id="@+id/fragmentRecipeScrollRelLay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-            <!-- Recipe image goes here, cannot figure out how to add this
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/fragmentRecipeTopBar"
-                android:contentDescription="Recipe image"
-                android:src="@drawable/placeholder" />
-
-                -->
-
-            <!-- This is a placeholder for the image -->
             <ImageView
                 android:id="@+id/fragmentRecipeImage"
                 android:layout_width="match_parent"
@@ -71,7 +60,7 @@
                 android:textSize="40sp"
                 android:paddingHorizontal="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"/>
+                android:textColor="@color/text_color"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragmentRecipeIngredientsRecycler"
@@ -88,7 +77,7 @@
                 android:textSize="40sp"
                 android:paddingHorizontal="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textColor="@color/text_color" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragmentRecipeMethodRecycler"
@@ -106,13 +95,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/black">
+        android:background="@color/text_color">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NAVBAR"
-            android:textColor="@color/white"
+            android:textColor="@color/main_background"
             android:textSize="30sp"/>
 
     </LinearLayout>
