@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/profileActivity"
-        android:title="Person"
-        android:icon="@drawable/profileicon_foreground"/>
+        android:id="@+id/shoppingListFragment"
+        android:title="ShoppingList"
+        android:icon="@drawable/shoppinglisticon_foreground"/>
     <item
         android:id="@+id/recipeMenuFragment"
         android:title="Recipe"
@@ -13,7 +13,7 @@
         android:title="Pantry"
         android:icon="@drawable/pantryicon_foreground"/>
     <item
-        android:id="@+id/shoppingListFragment"
-        android:title="ShoppingList"
-        android:icon="@drawable/shoppinglisticon_foreground"/>
+        android:id="@+id/profileActivity"
+        android:title="Person"
+        android:icon="@drawable/profileicon_foreground"/>
 </menu>
