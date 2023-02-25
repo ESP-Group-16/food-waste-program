@@ -12,63 +12,63 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:layout_marginBottom="20dp"
-        android:id="@+id/dialogRegisterTitleTxt"
+        android:id="@+id/txtRegisterTxt"
         android:textSize="50sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dialogRegisterTitleTxt"
+        android:layout_below="@+id/txtRegisterTxt"
         android:text="Email"
-        android:id="@+id/dialogRegisterEmailTxt" />
+        android:id="@+id/txtRegisterEmail" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dialogRegisterEmailTxt"
-        android:layout_alignStart="@+id/dialogRegisterEmailTxt"
-        android:id="@+id/dialogRegisterEmailEdtTxt"/>
+        android:layout_below="@+id/txtRegisterEmail"
+        android:layout_alignStart="@+id/txtRegisterEmail"
+        android:id="@+id/edtTxtRegisterEmail"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/dialogRegisterEmailEdtTxt"
-        android:id="@+id/dialogRegisterPasswordTxt"/>
+        android:layout_below="@+id/edtTxtRegisterEmail"
+        android:id="@+id/txtRegisterPassword"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/dialogRegisterPasswordTxt"
-        android:id="@+id/dialogRegisterPasswordEdtTxt"
+        android:layout_alignStart="@+id/txtRegisterPassword"
+        android:id="@+id/edtTxtRegisterPassword"
         android:inputType="textPassword"
-        android:layout_below="@+id/dialogRegisterPasswordTxt"/>
+        android:layout_below="@+id/txtRegisterPassword"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Repeat Password"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/dialogRegisterPasswordEdtTxt"
-        android:id="@+id/dialogRegisterRePasswordTxt"/>
+        android:layout_below="@+id/edtTxtRegisterPassword"
+        android:id="@+id/txtRegisterRepeatPassword"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/dialogRegisterRePasswordTxt"
-        android:id="@+id/dialogRegisterRePasswordEdtTxt"
+        android:layout_alignStart="@+id/txtRegisterRepeatPassword"
+        android:id="@+id/edtTxtRegisterRepeatPassword"
         android:inputType="textPassword"
-        android:layout_below="@+id/dialogRegisterRePasswordTxt"/>
+        android:layout_below="@+id/txtRegisterRepeatPassword"/>
 
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:layout_below="@+id/dialogRegisterRePasswordEdtTxt"
+        android:layout_below="@+id/edtTxtRegisterRepeatPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:textAllCaps="false"
-        android:id="@+id/dialogRegisterOkButton"/>
+        android:id="@+id/btnRegisterOk"/>
 
 </RelativeLayout>
