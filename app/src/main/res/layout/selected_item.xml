@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/selectedItemsRelLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/selectedItemsNameQuantityLinLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/selectedItemsNameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Carrots"
+                android:textSize="35dp"
+                android:textColor="@color/text_color"
+                android:paddingHorizontal="10sp"
+                android:layout_weight="0.75"/>
+
+            <TextView
+                android:id="@+id/selectedItemQuantityTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="2 bags"
+                android:textColor="@color/text_color"
+                android:layout_weight="0.25"
+                />
+        </LinearLayout>
+
+
+        <!-- I wanna do this here https://www.youtube.com/watch?v=hHjFIG0TtA0 -->
+        <TextView
+            android:id="@+id/expiryDateTxtBox"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/selectedItemsNameQuantityLinLay"
+            android:text="Enter expiry date"
+            android:textSize="15dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

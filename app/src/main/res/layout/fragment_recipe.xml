@@ -48,7 +48,8 @@
                 android:id="@+id/fragmentRecipeImage"
                 android:layout_width="match_parent"
                 android:layout_height="300sp"
-                android:contentDescription="Image of food" />
+                android:contentDescription="Image of food"
+                />
 
             <TextView
                 android:id="@+id/fragmentRecipeIngredientsTxt"
