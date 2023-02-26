@@ -9,14 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.espproject.databinding.FragmentRecipeBinding;
+
+
 public class RecipeFragment extends Fragment {
 
-    // TODO: declare UI components as fields
-
-
-    @Nullable
+    private FragmentRecipeBinding binding;
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentRecipeBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 }

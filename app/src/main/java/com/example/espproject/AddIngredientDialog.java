@@ -3,7 +3,9 @@ package com.example.espproject;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -59,6 +61,6 @@ public class AddIngredientDialog extends DialogFragment {
     // TODO: finish (using the view.findViewById(R.layout.<insert components id>) method)
     // method to initialize UI components
     public void initViews(View view) {
-        btnAddIngredient = view.findViewById(R.id.btnAddIngredient);
+        //btnAddIngredient = view.findViewById(R.id.btnAddIngredient);
     }
 }
