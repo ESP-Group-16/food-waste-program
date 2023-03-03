@@ -14,7 +14,6 @@ import com.example.espproject.databinding.FragmentSelectedItemsBinding;
 public class SelectedItemsFragment extends Fragment {
 
     private FragmentSelectedItemsBinding binding;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSelectedItemsBinding.inflate(inflater, container, false);

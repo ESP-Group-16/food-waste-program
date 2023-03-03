@@ -3,16 +3,18 @@
     android:id="@+id/addIngredientLinLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/main_background">
+    android:background="@color/white"
+    tools:context=".AddIngredientDialog">
 
     <TextView
-        android:id="@+id/pantryAddIngredientMainTxt"
+        android:id="@+id/pantryAddIngredientMainTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Ingredient:"
         android:textSize="35sp"
-        android:textColor="@color/text_color"
+        android:textColor="@color/black"
         android:padding="10sp"/>
 
     <EditText
@@ -43,7 +45,6 @@
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"
-            android:contentDescription="Checkbox for sharing this item"
             />
     </LinearLayout>
 
@@ -53,16 +54,20 @@
         android:layout_height="wrap_content"
         android:text="Select expiry date"
         android:textSize="30sp"
-        android:textColor="@color/text_color"
+        android:textColor="@color/black"
         android:paddingHorizontal="10sp"
         android:layout_marginTop="20sp"/>
 
+    <!--
     <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:datePickerMode="spinner" />
+        android:id="@+id/simpleDatePicker"
+        android:layout_width="10sp"
+        android:layout_height="10sp"
+        android:datePickerMode="calendar" />
 
+        !!! UNSURE WHY THIS CAUSES A RENDER ERROR
 
+    -->
     <CheckBox
         android:id="@+id/pantryAddIngredientShareBox"
         android:layout_width="wrap_content"
@@ -72,7 +77,7 @@
         android:paddingHorizontal="10sp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/pantryAddIngredientButton"
+        android:id="@+id/button_additem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Item"
@@ -81,7 +86,7 @@
         android:layout_gravity="center"
         android:textAllCaps="false"
         android:textSize="25sp"
-        android:textColor="@color/main_background"
+        android:textColor="@color/white"
         android:paddingVertical="10sp"
         android:paddingHorizontal="20sp"
         android:background="@drawable/rounded_button"/>

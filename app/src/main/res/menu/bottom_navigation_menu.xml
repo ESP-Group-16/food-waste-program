@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="Shopping List"
-        android:id="@+id/shoppingList"
-        android:icon="@drawable/ic_shopping_cart"/>
-
+        android:id="@+id/profileActivity"
+        android:title="Person"
+        android:icon="@drawable/profileicon_foreground"/>
     <item
-        android:title="Recipes"
-        android:id="@+id/recipe"
-        android:icon="@drawable/ic_recipe"/>
-
+        android:id="@+id/recipeMenuFragment"
+        android:title="Recipe"
+        android:icon="@drawable/recipeicon_foreground"/>
     <item
+        android:id="@+id/createPantryFragment"
         android:title="Pantry"
-        android:id="@+id/pantry"
-        android:icon="@drawable/ic_pantry"/>
-
+        android:icon="@drawable/pantryicon_foreground"/>
     <item
-        android:title="Profile"
-        android:id="@+id/profile"
-        android:icon="@drawable/ic_profile"/>
-
+        android:id="@+id/shoppingListFragment"
+        android:title="ShoppingList"
+        android:icon="@drawable/shoppinglisticon_foreground"/>
 </menu>
