@@ -1,92 +1,42 @@
 package com.example.espproject;
 
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
-public class Pantry {
-
-    private String TAG = "PantryActivity";
-
+public class Pantry { // TODO: check access modifiers.
     public static final String fireStoreCollectionName = "pantries";
-
-    private int id;
+    private int pantryId; // Changed from id to pantryId (per UML diagram)
     private String name;
+    // New added attributes
+    private ArrayList<User> userArrayList;
+    private ArrayList<Stock> stocks;
 
     public Pantry(int id, String name) {
-        this.id = id;
+        this.pantryId = id;
         this.name = name;
     }
 
-    public Pantry retrievePantry() {
+    public Pantry() {
+
+    }
+
+    public Pantry retrievePantry(FirebaseFirestore db) {
         //TODO: move this to the interface method for future use
         //TODO: get a user in the future
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("users")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
+        // pass the pantry back to pantry activity
+        db.collection(fireStoreCollectionName).document("PsFFlfX7gicMjIyBay5H").get();
 
         return null;
     }
 
-    public void addPantryToDB(Pantry pantry) {
-        // check if pantry already exists
-
-        // add pantry to DB if not
-
-    }
-
-    public void updatePantryInDB(Pantry pantry) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        HashMap<String, Pantry> pantryMap = new HashMap<>();
-        pantryMap.put(pantry.getName(), pantry);
-
-        db.collection("pantries")
-                .add(pantryMap)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
-    }
-
     public int getId() {
-        return id;
+        return pantryId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.pantryId = id;
     }
 
     public String getName() {
@@ -96,4 +46,24 @@ public class Pantry {
     public void setName(String name) {
         this.name = name;
     }
+
+    // New Attribute Getters and Setters
+
+    public ArrayList<User> getUsers() { // Name altered from getUserArrayList() --> getUsers() (per UML diagram)
+        return userArrayList;
+    }
+
+    public void setUsers(ArrayList<User> userArrayList) { // setUserArrayList() --> setUsers()
+        this.userArrayList = userArrayList;
+    }
+
+    public ArrayList<Stock> getStock() { // Name altered from getStocks() --> getStock() (per UML diagram)
+        return stocks;
+    }
+
+    public void setStock(ArrayList<Stock> stocks) { // setStocks() --> setStock()
+        this.stocks = stocks;
+    }
+
+
 }

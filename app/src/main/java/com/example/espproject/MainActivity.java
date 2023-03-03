@@ -2,70 +2,50 @@ package com.example.espproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.example.espproject.databinding.ActivityMainBinding;
+
+
 // main login page
-public class MainActivity extends AppCompatActivity implements RegisterDialog.RegisterNewUser {
+public class MainActivity extends AppCompatActivity {
 
-    private EditText edtTxtPassword, edtTxtEmail;
-    private Button btnLogin, btnRegister;
-
+    // TODO: declare UI components as fields
     private FirebaseAuth mAuth;
+    private TextView txt;
     private String TAG = "MainActivity";
+    private ActivityMainBinding binding;
 
-    @Override
-    public void onRegister(String email, String password) {
-        // TODO: finish registering new user
-        createAccount(email, password);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        initViews();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.profileActivity, R.id.recipeMenuFragment, R.id.createPantryFragment, R.id.shoppingListFragment).build();
+        NavController navController = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_activity_main);
+        //NavigationUI.setupActionBarWithNavController(MainActivity.this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navBar, navController);
+        txt = findViewById(R.id.textView);
 
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-
-
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO: login user
-                String email = edtTxtEmail.getText().toString().trim();
-                String password = edtTxtPassword.getText().toString();
-
-                if(!email.isEmpty() && !password.isEmpty()) {
-                    signIn(email, password);
-                }
-            }
-        });
-
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // display registration dialog
-                RegisterDialog dialog = new RegisterDialog();
-                dialog.show(getSupportFragmentManager(), "register user");
-            }
-        });
     }
 
     @Override
@@ -73,37 +53,10 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null) {
-            // open PantryActivity if user is signed in
-            // TODO: pass user to PantryActivity in the future
-            Intent intent = new Intent(MainActivity.this, PantryActivity.class);
-            intent.putExtra("email", currentUser.getEmail());
-            startActivity(intent);
+        if(currentUser != null){
+            ;
         }
-    }
-
-    public void signIn(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            // navigate user to PantryActivity
-                            Intent intent = new Intent(MainActivity.this, PantryActivity.class);
-                            intent.putExtra("email", email);
-                            startActivity(intent);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                        }
-                    }
-                });
+        //createAccount();
     }
 
     public void createAccount(String email, String password) {
@@ -115,25 +68,16 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
-                            Toast.makeText(MainActivity.this, "Authentication successful", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(MainActivity.this, "Email: " + email + "\nPassword: " + password, Toast.LENGTH_SHORT).show();
+                            txt.setText(user.getDisplayName());
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                            Toast.makeText(MainActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                            txt.setText("There is no current user");
                         }
                     }
                 });
-    }
-
-    private void initViews() {
-        btnLogin = findViewById(R.id.activityMainLoginButton);
-        btnRegister = findViewById(R.id.activityMainRegisterButton);
-        edtTxtEmail = findViewById(R.id.activityMainEmailEdtTxt);
-        edtTxtPassword = findViewById(R.id.activityMainPasswordEdtTxt);
     }
 }
