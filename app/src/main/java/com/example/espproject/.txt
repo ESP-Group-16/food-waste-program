@@ -1,0 +1,28 @@
+FirestoreRepository repository = new FirestoreRepositoryImpl();
+repository.saveData("my_collection", new MyDataObject(), new FirestoreRepositoryCallback() {
+    @Override
+    public void onSuccess(DocumentSnapshot documentSnapshot) {
+        // Data saved successfully
+    }
+
+    @Override
+    public void onFailure(Exception exception) {
+        // Handle the error here
+    }
+})
+
+
+FirestoreRepository repository = new FirestoreRepositoryImpl();
+repository.getData("my_collection", "my_document_id", new FirestoreRepositoryCallback() {
+    @Override
+    public void onSuccess(DocumentSnapshot documentSnapshot) {
+        // Get the data from the document snapshot
+        MyDataObject data = documentSnapshot.toObject(MyDataObject.class);
+        // Use the data here
+    }
+
+    @Override
+    public void onFailure(Exception exception) {
+        // Handle the error here
+    }
+});

@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.example.espproject.databinding.ActivityMainBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 // main login page
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txt;
     private String TAG = "MainActivity";
     private ActivityMainBinding binding;
+
 
 
     @Override
