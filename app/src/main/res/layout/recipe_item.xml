@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="3dp"
+    android:id="@+id/recipeItemParent"
+    app:cardBackgroundColor="@color/main_background"
+    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recipe Name"
+            android:textSize="20sp"
+            android:textColor="@color/text_color"
+            android:paddingVertical="2sp"
+            android:id="@+id/recipeItemRecipeNameTxt" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/recipeItemRecipeNameTxt">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favourite"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:id="@+id/recipeItemFavouriteButton"
+                android:layout_alignParentStart="true"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Ingredients To Cart"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/recipeItemAddIngredientsToCartButton" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

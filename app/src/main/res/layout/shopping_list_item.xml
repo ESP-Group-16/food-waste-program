@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/main_background"
+    android:layout_margin="3dp"
+    android:id="@+id/shoppingListItemParent"
+    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item name"
+            android:checked="false"
+            android:layout_centerVertical="true"
+            android:textColor="@color/text_color"
+            android:textSize="15sp"
+            android:id="@+id/shoppingListItemCheckbox" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of units"
+            android:textColor="@color/text_color"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/shoppingListItemUnitNumberTxt"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

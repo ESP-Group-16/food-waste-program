@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/dialogRegisterMainTxt"
+        android:textSize="50sp"
+        android:textColor="@color/text_color"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogRegisterMainTxt"
+        android:text="Email"
+        android:id="@+id/dialogRegisterEmailTxt"
+        android:textColor="@color/text_color"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_below="@+id/dialogRegisterEmailTxt"
+        android:layout_alignStart="@+id/dialogRegisterEmailTxt"
+        android:id="@+id/dialogRegisterEmailEdtTxt"
+        android:hint="e.g. abc@mail.com"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/dialogRegisterEmailEdtTxt"
+        android:id="@+id/dialogRegisterPasswordTxt"
+        android:textColor="@color/text_color"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:id="@+id/dialogRegisterPasswordEdtTxt"
+        android:inputType="textPassword"
+        android:layout_below="@+id/dialogRegisterPasswordTxt"
+        android:hint="Enter password"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Repeat Password"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/dialogRegisterPasswordEdtTxt"
+        android:id="@+id/dialogRegisterRepeatPasswordTxt"
+        android:textColor="@color/text_color"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/dialogRegisterRepeatPasswordEdtTxt"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_below="@+id/dialogRegisterRepeatPasswordTxt"
+        android:layout_alignStart="@+id/dialogRegisterRepeatPasswordTxt"
+        android:hint="Repeat password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/dialogRegisterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialogRegisterRepeatPasswordEdtTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounded_button"
+        android:paddingHorizontal="20sp"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+
+</RelativeLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Main Menu"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"
+        android:textColor="@color/text_color"
+        android:textStyle="bold"
+        android:paddingVertical="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Perhaps we can add icons to these buttons? -->
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragmentRecipeMenuMyRecipesButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button"
+                android:paddingHorizontal="70sp"
+                android:paddingVertical="20sp"
+                android:text="My Recipes"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_alt"
+                android:textSize="30sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="30dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragmentRecipeMenuPantryRecipesButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button"
+                android:paddingHorizontal="70sp"
+                android:paddingVertical="20sp"
+                android:text="Pantry Recipes"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_alt"
+                android:textSize="30sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="30dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragmentRecipeMenuSearchButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button"
+                android:paddingHorizontal="70sp"
+                android:paddingVertical="20sp"
+                android:text="Search"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_alt"
+                android:textSize="30sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="30dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

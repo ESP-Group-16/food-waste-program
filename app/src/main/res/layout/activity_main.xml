@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="40dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="40sp"
+        android:id="@+id/activityMainLoginTxt"
+        android:textColor="@color/text_color"/>
+
+    <TextView
+        android:id="@+id/activityMainEmailTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activityMainLoginTxt"
+        android:layout_marginTop="30dp"
+        android:text="Email"
+        android:textSize="20sp"
+        android:textColor="@color/text_color" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50sp"
+        android:layout_below="@+id/activityMainEmailTxt"
+        android:id="@+id/activityMainEmailEdtTxt"
+        android:hint="e.g. abc@mail.com"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="20sp"
+        android:layout_below="@+id/activityMainEmailEdtTxt"
+        android:layout_marginTop="20dp"
+        android:id="@+id/activityMainPasswordTxt"
+        android:textColor="@color/text_color"/>
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50sp"
+        android:layout_below="@+id/activityMainPasswordTxt"
+        android:inputType="textPassword"
+        android:id="@+id/activityMainPasswordEdtTxt"
+        android:hint="Enter your password"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:layout_below="@+id/activityMainPasswordEdtTxt"
+        android:layout_marginTop="30dp"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/activityMainLoginButton"
+        android:background="@drawable/rounded_button"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/activityMainNoAccountTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activityMainLoginButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="Don't have an account?"
+        android:textColor="@color/text_color"
+        android:textSize="15sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activityMainNoAccountTxt"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/activityMainRegisterButton"
+        android:background="@drawable/rounded_button"
+        android:textSize="20sp"/>
+
+</RelativeLayout>

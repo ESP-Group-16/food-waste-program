@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/main_background">
+
+    <LinearLayout
+        android:id="@+id/pantryTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/secondary_color_light" >
+
+        <TextView
+            android:id="@+id/pantryTextName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:padding="10dp"
+            android:text="Pantry Name"
+            android:textColor="@color/main_background"
+            android:textSize="40sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/pantryUsersButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/baseline_supervised_user_circle_24"
+            android:text="Users"
+            android:textSize="15sp"
+            android:textAllCaps="false"
+            android:textColor="@color/main_background"
+            android:textAlignment="center"
+            android:backgroundTint="@color/secondary_color_light"/>
+
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:id="@+id/pantryScrollLocationsList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pantryTopBar">
+
+        <RelativeLayout
+            android:id="@+id/pantryRelLayoutLocationFridge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtPantryFridge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fridge"
+                android:textSize="35sp"
+                android:textColor="@color/text_color"
+                android:paddingHorizontal="10sp"
+                android:textStyle="bold"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pantryRecyclerFridge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtPantryFridge"
+                />
+
+            <TextView
+                android:id="@+id/txtPantryCupboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cupboard"
+                android:textSize="35sp"
+                android:layout_below="@+id/pantryRecyclerFridge"
+                android:textColor="@color/text_color"
+                android:paddingHorizontal="10sp"
+                android:textStyle="bold"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pantryRecyclerCupboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtPantryCupboard"
+                android:paddingHorizontal="10sp"/>
+
+            <TextView
+                android:id="@+id/txtPantryFreezer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Freezer"
+                android:textSize="35sp"
+                android:layout_below="@+id/pantryRecyclerCupboard"
+                android:textColor="@color/text_color"
+                android:paddingHorizontal="10sp"
+                android:textStyle="bold"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pantryRecyclerFreezer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtPantryFreezer"
+                android:paddingHorizontal="10sp"
+                android:paddingBottom="90sp" />
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addIngredientButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Pantry Item"
+        android:layout_alignParentBottom="true"
+        android:layout_marginVertical="20dp"
+        android:textColor="@color/main_background"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:drawableLeft="@drawable/baseline_add_24"
+        android:textAllCaps="false"
+        android:background="@drawable/rounded_button"
+        android:paddingHorizontal="20sp"
+        android:paddingVertical="5sp"
+        android:layout_marginBottom="10sp"/>
+
+</RelativeLayout>
