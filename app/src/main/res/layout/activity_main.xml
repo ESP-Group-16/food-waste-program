@@ -1,31 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="40dp">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_bar"
-        android:layout_width="416dp"
-        android:layout_height="104dp"
-        android:layout_marginBottom="4dp"
-        android:background="#5B098E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="40sp"
+        android:id="@+id/activityMainLoginTxt"
+        android:textColor="@color/text_color"/>
 
+    <TextView
+        android:id="@+id/activityMainEmailTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activityMainLoginTxt"
+        android:layout_marginTop="30dp"
+        android:text="Email"
+        android:textSize="20sp"
+        android:textColor="@color/text_color" />
 
-    <fragment
-        android:id="@+id/nav_host_fragment_activity_main"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/mynav" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50sp"
+        android:layout_below="@+id/activityMainEmailTxt"
+        android:id="@+id/activityMainEmailEdtTxt"
+        android:hint="e.g. abc@mail.com"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="20sp"
+        android:layout_below="@+id/activityMainEmailEdtTxt"
+        android:layout_marginTop="20dp"
+        android:id="@+id/activityMainPasswordTxt"
+        android:textColor="@color/text_color"/>
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50sp"
+        android:layout_below="@+id/activityMainPasswordTxt"
+        android:inputType="textPassword"
+        android:id="@+id/activityMainPasswordEdtTxt"
+        android:hint="Enter your password"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:layout_below="@+id/activityMainPasswordEdtTxt"
+        android:layout_marginTop="30dp"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/activityMainLoginButton"
+        android:background="@drawable/rounded_button"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account?"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="15sp"
+        android:layout_below="@+id/activityMainLoginButton"
+        android:id="@+id/activityMainNoAccountTxt"
+        android:textColor="@color/text_color"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activityMainNoAccountTxt"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/activityMainRegisterButton"
+        android:background="@drawable/rounded_button"
+        android:textSize="20sp"/>
+
+</RelativeLayout>

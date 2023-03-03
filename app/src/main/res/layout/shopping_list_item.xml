@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/selectedItemsRelLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/shoppingListNameQuantityLinLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/shoppingListNameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Carrots"
+                android:textSize="35dp"
+                android:textColor="@color/text_color"
+                android:paddingHorizontal="10sp"
+                android:layout_weight="0.75"/>
+
+            <TextView
+                android:id="@+id/shoppingListQuantityTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="2 bags"
+                android:textColor="@color/text_color"
+                android:layout_weight="0.25"
+                />
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,42 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5183E6"
-    tools:context=".RecipeMenuFragment">
+    android:background="@color/main_background" >
 
-    <Button
-        android:id="@+id/button_recipelist"
-        android:layout_width="297dp"
-        android:layout_height="128dp"
-        android:layout_marginBottom="20dp"
-        android:text="My Recipes"
-        app:layout_constraintBottom_toTopOf="@+id/button_pantry"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
-        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Main Menu"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"
+        android:textColor="@color/text_color"
+        android:textStyle="bold"
+        android:paddingVertical="20sp" />
 
-    <Button
-        android:id="@+id/button_pantry"
-        android:layout_width="300dp"
-        android:layout_height="123dp"
-        android:layout_marginBottom="28dp"
-        android:text="Recipe from pantry"
-        app:layout_constraintBottom_toTopOf="@+id/button_search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.558"
-        app:layout_constraintStart_toStartOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/button_search"
-        android:layout_width="300dp"
-        android:layout_height="133dp"
-        android:layout_marginBottom="208dp"
-        android:text="Search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.558"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Perhaps we can add icons to these buttons? -->
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragmentRecipeMenuMyRecipesButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button"
+                android:paddingHorizontal="70sp"
+                android:paddingVertical="20sp"
+                android:text="My Recipes"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_alt"
+                android:textSize="30sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="30dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragmentRecipeMenuPantryRecipesButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button"
+                android:paddingHorizontal="70sp"
+                android:paddingVertical="20sp"
+                android:text="Pantry Recipes"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_alt"
+                android:textSize="30sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="30dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragmentRecipeMenuSearchButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button"
+                android:paddingHorizontal="70sp"
+                android:paddingVertical="20sp"
+                android:text="Search"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_alt"
+                android:textSize="30sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="30dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

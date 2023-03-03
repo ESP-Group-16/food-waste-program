@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ProfileActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/main_background">
 
     <LinearLayout
         android:id="@+id/activityProfileTopBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_500"
+        android:background="@color/secondary_color_light"
         android:orientation="vertical" >
         <TextView
             android:id="@+id/activityProfileTopTextUsername"
@@ -18,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="Welcome, name!"
             android:textSize="40sp"
-            android:textColor="@color/white"
+            android:textColor="@color/main_background"
             android:paddingHorizontal="10sp"
             android:textStyle="bold"/>
 
@@ -28,18 +26,18 @@
             android:layout_height="wrap_content"
             android:text="Pantry admin"
             android:textSize="15sp"
-            android:textColor="@color/white"
+            android:textColor="@color/main_background"
             android:paddingHorizontal="10sp"
             android:paddingBottom="5sp" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/activityProfileAchievementsTitle"
+        android:id="@+id/activityProfileAchievementsTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Achievements"
-        android:textColor="@color/black"
+        android:textColor="@color/text_color"
         android:textSize="35sp"
         android:textStyle="bold"
         android:layout_below="@id/activityProfileTopBar"
@@ -50,7 +48,7 @@
         android:id="@+id/activityProfileAchievementsTable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/activityProfileAchievementsTitle"
+        android:layout_below="@id/activityProfileAchievementsTxt"
         android:paddingHorizontal="20sp">
 
         <LinearLayout
@@ -61,30 +59,30 @@
             android:layout_weight="3">
 
             <TextView
-                android:id="@+id/activityProfileSavedTitle"
+                android:id="@+id/activityProfileSavedTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text="You have saved"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 android:paddingVertical="2sp"/>
 
             <TextView
-                android:id="@+id/activityProfileScoreTitle"
+                android:id="@+id/activityProfileScoreTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Your score"
                 android:textSize="20sp"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 android:paddingVertical="2sp"/>
 
             <TextView
-                android:id="@+id/activityProfileLeaderboardTitle"
+                android:id="@+id/activityProfileLeaderboardTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text="Leaderboard position"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 android:paddingVertical="2sp"/>
 
         </LinearLayout>
@@ -102,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text=" - CO2"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 android:paddingVertical="2sp"/>
 
             <TextView
@@ -111,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text=" -X- "
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 android:paddingVertical="2sp"/>
 
             <TextView
@@ -120,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text=" -X- "
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 android:paddingVertical="2sp"/>
 
         </LinearLayout>
@@ -129,11 +127,11 @@
 
 
     <TextView
-        android:id="@+id/activityProfileProfileTitle"
+        android:id="@+id/activityProfileProfileTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Profile"
-        android:textColor="@color/black"
+        android:textColor="@color/text_color"
         android:textSize="35sp"
         android:textStyle="bold"
         android:layout_below="@id/activityProfileAchievementsTable"
@@ -145,7 +143,7 @@
         android:id="@+id/activityProfileProfileButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/activityProfileProfileTitle"
+        android:layout_below="@id/activityProfileProfileTxt"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -154,7 +152,7 @@
             android:layout_height="wrap_content"
             android:text="Preferences"
             android:textSize="20sp"
-            android:textColor="@color/white"
+            android:textColor="@color/main_background"
             android:layout_marginBottom="5sp"
             android:background="@drawable/rounded_button"
             android:drawableRight="@drawable/baseline_arrow_right_alt_24"
@@ -169,7 +167,7 @@
             android:layout_height="wrap_content"
             android:text="Allergies"
             android:textSize="20sp"
-            android:textColor="@color/white"
+            android:textColor="@color/main_background"
             android:drawableRight="@drawable/baseline_arrow_right_alt_24"
             android:textAllCaps="false"
             android:background="@drawable/rounded_button"
@@ -180,11 +178,11 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/activityProfileSettingsTitle"
+        android:id="@+id/activityProfileSettingsTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Settings"
-        android:textColor="@color/black"
+        android:textColor="@color/text_color"
         android:textSize="35sp"
         android:textStyle="bold"
         android:layout_below="@id/activityProfileProfileButtons"
@@ -193,11 +191,11 @@
         android:paddingBottom="7sp"/>
 
     <TextView
-        android:id="@+id/activityProfileNotificationDaysTitle"
+        android:id="@+id/activityProfileNotificationDaysTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Days notice for expiry:"
-        android:layout_below="@id/activityProfileSettingsTitle"
+        android:layout_below="@id/activityProfileSettingsTxt"
         android:textSize="25sp"
         android:paddingHorizontal="20sp" />
 
@@ -206,7 +204,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:inputType="number"
-        android:layout_below="@id/activityProfileNotificationDaysTitle"
+        android:layout_below="@id/activityProfileNotificationDaysTxt"
         android:hint="e.g. 2"
         android:textSize="20sp"
         android:paddingHorizontal="20sp"
@@ -222,7 +220,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:background="@drawable/rounded_button"
-        android:textColor="@color/white"
+        android:textColor="@color/main_background"
         android:paddingHorizontal="50sp"
         android:paddingVertical="15sp"
         android:layout_marginTop="20sp"/>
@@ -232,13 +230,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/black">
+        android:background="@color/text_color">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NAVBAR"
-            android:textColor="@color/white"
+            android:textColor="@color/main_background"
             android:textSize="30sp"/>
 
     </LinearLayout>
