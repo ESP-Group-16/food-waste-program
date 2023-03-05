@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Datasource {
     //stores all the hard coded data
+    private static Datasource instance;
     ArrayList<String> dietaryInfoR1= new ArrayList<String>();
     ArrayList<Ingredient> ingredientsR1= new ArrayList<Ingredient>();
     ArrayList<String> stepsR1= new ArrayList<String>();
@@ -19,8 +20,16 @@ public class Datasource {
     ArrayList<Food> AllFood=new ArrayList<Food>();
     ArrayList<Ingredient> AllIngredients=new ArrayList<Ingredient>();
     ArrayList<Pantry> AllPantry=new ArrayList<Pantry>();
-
-    void start(){
+    String test="bad";
+    private Datasource() {
+        // private constructor
         AllRecipes.add(R1);
+    }
+
+    public static Datasource getInstance() {//makes datasource a singleton
+        if (instance == null) {
+            instance = new Datasource();
+        }
+        return instance;
     }
 }
