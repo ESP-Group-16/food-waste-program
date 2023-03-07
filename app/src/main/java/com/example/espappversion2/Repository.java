@@ -1,6 +1,9 @@
 package com.example.espappversion2;
 
+import static android.content.ContentValues.TAG;
 import static android.os.Build.ID;
+
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -9,8 +12,18 @@ public class Repository {
     //used for getting data and string data to and from Datasource
     private Datasource source = Datasource.getInstance();
 
-    //////////////////////////////////////////////////////all
-
+    //////////////////////////////////////////////////////all GetFromName functions
+    public User GetUserFromName(String name){
+        User user=null;
+        for(int i=0;i<source.AllUsers.size();i++){
+            User currentobject= source.AllUsers.get(i);
+            if (name.equals(currentobject.getUserName())){
+                user=currentobject;
+            }
+        }
+        //dehash here
+        return user;
+    }
     //////////////////////////////////////////////////////all GetFromID functions
     public Recipe GetRecipeFromID(int ID){
         Recipe recipe=null;
@@ -68,18 +81,23 @@ public class Repository {
     }
     ////////////////////////////////////////////////////all Store functions
     public void StoreUser(User user){
+        user.setUserId(source.AllUsers.size());
+        //hashpassword
         source.AllUsers.add(user);
     }
     public void StoreRecipe(Recipe recipe){
+        recipe.setRecipeId(source.AllRecipes.size());
         source.AllRecipes.add(recipe);
     }
     public void StorePantry(Pantry pantry){
+        pantry.setPantryId(source.AllPantry.size());
         source.AllPantry.add(pantry);
     }
     public void StoreStock(Stock stock){
         source.AllStock.add(stock);
     }
     public void StoreFood(Food food){
+        food.setFoodId(source.AllFood.size());
         source.AllFood.add(food);
     }
     public void StoreIngredient(Ingredient ingredient){

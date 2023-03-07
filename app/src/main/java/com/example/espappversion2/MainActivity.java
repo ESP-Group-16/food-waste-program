@@ -17,29 +17,22 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements RegisterDialog.RegisterNewUser {
+public class MainActivity extends AppCompatActivity {
 
     private EditText edtTxtPassword, edtTxtEmail;
     private Button btnLogin, btnRegister;
 
-    private FirebaseAuth mAuth;
+    private Repository repo=new Repository();
+
     private String TAG = "MainActivity";
 
     @Override
-    public void onRegister(String email, String password) {
-        // TODO: finish registering new user
-        createAccount(email, password);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initViews();
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,9 +40,18 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
                 // TODO: login user
                 String email = edtTxtEmail.getText().toString().trim();
                 String password = edtTxtPassword.getText().toString();
-
                 if(!email.isEmpty() && !password.isEmpty()) {
-                    signIn(email, password);
+                    //check if email and password match
+                    User user=repo.GetUserFromName(email);
+                    try{
+                        if (password.equals(user.getPassword())){
+                            Intent intent = new Intent(MainActivity.this, PantryActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                    catch(Exception e){
+                        Log.d(TAG, "invalid login");
+                    }
                 }
             }
         });
@@ -69,63 +71,13 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null) {
-            // open PantryActivity if user is signed in
-            Intent intent = new Intent(MainActivity.this, PantryActivity.class);
-            intent.putExtra("email", currentUser.getEmail());
-            startActivity(intent);
-        }
-    }
-
-    // Firebase sign-in method
-    public void signIn(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            // navigate user to PantryActivity
-                            Intent intent = new Intent(MainActivity.this, PantryActivity.class);
-                            intent.putExtra("email", email);
-                            startActivity(intent);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                        }
-                    }
-                });
-    }
-
-    // Firebase create account method
-    public void createAccount(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
-                            Toast.makeText(MainActivity.this, "Authentication successful", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(MainActivity.this, "Email: " + email + "\nPassword: " + password, Toast.LENGTH_SHORT).show();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                            Toast.makeText(MainActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+        //FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if(currentUser != null) {
+//            // open PantryActivity if user is signed in
+//            Intent intent = new Intent(MainActivity.this, PantryActivity.class);
+//            intent.putExtra("email", currentUser.getEmail());
+//            startActivity(intent);
+//        }
     }
 
     // initialize UI components as fields
