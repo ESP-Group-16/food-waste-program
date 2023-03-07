@@ -43,8 +43,15 @@ public class MainActivity extends AppCompatActivity {
                 if(!email.isEmpty() && !password.isEmpty()) {
                     //check if email and password match
                     User user=repo.GetUserFromName(email);
-                    //check is user.getpassword is password also check if user=null or nah
-                    //if so navigate to page
+                    try{
+                        if (password.equals(user.getPassword())){
+                            Intent intent = new Intent(MainActivity.this, PantryActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                    catch(Exception e){
+                        Log.d(TAG, "invalid login");
+                    }
                 }
             }
         });

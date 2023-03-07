@@ -19,7 +19,6 @@ public class Repository {
             User currentobject= source.AllUsers.get(i);
             if (name.equals(currentobject.getUserName())){
                 user=currentobject;
-                Log.d(TAG, currentobject.getPassword());
             }
         }
         //dehash here
@@ -84,8 +83,6 @@ public class Repository {
     public void StoreUser(User user){
         user.setUserId(source.AllUsers.size());
         //hashpassword
-        Log.d(TAG, user.getPassword());
-        Log.d(TAG, Integer.toString(user.getUserId()));
         source.AllUsers.add(user);
     }
     public void StoreRecipe(Recipe recipe){

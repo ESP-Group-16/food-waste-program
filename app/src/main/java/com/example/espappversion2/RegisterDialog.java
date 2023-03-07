@@ -40,8 +40,11 @@ public class RegisterDialog extends DialogFragment {
                     // TODO: check if data meets registration criteria - add more checks here
                     // note that the password must be at least 6 characters long
                     // check if username is taken
-                    User user=new User(email,password);
-                    repo.StoreUser(user);
+                    if (repo.GetUserFromName(email)==null){
+                        User user=new User(email,password);
+                        repo.StoreUser(user);
+                        Log.d(TAG, "Account created");
+                    }
                 }
             }
         });
