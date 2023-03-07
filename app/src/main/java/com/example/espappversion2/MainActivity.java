@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
     private EditText edtTxtPassword, edtTxtEmail;
     private Button btnLogin, btnRegister;
 
-    private FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
     private String TAG = "MainActivity";
 
     @Override

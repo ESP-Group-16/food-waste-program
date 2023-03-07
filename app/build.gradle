@@ -49,4 +49,6 @@ dependencies {
 
     // Gson
     implementation 'com.google.code.gson:gson:2.10'
+
+    testImplementation 'org.mockito:mockito-core:3.9.0'
 }
