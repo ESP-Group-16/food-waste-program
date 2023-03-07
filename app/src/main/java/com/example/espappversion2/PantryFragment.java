@@ -27,7 +27,7 @@ public class PantryFragment extends Fragment implements PantryActivity.UpdatePan
     @Override
     public void onUpdatePantryItems(ArrayList<Stock> pantryItems) {
         this.pantryItems = pantryItems;
-        fridgeAdapter.setItems(pantryItems);
+//        fridgeAdapter.setItems(pantryItems); // # TODO: Commented out
     }
 
     @Nullable
@@ -68,7 +68,7 @@ public class PantryFragment extends Fragment implements PantryActivity.UpdatePan
         fridgeAdapter = new PantryItemsAdapter(getActivity());
         pantryItems.add(new Stock());
 
-        fridgeAdapter.setItems(pantryItems);
+        fridgeAdapter.setItems(pantryItems); // # TODO: Commented out to test.
 
         recViewFridge.setAdapter(fridgeAdapter);
         recViewFridge.setLayoutManager(new LinearLayoutManager(getActivity()));
