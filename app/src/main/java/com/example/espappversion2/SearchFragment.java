@@ -1,6 +1,9 @@
 package com.example.espappversion2;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class SearchFragment extends Fragment {
 
     private RecipeAdapter adapter;
-    private Button btnAsian, btnSoup;
+    private Button btnAsian, btnSoup, btnSearch;
     private EditText searchEdtTxt;
 
     @Nullable
@@ -38,7 +41,15 @@ public class SearchFragment extends Fragment {
                 openRecipePageByCuisine("Soup");
             }
         });
-
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String input=searchEdtTxt.getText().toString();
+                Log.d(TAG, input);
+                //now use the input to get values from data base
+                //display using fragment rexipe list and recipe item
+            }
+        });
         // set adapter for list
 
         return view;
@@ -47,6 +58,8 @@ public class SearchFragment extends Fragment {
     private void initViews(View view) {
         btnSoup = view.findViewById(R.id.fragmentSearchSoupCuisineButton);
         btnAsian = view.findViewById(R.id.fragmentSearchAsianCuisineButton);
+        btnSearch = view.findViewById(R.id.fragmentSearchButton);
+        searchEdtTxt = view.findViewById(R.id.fragmentSearchBarEdtTxt);
     }
 
     public void openRecipePageByCuisine(String cuisine) {
