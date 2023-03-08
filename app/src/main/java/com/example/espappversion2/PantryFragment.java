@@ -17,18 +17,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class PantryFragment extends Fragment implements PantryActivity.UpdatePantryItems {
+public class PantryFragment extends Fragment {
 
     private Button btnUsers, btnAddIngredient;
     private RecyclerView recViewFridge, recViewFreezer, recViewCupboard;
     private PantryItemsAdapter fridgeAdapter, freezerAdapter, cupboardAdapter;
     private ArrayList<Stock> pantryItems = new ArrayList<>();
 
-    @Override
-    public void onUpdatePantryItems(ArrayList<Stock> pantryItems) {
-        this.pantryItems = pantryItems;
-        fridgeAdapter.setItems(pantryItems);
-    }
+//    @Override
+//    public void onUpdatePantryItems(ArrayList<Stock> pantryItems) {
+//        this.pantryItems = pantryItems;
+//        fridgeAdapter.setItems(pantryItems);
+//    }
 
     @Nullable
     @Override

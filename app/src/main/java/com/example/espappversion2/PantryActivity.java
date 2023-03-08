@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 public class PantryActivity extends AppCompatActivity implements AddPantryItemDialog.AddItem {
 
-    public interface UpdatePantryItems {
-        void onUpdatePantryItems(ArrayList<Stock> pantryItems);
-    }
+//    public interface UpdatePantryItems {
+//        void onUpdatePantryItems(ArrayList<Stock> pantryItems);
+//    }
 
     private FrameLayout container;
     private BottomNavigationView bottomNavigationView;
@@ -31,7 +31,7 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
         // TODO: add item to DB
         Toast.makeText(this, "Item added to pantry: " + stock.getFood().getName(), Toast.LENGTH_SHORT).show();
         pantryItems.add(stock);
-        updatePantryItems();
+        //updatePantryItems();
     }
 
     @Override
@@ -49,14 +49,15 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
         transaction.replace(R.id.activityPantryFragmentContainer, pantryFragment);
         transaction.commit();
 
+
         // TODO: get the list of pantry items from DB and send them to PantryFragment
-        pantryItems = getPantryItemsFromDB();
-        updatePantryItems();
+        //pantryItems = getPantryItemsFromDB();
+        //updatePantryItems();
     }
 
-    private void updatePantryItems() {
-        ((UpdatePantryItems) pantryFragment).onUpdatePantryItems(pantryItems);
-    }
+//    private void updatePantryItems() {
+//        ((UpdatePantryItems) pantryFragment).onUpdatePantryItems(pantryItems);
+//    }
 
     private ArrayList<Stock> getPantryItemsFromDB() {
         return new ArrayList<>();
