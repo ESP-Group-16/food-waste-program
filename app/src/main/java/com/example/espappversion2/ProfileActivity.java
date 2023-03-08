@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
 //                AddPantryItemDialog dialog = new AddPantryItemDialog();
 //                dialog.show(getActivity().getSupportFragmentManager(), "add ingredient");
                 AddAllergyDialog dialog = new AddAllergyDialog();
-                dialog.show(getActivity().getSupportFragmentManager(), "add ingredient");
+                dialog.show(getSupportFragmentManager(), "add ingredient");
             }
         });
 
