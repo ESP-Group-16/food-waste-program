@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                         if (password.equals(user.getPassword())){
                             Intent intent = new Intent(MainActivity.this, PantryActivity.class);
                             startActivity(intent);
+                            //set currentuserid as user get user iD
+                            repo.SetCurrentUserID(user.getUserId());
                         }
                     }
                     catch(Exception e){

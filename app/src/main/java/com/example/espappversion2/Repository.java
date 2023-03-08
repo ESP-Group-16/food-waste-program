@@ -12,6 +12,13 @@ public class Repository {
     //used for getting data and string data to and from Datasource
     private Datasource source = Datasource.getInstance();
 
+    //////////////////////////////////////////////////////get and set current user
+    public int GetCurrentUserID(){
+        return source.currentuserID;
+    }
+    public void SetCurrentUserID(int ID){
+        source.currentuserID=ID;
+    }
     //////////////////////////////////////////////////////all GetFromName functions
     public User GetUserFromName(String name){
         User user=null;
