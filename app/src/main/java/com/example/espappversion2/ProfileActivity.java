@@ -56,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
         else{ // remove allergy to store
             repo.removeAllergy(allergy);
         }
-        repo.viewAllergyList();
+//        repo.viewAllergyList();
     }
 
     private void initBottomNavBar() {
