@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
@@ -19,6 +21,7 @@ public class AddAllergyDialog extends DialogFragment {
 
     private EditText editTextAllergy; // New Allergy Text Box
 
+    private TextView listOfAllergies; // Allergy List
     private AddAllergyDialogListener listener; // Listener to send dialog info to activity.
 
     @NonNull
@@ -59,6 +62,17 @@ public class AddAllergyDialog extends DialogFragment {
 
         // Initialise editText
         editTextAllergy = view.findViewById(R.id.editAllergyUI);
+        listOfAllergies = view.findViewById(R.id.currentAllergyList);
+
+        // Get information for textview
+        Repository repo = new Repository();
+        StringBuilder caString = new StringBuilder();
+        for (String i : repo.getAllergies()){
+            caString.append(i).append("\n");
+        }
+
+        listOfAllergies.setText(caString.toString());
+
         return builder.create();
 
     }
