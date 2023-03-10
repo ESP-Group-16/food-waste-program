@@ -150,8 +150,21 @@ public class Repository {
         return false;
     }
 
-    public void viewAllergyList(){ // Debugging method
-        System.out.println(source.AllergyInformation);
+    public ArrayList<String> getAllergies(){
+
+        ArrayList<String> temp = new ArrayList<>();
+
+        for (String i : source.AllergyInformation.keySet()){
+            if (Boolean.TRUE.equals(source.AllergyInformation.get(i))){ // If the boolean is true
+                temp.add(i);
+            }
+        }
+
+        return temp;
     }
+
+    public void viewAllergyList(){
+        System.out.println(source.AllergyInformation);
+    } // Debugging method
 
 }
