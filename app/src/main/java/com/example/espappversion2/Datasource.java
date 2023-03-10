@@ -3,6 +3,7 @@ package com.example.espappversion2;
 import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Datasource {
     //stores all the hard coded data
@@ -21,6 +22,11 @@ public class Datasource {
     ArrayList<Ingredient> AllIngredients=new ArrayList<Ingredient>();
     ArrayList<Pantry> AllPantry=new ArrayList<Pantry>();
     String test="bad";
+
+    // Ryan's special allergio extrodinario
+    // TODO: Adapt into User details once the user side of things has figured itself out.
+    HashMap<String, Boolean> AllergyInformation = new HashMap<String, Boolean>();
+
     private Datasource() {
         // private constructor
         AllRecipes.add(R1);
