@@ -115,5 +115,8 @@ public class Repository {
         }
     }
 
+    public void viewAllergyList(){ // Debugging method
+        System.out.println(source.AllergyInformation);
+    }
 
 }
