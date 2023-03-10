@@ -119,25 +119,35 @@ public class Repository {
     // I chose to implement it this way since if we have a spinner with all the allergies or want to list them off it also might be easier to list ones the user does not have
     // something something maybe flatmate has peanut allergy and we are cooking for flatmate?
     public boolean removeAllergy(String allergykey) { // returns true if successful.
-        if (allergykey == null) { // key is null (null not stored in hashmap)
-            throw new IllegalArgumentException("Argument is null. Cannot remove null from Allergy HashMap");
-        } else {
-            if (source.AllergyInformation.containsKey(allergykey)) { // if the argument key is not null and it exists as an existing key/value pair
-                source.AllergyInformation.put(allergykey, false);
-                return true;
-            } else { // key does not exist in hashmap.
-                throw new NullPointerException("Argument does not exist. Cannot remove null argument from Allergy HashMap");
+        try {
+            if (allergykey == null) { // key is null (null not stored in hashmap)
+                throw new IllegalArgumentException("Argument is null. Cannot remove null from Allergy HashMap");
+            } else {
+                if (source.AllergyInformation.containsKey(allergykey)) { // if the argument key is not null and it exists as an existing key/value pair
+                    source.AllergyInformation.put(allergykey, false);
+                    return true;
+                } else { // key does not exist in hashmap.
+                    throw new NullPointerException("Argument does not exist. Cannot remove null argument from Allergy HashMap");
+                }
             }
+        } catch (IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 
     public boolean addAllergy(String allergykey) { // returns true/false for success/ failure
-        if (allergykey == null) { // key is null (null not stored in hashmap)
-            throw new IllegalArgumentException("Argument is null. Cannot remove null from Allergy HashMap");
-        } else {
-            source.AllergyInformation.put(allergykey, true);
-            return true;
+        try {
+            if (allergykey == null) { // key is null (null not stored in hashmap)
+                throw new IllegalArgumentException("Argument is null. Cannot remove null from Allergy HashMap");
+            } else {
+                source.AllergyInformation.put(allergykey, true);
+                return true;
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 
     public void viewAllergyList(){ // Debugging method
