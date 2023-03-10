@@ -16,8 +16,7 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
 
 
     private BottomNavigationView bottomNavigationView;
-    private Button AllergyProfileButton;
-    private Button PreferencesProfileButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,12 +25,12 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
         initViews();
         initBottomNavBar();
 
-        AllergyProfileButton = (Button) findViewById(R.id.activityProfileAllergiesButton); // Could be in initviews but is here for simplicity of viewing.
-        AllergyProfileButton.setOnClickListener(view -> { // Lambda does same as View.OnClickListener
+        Button allergyProfileButton = (Button) findViewById(R.id.activityProfileAllergiesButton); // Could be in initviews but is here for simplicity of viewing.
+        allergyProfileButton.setOnClickListener(view -> { // Lambda does same as View.OnClickListener
             openAllergyDialog(); // calls method below
         });
-        PreferencesProfileButton = (Button) findViewById(R.id.activityProfilePreferencesButton); // Could be in initviews but is here for simplicity of viewing.
-        PreferencesProfileButton.setOnClickListener(view -> {
+        Button preferencesProfileButton = (Button) findViewById(R.id.activityProfilePreferencesButton); // Could be in initviews but is here for simplicity of viewing.
+        preferencesProfileButton.setOnClickListener(view -> {
             // TODO: Implement Preferences Button.
 
         });

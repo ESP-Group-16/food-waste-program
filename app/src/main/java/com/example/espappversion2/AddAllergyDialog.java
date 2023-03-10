@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.Objects;
+
 public class AddAllergyDialog extends DialogFragment {
 
     private EditText editTextAllergy; // New Allergy Text Box
@@ -27,7 +29,7 @@ public class AddAllergyDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         // Set View = Custom View.
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = requireActivity().getLayoutInflater(); // use requireActivity instead of getActivity to avoid NullPointerException.
         View view = inflater.inflate(R.layout.dialog_add_allergy, null);
 
         builder.setView(view)
