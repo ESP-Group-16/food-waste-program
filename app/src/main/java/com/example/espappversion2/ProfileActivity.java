@@ -2,16 +2,18 @@ package com.example.espappversion2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements AddAllergyDialog.AddAllergyDialogListener {
+
 
     private BottomNavigationView bottomNavigationView;
 
@@ -23,10 +25,37 @@ public class ProfileActivity extends AppCompatActivity {
         initViews();
         initBottomNavBar();
 
+        Button allergyProfileButton = (Button) findViewById(R.id.activityProfileAllergiesButton); // Could be in initviews but is here for simplicity of viewing.
+        allergyProfileButton.setOnClickListener(view -> { // Lambda does same as View.OnClickListener
+            openAllergyDialog(); // calls method below
+        });
+        Button preferencesProfileButton = (Button) findViewById(R.id.activityProfilePreferencesButton); // Could be in initviews but is here for simplicity of viewing.
+        preferencesProfileButton.setOnClickListener(view -> {
+            // TODO: Implement Preferences Button.
+
+        });
+    }
+
+    public void openAllergyDialog() { // Shows the Allergy Dialog upon 'Allergies' button click.
+        AddAllergyDialog addAllergyDialog = new AddAllergyDialog();
+        addAllergyDialog.show(getSupportFragmentManager(), "add or remove allergy dialog");
     }
 
     private void initViews() {
         bottomNavigationView = findViewById(R.id.activityProfileBottomNavBar);
+    }
+
+    @Override
+    public void applyAllergyChanges(String allergy, boolean adremBool) { // Runs the allergy dialog calculations
+        // DO CALCULATIONS HERE TO CHANGE THE DATA IN THE DATASTORE
+        Repository repo = new Repository();
+        if (adremBool){ // Add allergy to store
+            repo.addAllergy(allergy);
+        }
+        else{ // remove allergy to store
+            repo.removeAllergy(allergy);
+        }
+//        repo.viewAllergyList();
     }
 
     private void initBottomNavBar() {
