@@ -2,8 +2,12 @@ package com.example.espappversion2;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,40 +15,67 @@ import androidx.fragment.app.DialogFragment;
 
 public class AddAllergyDialog extends DialogFragment {
 
-    // Callback interface for sending passing new allergy item to profile activity.
-    interface AddAllergy {
-        void onAddAllergy(String allergy);
-    }
+    private EditText editTextAllergy; // New Allergy Text Box
 
-    // TODO: Add Ui elements as fields...
-
-    private AddAllergy addAllergy; // Instance of interface declared as a field
-
+    private AddAllergyDialogListener listener; // Listener to send dialog info to activity.
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        // display dialog
-        View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_add_allergy, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
 
-        initViews(view);
+        // Display Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        String allergy = ""; // Placeholder String.
-        try {
-            addAllergy = (AddAllergy) getActivity(); // Casting the calling activity to be AddAllergy interface object.
-            addAllergy.onAddAllergy(allergy); // Calling method on calling activity (sending new object back)
-        }catch(ClassCastException e){
-            e.printStackTrace();
-        }
+        // Set View = Custom View.
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_add_allergy, null);
 
+        builder.setView(view)
+                .setTitle("Add or Remove Input Allergy")
+                .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Cancel operations, therefore do nothing.
+                    }
+                })
+                .setNegativeButton("Remove Allergy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String allergy = editTextAllergy.getText().toString();
+                        boolean adremBool = false;
+                        listener.applyAllergyChanges(allergy, adremBool);
+                    }
+                })
+                .setPositiveButton("Add Allergy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String allergy = editTextAllergy.getText().toString();
+                        boolean adremBool = true;
+                        listener.applyAllergyChanges(allergy, adremBool);
+                    }
+                });
 
+        // Initialise editText
+        editTextAllergy = view.findViewById(R.id.editAllergyUI);
         return builder.create();
 
     }
 
-    private void initViews(View view) {
-        // TODO: Initialise UI elements here...
+    @Override
+    public void onAttach(@NonNull Context context) { // context is our activity
+        super.onAttach(context);
+
+        try {
+            listener = (AddAllergyDialogListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() +
+                    "must implement AddAllergyDialogListener");
+        }
+    }
+
+    public interface AddAllergyDialogListener{
+        void applyAllergyChanges(String allergy, boolean adremBool); // allergy = text entered; adremBool = add or remove such text from allergies list.
+
     }
 
 }

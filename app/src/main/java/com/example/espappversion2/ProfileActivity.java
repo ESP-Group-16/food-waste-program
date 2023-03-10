@@ -2,29 +2,22 @@ package com.example.espappversion2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class ProfileActivity extends AppCompatActivity implements AddAllergyDialog.AddAllergy{
+public class ProfileActivity extends AppCompatActivity implements AddAllergyDialog.AddAllergyDialogListener {
 
-    @Override
-    public void onAddAllergy(String allergy) { // This is the method called fro AddAllergyDialog when we want to send back data (allergy string for now).
-        // Do things - aka add allergy to the hashmap.
-    }
 
     private BottomNavigationView bottomNavigationView;
-
-    // Button for Allergies
     private Button AllergyProfileButton;
-
+    private Button PreferencesProfileButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,27 +26,38 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
         initViews();
         initBottomNavBar();
 
-        AllergyProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Example:
-//                // open add ingredient dialog
-//                AddPantryItemDialog dialog = new AddPantryItemDialog();
-//                dialog.show(getActivity().getSupportFragmentManager(), "add ingredient");
-                AddAllergyDialog dialog = new AddAllergyDialog();
-                dialog.show(getSupportFragmentManager(), "add ingredient");
-            }
+        AllergyProfileButton = (Button) findViewById(R.id.activityProfileAllergiesButton); // Could be in initviews but is here for simplicity of viewing.
+        AllergyProfileButton.setOnClickListener(view -> { // Lambda does same as View.OnClickListener
+            openAllergyDialog(); // calls method below
         });
+        PreferencesProfileButton = (Button) findViewById(R.id.activityProfilePreferencesButton); // Could be in initviews but is here for simplicity of viewing.
+        PreferencesProfileButton.setOnClickListener(view -> {
+            // TODO: Implement Preferences Button.
 
+        });
+    }
+
+    public void openAllergyDialog() { // Shows the Allergy Dialog upon 'Allergies' button click.
+        AddAllergyDialog addAllergyDialog = new AddAllergyDialog();
+        addAllergyDialog.show(getSupportFragmentManager(), "add or remove allergy dialog");
     }
 
     private void initViews() {
         bottomNavigationView = findViewById(R.id.activityProfileBottomNavBar);
-        AllergyProfileButton = findViewById(R.id.activityProfileAllergiesButton);
     }
 
-    // TODO: Create logic methods for retrieving the hashmap of allergies from the user and adding the allergies
-
+    @Override
+    public void applyAllergyChanges(String allergy, boolean adremBool) { // Runs the allergy dialog calculations
+        // DO CALCULATIONS HERE TO CHANGE THE DATA IN THE DATASTORE
+        Repository repo = new Repository();
+        if (adremBool){ // Add allergy to store
+            repo.addAllergy(allergy);
+        }
+        else{ // remove allergy to store
+            repo.removeAllergy(allergy);
+        }
+        repo.viewAllergyList();
+    }
 
     private void initBottomNavBar() {
         bottomNavigationView.setSelectedItemId(R.id.profile);
