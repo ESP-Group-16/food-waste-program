@@ -15,6 +15,7 @@ public class Datasource {
     User creatorR1=new User();
     Recipe R1= new Recipe(0,"stirfry","fakeurl",10,dietaryInfoR1,ingredientsR1,stepsR1,categoryR1,creatorR1);
 
+    int currentuserID;
     ArrayList<Recipe> AllRecipes=new ArrayList<Recipe>();
     ArrayList<User> AllUsers=new ArrayList<User>();
     ArrayList<Stock> AllStock=new ArrayList<Stock>();
