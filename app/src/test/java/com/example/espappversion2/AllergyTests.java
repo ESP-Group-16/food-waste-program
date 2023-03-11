@@ -101,5 +101,18 @@ public class AllergyTests {
         assertEquals(1, allergies.size());
     }
 
+    // When adding null, should throw Illegal argument exception
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullAddThrowsIllegalArgument() {
+        repo.addAllergy(null);
+    }
+
+    // When removing null, should throw Illegal argument exception
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullRemoveThrowsIllegalArgument() {
+        repo.addAllergy(null);
+    }
+
+
 
 }
