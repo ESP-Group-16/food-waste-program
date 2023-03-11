@@ -27,7 +27,7 @@ public class Datasource {
     // TODO: Adapt into User details once the user side of things has figured itself out.
     HashMap<String, Boolean> AllergyInformation = new HashMap<String, Boolean>();
 
-    private Datasource() {
+    Datasource() {
         // private constructor
         AllRecipes.add(R1);
     }
