@@ -16,8 +16,8 @@ public class ShoppingListActivity extends AppCompatActivity implements AddShoppi
 
     @Override
     public void onAddShoppingListItem(Stock item, String storageLocation) {
-        // TODO: add the new item to shopping list in DB
-        Toast.makeText(this, "New item name: " + item.getFood().getName() + " stored in " + storageLocation, Toast.LENGTH_SHORT).show();
+        // add the new item to shopping list in DB
+        //Toast.makeText(this, "New item name: " + item.getFood().getName() + " stored in " + storageLocation, Toast.LENGTH_SHORT).show();
 
         int i = (storageLocation.equals("fridge"))? 0 : (storageLocation.equals("freezer")? 1 : (storageLocation.equals("cupboard"))? 2 : -1);
         repository.addItemToShoppingList(item, i);

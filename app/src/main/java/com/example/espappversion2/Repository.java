@@ -173,12 +173,25 @@ public class Repository {
         return source.shoppingList;
     }
 
+    // returns the whole shopping list as one list
+    public ArrayList<Stock> getEntireShoppingList() {
+        ArrayList<Stock> shoppingList = new ArrayList<>();
+        for(ArrayList<Stock> list : getShoppingList()) {
+            shoppingList.addAll(list);
+        }
+        return shoppingList;
+    }
+
     // i is the storage location - 0: fridge, 1: freezer, 2: cupboard
     public ArrayList<Stock> getShoppingListByLocation(int i) {
         if(0 <= i && i <= 2) {
             return getShoppingList().get(i);
         }
         return null;
+    }
+
+    public boolean isShoppingListEmpty() {
+        return getShoppingListByLocation(0).isEmpty() && getShoppingListByLocation(1).isEmpty() && getShoppingListByLocation(2).isEmpty();
     }
 
     // i is the storage location - 0: fridge, 1: freezer, 2: cupboard

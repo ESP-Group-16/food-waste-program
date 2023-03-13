@@ -30,7 +30,7 @@
             android:layout_alignBaseline="@+id/selectedItemCheckBox"
             android:textSize="15sp"
             android:layout_alignParentEnd="true"
-            android:id="@+id/selectedItemNameText"/>
+            android:id="@+id/selectedItemUnitText"/>
 
         <EditText
             android:layout_width="250dp"

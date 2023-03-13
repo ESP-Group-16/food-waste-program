@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     private Context context;
 
     private Repository repository;
-    private ArrayList<Stock> items;
+    private ArrayList<Stock> items = new ArrayList<>();
+    private ArrayList<Stock> selectedItems = new ArrayList<>();
     private int storageLocation;
 
     public ShoppingListAdapter(Context context, int storageLocation) {
@@ -45,6 +47,26 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         }
         holder.txtUnitNumber.setText(items.get(holder.getAdapterPosition()).getQuantity() + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
 
+        holder.txtItemName.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Stock selectedItem = items.get(holder.getAdapterPosition());
+                if(b) {
+                    //Toast.makeText(context, selectedItem.getFood().getName() + " selected", Toast.LENGTH_SHORT).show();
+                    if(!selectedItems.contains(selectedItem)) {
+                        if(selectedItems.add(selectedItem)) {
+                            //Toast.makeText(context, selectedItem.getFood().getName() + " added to list", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } else {
+                    //Toast.makeText(context, selectedItem.getFood().getName() + " unselected", Toast.LENGTH_SHORT).show();
+                    if (selectedItems.remove(selectedItem)) {
+                        //Toast.makeText(context, selectedItem.getFood().getName() + " removed from list", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,8 +82,10 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 // delete the item form pantry
-                                Toast.makeText(context, "Deleted from shopping list", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context, "Deleted from shopping list", Toast.LENGTH_SHORT).show();
                                 repository.removeItemFromShoppingList(items.get(holder.getAdapterPosition()), storageLocation);
+                                // TODO: remove from selected items as well if present
+
                                 notifyDataSetChanged();
                             }
                         })
@@ -74,6 +98,10 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                 builder.create().show();
             }
         });
+    }
+
+    public ArrayList<Stock> getSelectedItems() {
+        return selectedItems;
     }
 
     public void setItems(ArrayList<Stock> items) {
@@ -89,7 +117,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txtUnitNumber;
-        private TextView txtItemName;
+        private CheckBox txtItemName;
         private CardView parent;
 
         public ViewHolder(@NonNull View itemView) {

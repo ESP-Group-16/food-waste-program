@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -18,9 +19,12 @@ public class SelectedItemsFragment extends Fragment {
 
     private RecyclerView recViewSelectedItems;
     private Button btnAddItemsToPantry;
-    private ArrayList<Stock> items;
     private TextView txtUnitNumber;
 
+    private Repository repository;
+    private ArrayList<Stock> shoppingList;
+
+    private SelectedItemsAdapter adapter;
 
     @Nullable
     @Override
@@ -28,6 +32,10 @@ public class SelectedItemsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_selected_items, container, false);
 
         initViews(view);
+
+        // get shopping list from DB
+        repository = new Repository();
+        shoppingList = repository.getEntireShoppingList();
 
         btnAddItemsToPantry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +45,10 @@ public class SelectedItemsFragment extends Fragment {
         });
 
         // TODO: set adapter for list items
-
+        adapter = new SelectedItemsAdapter(getActivity());
+        adapter.setItems(shoppingList);
+        recViewSelectedItems.setAdapter(adapter);
+        recViewSelectedItems.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
     }

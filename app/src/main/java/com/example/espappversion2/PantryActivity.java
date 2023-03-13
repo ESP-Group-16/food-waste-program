@@ -29,7 +29,7 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
     @Override
     public void onAddItem(Stock stock) {
         // TODO: add item to DB
-        Toast.makeText(this, "Item added to pantry: " + stock.getFood().getName(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Item added to pantry: " + stock.getFood().getName(), .LENGTH_SHORT).show();
         pantryItems.add(stock);
         updatePantryItems();
     }

@@ -35,6 +35,8 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // set UI components to reflect the data
+        holder.checkBoxSelectedItem.setText(items.get(holder.getAdapterPosition()).getFood().getName());
+
     }
 
     public void setItems(ArrayList<Stock> items) {
@@ -61,7 +63,7 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
             checkBoxSelectedItem = itemView.findViewById(R.id.selectedItemCheckBox);
             edtTxtExpiryDate = itemView.findViewById(R.id.selectedItemExpiryDateEdtTxt);
             parent = itemView.findViewById(R.id.selectedItemParent);
-            txtUnitNumber = itemView.findViewById(R.id.selectedItemNameText);
+            txtUnitNumber = itemView.findViewById(R.id.selectedItemUnitText);
         }
     }
 }

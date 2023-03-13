@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,13 +55,22 @@ public class ShoppingListFragment extends Fragment {
 
         // TODO: extract this into a general method
         // fridge
-        setAdapter(fridgeAdapter, fridgeItemsList, recViewFridgeItems, 0);
+        fridgeAdapter = new ShoppingListAdapter(getActivity(), 0);
+        fridgeAdapter.setItems(fridgeItemsList);
+        recViewFridgeItems.setAdapter(fridgeAdapter);
+        recViewFridgeItems.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // freezer
-        setAdapter(freezerAdapter, freezerItemsList, recViewFreezerItems, 1);
+        freezerAdapter = new ShoppingListAdapter(getActivity(), 1);
+        freezerAdapter.setItems(freezerItemsList);
+        recViewFreezerItems.setAdapter(freezerAdapter);
+        recViewFreezerItems.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // cupboard
-        setAdapter(cupboardAdapter, cupboardItemsList, recViewCupboardItems, 2);
+        cupboardAdapter = new ShoppingListAdapter(getActivity(), 2);
+        cupboardAdapter.setItems(cupboardItemsList);
+        recViewCupboardItems.setAdapter(cupboardAdapter);
+        recViewCupboardItems.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // set text of counter text
         int itemNumber = fridgeItemsList.size() + freezerItemsList.size() + cupboardItemsList.size();
@@ -69,27 +79,70 @@ public class ShoppingListFragment extends Fragment {
         btnFinishShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // ask for verification before proceeding
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                        .setTitle("Finish shop?")
-                        .setMessage("Finish the shop with selected items")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                // TODO: navigate user to SelectedItemsFragment
-                                // navigate user to recipe list fragment TODO: pass correct list to display to fragment
-                                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                transaction.replace(R.id.activityShoppingListFragmentContainer, new SelectedItemsFragment());
-                                transaction.commit();
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                // don't do anything
-                            }
-                        });
-                builder.create().show();
+                // check if shopping list is empty
+                if(!repository.isShoppingListEmpty()) {
+                    // ask for verification before proceeding
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                            .setTitle("Finish shop?")
+                            .setMessage("Do you want to remove the selected items from your shopping list and add them to the pantry?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    // TODO: add all the selected items to the pantry and remove them from shopping list
+//                                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                                    transaction.replace(R.id.activityShoppingListFragmentContainer, new SelectedItemsFragment());
+//                                    transaction.commit();
+                                    ArrayList<Stock> selectedItems = new ArrayList<>();
+                                    selectedItems.addAll(freezerAdapter.getSelectedItems());
+                                    selectedItems.addAll(fridgeAdapter.getSelectedItems());
+                                    selectedItems.addAll(cupboardAdapter.getSelectedItems());
+
+                                    // a bunch of stuff used for debugging - please ignore
+
+                                    String allItems = "";
+                                    for (Stock s : selectedItems) {
+                                        allItems += " " + s.getFood().getName();
+                                    }
+                                    String fridgeItems = "";
+                                    for (Stock s : fridgeAdapter.getSelectedItems()) {
+                                        fridgeItems += " " + s.getFood().getName();
+                                    }
+                                    String freezerItems = "";
+                                    for (Stock s : freezerAdapter.getSelectedItems()) {
+                                        freezerItems += " " + s.getFood().getName();
+                                    }
+                                    String cupboardItems = "";
+                                    for (Stock s : cupboardAdapter.getSelectedItems()) {
+                                        cupboardItems += " " + s.getFood().getName();
+                                    }
+                                    //Toast.makeText(getActivity(), "Selected items size: " + selectedItems.size() + "\n" + allItems, Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(getActivity(), "Fridge selected items: " + fridgeItems, Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(getActivity(), "Freezer selected items: " + freezerItems, Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(getActivity(), "Cupboard selected items: " + cupboardItems, Toast.LENGTH_SHORT).show();
+
+
+                                    AlertDialog.Builder selectedItemsDialog = new AlertDialog.Builder(getActivity())
+                                            .setTitle("Items added to pantry")
+                                            .setMessage("Fridge: " + fridgeItems + "\nFreezer: " + freezerItems + "\nCupboard: " + cupboardItems)
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    // nothing
+                                                }
+                                            });
+                                    selectedItemsDialog.create().show();
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    // don't do anything
+                                }
+                            });
+                    builder.create().show();
+                } else {
+                    Toast.makeText(getActivity(), "The shopping list is empty!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -101,15 +154,7 @@ public class ShoppingListFragment extends Fragment {
                 dialog.show(getActivity().getSupportFragmentManager(), "add shopping list item");
             }
         });
-
         return view;
-    }
-
-    private void setAdapter(ShoppingListAdapter adapter, ArrayList<Stock> list, RecyclerView recyclerView, int i) {
-        adapter = new ShoppingListAdapter(getActivity(), i);
-        adapter.setItems(list);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     private void initViews(View view) {
