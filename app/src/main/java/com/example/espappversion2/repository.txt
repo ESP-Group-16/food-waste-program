@@ -1,0 +1,12 @@
+call repository in any file with:
+private Repository repo=new Repository();
+
+when calling a function use a premade on in repository or make your own using source
+
+repo.GetAllRecipes(); would get all recipes
+
+to hardcode a value to be stored hardcode the value as a object in datasource and add it to relavent array in constructor
+    private Datasource() {
+        // private constructor
+        AllRecipes.add(R1);
+    }
