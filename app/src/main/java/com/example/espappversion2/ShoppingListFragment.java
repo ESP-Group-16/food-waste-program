@@ -1,5 +1,8 @@
 package com.example.espappversion2;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +24,9 @@ public class ShoppingListFragment extends Fragment {
     private Button btnAddItem, btnFinishShop;
     private TextView txtItemCounter;
     private RecyclerView recViewFridgeItems, recViewFreezerItems, recViewCupboardItems;
+
+    private Repository repository;
+    private ArrayList<ArrayList<Stock>> shoppingList;
     private ArrayList<Stock> fridgeItemsList, freezerItemsList, cupboardItemsList;
     private ShoppingListAdapter fridgeAdapter, freezerAdapter, cupboardAdapter;
 
@@ -30,53 +36,80 @@ public class ShoppingListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shopping_list, container, false);
 
         initViews(view);
+        repository = new Repository();
 
-        // TODO: get the lists from DB
-        fridgeItemsList = new ArrayList<>();
-        freezerItemsList = new ArrayList<>();
-        cupboardItemsList = new ArrayList<>();
+        // get the lists from DB
+        shoppingList = repository.getShoppingList();
+        fridgeItemsList = shoppingList.get(0);
+        freezerItemsList = shoppingList.get(1);
+        cupboardItemsList = shoppingList.get(2);
 
+//        // some initial data
+//        Stock newItem = new Stock();
+//        Food foodItem = new Food();
+//        foodItem.setName("Cheese");
+//        newItem.setFood(foodItem);
+//        newItem.setQuantity(2);
+//        fridgeItemsList.add(newItem);
+
+        // TODO: extract this into a general method
+        // fridge
+        setAdapter(fridgeAdapter, fridgeItemsList, recViewFridgeItems, 0);
+
+        // freezer
+        setAdapter(freezerAdapter, freezerItemsList, recViewFreezerItems, 1);
+
+        // cupboard
+        setAdapter(cupboardAdapter, cupboardItemsList, recViewCupboardItems, 2);
+
+        // set text of counter text
+        int itemNumber = fridgeItemsList.size() + freezerItemsList.size() + cupboardItemsList.size();
+        txtItemCounter.setText(itemNumber + " items");
 
         btnFinishShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: navigate user to SelectedItemsFragment
-                // navigate user to recipe list fragment TODO: pass correct list to display to fragment
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.activityShoppingListFragmentContainer, new SelectedItemsFragment());
-                transaction.commit();
+                // ask for verification before proceeding
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                        .setTitle("Finish shop?")
+                        .setMessage("Finish the shop with selected items")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // TODO: navigate user to SelectedItemsFragment
+                                // navigate user to recipe list fragment TODO: pass correct list to display to fragment
+                                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                transaction.replace(R.id.activityShoppingListFragmentContainer, new SelectedItemsFragment());
+                                transaction.commit();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // don't do anything
+                            }
+                        });
+                builder.create().show();
             }
         });
 
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: display dialog to add a new item to shopping list
                 // open add ingredient dialog
                 AddShoppingListItemDialog dialog = new AddShoppingListItemDialog();
                 dialog.show(getActivity().getSupportFragmentManager(), "add shopping list item");
             }
         });
 
-        // TODO: set adapters for recycler views
-        fridgeAdapter = new ShoppingListAdapter(getActivity());
-        Stock newItem = new Stock();
-        Food foodItem = new Food();
-        foodItem.setName("Cheese");
-        newItem.setFood(foodItem);
-        newItem.setQuantity(2);
-        fridgeItemsList.add(newItem);
-
-        fridgeAdapter.setItems(fridgeItemsList);
-
-        recViewFridgeItems.setAdapter(fridgeAdapter);
-        recViewFridgeItems.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        // TODO: set text of counter text
-        int itemNumber = fridgeItemsList.size() + freezerItemsList.size() + cupboardItemsList.size();
-        txtItemCounter.setText(itemNumber + " items");
-
         return view;
+    }
+
+    private void setAdapter(ShoppingListAdapter adapter, ArrayList<Stock> list, RecyclerView recyclerView, int i) {
+        adapter = new ShoppingListAdapter(getActivity(), i);
+        adapter.setItems(list);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     private void initViews(View view) {

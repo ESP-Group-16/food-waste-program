@@ -19,6 +19,9 @@ public class ShoppingListActivity extends AppCompatActivity implements AddShoppi
         // TODO: add the new item to shopping list in DB
         Toast.makeText(this, "New item name: " + item.getFood().getName() + " stored in " + storageLocation, Toast.LENGTH_SHORT).show();
 
+        int i = (storageLocation.equals("fridge"))? 0 : (storageLocation.equals("freezer")? 1 : (storageLocation.equals("cupboard"))? 2 : -1);
+        repository.addItemToShoppingList(item, i);
+
         // restart ShoppingListFragment to display updated list
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.activityShoppingListFragmentContainer, new ShoppingListFragment());
@@ -26,6 +29,7 @@ public class ShoppingListActivity extends AppCompatActivity implements AddShoppi
     }
 
     private BottomNavigationView bottomNavigationView;
+    private Repository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,8 @@ public class ShoppingListActivity extends AppCompatActivity implements AddShoppi
 
         initViews();
         initBottomNavBar();
+
+        repository = new Repository();
 
         // display ShoppingListFragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

@@ -28,9 +28,15 @@ public class Datasource {
     // TODO: Adapt into User details once the user side of things has figured itself out.
     HashMap<String, Boolean> AllergyInformation = new HashMap<String, Boolean>();
 
+    // shopping list, a list of 3 lists based on storage location - 0: fridge, 1: freezer, 2: cupboard
+    ArrayList<ArrayList<Stock>> shoppingList = new ArrayList<>();
+
     private Datasource() {
         // private constructor
         AllRecipes.add(R1);
+        shoppingList.add(new ArrayList<>());
+        shoppingList.add(new ArrayList<>());
+        shoppingList.add(new ArrayList<>());
     }
 
     public static Datasource getInstance() {//makes datasource a singleton

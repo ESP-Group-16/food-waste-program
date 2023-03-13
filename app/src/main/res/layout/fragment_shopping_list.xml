@@ -51,7 +51,7 @@
     <ScrollView
         android:id="@+id/fragmentShoppingListScrollView"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/RelativeLayout2">
 
         <RelativeLayout
@@ -102,28 +102,24 @@
                 android:id="@+id/fragmentShoppingListCupboardRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/fragmentShoppingListCupboardTxt" />
+                android:layout_below="@id/fragmentShoppingListCupboardTxt"
+                android:layout_marginBottom="70dp"/>
 
         </RelativeLayout>
 
     </ScrollView>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/fragmentShoppingListScrollView">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/fragmentShoppingListFinishButton"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:text="Finish Shop"
-            android:textColor="@color/text_color_alt"
-            android:background="@drawable/rounded_button"/>
-
-    </RelativeLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_alignParentBottom="true"
+        android:id="@+id/fragmentShoppingListFinishButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Finish Shop"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/text_color_alt"
+        android:background="@drawable/rounded_button"/>
 
 
 </RelativeLayout>

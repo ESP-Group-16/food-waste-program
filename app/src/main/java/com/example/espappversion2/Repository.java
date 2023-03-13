@@ -167,4 +167,27 @@ public class Repository {
         System.out.println(source.AllergyInformation);
     } // Debugging method
 
+    // returns shopping list, which a list of lists with items separated based on location
+    // 0: fridge, 1: freezer, 2: cupboard
+    public ArrayList<ArrayList<Stock>> getShoppingList() {
+        return source.shoppingList;
+    }
+
+    // i is the storage location - 0: fridge, 1: freezer, 2: cupboard
+    public ArrayList<Stock> getShoppingListByLocation(int i) {
+        if(0 <= i && i <= 2) {
+            return getShoppingList().get(i);
+        }
+        return null;
+    }
+
+    // i is the storage location - 0: fridge, 1: freezer, 2: cupboard
+    public void addItemToShoppingList(Stock item, int i) {
+        source.shoppingList.get(i).add(item);
+    }
+
+    // i is the storage location - 0: fridge, 1: freezer, 2: cupboard
+    public void removeItemFromShoppingList(Stock item, int i) {
+        source.shoppingList.get(i).remove(item);
+    }
 }

@@ -60,7 +60,7 @@ public class AddShoppingListItemDialog extends DialogFragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                storageLocation = null;
             }
         });
 
@@ -70,21 +70,25 @@ public class AddShoppingListItemDialog extends DialogFragment {
                 // get details of new item from UI components
                 Stock newItem = new Stock();
                 if(!edtTxtItemName.getText().toString().isEmpty() && !edtTxtQuantity.getText().toString().isEmpty()) {
-                    Food food = new Food();
-                    food.setName(edtTxtItemName.getText().toString());
-                    food.setUnit(unitSpinner.getSelectedItem().toString());
-                    newItem.setFood(food);
-                    newItem.setQuantity(Double.parseDouble(edtTxtQuantity.getText().toString()));
+                    if(storageLocation != null) {
+                        Food food = new Food();
+                        food.setName(edtTxtItemName.getText().toString());
+                        food.setUnit(unitSpinner.getSelectedItem().toString());
+                        newItem.setFood(food);
+                        newItem.setQuantity(Double.parseDouble(edtTxtQuantity.getText().toString()));
 
-                    // send the new item back to ShoppingListFragment
-                    try{
-                        addShoppingListItem = (AddShoppingListItem) getActivity();
-                        addShoppingListItem.onAddShoppingListItem(newItem, storageLocation);
-                    } catch(ClassCastException e) {
-                        e.printStackTrace();
+                        // send the new item back to ShoppingListFragment
+                        try {
+                            addShoppingListItem = (AddShoppingListItem) getActivity();
+                            addShoppingListItem.onAddShoppingListItem(newItem, storageLocation);
+                        } catch(ClassCastException e) {
+                            e.printStackTrace();
+                        }
+
+                        dismiss();
+                    } else {
+                        Toast.makeText(getActivity(), "Please select a storage location", Toast.LENGTH_SHORT).show();
                     }
-
-                    dismiss();
                 } else {
                     Toast.makeText(getActivity(), "Please fill out all the required fields!", Toast.LENGTH_SHORT).show();
                 }
@@ -96,13 +100,13 @@ public class AddShoppingListItemDialog extends DialogFragment {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch(i) {
                     case R.id.dialogAddShoppingListItemFridgeRB:
-                        storageLocation = "Fridge";
+                        storageLocation = "fridge";
                         break;
                     case R.id.dialogAddShoppingListItemFreezerRB:
-                        storageLocation = "Freezer";
+                        storageLocation = "freezer";
                         break;
                     case R.id.dialogAddShoppingListItemCupboardRB:
-                        storageLocation = "Cupboard";
+                        storageLocation = "cupboard";
                         break;
                     default:
                         break;
@@ -127,6 +131,9 @@ public class AddShoppingListItemDialog extends DialogFragment {
         units.add("Kg");
         units.add("L");
         units.add("Pc");
+        units.add("Ml");
+        units.add("Pint");
+        units.add("g");
         return units;
     }
 }
