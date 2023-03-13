@@ -18,6 +18,10 @@ public class User {
     public User() {
 
     }
+    public User(String userName, String password) {
+        this.userName=userName;
+        this.password=password;
+    }
 
     // TODO: finish getPreferences()
     public ArrayList<String> getPreferences(){
