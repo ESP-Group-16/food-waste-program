@@ -8,7 +8,7 @@ public class Food {
     private int foodId;
     private String name;
     private ArrayList<String> dietaryInfo;
-    private int unit;
+    private String unit;
     private Dictionary<String, Integer> nutritional_info;
     private double carbonFootprint;
 
@@ -22,7 +22,7 @@ public class Food {
     public Food() {
     }
 
-    public Food(int foodId, String name, ArrayList<String> dietaryInfo, int unit, Dictionary<String, Integer> nutritional_info, double carbonFootprint) {
+    public Food(int foodId, String name, ArrayList<String> dietaryInfo, String unit, Dictionary<String, Integer> nutritional_info, double carbonFootprint) {
         this.foodId = foodId;
         this.name = name;
         this.dietaryInfo = dietaryInfo;
@@ -47,11 +47,11 @@ public class Food {
         this.dietaryInfo = dietaryInfo;
     }
 
-    public int getUnit() {
+    public String getUnit() {
         return unit;
     }
 
-    public void setUnit(int unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
 

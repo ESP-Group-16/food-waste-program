@@ -51,7 +51,7 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
 
         // TODO: get the list of pantry items from DB and send them to PantryFragment
         pantryItems = getPantryItemsFromDB();
-        updatePantryItems();
+        //  updatePantryItems();
     }
 
     private void updatePantryItems() {

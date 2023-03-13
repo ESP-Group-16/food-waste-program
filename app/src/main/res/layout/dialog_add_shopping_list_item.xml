@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/main_background"
+    android:padding="15dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Item To Shopping List"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:textColor="@color/text_color"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/dialogAddShoppingListItemTitleText"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Name"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:inputType="text"
+        android:textColor="@color/text_color"
+        android:textColorHint="@color/text_color_hint"
+        android:layout_below="@id/dialogAddShoppingListItemTitleText"
+        android:id="@+id/dialogAddShoppingListItemNameEdtTxt" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialogAddShoppingListItemNameEdtTxt"
+        android:id="@+id/dialogAddShoppingListItemQuantityLinLayout">
+
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="Quantity"
+            android:inputType="numberDecimal"
+            android:textColor="@color/text_color"
+            android:textColorHint="@color/text_color_hint"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="8"
+            android:id="@+id/dialogAddShoppingListItemQuantityEdtTxt" />
+
+        <Spinner
+            android:id="@+id/dialogAddShoppingListItemUnitSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            android:layout_weight="2"/>
+
+    </LinearLayout>
+
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/dialogAddShoppingListItemQuantityLinLayout"
+        android:id="@+id/dialogAddShoppingListItemStorageLocationRG">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fridge"
+            android:checked="true"
+            android:textColor="@color/text_color"
+            android:id="@+id/dialogAddShoppingListItemFridgeRB" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialogAddShoppingListItemFreezerRB"
+            android:text="Freezer"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="25dp" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/dialogAddShoppingListItemCupboardRB"
+            android:text="Cupboard"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="25dp" />
+
+    </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialogAddShoppingListItemStorageLocationRG"
+        android:text="Add Item"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/dialogAddShoppingListItemAddButton" />
+
+
+</RelativeLayout>

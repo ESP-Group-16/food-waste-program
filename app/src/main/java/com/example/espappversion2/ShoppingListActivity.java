@@ -7,11 +7,23 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class ShoppingListActivity extends AppCompatActivity {
+public class ShoppingListActivity extends AppCompatActivity implements AddShoppingListItemDialog.AddShoppingListItem {
+
+    @Override
+    public void onAddShoppingListItem(Stock item, String storageLocation) {
+        // TODO: add the new item to shopping list in DB
+        Toast.makeText(this, "New item name: " + item.getFood().getName() + " stored in " + storageLocation, Toast.LENGTH_SHORT).show();
+
+        // restart ShoppingListFragment to display updated list
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activityShoppingListFragmentContainer, new ShoppingListFragment());
+        transaction.commit();
+    }
 
     private BottomNavigationView bottomNavigationView;
 

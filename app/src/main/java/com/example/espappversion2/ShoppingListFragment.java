@@ -52,6 +52,9 @@ public class ShoppingListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // TODO: display dialog to add a new item to shopping list
+                // open add ingredient dialog
+                AddShoppingListItemDialog dialog = new AddShoppingListItemDialog();
+                dialog.show(getActivity().getSupportFragmentManager(), "add shopping list item");
             }
         });
 
