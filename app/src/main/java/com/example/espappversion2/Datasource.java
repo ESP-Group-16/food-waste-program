@@ -26,7 +26,17 @@ public class Datasource {
 
     // Ryan's special allergio extrodinario
     // TODO: Adapt into User details once the user side of things has figured itself out.
-    HashMap<String, Boolean> AllergyInformation = new HashMap<String, Boolean>();
+    HashMap<String, Boolean> AllergyInformation = new HashMap<>();
+
+
+    // Ryan's special pantrino extrodinario
+    // TODO: Adapt into PANTRY details once the PANTRY side of things has figured itself out.
+    HashMap<String, ArrayList<Stock>> PantryInformation = new HashMap<String, ArrayList<Stock>>() {{
+        put("cupboard", new ArrayList<>());
+        put("fridge", new ArrayList<>());
+        put("freezer", new ArrayList<>());
+    }};
+
 
     private Datasource() {
         // private constructor
