@@ -83,7 +83,7 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private CardView parent;
         private TextView txtItemName, txtExpiryDate, txtQuantity;
