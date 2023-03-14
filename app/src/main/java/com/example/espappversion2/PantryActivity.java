@@ -15,23 +15,26 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
-public class PantryActivity extends AppCompatActivity implements AddPantryItemDialog.AddItem {
-
-    public interface UpdatePantryItems {
-        void onUpdatePantryItems(ArrayList<Stock> pantryItems);
-    }
+public class PantryActivity extends AppCompatActivity implements AddPantryItemDialog.AddPantryItemDialogListener {
 
     private FrameLayout container;
     private BottomNavigationView bottomNavigationView;
-    private ArrayList<Stock> pantryItems;
     private PantryFragment pantryFragment;
 
     @Override
-    public void onAddItem(Stock stock) {
-        // TODO: add item to DB
-        Toast.makeText(this, "Item added to pantry: " + stock.getFood().getName(), Toast.LENGTH_SHORT).show();
-        pantryItems.add(stock);
-        updatePantryItems();
+    public void applyPantryItemChanges(String storageloc, Stock stock) { // For some reason it sends it here instead of the pantry fragment - uh so I'll do the changing backend here
+
+        // Comes from AddPantryItemDialog: We need to add pantry item here
+
+        Repository repo = new Repository();
+        repo.addStockItem(storageloc, stock);
+        repo.viewAllPantry();
+
+        pantryFragment = new PantryFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activityPantryFragmentContainer, pantryFragment);
+        transaction.commit();
+
     }
 
     @Override
@@ -48,18 +51,6 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.activityPantryFragmentContainer, pantryFragment);
         transaction.commit();
-
-        // TODO: get the list of pantry items from DB and send them to PantryFragment
-        pantryItems = getPantryItemsFromDB();
-        updatePantryItems();
-    }
-
-    private void updatePantryItems() {
-        ((UpdatePantryItems) pantryFragment).onUpdatePantryItems(pantryItems);
-    }
-
-    private ArrayList<Stock> getPantryItemsFromDB() {
-        return new ArrayList<>();
     }
 
     private void initViews() {
