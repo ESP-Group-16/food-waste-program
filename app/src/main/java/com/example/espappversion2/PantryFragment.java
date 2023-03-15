@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ public class PantryFragment extends Fragment{
 
     private Button btnUsers, btnAddIngredient;
     private RecyclerView recViewFridge, recViewFreezer, recViewCupboard;
+
     private PantryItemsAdapter fridgeAdapter, freezerAdapter, cupboardAdapter;
 
     @Nullable
@@ -64,7 +66,7 @@ public class PantryFragment extends Fragment{
 
         // Step 2: ASSIGN DATA ITEMS TO CREATE NEW RECYCLERVIEW (instanced) ITEMS.
         // set adapter for fridge
-        fridgeAdapter = new PantryItemsAdapter(getActivity());
+        fridgeAdapter = new PantryItemsAdapter(getActivity(), "fridge");
 
         fridgeAdapter.setItems(fridgePantryItems); // # TODO: Commented out to test.
 
@@ -72,7 +74,7 @@ public class PantryFragment extends Fragment{
         recViewFridge.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // set adapter for freezer
-        freezerAdapter = new PantryItemsAdapter(getActivity());
+        freezerAdapter = new PantryItemsAdapter(getActivity(), "freezer");
 
         freezerAdapter.setItems(freezerPantryItems); // # TODO: Commented out to test.
 
@@ -80,7 +82,7 @@ public class PantryFragment extends Fragment{
         recViewFreezer.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // set adapter for cupboard
-        cupboardAdapter = new PantryItemsAdapter(getActivity());
+        cupboardAdapter = new PantryItemsAdapter(getActivity(), "cupboard");
 
         cupboardAdapter.setItems(cupboardPantryItems); // # TODO: Commented out to test.
 

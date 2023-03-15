@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ViewHolder> {
 
     private Context context;
-
     private Repository repository;
     private ArrayList<Stock> items = new ArrayList<>();
     private ArrayList<Stock> selectedItems = new ArrayList<>();

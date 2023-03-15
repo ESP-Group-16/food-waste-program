@@ -29,12 +29,12 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
         Repository repo = new Repository();
         repo.addStockItem(storageloc, stock);
         repo.viewAllPantry();
+        Toast.makeText(this, "New item " + stock.getFood().getName() + " added to " + storageloc, Toast.LENGTH_SHORT).show();
 
         pantryFragment = new PantryFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.activityPantryFragmentContainer, pantryFragment);
         transaction.commit();
-
     }
 
     @Override

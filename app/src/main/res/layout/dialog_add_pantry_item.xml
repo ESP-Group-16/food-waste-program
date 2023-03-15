@@ -26,15 +26,38 @@
         android:inputType="text"
         android:textSize="25sp" />
 
-    <EditText
-        android:id="@+id/pantryIngredientStorageLocation"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="Storage Location"
-        android:inputType="text"
-        android:textColor="@color/text_color"
-        android:textColorHint="@color/text_color_hint"
-        android:textSize="25sp" />
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/pantryAddIngredientName"
+        android:id="@+id/dialogAddPantryItemStorageLocationRG">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fridge"
+            android:textColor="@color/text_color"
+            android:id="@+id/dialogAddPantryItemFridgeRB" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialogAddPantryItemFreezerRB"
+            android:text="Freezer"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="25dp" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/dialogAddPantryItemCupboardRB"
+            android:text="Cupboard"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="25dp" />
+
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
