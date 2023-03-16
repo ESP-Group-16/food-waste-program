@@ -61,8 +61,8 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                // TODO: delete the item form pantry
-                                Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+                                // delete the item form pantry
+                                //Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
                                 repository.removeStockItem(storageLocation, items.get(holder.getAdapterPosition()));
                                 notifyDataSetChanged();
                             }

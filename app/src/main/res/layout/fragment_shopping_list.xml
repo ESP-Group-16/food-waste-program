@@ -64,6 +64,8 @@
                 android:layout_height="50dp"
                 android:text="Fridge"
                 android:textSize="35dp"
+                android:paddingHorizontal="10sp"
+                android:textStyle="bold"
                 android:textColor="@color/text_color"
                 android:paddingTop="10sp"/>
 
@@ -71,6 +73,7 @@
                 android:id="@+id/fragmentShoppingListFridgeRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="10sp"
                 android:layout_below="@id/fragmentShoppingListFridgeTxt" />
 
             <TextView
@@ -80,6 +83,8 @@
                 android:text="Freezer"
                 android:textSize="35dp"
                 android:textColor="@color/text_color"
+                android:paddingHorizontal="10sp"
+                android:textStyle="bold"
                 android:layout_below="@id/fragmentShoppingListFridgeRecyclerView"
                 android:paddingTop="10sp"/>
 
@@ -87,6 +92,7 @@
                 android:id="@+id/fragmentShoppingListFreezerRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="10sp"
                 android:layout_below="@id/fragmentShoppingListFreezerTxt" />
 
             <TextView
@@ -96,12 +102,15 @@
                 android:layout_below="@id/fragmentShoppingListFreezerRecyclerView"
                 android:text="Cupboard"
                 android:textColor="@color/text_color"
+                android:paddingHorizontal="10sp"
+                android:textStyle="bold"
                 android:textSize="35dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragmentShoppingListCupboardRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="10sp"
                 android:layout_below="@id/fragmentShoppingListCupboardTxt"
                 android:layout_marginBottom="70dp"/>
 

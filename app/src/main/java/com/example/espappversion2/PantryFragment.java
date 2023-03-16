@@ -68,7 +68,7 @@ public class PantryFragment extends Fragment{
         // set adapter for fridge
         fridgeAdapter = new PantryItemsAdapter(getActivity(), "fridge");
 
-        fridgeAdapter.setItems(fridgePantryItems); // # TODO: Commented out to test.
+        fridgeAdapter.setItems(fridgePantryItems);
 
         recViewFridge.setAdapter(fridgeAdapter);
         recViewFridge.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -76,7 +76,7 @@ public class PantryFragment extends Fragment{
         // set adapter for freezer
         freezerAdapter = new PantryItemsAdapter(getActivity(), "freezer");
 
-        freezerAdapter.setItems(freezerPantryItems); // # TODO: Commented out to test.
+        freezerAdapter.setItems(freezerPantryItems);
 
         recViewFreezer.setAdapter(freezerAdapter);
         recViewFreezer.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -84,7 +84,7 @@ public class PantryFragment extends Fragment{
         // set adapter for cupboard
         cupboardAdapter = new PantryItemsAdapter(getActivity(), "cupboard");
 
-        cupboardAdapter.setItems(cupboardPantryItems); // # TODO: Commented out to test.
+        cupboardAdapter.setItems(cupboardPantryItems);
 
         recViewCupboard.setAdapter(cupboardAdapter);
         recViewCupboard.setLayoutManager(new LinearLayoutManager(getActivity()));

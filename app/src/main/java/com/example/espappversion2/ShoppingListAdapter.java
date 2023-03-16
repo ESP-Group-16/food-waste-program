@@ -45,7 +45,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             holder.txtItemName.setText(items.get(holder.getAdapterPosition()).getFood().getName());
         }
         holder.txtUnitNumber.setText(items.get(holder.getAdapterPosition()).getQuantity() + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
-
+        holder.txtExpiryDate.setText(items.get(holder.getAdapterPosition()).getExpiresAt());
         holder.txtItemName.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -83,8 +83,6 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                                 // delete the item form pantry
                                 //Toast.makeText(context, "Deleted from shopping list", Toast.LENGTH_SHORT).show();
                                 repository.removeItemFromShoppingList(items.get(holder.getAdapterPosition()), storageLocation);
-                                // TODO: remove from selected items as well if present
-
                                 notifyDataSetChanged();
                             }
                         })
@@ -115,7 +113,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView txtUnitNumber;
+        private TextView txtUnitNumber, txtExpiryDate;
         private CheckBox txtItemName;
         private CardView parent;
 
@@ -125,6 +123,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             txtUnitNumber = itemView.findViewById(R.id.shoppingListItemUnitNumberTxt);
             txtItemName = itemView.findViewById(R.id.shoppingListItemCheckbox);
             parent = itemView.findViewById(R.id.shoppingListItemParent);
+            txtExpiryDate = itemView.findViewById(R.id.shoppingListItemExpiryDateText);
         }
     }
 }

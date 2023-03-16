@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -31,8 +32,8 @@ public class AddShoppingListItemDialog extends DialogFragment {
     private Button btnAddItem;
     private EditText edtTxtItemName, edtTxtQuantity;
     private Spinner unitSpinner;
-
     private RadioGroup rgStorageLocation;
+    private DatePicker datePicker;
 
     private ArrayList<String> units;
     private String storageLocation;
@@ -76,6 +77,12 @@ public class AddShoppingListItemDialog extends DialogFragment {
                         food.setUnit(unitSpinner.getSelectedItem().toString());
                         newItem.setFood(food);
                         newItem.setQuantity(Double.parseDouble(edtTxtQuantity.getText().toString()));
+
+                        int day = datePicker.getDayOfMonth();
+                        int month = datePicker.getMonth() + 1;
+                        int year = datePicker.getYear();
+
+                        newItem.setExpiresAt(day+"/"+month+"/"+year);
 
                         // send the new item back to ShoppingListFragment
                         try {
@@ -124,6 +131,7 @@ public class AddShoppingListItemDialog extends DialogFragment {
         edtTxtQuantity = view.findViewById(R.id.dialogAddShoppingListItemQuantityEdtTxt);
         unitSpinner = view.findViewById(R.id.dialogAddShoppingListItemUnitSpinner);
         rgStorageLocation = view.findViewById(R.id.dialogAddShoppingListItemStorageLocationRG);
+        datePicker = view.findViewById(R.id.dialogAddShoppingListItemDatePicker);
     }
 
     private ArrayList<String> getUnits() {
