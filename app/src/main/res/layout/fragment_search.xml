@@ -5,25 +5,25 @@
     android:padding="10dp">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragmentSearchTopRelLayout">
+        android:id="@+id/fragmentSearchTopRelLayout"
+        android:layout_width="402dp"
+        android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/fragmentSearchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"
-            android:id="@+id/fragmentSearchBackButton"
-            android:layout_marginStart="10dp" />
+            android:layout_marginStart="10dp"
+            android:text="Search" />
 
         <EditText
             android:id="@+id/fragmentSearchBarEdtTxt"
             android:layout_width="250dp"
-            android:hint="Search for a recipe..."
-            android:textColorHint="@color/text_color_hint"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/fragmentSearchBackButton" />
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/fragmentSearchButton"
+            android:hint="Search for a recipe..."
+            android:textColorHint="@color/text_color_hint" />
 
     </RelativeLayout>
 

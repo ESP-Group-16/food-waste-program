@@ -12,6 +12,17 @@ public class Repository {
     //used for getting data and string data to and from Datasource
     private Datasource source = Datasource.getInstance();
 
+    /////////////////////////////////////////////////// for parital string name search
+    public ArrayList<Recipe> GetRecipeContainingName(String name){
+        ArrayList<Recipe> RecipesOut=new ArrayList<>();
+        for(int i=0;i<source.AllRecipes.size();i++) {
+            Recipe currentobject = source.AllRecipes.get(i);
+            if (name.equals(currentobject.getName())) {
+                RecipesOut.add(currentobject);
+            }
+        }
+        return RecipesOut;
+    }
     //////////////////////////////////////////////////////get and set current user
     public int GetCurrentUserID(){
         return source.currentuserID;
