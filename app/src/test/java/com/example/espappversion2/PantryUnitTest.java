@@ -32,10 +32,25 @@ public class PantryUnitTest {
                 PantryInformation.get("cupboard")).get(0).getFood().getName());
     }
 
-    // TODO: Might need a teardown function to remove the added item
+    @Test
+    public void removeFromEmptyPantry() {
+
+        Stock stockitem = new Stock();
+        Food food = new Food();
+        food.setName("TestAdding");
+        stockitem.setFood(food);
+
+        // Doesn't throw exception - instead returns false: is caught by try catch.
+//        assertThrows(IllegalArgumentException.class,
+//                () -> {
+//                    repo.removeStockItem("cupboard", stockitem);
+//                });
+
+        assertFalse(repo.removeStockItem("cupboard", stockitem));
+    }
 
     @Test
-    public void addandremoveItemFromPantry(){
+    public void addthenremoveItemFromPantry(){
 
         Stock stockitem = new Stock();
         Food food = new Food();
@@ -55,20 +70,25 @@ public class PantryUnitTest {
     }
 
     @Test
-    public void removeFromEmptyPantry() {
+    public void addItemToInvalidPantrylocation(){
 
         Stock stockitem = new Stock();
         Food food = new Food();
         food.setName("TestAdding");
         stockitem.setFood(food);
 
-        // Doesn't throw exception - instead returns false: is caught by try catch.
-//        assertThrows(IllegalArgumentException.class,
-//                () -> {
-//                    repo.removeStockItem("cupboard", stockitem);
-//                });
+        assertFalse(repo.addStockItem("pizza oven", stockitem));
+    }
 
-        assertFalse(repo.removeStockItem("cupboard", stockitem));
+    @Test
+    public void removeItemToInvalidPantrylocation(){
+
+        Stock stockitem = new Stock();
+        Food food = new Food();
+        food.setName("TestAdding");
+        stockitem.setFood(food);
+
+        assertFalse(repo.removeStockItem("pizza oven", stockitem));
     }
 
 }
