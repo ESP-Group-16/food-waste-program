@@ -1,11 +1,9 @@
 package com.example.espappversion2;
 
-import java.util.Date;
-
 public class Stock {
     private Food food;
     private double quantity;
-    private Date expiresAt;
+    private String expiresAt;
     private boolean isShared;
     private User owner;
 
@@ -13,7 +11,7 @@ public class Stock {
 
     }
 
-    public Stock(Food food, double quantity, Date expiresAt, boolean isShared, User owner) {
+    public Stock(Food food, double quantity, String expiresAt, boolean isShared, User owner) {
         this.food = food;
         this.quantity = quantity;
         this.expiresAt = expiresAt;
@@ -45,11 +43,11 @@ public class Stock {
         this.quantity = quantity;
     }
 
-    public Date getExpiresAt() {
+    public String getExpiresAt() {
         return expiresAt;
     }
 
-    public void setExpiresAt(Date expiresAt) {
+    public void setExpiresAt(String expiresAt) {
         this.expiresAt = expiresAt;
     }
 

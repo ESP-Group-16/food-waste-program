@@ -51,12 +51,30 @@
     <ScrollView
         android:id="@+id/fragmentShoppingListScrollView"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/RelativeLayout2">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/fragmentShoppingListFridgeTxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Fridge"
+                android:textSize="35dp"
+                android:paddingHorizontal="10sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_color"
+                android:paddingTop="10sp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragmentShoppingListFridgeRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10sp"
+                android:layout_below="@id/fragmentShoppingListFridgeTxt" />
 
             <TextView
                 android:id="@+id/fragmentShoppingListFreezerTxt"
@@ -65,65 +83,52 @@
                 android:text="Freezer"
                 android:textSize="35dp"
                 android:textColor="@color/text_color"
+                android:paddingHorizontal="10sp"
+                android:textStyle="bold"
+                android:layout_below="@id/fragmentShoppingListFridgeRecyclerView"
                 android:paddingTop="10sp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragmentShoppingListFreezerRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="10sp"
                 android:layout_below="@id/fragmentShoppingListFreezerTxt" />
-
-            <TextView
-                android:id="@+id/fragmentShoppingListFridgeTxt"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Fridge"
-                android:textSize="35dp"
-                android:textColor="@color/text_color"
-                android:paddingTop="10sp"
-                android:layout_below="@id/fragmentShoppingListFreezerRecyclerView"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragmentShoppingListFridgeRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/fragmentShoppingListFridgeTxt" />
 
             <TextView
                 android:id="@+id/fragmentShoppingListCupboardTxt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@id/fragmentShoppingListFridgeRecyclerView"
+                android:layout_below="@id/fragmentShoppingListFreezerRecyclerView"
                 android:text="Cupboard"
                 android:textColor="@color/text_color"
+                android:paddingHorizontal="10sp"
+                android:textStyle="bold"
                 android:textSize="35dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragmentShoppingListCupboardRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/fragmentShoppingListCupboardTxt" />
+                android:paddingHorizontal="10sp"
+                android:layout_below="@id/fragmentShoppingListCupboardTxt"
+                android:layout_marginBottom="70dp"/>
 
         </RelativeLayout>
 
     </ScrollView>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/fragmentShoppingListScrollView">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/fragmentShoppingListFinishButton"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:text="Finish Shop"
-            android:textColor="@color/text_color_alt"
-            android:background="@drawable/rounded_button"/>
-
-    </RelativeLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_alignParentBottom="true"
+        android:id="@+id/fragmentShoppingListFinishButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Finish Shop"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/text_color_alt"
+        android:background="@drawable/rounded_button"/>
 
 
 </RelativeLayout>

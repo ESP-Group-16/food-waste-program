@@ -11,10 +11,10 @@
         android:id="@+id/pantryAddIngredientMainTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10sp"
         android:text="Add Pantry Item:"
-        android:textSize="35sp"
         android:textColor="@color/text_color"
-        android:padding="10sp"/>
+        android:textSize="35sp" />
 
     <EditText
         android:id="@+id/pantryAddIngredientName"
@@ -25,6 +25,39 @@
         android:textColor="@color/text_color"
         android:inputType="text"
         android:textSize="25sp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/pantryAddIngredientName"
+        android:id="@+id/dialogAddPantryItemStorageLocationRG">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fridge"
+            android:textColor="@color/text_color"
+            android:id="@+id/dialogAddPantryItemFridgeRB" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialogAddPantryItemFreezerRB"
+            android:text="Freezer"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="25dp" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/dialogAddPantryItemCupboardRB"
+            android:text="Cupboard"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="25dp" />
+
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,16 +117,16 @@
         android:id="@+id/pantryAddIngredientButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Item"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_button"
         android:drawableLeft="@drawable/baseline_add_24"
         android:padding="10sp"
-        android:layout_gravity="center"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        android:textColor="@color/main_background"
-        android:paddingVertical="10sp"
         android:paddingHorizontal="20sp"
-        android:background="@drawable/rounded_button"/>
+        android:paddingVertical="10sp"
+        android:text="Add Item"
+        android:textAllCaps="false"
+        android:textColor="@color/main_background"
+        android:textSize="25sp" />
 
 
 </LinearLayout>

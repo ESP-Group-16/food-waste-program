@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,21 +17,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class PantryFragment extends Fragment implements PantryActivity.UpdatePantryItems {
+
+public class PantryFragment extends Fragment{
 
     private Button btnUsers, btnAddIngredient;
     private RecyclerView recViewFridge, recViewFreezer, recViewCupboard;
+
     private PantryItemsAdapter fridgeAdapter, freezerAdapter, cupboardAdapter;
-    private ArrayList<Stock> pantryItems = new ArrayList<>();
-
-    @Override
-    public void onUpdatePantryItems(ArrayList<Stock> pantryItems) {
-        this.pantryItems = pantryItems;
-
-//        fridgeAdapter.setItems(pantryItems); // # TODO: Commented out
-
-    }
 
     @Nullable
     @Override
@@ -43,7 +38,7 @@ public class PantryFragment extends Fragment implements PantryActivity.UpdatePan
             @Override
             public void onClick(View view) {
                 // open users dialog
-                new AlertDialog.Builder(getActivity()).setTitle("List of Users")
+                new AlertDialog.Builder(requireActivity()).setTitle("List of Users")
                         .setMessage("This is where the users are displayed")
                         .setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
                             @Override
@@ -59,26 +54,40 @@ public class PantryFragment extends Fragment implements PantryActivity.UpdatePan
             public void onClick(View view) {
                 // open add ingredient dialog
                 AddPantryItemDialog dialog = new AddPantryItemDialog();
-                dialog.show(getActivity().getSupportFragmentManager(), "add ingredient");
+                dialog.show(requireActivity().getSupportFragmentManager(), "add ingredient");
             }
         });
 
-        // TODO: separate pantry items based on storage location
+        // Step 1: EXTRACT ITEMS FROM DATASOURCE.
+        ArrayList<Stock> cupboardPantryItems = Datasource.getInstance().PantryInformation.get("cupboard");
+        ArrayList<Stock> freezerPantryItems = Datasource.getInstance().PantryInformation.get("freezer");
+        ArrayList<Stock> fridgePantryItems = Datasource.getInstance().PantryInformation.get("fridge");
 
 
+        // Step 2: ASSIGN DATA ITEMS TO CREATE NEW RECYCLERVIEW (instanced) ITEMS.
         // set adapter for fridge
-        fridgeAdapter = new PantryItemsAdapter(getActivity());
-        pantryItems.add(new Stock());
+        fridgeAdapter = new PantryItemsAdapter(getActivity(), "fridge");
 
-        fridgeAdapter.setItems(pantryItems); // # TODO: Commented out to test.
+        fridgeAdapter.setItems(fridgePantryItems);
 
         recViewFridge.setAdapter(fridgeAdapter);
         recViewFridge.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // set adapter for freezer
-        freezerAdapter = new PantryItemsAdapter(getActivity());
+        freezerAdapter = new PantryItemsAdapter(getActivity(), "freezer");
+
+        freezerAdapter.setItems(freezerPantryItems);
+
+        recViewFreezer.setAdapter(freezerAdapter);
+        recViewFreezer.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // set adapter for cupboard
+        cupboardAdapter = new PantryItemsAdapter(getActivity(), "cupboard");
+
+        cupboardAdapter.setItems(cupboardPantryItems);
+
+        recViewCupboard.setAdapter(cupboardAdapter);
+        recViewCupboard.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
     }
@@ -91,4 +100,5 @@ public class PantryFragment extends Fragment implements PantryActivity.UpdatePan
         btnUsers = view.findViewById(R.id.pantryUsersButton);
         btnAddIngredient = view.findViewById(R.id.addIngredientButton);
     }
+
 }

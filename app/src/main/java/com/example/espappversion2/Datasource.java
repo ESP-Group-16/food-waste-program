@@ -26,11 +26,27 @@ public class Datasource {
 
     // Ryan's special allergio extrodinario
     // TODO: Adapt into User details once the user side of things has figured itself out.
-    HashMap<String, Boolean> AllergyInformation = new HashMap<String, Boolean>();
+    HashMap<String, Boolean> AllergyInformation = new HashMap<>();
+
+
+    // Ryan's special pantrino extrodinario
+    // TODO: Adapt into PANTRY details once the PANTRY side of things has figured itself out.
+    HashMap<String, ArrayList<Stock>> PantryInformation = new HashMap<String, ArrayList<Stock>>() {{
+        put("cupboard", new ArrayList<>());
+        put("fridge", new ArrayList<>());
+        put("freezer", new ArrayList<>());
+    }};
+
+
+    // shopping list, a list of 3 lists based on storage location - 0: fridge, 1: freezer, 2: cupboard
+    ArrayList<ArrayList<Stock>> shoppingList = new ArrayList<>();
 
     private Datasource() {
         // private constructor
         AllRecipes.add(R1);
+        shoppingList.add(new ArrayList<>());
+        shoppingList.add(new ArrayList<>());
+        shoppingList.add(new ArrayList<>());
     }
 
     public static Datasource getInstance() {//makes datasource a singleton

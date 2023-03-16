@@ -6,6 +6,8 @@ import static android.os.Build.ID;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public class Repository {
@@ -176,6 +178,117 @@ public class Repository {
 
     public void viewAllergyList(){
         System.out.println(source.AllergyInformation);
-    } // Debugging method
+    } // TODO: Remove Debugging method
 
+
+    // returns shopping list, which a list of lists with items separated based on location
+    // 0: fridge, 1: freezer, 2: cupboard
+    public ArrayList<ArrayList<Stock>> getShoppingList() {
+        return source.shoppingList;
+    }
+
+    // returns the whole shopping list as one list
+    public ArrayList<Stock> getEntireShoppingList() {
+        ArrayList<Stock> shoppingList = new ArrayList<>();
+        for(ArrayList<Stock> list : getShoppingList()) {
+            shoppingList.addAll(list);
+        }
+        return shoppingList;
+    }
+
+    // i is the storage location - 0: fridge, 1: freezer, 2: cupboard
+    public ArrayList<Stock> getShoppingListByLocation(int i) {
+        if(0 <= i && i <= 2) {
+            return getShoppingList().get(i);
+        }
+        return null;
+    }
+
+    public boolean isShoppingListEmpty() {
+        return getShoppingListByLocation(0).isEmpty() && getShoppingListByLocation(1).isEmpty() && getShoppingListByLocation(2).isEmpty();
+    }
+
+    // i is the storage location - 0: fridge, 1: freezer, 2: cupboard
+    public void addItemToShoppingList(Stock item, int i) {
+        source.shoppingList.get(i).add(item);
+    }
+
+    // i is the storage location - 0: fridge, 1: freezer, 2: cupboard
+    public void removeItemFromShoppingList(Stock item, int i) {
+        source.shoppingList.get(i).remove(item);
+    }
+
+    // Ryan's special pantrino methodinio extrodinario
+    // TODO: Adapt into PANTRY details once the PANTRY side of things has figured itself out.
+
+    // Add Stock Item to x place.
+    public boolean addStockItem(String storageloc, Stock stockitem){
+        try {
+            if (source.PantryInformation.containsKey(storageloc)){ // Storage location exists
+                // Gather current Stock info at storage location.
+                ArrayList<Stock> temp = source.PantryInformation.get(storageloc);
+
+                // Add new Stock Item and replace old arraylist.
+                temp.add(stockitem);
+                source.PantryInformation.put(storageloc, temp);
+                return true;
+            }
+            else{ // Storage location doesn't exist
+                throw new IllegalArgumentException("Argument storage location does not exist");
+            }
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Remove Stock item from x place.
+    public boolean removeStockItem(String storageloc, Stock stockitem){
+        try {
+            if (source.PantryInformation.containsKey(storageloc)){ // Storage location exists
+                // Gather current Stock info at storage location.
+                ArrayList<Stock> temp = source.PantryInformation.get(storageloc);
+
+                if (temp.contains(stockitem)){ // if stockitem in list: remove it
+                    temp.remove(stockitem);
+                    source.PantryInformation.put(storageloc, temp);
+                }
+                else{
+                    throw new IllegalArgumentException("Argument stock does not exist to be removed");
+                }
+                return true;
+            }
+
+            else{ // Storage location doesn't exist
+                throw new IllegalArgumentException("Argument storage location does not exist");
+            }
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    //TODO: Remove two debugging methods below
+
+    // View Stock Items in x place.
+    public void viewPantry(String storageloc){
+        System.out.println(storageloc + source.PantryInformation.get(storageloc));
+    }
+
+    // View All.
+    public void viewAllPantry(){
+        System.out.println(source.PantryInformation);
+        for (String key: source.PantryInformation.keySet()) {
+
+            System.out.println(key);
+            ArrayList<Stock> temp = source.PantryInformation.get(key);
+            for (Stock stock: temp
+                 ) {
+                System.out.print(stock.getFood().getName() + ", ");
+            }
+            System.out.println();
+        }
+    }
 }

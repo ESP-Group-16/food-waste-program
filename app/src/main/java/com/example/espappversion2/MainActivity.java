@@ -58,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnLogin.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PantryActivity.class);
+                startActivity(intent);
+                return false;
+            }
+        });
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

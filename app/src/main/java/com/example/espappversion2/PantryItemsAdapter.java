@@ -20,8 +20,14 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
     private ArrayList<Stock> items = new ArrayList<>();
     private Context context;
 
-    public PantryItemsAdapter(Context context) {
+    private String storageLocation;
+
+    private Repository repository;
+
+    public PantryItemsAdapter(Context context, String storageLocation) {
         this.context = context;
+        this.storageLocation = storageLocation;
+        this.repository = new Repository();
     }
 
     @NonNull
@@ -34,14 +40,12 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
     // called when recycler view items need to be updated (when they are scrolled)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // TODO: bind UI components of element to data
-
-        if(items.get(position).getFood() != null && items.get(position).getFood().getName() != null) {
-            holder.txtItemName.setText(items.get(position).getFood().getName());
+        if(items.get(holder.getAdapterPosition()).getFood() != null && items.get(holder.getAdapterPosition()).getFood().getName() != null) {
+            holder.txtItemName.setText(items.get(holder.getAdapterPosition()).getFood().getName());
         }
-        holder.txtQuantity.setText(String.valueOf(items.get(position).getQuantity()));
+        holder.txtQuantity.setText(items.get(holder.getAdapterPosition()).getQuantity() + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
 
-        holder.txtExpiryDate.setText(String.valueOf(items.get(position).getExpiresAt()));
+        holder.txtExpiryDate.setText(String.valueOf(items.get(holder.getAdapterPosition()).getExpiresAt()));
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +53,7 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
                 // display dialog to ask if user wants to delete or modify item
                 AlertDialog.Builder builder = new AlertDialog.Builder(context)
                         .setMessage("Are you sure you want to delete this item?");
-                if(items.get(position).getFood() != null && items.get(position).getFood().getName() != null) {
+                if(items.get(holder.getAdapterPosition()).getFood() != null && items.get(holder.getAdapterPosition()).getFood().getName() != null) {
                     builder.setTitle("Delete " + items.get(holder.getAdapterPosition()).getFood().getName() + " ?");
                 } else {
                     builder.setTitle("Delete");
@@ -58,7 +62,9 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 // delete the item form pantry
-                                Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+                                repository.removeStockItem(storageLocation, items.get(holder.getAdapterPosition()));
+                                notifyDataSetChanged();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -83,7 +89,7 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private CardView parent;
         private TextView txtItemName, txtExpiryDate, txtQuantity;
