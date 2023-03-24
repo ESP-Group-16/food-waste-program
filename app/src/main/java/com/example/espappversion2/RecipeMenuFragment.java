@@ -11,9 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.util.ArrayList;
+
 public class RecipeMenuFragment extends Fragment {
 
     private Button btnMyRecipes, btnPantryRecipes, btnSearch;
+    private Repository repo=new Repository();
 
     @Nullable
     @Override
@@ -26,8 +29,13 @@ public class RecipeMenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // navigate user to recipe list fragment TODO: pass correct list to display to fragment
+                ArrayList<Recipe> outputrecipes= repo.GetAllRecipes();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("recipes_key", outputrecipes);
+                RecipeListFragment receiverFragment = new RecipeListFragment();
+                receiverFragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.activityRecipeFragmentContainer, new RecipeListFragment());
+                transaction.replace(R.id.activityRecipeFragmentContainer, receiverFragment);
                 transaction.commit();
             }
         });
@@ -36,8 +44,13 @@ public class RecipeMenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // navigate user to recipe list fragment TODO: pass correct list to display to fragment
+                ArrayList<Recipe> outputrecipes= repo.GetRecipeContainingName("stirfry");
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("recipes_key", outputrecipes);
+                RecipeListFragment receiverFragment = new RecipeListFragment();
+                receiverFragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.activityRecipeFragmentContainer, new RecipeListFragment());
+                transaction.replace(R.id.activityRecipeFragmentContainer, receiverFragment);
                 transaction.commit();
             }
         });

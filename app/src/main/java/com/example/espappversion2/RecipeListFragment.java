@@ -33,7 +33,7 @@ public class RecipeListFragment extends Fragment{
         // once we retrieve search string we search using repo
         Bundle bundle = getArguments();
         recipes = (ArrayList<Recipe>) bundle.getSerializable("recipes_key");
-        Log.d(TAG, recipes.get(0).getImageURL());
+        //Log.d(TAG, recipes.get(0).getImageURL());
 
         // TODO: get search result from previous fragment
         String searchResult = "";

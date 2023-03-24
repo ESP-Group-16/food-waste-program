@@ -14,7 +14,9 @@ public class Datasource {
     ArrayList<String> categoryR1= new ArrayList<String>();
     User creatorR1=new User();
     Recipe R1= new Recipe(0,"stirfry","fakeurl",10,dietaryInfoR1,ingredientsR1,stepsR1,categoryR1,creatorR1);
-
+    Recipe R2= new Recipe(1,"curry","fakeurl",10,dietaryInfoR1,ingredientsR1,stepsR1,categoryR1,creatorR1);
+    Recipe R3=new Recipe(2,"soup","fakeurl",10,dietaryInfoR1,ingredientsR1,stepsR1,categoryR1,creatorR1);
+    Recipe R4=new Recipe(3,"pasta","fakeurl",10,dietaryInfoR1,ingredientsR1,stepsR1,categoryR1,creatorR1);
     int currentuserID;
     ArrayList<Recipe> AllRecipes=new ArrayList<Recipe>();
     ArrayList<User> AllUsers=new ArrayList<User>();
@@ -44,6 +46,9 @@ public class Datasource {
     private Datasource() {
         // private constructor
         AllRecipes.add(R1);
+        AllRecipes.add(R2);
+        AllRecipes.add(R3);
+        AllRecipes.add(R4);
         shoppingList.add(new ArrayList<>());
         shoppingList.add(new ArrayList<>());
         shoppingList.add(new ArrayList<>());
