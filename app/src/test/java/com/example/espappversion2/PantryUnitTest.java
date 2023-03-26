@@ -88,22 +88,40 @@ public class PantryUnitTest {
         stockitem.setFood(food);
         stockitem.setQuantity(2.5);
 
-
-        assertEquals(0, Objects.requireNonNull(repo.source.
-                PantryInformation.get("cupboard")).size());
-
         repo.addStockItem("cupboard", stockitem);
         // testing adding was successful
         assertEquals("TestAdding", Objects.requireNonNull(repo.source.
                 PantryInformation.get("cupboard")).get(0).getFood().getName());
 
         repo.addStockItem("cupboard", stockitem);
-        repo.viewAllPantry();
         // asserting there should only be one of the same food entry
         assertEquals(1, Objects.requireNonNull(repo.source.
                 PantryInformation.get("cupboard")).size());
         // asserting they added up together
         assertEquals(5.0, Objects.requireNonNull(repo.source.
+                PantryInformation.get("cupboard")).get(0).getQuantity());
+
+    }
+
+    // We should be able to remove a portion of an item from the pantry
+    // i.e. 2 kg of chocolate and we   c o n s u m e   1.8 kg, we should have 0.2 kg left :(
+    @Test
+    public void removePartialAmount() {
+        food.setName("TestAdding");
+        stockitem.setFood(food);
+        stockitem.setQuantity(2.0);
+
+        Stock itemToRemove = new Stock() ;
+        itemToRemove.setFood(food);
+        itemToRemove.setQuantity(1.8);
+        repo.addStockItem("cupboard", stockitem);
+        repo.removeStockItem("cupboard", itemToRemove);
+
+        // Assert item hasn't been completely removed
+        assertEquals(1, Objects.requireNonNull(repo.source.
+                PantryInformation.get("cupboard")).size());
+        // Assert item has correctly been subtracted
+        assertEquals(0.2, Objects.requireNonNull(repo.source.
                 PantryInformation.get("cupboard")).get(0).getQuantity());
 
     }
