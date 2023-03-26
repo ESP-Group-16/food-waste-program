@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class Repository {
     //used for getting data and string data to and from Datasource
-    private Datasource source = Datasource.getInstance();
+    Datasource source = Datasource.getInstance();
 
     /////////////////////////////////////////////////// for parital string name search
     public ArrayList<Recipe> GetRecipeContainingName(String name){
