@@ -111,7 +111,7 @@ public class PantryUnitTest {
         stockitem.setFood(food);
         stockitem.setQuantity(2.0);
 
-        Stock itemToRemove = new Stock() ;
+        Stock itemToRemove = new Stock();
         itemToRemove.setFood(food);
         itemToRemove.setQuantity(1.8);
         repo.addStockItem("cupboard", stockitem);
