@@ -1,11 +1,8 @@
 package com.example.espappversion2;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,11 +13,15 @@ import androidx.fragment.app.DialogFragment;
 
 public class RegisterDialog extends DialogFragment {
 
+    public interface RegisterNewUser {
+        void onRegister(String email, String password);
+    }
+
+    private RegisterNewUser registerNewUser;
+
     // UI components
     private Button btnRegister;
     private EditText edtTxtEmail, edtTxtPassword, edtTxtRepeatPassword;
-
-    private Repository repo=new Repository();
 
     @NonNull
     @Override
@@ -36,14 +37,17 @@ public class RegisterDialog extends DialogFragment {
             public void onClick(View view) {
                 String email = edtTxtEmail.getText().toString().trim();
                 String password = edtTxtPassword.getText().toString();
+
+                // TODO: check if data meets registration criteria - add more checks here
+                // note that the password must be at least 6 characters long
                 if(!email.isEmpty() && !password.isEmpty()) {
-                    // TODO: check if data meets registration criteria - add more checks here
-                    // note that the password must be at least 6 characters long
-                    // check if username is taken
-                    if (repo.GetUserFromName(email)==null){
-                        User user=new User(email,password);
-                        repo.StoreUser(user);
-                        Log.d(TAG, "Account created");
+                    // send data back to MainActivity
+                    try {
+                        registerNewUser = (RegisterNewUser) getActivity();
+                        registerNewUser.onRegister(email, password);
+                        dismiss();
+                    } catch(ClassCastException e) {
+                        e.printStackTrace();
                     }
                 }
             }
