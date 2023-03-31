@@ -101,18 +101,18 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
                 // if statement to determine step size of the counter
                 if (qty < 10) {
                     // set step size of 0.05
-                    sliderQty.setStepSize((float)items.get(holder.getAdapterPosition()).getQuantity() / ((float)items.get(holder.getAdapterPosition()).getQuantity() * 20));
+                    sliderQty.setStepSize(0.05f);
                 } else if (qty < 50) {
                     // set step size of 0.5
-                    sliderQty.setStepSize((float) items.get(holder.getAdapterPosition()).getQuantity() / ((float) items.get(holder.getAdapterPosition()).getQuantity() * 2));
+                    sliderQty.setStepSize(0.5f);
                 } else if (qty < 200) {
                     sliderQty.setValueTo(5.0f * (float)Math.ceil(items.get(holder.getAdapterPosition()).getQuantity() / 5)); // rounding UP to the nearest 5 to allow step size of 5
                     // set step size of 5
-                    sliderQty.setStepSize((float) items.get(holder.getAdapterPosition()).getQuantity() / (float)(items.get(holder.getAdapterPosition()).getQuantity() * 0.2));
+                    sliderQty.setStepSize(5.0f);
                 } else {
                     sliderQty.setValueTo(25.0f * (float)Math.ceil((float)items.get(holder.getAdapterPosition()).getQuantity() / 25)); // rounding UP to the nearest 25 to allow step size of 25
                     // set step size of 25
-                    sliderQty.setStepSize((float) items.get(holder.getAdapterPosition()).getQuantity() / (float)(items.get(holder.getAdapterPosition()).getQuantity()*0.04));
+                    sliderQty.setStepSize(25.0f);
                 }
                 txtQty.setText(sliderQty.getValues().get(0).toString() + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
 
@@ -123,8 +123,11 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
                         List<Float> b = sliderQty.getValues();
                         double showVal = (double) Math.round(b.get(0) * 100) / 100; // doing rounding to avoid floating point errors
                                                                                     // without this, you get values like 17.99999999997 rather than 17.8
-                        txtQty.setText(showVal + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
-
+                        if (showVal > items.get(holder.getAdapterPosition()).getQuantity()) {
+                            txtQty.setText(items.get(holder.getAdapterPosition()).getQuantity() + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
+                        } else {
+                            txtQty.setText(showVal + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
+                        }
                     }
                 });
             }
