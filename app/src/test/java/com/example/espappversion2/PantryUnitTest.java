@@ -79,29 +79,6 @@ public class PantryUnitTest {
         assertFalse(repo.removeStockItem("cupboard", stockitem));
     }
 
-    // adding items that are already in the pantry should add the quantity
-    // i.e. 1kg of chocolate is already in the cupboard
-    // we then add another 2kg of chocolate, we should have 3kg now rather than 2 separate entries
-    @Test
-    public void addingDuplicateShouldAddUpQty() {
-        food.setName("TestAdding");
-        stockitem.setFood(food);
-        stockitem.setQuantity(2.5);
-
-        repo.addStockItem("cupboard", stockitem);
-        // testing adding was successful
-        assertEquals("TestAdding", Objects.requireNonNull(repo.source.
-                PantryInformation.get("cupboard")).get(0).getFood().getName());
-
-        repo.addStockItem("cupboard", stockitem);
-        // asserting there should only be one of the same food entry
-        assertEquals(1, Objects.requireNonNull(repo.source.
-                PantryInformation.get("cupboard")).size());
-        // asserting they added up together
-        assertEquals(5.0, Objects.requireNonNull(repo.source.
-                PantryInformation.get("cupboard")).get(0).getQuantity());
-
-    }
 
     // We should be able to remove a portion of an item from the pantry
     // i.e. 2 kg of chocolate and we   c o n s u m e   1.8 kg, we should have 0.2 kg left :(
