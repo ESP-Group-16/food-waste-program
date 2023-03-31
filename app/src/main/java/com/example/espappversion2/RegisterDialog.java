@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,7 +45,12 @@ public class RegisterDialog extends DialogFragment {
                         User user=new User(email,password);
                         repo.StoreUser(user);
                         Log.d(TAG, "Account created");
+                        dismiss();
+                    } else {
+                        Toast.makeText(getActivity(), "Account could not be created. Check details are valid", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(getActivity(), "Please fill in all the required fields", Toast.LENGTH_SHORT).show();
                 }
             }
         });
