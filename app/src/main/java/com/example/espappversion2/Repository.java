@@ -1,14 +1,6 @@
 package com.example.espappversion2;
 
-import static android.content.ContentValues.TAG;
-import static android.os.Build.ID;
-
-import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 
 public class Repository {
     //used for getting data and string data to and from Datasource
@@ -253,6 +245,37 @@ public class Repository {
                 if (temp.contains(stockitem)){ // if stockitem in list: remove it
                     temp.remove(stockitem);
                     source.PantryInformation.put(storageloc, temp);
+                }
+                else{
+                    throw new IllegalArgumentException("Argument stock does not exist to be removed");
+                }
+                return true;
+            }
+
+            else{ // Storage location doesn't exist
+                throw new IllegalArgumentException("Argument storage location does not exist");
+            }
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean useStockItem(String storageloc, Stock stockitem, double quantityToRemove){
+        try {
+            if (source.PantryInformation.containsKey(storageloc)){ // Storage location exists
+                // Gather current Stock info at storage location.
+                ArrayList<Stock> temp = source.PantryInformation.get(storageloc);
+
+                if (temp.contains(stockitem)){ // if stockitem in list: remove it
+                    if (stockitem.getQuantity() - quantityToRemove <= 0) {
+                        temp.remove(stockitem);
+                        source.PantryInformation.put(storageloc, temp);
+                    } else {
+                        temp.get(temp.indexOf(stockitem)).setQuantity((double) Math.round((stockitem.getQuantity() - quantityToRemove) * 100) / 100);
+                        source.PantryInformation.put(storageloc, temp);
+                    }
                 }
                 else{
                     throw new IllegalArgumentException("Argument stock does not exist to be removed");
