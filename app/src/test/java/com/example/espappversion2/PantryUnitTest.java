@@ -89,17 +89,32 @@ public class PantryUnitTest {
         stockitem.setQuantity(2.0);
 
         Stock itemToRemove = new Stock();
-        itemToRemove.setFood(food);
-        itemToRemove.setQuantity(1.8);
         repo.addStockItem("cupboard", stockitem);
-        repo.removeStockItem("cupboard", itemToRemove);
+        repo.useStockItem("cupboard", stockitem, 1.8);
 
         // Assert item hasn't been completely removed
         assertEquals(1, Objects.requireNonNull(repo.source.
                 PantryInformation.get("cupboard")).size());
         // Assert item has correctly been subtracted
         assertEquals(0.2, Objects.requireNonNull(repo.source.
-                PantryInformation.get("cupboard")).get(0).getQuantity());
+                PantryInformation.get("cupboard")).get(0).getQuantity(), 0.001);
+
+    }
+
+    @Test
+    public void removeMoreThanExists() {
+        // this shouldn't even be possible because the user cannot input this but testing it anyway
+        food.setName("TestAdding");
+        stockitem.setFood(food);
+        stockitem.setQuantity(2.0);
+
+        Stock itemToRemove = new Stock();
+        repo.addStockItem("cupboard", stockitem);
+        repo.useStockItem("cupboard", stockitem, 15.0);
+
+        // Assert item has been completely removed
+        assertEquals(0, Objects.requireNonNull(repo.source.
+                PantryInformation.get("cupboard")).size());
 
     }
 
