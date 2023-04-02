@@ -15,6 +15,34 @@ import org.json.JSONObject;
 // Ok so this API actually goes hard
 // Have a look at the documentation https://www.themealdb.com/api.php
 // let's hope it works :)
+
+/*
+
+    the response structure of the API is a json of the format:
+    
+    "meals": {
+
+               "idemeal": int,
+               "strMeal": String,           Title of recipe
+               "strDrinkAlternate": ?
+               "strCategory": String,       i.e. Vegetarian
+               "strArea": String,           i.e. Italian
+               "strInstructions": String,
+               "strMealThumb": String,      This is the URL to a thumbnail of the recipe
+               "strTags": String,           Separated by commas, i.e. "Pasta,Curry" with no space
+               "strYoutube": String         This is the URL to a youtube vid of the recipe
+               "strIngredient1": String     Ingredient1
+               ...                                  ALL recipes will have 20 strIngredient items. usually the last ones will be null since
+               "strIngredient20": String/null,      not many recipes have that many ingredients
+
+               "strMeasure1": String/null,          The measure for each ingredient. Same logic applied as above
+                ...
+               "strMeasure20": String/null,
+               OTHER STUFF MAY BE RETURNED BUT WE DON'T NEED IT
+
+            }
+
+ */
 public class RecipeAPI {
 
     private Context mContext;
