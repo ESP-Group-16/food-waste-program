@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 RecipeAPI huh = new RecipeAPI(getApplicationContext());
-                huh.getRecipeByCuisine(new VolleyCallback() {
+                huh.getRecipesByCuisine(new VolleyCallback() {
                     @Override
                     public void onSuccess(JSONObject response) {
                         // Handle API response

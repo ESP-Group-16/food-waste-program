@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 // Ok so this API actually goes hard
 // Have a look at the documentation https://www.themealdb.com/api.php
+// also you have my explanation and visualisation below
 // let's hope it works :)
 
 /*
