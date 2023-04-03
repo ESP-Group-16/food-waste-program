@@ -22,7 +22,7 @@ import java.util.Objects;
 
 public class PantryFragment extends Fragment{
 
-    private Button btnUsers, btnAddIngredient;
+    private Button btnAddIngredient;
     private RecyclerView recViewFridge, recViewFreezer, recViewCupboard;
 
     private PantryItemsAdapter fridgeAdapter, freezerAdapter, cupboardAdapter;
@@ -33,21 +33,6 @@ public class PantryFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_pantry, container, false);
 
         initViews(view);
-
-        btnUsers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // open users dialog
-                new AlertDialog.Builder(requireActivity()).setTitle("List of Users")
-                        .setMessage("This is where the users are displayed")
-                        .setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                            }
-                        }).create().show();
-            }
-        });
 
         btnAddIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +82,6 @@ public class PantryFragment extends Fragment{
         recViewFridge = view.findViewById(R.id.pantryRecyclerFridge);
         recViewFreezer = view.findViewById(R.id.pantryRecyclerFreezer);
 
-        btnUsers = view.findViewById(R.id.pantryUsersButton);
         btnAddIngredient = view.findViewById(R.id.addIngredientButton);
     }
 

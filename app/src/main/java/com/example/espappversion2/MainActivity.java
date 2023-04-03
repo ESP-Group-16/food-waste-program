@@ -1,12 +1,13 @@
 package com.example.espappversion2;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,12 +15,22 @@ import com.android.volley.VolleyError;
 
 import org.json.JSONObject;
 
+import java.io.DataOutputStream;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RegisterDialog.RegisterUser {
+
+    @Override
+    public void onRegister(User user) {
+        Utils.getInstance(this).registerUser(user);
+        Toast.makeText(this, user.getUserName() + " registered", Toast.LENGTH_SHORT).show();
+    }
 
     private EditText edtTxtPassword, edtTxtEmail;
     private Button btnLogin, btnRegister;
+    private CheckBox checkBoxStayLoggedIn;
 
     private Repository repo=new Repository(this);
 
@@ -28,31 +39,41 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_main);
 
         initViews();
+        //Utils.getInstance(this).clearCurrentUser();
 
+        //System.out.println("Current user: " + Utils.getInstance(this).userExists(Utils.getInstance(this).getCurrentUser().getUserName()));
+        if(Utils.getInstance(this).getCurrentUser() != null) {
+            if(Utils.getInstance(this).userExists(Utils.getInstance(this).getCurrentUser().getUserName())) {
+                login(Utils.getInstance(this).getCurrentUser());
+            }
+        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: login user
                 String email = edtTxtEmail.getText().toString().trim();
                 String password = edtTxtPassword.getText().toString();
+
+                // check if all fields are filled in
                 if(!email.isEmpty() && !password.isEmpty()) {
-                    //check if email and password match
-                    User user=repo.GetUserFromName(email);
-                    try{
-                        if (password.equals(user.getPassword())){
-                            Intent intent = new Intent(MainActivity.this, PantryActivity.class);
-                            startActivity(intent);
-                            //set currentuserid as user get user iD
-                            repo.SetCurrentUserID(user.getUserId());
+                    // check if user exists
+                    if(Utils.getInstance(MainActivity.this).userExists(email)) {
+                        // check if password is valid
+                        if(password.equals(Utils.getInstance(MainActivity.this).getUser(email).getPassword())) {
+                            User user = Utils.getInstance(MainActivity.this).getUser(email);
+                            login(user);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Incorrect password", Toast.LENGTH_SHORT).show();
                         }
+                    } else {
+                        Toast.makeText(MainActivity.this, "User doesn't exist!", Toast.LENGTH_SHORT).show();
                     }
-                    catch(Exception e){
-                        Log.d(TAG, "invalid login");
-                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Please fill in the required fields!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -75,43 +96,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
-                ArrayList<String> arr = new ArrayList<String>();
-                arr.add("chicken_breast");
-                arr.add("garlic");
-                RecipeAPI huh = new RecipeAPI(getApplicationContext());
-                huh.getRecipesByMultipleIngredients(new VolleyCallback() {
-                    @Override
-                    public void onSuccess(JSONObject response) {
-                        // Handle API response
-                        // This will now have a JSON object if API call is successful
-                        // we can make this into a recipe object
-                        System.out.println(response.toString());
-                    }
-
-                    @Override
-                    public void onFailure(VolleyError error) {
-                        // Handle error response
-                        error.printStackTrace();
-                    }
-                }, arr);
+            public boolean onLongClick(View view) {
+                System.out.println("All users:\n" + Utils.getInstance(MainActivity.this).getUsers());
+                //System.out.println(Utils.getInstance(MainActivity.this).getUsers().getClass().getName());
+                System.out.println("Current user: " + Utils.getInstance(MainActivity.this).getCurrentUser());
+                return false;
             }
         });
+
+//        btnLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ArrayList<String> arr = new ArrayList<String>();
+//                arr.add("chicken_breast");
+//                arr.add("garlic");
+//                RecipeAPI huh = new RecipeAPI(getApplicationContext());
+//                System.out.println("Huh");
+//                huh.getRecipesByMultipleIngredients(new VolleyCallback() {
+//                    @Override
+//                    public void onSuccess(JSONObject response) {
+//                        // Handle API response
+//                        // This will now have a JSON object if API call is successful
+//                        // we can make this into a recipe object
+//                        System.out.println(response.toString());
+//                    }
+//
+//                    @Override
+//                    public void onFailure(VolleyError error) {
+//                        // Handle error response
+//                        error.printStackTrace();
+//                    }
+//                }, arr);
+//            }
+//        });
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if(currentUser != null) {
-//            // open PantryActivity if user is signed in
-//            Intent intent = new Intent(MainActivity.this, PantryActivity.class);
-//            intent.putExtra("email", currentUser.getEmail());
-//            startActivity(intent);
-//        }
+    private void login(User user) {
+        Log.d(TAG, "login: called");
+        if(user != null) {
+            Utils.getInstance(this).setCurrentUser(user, checkBoxStayLoggedIn.isChecked());
+            Intent intent = new Intent(MainActivity.this, PantryActivity.class);
+            Toast.makeText(this, "Logged in as " + user.getUserName(), Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+        }
     }
 
     // initialize UI components as fields
@@ -120,5 +149,12 @@ public class MainActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.activityMainRegisterButton);
         edtTxtEmail = findViewById(R.id.activityMainEmailEdtTxt);
         edtTxtPassword = findViewById(R.id.activityMainPasswordEdtTxt);
+        checkBoxStayLoggedIn = findViewById(R.id.activityMainStayLoggedInCheckBox);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }

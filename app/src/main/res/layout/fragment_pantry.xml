@@ -5,48 +5,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".PantryFragment"
     android:background="@color/main_background">
 
-    <LinearLayout
-        android:id="@+id/pantryTopBar"
+    <TextView
+        android:id="@+id/pantryTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/secondary_color_light" >
-
-        <TextView
-            android:id="@+id/pantryTextName"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:padding="10dp"
-            android:text="Pantry Name"
-            android:textColor="@color/main_background"
-            android:textSize="40sp"
-            android:textStyle="bold"/>
-
-        <Button
-            android:id="@+id/pantryUsersButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/baseline_supervised_user_circle_24"
-            android:text="Users"
-            android:textSize="15sp"
-            android:textAllCaps="false"
-            android:textColor="@color/main_background"
-            android:textAlignment="center"
-            android:backgroundTint="@color/secondary_color_light"/>
-
-
-    </LinearLayout>
+        android:background="@color/secondary_color_light"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:text="Your Pantry"
+        android:textColor="@color/main_background"
+        android:textSize="40sp"
+        android:textStyle="bold"/>
 
 
     <ScrollView
         android:id="@+id/pantryScrollLocationsList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pantryTopBar">
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/pantryTextName">
 
         <RelativeLayout
             android:id="@+id/pantryRelLayoutLocationFridge"

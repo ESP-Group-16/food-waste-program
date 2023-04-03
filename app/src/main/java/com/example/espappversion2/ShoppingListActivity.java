@@ -34,6 +34,7 @@ public class ShoppingListActivity extends AppCompatActivity implements AddShoppi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_shopping_list);
 
         initViews();
@@ -84,5 +85,11 @@ public class ShoppingListActivity extends AppCompatActivity implements AddShoppi
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }

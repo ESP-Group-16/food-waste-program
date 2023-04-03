@@ -7,23 +7,35 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class ProfileActivity extends AppCompatActivity implements AddAllergyDialog.AddAllergyDialogListener {
 
-
+    private Button btnLogOut;
+    private TextView txtTitle;
     private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_profile);
 
         initViews();
         initBottomNavBar();
+
+        txtTitle.setText("Welcome, " + Utils.getInstance(this).getCurrentUser().getUserName() + "!");
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logOut();
+            }
+        });
 
         Button allergyProfileButton = (Button) findViewById(R.id.activityProfileAllergiesButton); // Could be in initviews but is here for simplicity of viewing.
         allergyProfileButton.setOnClickListener(view -> { // Lambda does same as View.OnClickListener
@@ -41,10 +53,6 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
         addAllergyDialog.show(getSupportFragmentManager(), "add or remove allergy dialog");
     }
 
-    private void initViews() {
-        bottomNavigationView = findViewById(R.id.activityProfileBottomNavBar);
-    }
-
     @Override
     public void applyAllergyChanges(String allergy, boolean adremBool) { // Runs the allergy dialog calculations
         // DO CALCULATIONS HERE TO CHANGE THE DATA IN THE DATASTORE
@@ -56,6 +64,18 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
             repo.removeAllergy(allergy);
         }
 //        repo.viewAllergyList();
+    }
+
+    public void logOut() {
+        Utils.getInstance(this).clearCurrentUser();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void initViews() {
+        bottomNavigationView = findViewById(R.id.activityProfileBottomNavBar);
+        txtTitle = findViewById(R.id.activityProfileTopTextUsername);
+        btnLogOut = findViewById(R.id.activityProfileLogoutButton);
     }
 
     private void initBottomNavBar() {
@@ -91,5 +111,11 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }

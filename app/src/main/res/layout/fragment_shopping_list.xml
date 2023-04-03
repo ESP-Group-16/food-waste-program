@@ -7,27 +7,23 @@
     tools:context=".ShoppingListFragment"
     android:background="@color/main_background">
 
-    <RelativeLayout
-        android:id="@+id/fragmentShoppingListRelLay"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/main_background">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Shopping List"
-            android:textColor="@color/text_color"
-            android:textSize="40dp"
-            android:textStyle="bold" />
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:text="Shopping List"
+        android:textColor="@color/text_color"
+        android:textSize="40dp"
+        android:id="@+id/fragmentShoppingListTitleTxt"
+        android:background="@color/main_background"
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:id="@+id/RelativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@id/fragmentShoppingListRelLay">
+        android:layout_below="@id/fragmentShoppingListTitleTxt">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragmentShoppingListAddItem"

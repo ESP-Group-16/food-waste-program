@@ -40,6 +40,7 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_pantry);
 
         initViews();
@@ -91,5 +92,11 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }

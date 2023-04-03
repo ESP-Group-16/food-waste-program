@@ -50,11 +50,19 @@
         android:id="@+id/activityMainPasswordEdtTxt"
         android:hint="Enter your password"/>
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stay logged in"
+        android:id="@+id/activityMainStayLoggedInCheckBox"
+        android:checked="true"
+        android:layout_below="@+id/activityMainPasswordEdtTxt" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:layout_below="@+id/activityMainPasswordEdtTxt"
+        android:layout_below="@+id/activityMainStayLoggedInCheckBox"
         android:layout_marginTop="30dp"
         android:textAllCaps="false"
         android:layout_centerHorizontal="true"
