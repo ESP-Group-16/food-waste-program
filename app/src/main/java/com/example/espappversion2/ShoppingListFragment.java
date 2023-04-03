@@ -38,7 +38,7 @@ public class ShoppingListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shopping_list, container, false);
 
         initViews(view);
-        repository = new Repository();
+        repository = new Repository(getActivity());
 
         // get the lists from DB
         shoppingList = repository.getShoppingList();

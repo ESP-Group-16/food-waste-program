@@ -65,7 +65,7 @@ public class AddAllergyDialog extends DialogFragment {
         listOfAllergies = view.findViewById(R.id.currentAllergyList);
 
         // Get information for textview
-        Repository repo = new Repository();
+        Repository repo = new Repository(getActivity());
         StringBuilder caString = new StringBuilder();
         for (String i : repo.getAllergies()){
             caString.append(i).append("\n");

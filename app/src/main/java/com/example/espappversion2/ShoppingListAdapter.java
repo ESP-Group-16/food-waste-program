@@ -28,7 +28,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     public ShoppingListAdapter(Context context, int storageLocation) {
         this.context = context;
         this.storageLocation = storageLocation;
-        repository = new Repository();
+        repository = new Repository(context);
     }
 
     @NonNull

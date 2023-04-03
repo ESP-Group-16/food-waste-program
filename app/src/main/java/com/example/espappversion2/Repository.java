@@ -1,10 +1,19 @@
 package com.example.espappversion2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.ArrayList;
 
 public class Repository {
     //used for getting data and string data to and from Datasource
     private Datasource source = Datasource.getInstance();
+    private SharedPreferences sharedPreferences;
+    private Context context;
+
+    public Repository(Context context) {
+        this.context = context;
+    }
 
     /////////////////////////////////////////////////// for parital string name search
     public ArrayList<Recipe> GetRecipeContainingName(String name){

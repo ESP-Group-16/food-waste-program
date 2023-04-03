@@ -16,12 +16,13 @@ import java.util.ArrayList;
 public class RecipeMenuFragment extends Fragment {
 
     private Button btnMyRecipes, btnPantryRecipes, btnSearch;
-    private Repository repo=new Repository();
+    private Repository repo;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_menu, container, false);
+        repo = new Repository(getActivity());
 
         initViews(view);
 

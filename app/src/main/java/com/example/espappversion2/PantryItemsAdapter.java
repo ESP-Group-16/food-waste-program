@@ -32,7 +32,7 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
     public PantryItemsAdapter(Context context, String storageLocation) {
         this.context = context;
         this.storageLocation = storageLocation;
-        this.repository = new Repository();
+        this.repository = new Repository(context);
     }
 
     @NonNull

@@ -23,12 +23,13 @@ public class SearchFragment extends Fragment {
     private RecipeAdapter adapter;
     private Button btnAsian, btnSoup, btnSearch;
     private EditText searchEdtTxt;
-    private Repository repo=new Repository();
+    private Repository repo;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+        repo = new Repository(getActivity());
 
         initViews(view);
 

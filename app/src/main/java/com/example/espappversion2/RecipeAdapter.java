@@ -18,10 +18,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Context context;
 
-    private Repository repository = new Repository();
+    private Repository repository;
 
     public RecipeAdapter(Context context) {
         this.context = context;
+        this.repository = new Repository(context);
     }
 
     @NonNull

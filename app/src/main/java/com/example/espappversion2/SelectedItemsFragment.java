@@ -34,7 +34,7 @@ public class SelectedItemsFragment extends Fragment {
         initViews(view);
 
         // get shopping list from DB
-        repository = new Repository();
+        repository = new Repository(getActivity());
         shoppingList = repository.getEntireShoppingList();
 
         btnAddItemsToPantry.setOnClickListener(new View.OnClickListener() {

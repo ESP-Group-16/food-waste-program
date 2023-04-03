@@ -21,7 +21,7 @@ public class RegisterDialog extends DialogFragment {
     private Button btnRegister;
     private EditText edtTxtEmail, edtTxtPassword, edtTxtRepeatPassword;
 
-    private Repository repo=new Repository();
+    private Repository repo;
 
     @NonNull
     @Override
@@ -29,6 +29,7 @@ public class RegisterDialog extends DialogFragment {
         // display dialog
         View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_register, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
+        repo = new Repository(getActivity());
 
         initViews(view);
 

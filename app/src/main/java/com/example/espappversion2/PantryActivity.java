@@ -26,7 +26,7 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
 
         // Comes from AddPantryItemDialog: We need to add pantry item here
 
-        Repository repo = new Repository();
+        Repository repo = new Repository(this);
         repo.addStockItem(storageloc, stock);
         repo.viewAllPantry();
         Toast.makeText(this, "New item " + stock.getFood().getName() + " added to " + storageloc, Toast.LENGTH_SHORT).show();

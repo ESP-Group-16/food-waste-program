@@ -23,13 +23,14 @@ public class RecipeListFragment extends Fragment{
     private RecyclerView recipeRecView;
     private RecipeAdapter adapter;
     private ArrayList<Recipe> recipes;
-    Repository repo=new Repository();
+    Repository repo;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
         initViews(view);
+        repo = new Repository(getActivity());
         // once we retrieve search string we search using repo
         Bundle bundle = getArguments();
         recipes = (ArrayList<Recipe>) bundle.getSerializable("recipes_key");

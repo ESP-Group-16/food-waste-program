@@ -48,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
     @Override
     public void applyAllergyChanges(String allergy, boolean adremBool) { // Runs the allergy dialog calculations
         // DO CALCULATIONS HERE TO CHANGE THE DATA IN THE DATASTORE
-        Repository repo = new Repository();
+        Repository repo = new Repository(this);
         if (adremBool){ // Add allergy to store
             repo.addAllergy(allergy);
         }

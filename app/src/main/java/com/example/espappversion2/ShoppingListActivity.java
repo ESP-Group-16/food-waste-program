@@ -39,7 +39,7 @@ public class ShoppingListActivity extends AppCompatActivity implements AddShoppi
         initViews();
         initBottomNavBar();
 
-        repository = new Repository();
+        repository = new Repository(this);
 
         // display ShoppingListFragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
