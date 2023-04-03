@@ -13,6 +13,8 @@ import com.android.volley.VolleyError;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText edtTxtPassword, edtTxtEmail;
@@ -75,8 +77,11 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ArrayList<String> arr = new ArrayList<String>();
+                arr.add("chicken_breast");
+                arr.add("garlic");
                 RecipeAPI huh = new RecipeAPI(getApplicationContext());
-                huh.getRecipesByCuisine(new VolleyCallback() {
+                huh.getRecipesByMultipleIngredients(new VolleyCallback() {
                     @Override
                     public void onSuccess(JSONObject response) {
                         // Handle API response
@@ -90,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         // Handle error response
                         error.printStackTrace();
                     }
-                }, "Italian");
+                }, arr);
             }
         });
     }

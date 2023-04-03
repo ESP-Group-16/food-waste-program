@@ -21,6 +21,10 @@ import java.util.ArrayList;
 
 /*
 
+    Please beware of the function names so you don't get too many headaches
+    getRecpies and getRecipe !!!!
+    plural means multiple are returned and the second JSON visualisation applies !!!
+
     if the name of the function is not plural, this applies:
     the response structure of the API is a json of the format:
     {
@@ -29,7 +33,7 @@ import java.util.ArrayList;
                "idMeal": int,
                "strMeal": String,           Title of recipe
                "strDrinkAlternate": ?
-               "strCategory": String,       i.e. Vegetarian
+               "strCategory": String,       i.e. Vegetarian, Seafood
                "strArea": String,           i.e. Italian
                "strInstructions": String,
                "strMealThumb": String,      This is the URL to a thumbnail of the recipe
@@ -89,13 +93,13 @@ public class RecipeAPI {
      * @param callback used to return result to the calling activity
      * @param ingredients ArrayList<String> of ingredients to filter in recipes
      */
-    public void getRecipeByMultipleIngredients(final VolleyCallback callback, ArrayList<String> ingredients) {
+    public void getRecipesByMultipleIngredients(final VolleyCallback callback, ArrayList<String> ingredients) {
         String commaSeparatedList = ingredients.toString();
 
         commaSeparatedList
                 = commaSeparatedList.replace("[", "")
                 .replace("]", "")
-                .replace(" ", ",");
+                .replace(" ", "");
         getData(new VolleyCallback() {
             @Override
             public void onSuccess(JSONObject response) {
@@ -109,7 +113,7 @@ public class RecipeAPI {
                 callback.onFailure(error);
                 error.printStackTrace();
             }
-        }, "www.themealdb.com/api/json/v2/9973533/filter.php?i="+commaSeparatedList);
+        }, "https://www.themealdb.com/api/json/v2/9973533/filter.php?i="+commaSeparatedList);
     }
 
     public void get10RandomRecipes(final VolleyCallback callback) {
