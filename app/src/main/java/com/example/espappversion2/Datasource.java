@@ -19,6 +19,8 @@ public class Datasource {
     Recipe R4=new Recipe(3,"pasta","fakeurl",10,dietaryInfoR1,ingredientsR1,stepsR1,categoryR1,creatorR1);
     int currentuserID;
     ArrayList<Recipe> AllRecipes=new ArrayList<Recipe>();
+
+    ArrayList<Recipe> FavouriteRecipes = new ArrayList<>();
     ArrayList<User> AllUsers=new ArrayList<User>();
     ArrayList<Stock> AllStock=new ArrayList<Stock>();
     ArrayList<Food> AllFood=new ArrayList<Food>();
@@ -49,6 +51,7 @@ public class Datasource {
         AllRecipes.add(R2);
         AllRecipes.add(R3);
         AllRecipes.add(R4);
+        FavouriteRecipes.add(R1);
         shoppingList.add(new ArrayList<>());
         shoppingList.add(new ArrayList<>());
         shoppingList.add(new ArrayList<>());

@@ -29,7 +29,7 @@ public class RecipeMenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // navigate user to recipe list fragment TODO: pass correct list to display to fragment
-                ArrayList<Recipe> outputrecipes= repo.GetAllRecipes();
+                ArrayList<Recipe> outputrecipes= repo.GetFavouriteRecipes();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("recipes_key", outputrecipes);
                 RecipeListFragment receiverFragment = new RecipeListFragment();
@@ -44,7 +44,7 @@ public class RecipeMenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // navigate user to recipe list fragment TODO: pass correct list to display to fragment
-                ArrayList<Recipe> outputrecipes= repo.GetRecipeContainingName("stirfry");
+                ArrayList<Recipe> outputrecipes= repo.GetAllRecipes();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("recipes_key", outputrecipes);
                 RecipeListFragment receiverFragment = new RecipeListFragment();

@@ -77,9 +77,27 @@ public class Repository {
     public ArrayList<User> GetAllUsers(){
         return source.AllUsers;
     }
+
     public ArrayList<Recipe> GetAllRecipes(){
         return source.AllRecipes;
     }
+
+    public ArrayList<Recipe> GetFavouriteRecipes() {
+        return source.FavouriteRecipes;
+    }
+
+    public void addRecipeToFavourites(Recipe recipe) {
+        source.FavouriteRecipes.add(recipe);
+    }
+
+    public void removeRecipeFromFavourites(Recipe recipe) {
+        source.FavouriteRecipes.remove(recipe);
+    }
+
+    public boolean containsRecipeInFavourites(Recipe recipe) {
+        return source.FavouriteRecipes.contains(recipe);
+    }
+
     public ArrayList<Pantry> GetAllPantry(){
         return source.AllPantry;
     }

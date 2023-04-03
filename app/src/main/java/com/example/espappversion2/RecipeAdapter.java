@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Context context;
+
+    private Repository repository = new Repository();
 
     public RecipeAdapter(Context context) {
         this.context = context;
@@ -31,13 +34,24 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     // called when recycler view items need to be updated (when they are scrolled)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Recipe currentRecipe = recipes.get(holder.getAdapterPosition());
 
-        holder.txtRecipeName.setText(recipes.get(position).getName());
+        holder.txtRecipeName.setText(currentRecipe.getName());
+        holder.btnFavourite.setText(repository.containsRecipeInFavourites(currentRecipe)? "Unfavourite" : "Favourite");
 
         holder.btnFavourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // TODO: add recipe to favourites
+                if(!repository.containsRecipeInFavourites(currentRecipe)) {
+                    repository.addRecipeToFavourites(currentRecipe);
+                    holder.btnFavourite.setText("Unfavourite");
+                    Toast.makeText(context, currentRecipe.getName() + " added to favourite recipes", Toast.LENGTH_SHORT).show();
+                } else {
+                    repository.removeRecipeFromFavourites(currentRecipe);
+                    holder.btnFavourite.setText("Favourite");
+                    Toast.makeText(context, currentRecipe.getName() + " removed from favourite recipes", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
