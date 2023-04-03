@@ -19,7 +19,7 @@ import org.json.JSONObject;
 /*
 
     the response structure of the API is a json of the format:
-    
+
     "meals": {
 
                "idemeal": int,
@@ -42,6 +42,14 @@ import org.json.JSONObject;
 
             }
 
+    ********************* IF YOU WANT A LIST OF *********************
+
+    CATEGORIES:     www.themealdb.com/api/json/v1/1/list.php?c=list
+    CUISINES:       www.themealdb.com/api/json/v1/1/list.php?a=list
+    INGREDIENTS:    www.themealdb.com/api/json/v1/1/list.php?i=list
+
+    *****************************************************************
+
  */
 public class RecipeAPI {
 
@@ -50,10 +58,93 @@ public class RecipeAPI {
         this.mContext = mContext;
     }
 
-    public void getData(final VolleyCallback callback) {
-        RequestQueue queue = Volley.newRequestQueue(mContext);
+    public void getRecipeByMainIngredient(final VolleyCallback callback, String mainIngredient) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                // Handle API response
+                callback.onSuccess(response);
+            }
 
-        String url = "https://www.themealdb.com/api/json/v1/1/search.php?f=a";
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + mainIngredient);
+    }
+
+    public void getRecipeById(final VolleyCallback callback, int id) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                // Handle API response
+                callback.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id);
+    }
+
+    public void getRecipeByCategory(final VolleyCallback callback, String category) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                // Handle API response
+                callback.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category);
+    }
+
+    public void getRecipeByName(final VolleyCallback callback, String name) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                // Handle API response
+                callback.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v1/1/search.php?s="+name);
+    }
+
+    public void getRecipeByCuisine(final VolleyCallback callback, String cuisine) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                // Handle API response
+                callback.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v1/1/filter.php?a="+cuisine);
+    }
+
+    public void getData(final VolleyCallback callback, String url) {
+        RequestQueue queue = Volley.newRequestQueue(mContext);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override

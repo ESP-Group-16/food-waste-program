@@ -76,10 +76,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 RecipeAPI huh = new RecipeAPI(getApplicationContext());
-                huh.getData(new VolleyCallback() {
+                huh.getRecipeByCuisine(new VolleyCallback() {
                     @Override
                     public void onSuccess(JSONObject response) {
                         // Handle API response
+                        // This will now have a JSON object if API call is successful
+                        // we can make this into a recipe object
                         System.out.println(response.toString());
                     }
 
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         // Handle error response
                         error.printStackTrace();
                     }
-                });
+                }, "Canadian");
             }
         });
     }
