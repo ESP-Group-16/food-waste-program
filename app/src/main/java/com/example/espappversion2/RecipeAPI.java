@@ -18,11 +18,12 @@ import org.json.JSONObject;
 
 /*
 
+    if the name of the function is not plural, this applies:
     the response structure of the API is a json of the format:
+    {
+    "meals": [{
 
-    "meals": {
-
-               "idemeal": int,
+               "idMeal": int,
                "strMeal": String,           Title of recipe
                "strDrinkAlternate": ?
                "strCategory": String,       i.e. Vegetarian
@@ -40,7 +41,28 @@ import org.json.JSONObject;
                "strMeasure20": String/null,
                OTHER STUFF MAY BE RETURNED BUT WE DON'T NEED IT
 
-            }
+            }]
+       }
+
+     NOTICE THAT THE FORMAT IS "meals": ARRAY<JSONObject> so you will need to call the index 0 of meals to get the recipe
+
+
+
+     if the name of a function is plural, the following applies:
+     response is a JSONObject of the format:
+
+    {
+        "meals": [{
+                   "strMealThumb": String,
+                   "idMeal": int,
+                   "strMeal": String,           Title of recipe
+                    },
+                    /// other recipe ///
+                    }, ... {other recipe}]
+     }
+
+    NOTICE THIS RETURNS AN ARRAY OF RECIPES WITH THE "meals": ARRAY<JSONObject>
+
 
     ********************* IF YOU WANT A LIST OF *********************
 
@@ -58,7 +80,7 @@ public class RecipeAPI {
         this.mContext = mContext;
     }
 
-    public void getRecipeByMainIngredient(final VolleyCallback callback, String mainIngredient) {
+    public void getRecipesByMainIngredient(final VolleyCallback callback, String mainIngredient) {
         getData(new VolleyCallback() {
             @Override
             public void onSuccess(JSONObject response) {
@@ -92,7 +114,7 @@ public class RecipeAPI {
         }, "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id);
     }
 
-    public void getRecipeByCategory(final VolleyCallback callback, String category) {
+    public void getRecipesByCategory(final VolleyCallback callback, String category) {
         getData(new VolleyCallback() {
             @Override
             public void onSuccess(JSONObject response) {
@@ -126,7 +148,7 @@ public class RecipeAPI {
         }, "https://www.themealdb.com/api/json/v1/1/search.php?s="+name);
     }
 
-    public void getRecipeByCuisine(final VolleyCallback callback, String cuisine) {
+    public void getRecipesByCuisine(final VolleyCallback callback, String cuisine) {
         getData(new VolleyCallback() {
             @Override
             public void onSuccess(JSONObject response) {
