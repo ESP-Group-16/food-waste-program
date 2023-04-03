@@ -12,6 +12,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 // Ok so this API actually goes hard
 // Have a look at the documentation https://www.themealdb.com/api.php
 // also you have my explanation and visualisation below
@@ -81,6 +83,69 @@ public class RecipeAPI {
         this.mContext = mContext;
     }
 
+    /**
+     * Function which takes in a ArrayList<String> of ingredients.
+     * Please make sure if an ingredient has a whitespace, replace it with "_"
+     * @param callback used to return result to the calling activity
+     * @param ingredients ArrayList<String> of ingredients to filter in recipes
+     */
+    public void getRecipeByMultipleIngredients(final VolleyCallback callback, ArrayList<String> ingredients) {
+        String commaSeparatedList = ingredients.toString();
+
+        commaSeparatedList
+                = commaSeparatedList.replace("[", "")
+                .replace("]", "")
+                .replace(" ", ",");
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                // Handle API response
+                callback.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "www.themealdb.com/api/json/v2/9973533/filter.php?i="+commaSeparatedList);
+    }
+
+    public void get10RandomRecipes(final VolleyCallback callback) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                // Handle API response
+                callback.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v2/9973533/randomselection.php");
+    }
+
+    public void getLatestRecipes(final VolleyCallback callback) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                // Handle API response
+                callback.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v2/9973533/latest.php");
+    }
+
     public void getRecipesByMainIngredient(final VolleyCallback callback, String mainIngredient) {
         getData(new VolleyCallback() {
             @Override
@@ -95,7 +160,7 @@ public class RecipeAPI {
                 callback.onFailure(error);
                 error.printStackTrace();
             }
-        }, "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + mainIngredient);
+        }, "https://www.themealdb.com/api/json/v2/9973533/filter.php?i=" + mainIngredient);
     }
 
     public void getRecipeById(final VolleyCallback callback, int id) {
@@ -112,7 +177,7 @@ public class RecipeAPI {
                 callback.onFailure(error);
                 error.printStackTrace();
             }
-        }, "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id);
+        }, "https://www.themealdb.com/api/json/v2/9973533/lookup.php?i=" + id);
     }
 
     public void getRecipesByCategory(final VolleyCallback callback, String category) {
@@ -129,7 +194,7 @@ public class RecipeAPI {
                 callback.onFailure(error);
                 error.printStackTrace();
             }
-        }, "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category);
+        }, "https://www.themealdb.com/api/json/v2/9973533/filter.php?c=" + category);
     }
 
     public void getRecipeByName(final VolleyCallback callback, String name) {
@@ -146,7 +211,7 @@ public class RecipeAPI {
                 callback.onFailure(error);
                 error.printStackTrace();
             }
-        }, "https://www.themealdb.com/api/json/v1/1/search.php?s="+name);
+        }, "https://www.themealdb.com/api/json/v2/9973533/search.php?s="+name);
     }
 
     public void getRecipesByCuisine(final VolleyCallback callback, String cuisine) {
@@ -163,7 +228,7 @@ public class RecipeAPI {
                 callback.onFailure(error);
                 error.printStackTrace();
             }
-        }, "https://www.themealdb.com/api/json/v1/1/filter.php?a="+cuisine);
+        }, "https://www.themealdb.com/api/json/v2/9973533/filter.php?a="+cuisine);
     }
 
     public void getData(final VolleyCallback callback, String url) {
@@ -183,9 +248,7 @@ public class RecipeAPI {
                         // Handle error response
                         callback.onFailure(error);
                     }
-                }) {
-
-        };
+                });
         queue.add(request);
 
     }
