@@ -231,7 +231,7 @@ public class RecipeAPI {
         }, "https://www.themealdb.com/api/json/v2/9973533/filter.php?a="+cuisine);
     }
 
-    public void getData(final VolleyCallback callback, String url) {
+    private void getData(final VolleyCallback callback, String url) {
         RequestQueue queue = Volley.newRequestQueue(mContext);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
