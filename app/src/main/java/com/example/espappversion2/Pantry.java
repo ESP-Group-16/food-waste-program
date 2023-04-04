@@ -32,6 +32,33 @@ public class Pantry {
         }
     }
 
+    public void removeItemFromPantry(int storageLocationIndex, int index) {
+        if(storageLocationIndex >=0 && storageLocationIndex <= 2) {
+            if(index >= 0 && index <= pantryItems.get(STORAGE_LOCATIONS[storageLocationIndex]).size()) {
+                System.out.println("Pantry.remove");
+                pantryItems.get(STORAGE_LOCATIONS[storageLocationIndex]).remove(index);
+                System.out.println(this.pantryItems.get(STORAGE_LOCATIONS[storageLocationIndex]).size());
+            }
+        }
+    }
+
+    public void editPantryItemQuantity(int storageLocationIndex, int index, double quantityToRemove) {
+        if(storageLocationIndex >=0 && storageLocationIndex <= 2){
+            if(index >= 0 && index <= pantryItems.get(STORAGE_LOCATIONS[storageLocationIndex]).size()) {
+                double originalQuantity = pantryItems.get(STORAGE_LOCATIONS[storageLocationIndex]).get(index).getQuantity();
+                if(originalQuantity > quantityToRemove) {
+                    // (double) Math.round((stockitem.getQuantity() - quantityToRemove) * 100) / 100
+                    pantryItems.get(STORAGE_LOCATIONS[storageLocationIndex]).get(index).setQuantity((double) Math.round((originalQuantity - quantityToRemove) * 100) / 100);
+                    if(pantryItems.get(STORAGE_LOCATIONS[storageLocationIndex]).get(index).getQuantity() == 0.0) {
+                        removeItemFromPantry(storageLocationIndex, index);
+                    }
+                } else {
+                    removeItemFromPantry(storageLocationIndex, index);
+                }
+            }
+        }
+    }
+
     public int getPantryId() {
         return pantryId;
     }

@@ -32,13 +32,13 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
         repo.viewAllPantry();
         Toast.makeText(this, "New item " + stock.getFood().getName() + " added to " + storageloc, Toast.LENGTH_SHORT).show();
         Utils.getInstance(this).addPantryItem(storageloc, stock);
-        System.out.println("Users before restarting PantryFragment: " + new Gson().toJson(Utils.getInstance(this).getUsers()));
+        //System.out.println("Users before restarting PantryFragment: " + new Gson().toJson(Utils.getInstance(this).getUsers()));
 
         // restart the fragment to display updated list
-//        pantryFragment = new PantryFragment();
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.activityPantryFragmentContainer, pantryFragment);
-//        transaction.commit();
+        pantryFragment = new PantryFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activityPantryFragmentContainer, pantryFragment);
+        transaction.commit();
     }
 
     @Override

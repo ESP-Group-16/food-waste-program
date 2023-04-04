@@ -103,6 +103,14 @@ public class User {
         pantry.addItemToPantry(storageLocation, item);
     }
 
+    public void removeItemFromPantry(int storageLocation, int index) {
+        pantry.removeItemFromPantry(storageLocation, index);
+    }
+
+    public void editPantryItemQuantity(int storageLocation, int index, double quantityToRemove) {
+        pantry.editPantryItemQuantity(storageLocation, index, quantityToRemove);
+    }
+
     public Pantry getPantry() {
         return pantry;
     }

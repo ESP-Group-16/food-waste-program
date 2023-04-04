@@ -52,16 +52,20 @@ public class Utils {
     // User Methods
 
     public User getCurrentUser() {
-        Type type = new TypeToken<User>(){}.getType();
+        Type type = new TypeToken<String>(){}.getType();
         //System.out.println(sharedPreferences.getString(CURRENT_USER_KEY, null));
-        return gson.fromJson(sharedPreferences.getString(CURRENT_USER_KEY, null), type);
+        String userName = gson.fromJson(sharedPreferences.getString(CURRENT_USER_KEY, null), type);
+        if (getUser(userName) != null) {
+            return getUser(userName);
+        }
+        return null;
     }
 
     public void setCurrentUser(User user, boolean stayLoggedIn) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(CURRENT_USER_KEY);
         if(stayLoggedIn) {
-            editor.putString(CURRENT_USER_KEY, gson.toJson(user));
+            editor.putString(CURRENT_USER_KEY, gson.toJson(user.getUserName()));
         }
         editor.commit();
     }
@@ -82,10 +86,10 @@ public class Utils {
     }
 
     public User getUser(String username) {
-        System.out.println(getUsers().getClass().getName());
-        //System.out.println(getUsers().containsKey(username));
-        //System.out.println(getUsers().get(username));
-        return getUsers().get(username);
+        if(getUsers().get(username) != null) {
+            return getUsers().get(username);
+        }
+        return null;
     }
 
     public void registerUser(User user) {
@@ -104,14 +108,14 @@ public class Utils {
         HashMap<String, User> users = getUsers();
         users.remove(user.getUserName());
         users.put(user.getUserName(), user);
-        System.out.println("Users in updateUser: " + gson.toJson(users));
+        //System.out.println("Users in updateUser: " + gson.toJson(users));
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(USERS_KEY);
         editor.putString(USERS_KEY, gson.toJson(users));
         editor.commit();
 
-        System.out.println("Users after saving: " + gson.toJson(users));
+        //System.out.println("Users after saving: " + gson.toJson(users));
     }
 
     // might not need this
@@ -138,26 +142,37 @@ public class Utils {
     // Pantry Methods
 
     public Pantry getPantryByUser(User user) {
-        return getCurrentUser().getPantry();
+        if(user != null) {
+            return getUser(user.getUserName()).getPantry();
+        }
+        return null;
     }
 
     public void addPantryItem(String storageLocation, Stock stock) {
-        //System.out.println("Storage location: " + Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation));
         User currentUser = getCurrentUser();
+        //System.out.println("All users before adding: " + gson.toJson(getUsers()));
+        //System.out.println("Items in pantry before adding: " + gson.toJson(currentUser.getPantry()));
         currentUser.addItemToPantry(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), stock);
+        //System.out.println("Items in pantry after adding: " + gson.toJson(currentUser.getPantry()));
         updateUser(currentUser);
         saveState();
-        System.out.println("Pantry: " + currentUser.getPantry().getPantryItems().get("fridge").size());
-        System.out.println("Users current state: " + gson.toJson(getUsers()));
-        Toast.makeText(context, "Item added to pantry: " + stock, Toast.LENGTH_SHORT).show();
     }
 
-    public void removePantryItem(Stock stock) {
-
+    public void removePantryItem(String storageLocation, int index) {
+        User currentUser = getCurrentUser();
+        //System.out.println("All users before removing: " + gson.toJson(getUsers()));
+        //System.out.println("Items in pantry before removing: " + gson.toJson(currentUser.getPantry()));
+        currentUser.removeItemFromPantry(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), index);
+        //System.out.println("Items in pantry after removing: " + gson.toJson(currentUser.getPantry()));
+        updateUser(currentUser);
+        saveState();
     }
 
-    public void editPantryItemQuantity(Stock stock) {
-
+    public void editPantryItemQuantity(String storageLocation, int stockIndex, double quantityToRemove) {
+        User currentUser = getCurrentUser();
+        currentUser.editPantryItemQuantity(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), stockIndex, quantityToRemove);
+        updateUser(currentUser);
+        saveState();
     }
 
 
@@ -168,7 +183,7 @@ public class Utils {
     public void saveState() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         HashMap<String, User> users = getUsers();
-        System.out.println("Users in saved state: " + gson.toJson(users));
+        //System.out.println("Users in saved state: " + gson.toJson(users));
         editor.remove(USERS_KEY);
         editor.putString(USERS_KEY, gson.toJson(users));
         editor.commit();
