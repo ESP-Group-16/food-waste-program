@@ -1,7 +1,5 @@
 package com.example.espappversion2;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,7 +8,7 @@ public class Datasource {
     private static Datasource instance;
     ArrayList<String> dietaryInfoR1= new ArrayList<String>();
     ArrayList<Ingredient> ingredientsR1= new ArrayList<Ingredient>();
-    ArrayList<String> stepsR1= new ArrayList<String>();
+    String stepsR1;
     ArrayList<String> categoryR1= new ArrayList<String>();
     User creatorR1=new User("Bob", "123456");
     Recipe R1= new Recipe(0,"stirfry","fakeurl",10,dietaryInfoR1,ingredientsR1,stepsR1,categoryR1,creatorR1);

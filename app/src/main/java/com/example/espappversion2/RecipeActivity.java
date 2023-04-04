@@ -1,13 +1,13 @@
 package com.example.espappversion2;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -17,15 +17,7 @@ import com.google.gson.Gson;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.NavigateToRecipeFragment {
-
-    @Override
-    public void onGoToRecipeFragment() {
-        // navigate user to RecipeFragment to display details about recipe
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activityRecipeFragmentContainer, new RecipeFragment());
-        transaction.commit();
-    }
+public class RecipeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private FrameLayout container;
@@ -33,7 +25,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.N
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_recipe);
 
         initViews();
@@ -43,6 +34,25 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.N
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.activityRecipeFragmentContainer, new RecipeMenuFragment());
         transaction.commit();
+    }
+
+    private ArrayList<Recipe> getDemoRecipes() {
+        ArrayList<Recipe> recipes = new ArrayList<>();
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<Recipe>>(){}.getType();
+
+        User user1 = new User();
+        user1.setUserName("Bob");
+
+        ArrayList<String> steps = new ArrayList<>();
+
+        Recipe recipe = new Recipe(1, "Spaghetti Bolognese", "https://food-images.files.bbci.co.uk/food/recipes/easy_spaghetti_bolognese_93639_16x9.jpg",
+                10, new ArrayList<String>(), new ArrayList<Ingredient>(), "", new ArrayList<>(), user1);
+        recipes.add(recipe);
+
+        //recipe = new Recipe(2, "Lasagne", )
+
+        return recipes;
     }
 
     private void initViews() {
@@ -83,11 +93,5 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.N
                 return false;
             }
         });
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }
