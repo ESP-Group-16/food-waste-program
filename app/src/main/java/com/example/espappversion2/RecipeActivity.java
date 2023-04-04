@@ -37,25 +37,6 @@ public class RecipeActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    private ArrayList<Recipe> getDemoRecipes() {
-        ArrayList<Recipe> recipes = new ArrayList<>();
-        Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<Recipe>>(){}.getType();
-
-        User user1 = new User();
-        user1.setUserName("Bob");
-
-        ArrayList<String> steps = new ArrayList<>();
-
-        Recipe recipe = new Recipe(1, "Spaghetti Bolognese", "https://food-images.files.bbci.co.uk/food/recipes/easy_spaghetti_bolognese_93639_16x9.jpg",
-                10, new ArrayList<String>(), new ArrayList<Ingredient>(), new ArrayList<String>(), new ArrayList<>(), user1);
-        recipes.add(recipe);
-
-        //recipe = new Recipe(2, "Lasagne", )
-
-        return recipes;
-    }
-
     private void initViews() {
         bottomNavigationView = findViewById(R.id.activityRecipeBottomNavBar);
         container = findViewById(R.id.activityRecipeFragmentContainer);

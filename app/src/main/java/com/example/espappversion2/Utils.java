@@ -2,13 +2,14 @@ package com.example.espappversion2;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
+import com.google.android.gms.common.util.ArrayUtils;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
-import java.nio.file.attribute.UserPrincipalLookupService;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
 
@@ -21,12 +22,12 @@ public class Utils {
     private Context context;
     private Gson gson;
     private SharedPreferences sharedPreferences;
-    private User currentUser;
 
     private static Utils instance;
 
     // private constructor
     private Utils(Context context) {
+        this.context = context;
         sharedPreferences = context.getSharedPreferences("cardsDB", Context.MODE_PRIVATE);
         gson = new Gson();
         // initialize users list is null
@@ -46,14 +47,17 @@ public class Utils {
         return instance;
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // User Methods
+
     public User getCurrentUser() {
         Type type = new TypeToken<User>(){}.getType();
-        System.out.println(sharedPreferences.getString(CURRENT_USER_KEY, null));
+        //System.out.println(sharedPreferences.getString(CURRENT_USER_KEY, null));
         return gson.fromJson(sharedPreferences.getString(CURRENT_USER_KEY, null), type);
     }
 
     public void setCurrentUser(User user, boolean stayLoggedIn) {
-        this.currentUser = user;
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(CURRENT_USER_KEY);
         if(stayLoggedIn) {
@@ -64,7 +68,7 @@ public class Utils {
 
     // get all existing users
     public HashMap<String, User> getUsers() {
-        System.out.println("getUsers: " + sharedPreferences.getString(USERS_KEY, null));
+        //System.out.println("getUsers: " + sharedPreferences.getString(USERS_KEY, null));
         Type type = new TypeToken<HashMap<String, User>>(){}.getType();
         return gson.fromJson(sharedPreferences.getString(USERS_KEY, null), type);
     }
@@ -95,8 +99,19 @@ public class Utils {
         System.out.println("registerUser: " + getUsers());
     }
 
-    public void editUser(User user) {
+    // will implement later - low priority
+    public void updateUser(User user) {
+        HashMap<String, User> users = getUsers();
+        users.remove(user.getUserName());
+        users.put(user.getUserName(), user);
+        System.out.println("Users in updateUser: " + gson.toJson(users));
 
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(USERS_KEY);
+        editor.putString(USERS_KEY, gson.toJson(users));
+        editor.commit();
+
+        System.out.println("Users after saving: " + gson.toJson(users));
     }
 
     // might not need this
@@ -114,6 +129,48 @@ public class Utils {
     public void clearUsers() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(USERS_KEY);
+        editor.commit();
+    }
+
+
+    // End of User Methods
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Pantry Methods
+
+    public Pantry getPantryByUser(User user) {
+        return getCurrentUser().getPantry();
+    }
+
+    public void addPantryItem(String storageLocation, Stock stock) {
+        //System.out.println("Storage location: " + Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation));
+        User currentUser = getCurrentUser();
+        currentUser.addItemToPantry(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), stock);
+        updateUser(currentUser);
+        saveState();
+        System.out.println("Pantry: " + currentUser.getPantry().getPantryItems().get("fridge").size());
+        System.out.println("Users current state: " + gson.toJson(getUsers()));
+        Toast.makeText(context, "Item added to pantry: " + stock, Toast.LENGTH_SHORT).show();
+    }
+
+    public void removePantryItem(Stock stock) {
+
+    }
+
+    public void editPantryItemQuantity(Stock stock) {
+
+    }
+
+
+
+    // End of Pantry Methods
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void saveState() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        HashMap<String, User> users = getUsers();
+        System.out.println("Users in saved state: " + gson.toJson(users));
+        editor.remove(USERS_KEY);
+        editor.putString(USERS_KEY, gson.toJson(users));
         editor.commit();
     }
 }

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
     private Button btnLogin, btnRegister;
     private CheckBox checkBoxStayLoggedIn;
 
-    private Repository repo=new Repository(this);
+    //private Repository repo=new Repository(this);
 
     private String TAG = "MainActivity";
 
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
         setContentView(R.layout.activity_main);
 
         initViews();
+        //Utils.getInstance(this).clearUsers();
         //Utils.getInstance(this).clearCurrentUser();
 
         //System.out.println("Current user: " + Utils.getInstance(this).userExists(Utils.getInstance(this).getCurrentUser().getUserName()));

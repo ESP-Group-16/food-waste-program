@@ -34,7 +34,7 @@ public class RegisterDialog extends DialogFragment {
         // display dialog
         View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_register, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
-        repo = new Repository(getActivity());
+        //repo = new Repository(getActivity());
 
         initViews(view);
 
@@ -50,9 +50,7 @@ public class RegisterDialog extends DialogFragment {
                     if(!Utils.getInstance(getActivity()).userExists(email)) {
                         // check if passwords match
                         if(password.equals(rePassword)) {
-                            User user = new User();
-                            user.setUserName(email);
-                            user.setPassword(password);
+                            User user = new User(email, password);
                             // send new user back to MainActivity to be registered
                             try {
                                 registerUser = (RegisterUser) getActivity();

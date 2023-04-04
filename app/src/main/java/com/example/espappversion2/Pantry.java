@@ -1,35 +1,36 @@
 package com.example.espappversion2;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Pantry {
 
+    /**
+     * Constant for pantry storage locations <p>
+     *     0: fridge | 1: freezer | 2: cupboard
+     * </p>
+     */
+    public static final String[] STORAGE_LOCATIONS = new String[] {"fridge", "freezer", "cupboard"};
     private int pantryId;
     private String pantryName;
     // New added attributes
     private ArrayList<User> users;
-    private ArrayList<Stock> stock;
-
-    public Pantry(int pantryId, String pantryName, ArrayList<User> users, ArrayList<Stock> stock) {
-        this.pantryId = pantryId;
-        this.pantryName = pantryName;
-        this.users = users;
-        this.stock = stock;
-    }
+    private HashMap<String, ArrayList<Stock>> pantryItems;
 
     public Pantry() {
-
+        pantryItems = new HashMap<>();
+        pantryItems.put(STORAGE_LOCATIONS[0], new ArrayList<>());
+        pantryItems.put(STORAGE_LOCATIONS[1], new ArrayList<>());
+        pantryItems.put(STORAGE_LOCATIONS[2], new ArrayList<>());
     }
 
-//    public Pantry retrievePantry(FirebaseFirestore db) {
-//        //TODO: move this to the interface method for future use
-//
-//        // pass the pantry back to pantry activity
-//        db.collection(fireStoreCollectionName).document("PsFFlfX7gicMjIyBay5H").get();
-//
-//        return null;
-//    }
-
+    public void addItemToPantry(int storageLocationIndex, Stock stock) {
+        if(storageLocationIndex >=0 && storageLocationIndex <= 2 && stock != null) {
+            this.pantryItems.get(STORAGE_LOCATIONS[storageLocationIndex]).add(stock);
+        }
+    }
 
     public int getPantryId() {
         return pantryId;
@@ -57,11 +58,11 @@ public class Pantry {
         this.users = userArrayList;
     }
 
-    public ArrayList<Stock> getStock() { // Name altered from getStocks() --> getStock() (per UML diagram)
-        return stock;
+    public HashMap<String, ArrayList<Stock>> getPantryItems() {
+        return pantryItems;
     }
 
-    public void setStock(ArrayList<Stock> stocks) { // setStocks() --> setStock()
-        this.stock = stocks;
+    public void setPantryItems(HashMap<String, ArrayList<Stock>> pantryItems) {
+        this.pantryItems = pantryItems;
     }
 }

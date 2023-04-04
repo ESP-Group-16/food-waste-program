@@ -13,15 +13,12 @@ public class User {
     private ArrayList<Recipe> favouriteRecipes;
     private int socialCreditScore;
     private ArrayList<Ingredient> shoppingList;
-    //private Pantry pantry;
+    private Pantry pantry;
 
-
-    public User() {
-        //this.pantry = new Pantry();
-    }
     public User(String userName, String password) {
         this.userName=userName;
         this.password=password;
+        this.pantry = new Pantry();
     }
 
     // TODO: finish getPreferences()
@@ -102,11 +99,15 @@ public class User {
         this.shoppingList = shoppingList;
     }
 
-//    public Pantry getPantry() {
-//        return pantry;
-//    }
-//
-//    public void setPantry(Pantry pantry) {
-//        this.pantry = pantry;
-//    }
+    public void addItemToPantry(int storageLocation, Stock item) {
+        pantry.addItemToPantry(storageLocation, item);
+    }
+
+    public Pantry getPantry() {
+        return pantry;
+    }
+
+    public void setPantry(Pantry pantry) {
+        this.pantry = pantry;
+    }
 }

@@ -12,7 +12,7 @@ public class Datasource {
     ArrayList<Ingredient> ingredientsR1= new ArrayList<Ingredient>();
     ArrayList<String> stepsR1= new ArrayList<String>();
     ArrayList<String> categoryR1= new ArrayList<String>();
-    User creatorR1=new User();
+    User creatorR1=new User("Bob", "123456");
     Recipe R1= new Recipe(0,"stirfry","fakeurl",10,dietaryInfoR1,ingredientsR1,stepsR1,categoryR1,creatorR1);
     Recipe R2= new Recipe(1,"curry","fakeurl",10,dietaryInfoR1,ingredientsR1,stepsR1,categoryR1,creatorR1);
     Recipe R3=new Recipe(2,"soup","fakeurl",10,dietaryInfoR1,ingredientsR1,stepsR1,categoryR1,creatorR1);

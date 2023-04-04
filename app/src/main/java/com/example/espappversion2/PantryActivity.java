@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
     private PantryFragment pantryFragment;
 
     @Override
-    public void applyPantryItemChanges(String storageloc, Stock stock) { // For some reason it sends it here instead of the pantry fragment - uh so I'll do the changing backend here
+    public void applyPantryItemChanges(String storageloc, Stock stock) {
 
         // Comes from AddPantryItemDialog: We need to add pantry item here
 
@@ -30,11 +31,14 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
         repo.addStockItem(storageloc, stock);
         repo.viewAllPantry();
         Toast.makeText(this, "New item " + stock.getFood().getName() + " added to " + storageloc, Toast.LENGTH_SHORT).show();
+        Utils.getInstance(this).addPantryItem(storageloc, stock);
+        System.out.println("Users before restarting PantryFragment: " + new Gson().toJson(Utils.getInstance(this).getUsers()));
 
-        pantryFragment = new PantryFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activityPantryFragmentContainer, pantryFragment);
-        transaction.commit();
+        // restart the fragment to display updated list
+//        pantryFragment = new PantryFragment();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.activityPantryFragmentContainer, pantryFragment);
+//        transaction.commit();
     }
 
     @Override
@@ -46,7 +50,6 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
         initViews();
         initBottomNavBar();
 
-        // TODO: check if user has a pantry and display fragment accordingly
         // show PantryFragment
         pantryFragment = new PantryFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
