@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="3dp"
+    android:id="@+id/recipeIngredientParent"
+    app:cardBackgroundColor="@color/main_background"
+    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 grams chicken"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"
+            android:paddingVertical="2sp"
+            android:id="@+id/txtIngredientName"
+            android:drawableLeft="@drawable/baseline_circle_24"
+            android:drawablePadding="10sp"/>
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

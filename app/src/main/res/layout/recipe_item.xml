@@ -13,6 +13,21 @@
         android:layout_height="wrap_content"
         android:padding="15dp">
 
+        <ImageView
+            android:id="@+id/recipeItemImg"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/default_recipe_img"
+            android:scaleType="centerCrop"
+
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/recipeItemImg"
+            android:layout_marginLeft="15sp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,30 +37,30 @@
             android:paddingVertical="2sp"
             android:id="@+id/recipeItemRecipeNameTxt" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/recipeItemRecipeNameTxt">
-
-            <Button
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Favourite"
-                android:textAllCaps="false"
-                android:textSize="12sp"
-                android:id="@+id/recipeItemFavouriteButton"
-                android:layout_alignParentStart="true"/>
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/recipeItemRecipeNameTxt">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add Ingredients To Cart"
-                android:textAllCaps="false"
-                android:textSize="12sp"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/recipeItemAddIngredientsToCartButton" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:id="@+id/recipeItemFavouriteButton"
+                    android:layout_alignParentStart="true"/>
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Ingredients To Cart"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/recipeItemAddIngredientsToCartButton" />
+            </RelativeLayout>
         </RelativeLayout>
 
     </RelativeLayout>
