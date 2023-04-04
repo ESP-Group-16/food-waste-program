@@ -1,7 +1,6 @@
 package com.example.espappversion2;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 
 public class Food {
@@ -56,11 +55,11 @@ public class Food {
         this.unit = unit;
     }
 
-    public Dictionary<String, Integer> getNutritional_info() {
+    public HashMap<String, Integer> getNutritional_info() {
         return nutritional_info;
     }
 
-    public void setNutritional_info(Dictionary<String, Integer> nutritional_info) {
+    public void setNutritional_info(HashMap<String, Integer> nutritional_info) {
         this.nutritional_info = nutritional_info;
     }
 
