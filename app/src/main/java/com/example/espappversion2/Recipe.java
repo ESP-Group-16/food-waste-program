@@ -3,7 +3,6 @@ package com.example.espappversion2;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -127,11 +126,11 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public ArrayList<String> getSteps() {
+    public String getSteps() {
         return steps;
     }
 
-    public void setSteps(ArrayList<String> steps) {
+    public void setSteps(String steps) {
         this.steps = steps;
     }
 
