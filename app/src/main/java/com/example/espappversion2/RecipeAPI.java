@@ -79,6 +79,19 @@ import java.util.ArrayList;
 
     *****************************************************************
 
+
+    getAllFunction return JSON of type
+    
+    {"meals":[{
+    "idIngredient":"1",
+    "strIngredient":"Chicken",
+    "strDescription":"desc" or null,
+    "strType":"type" or null
+    },
+    {...},
+    ...
+    ]}
+
  */
 public class RecipeAPI {
 
@@ -115,6 +128,58 @@ public class RecipeAPI {
             }
         }, "https://www.themealdb.com/api/json/v2/9973533/filter.php?i="+commaSeparatedList);
     }
+
+    public void getAllCategories(final VolleyCallback callback) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                // Handle API response
+                callback.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v2/9973533/list.php?c=list");
+    }
+
+    public void getAllCusisines(final VolleyCallback callback) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                // Handle API response
+                callback.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v2/9973533/list.php?a=list");
+    }
+
+    public void getAllIngredients(final VolleyCallback callback) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                // Handle API response
+                callback.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v2/9973533/list.php?i=list");
+    }
+
 
     public void get10RandomRecipes(final VolleyCallback callback) {
         getData(new VolleyCallback() {
