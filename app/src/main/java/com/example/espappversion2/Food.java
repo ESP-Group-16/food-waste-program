@@ -1,15 +1,15 @@
 package com.example.espappversion2;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.ArrayList;
 
 public class Food {
     private int foodId;
     private String name;
     private ArrayList<String> dietaryInfo;
     private String unit;
-    private Dictionary<String, Integer> nutritional_info;
+    private HashMap<String, Integer> nutritional_info;
     private double carbonFootprint;
 
     // TODO: clarify the functionality of this
@@ -22,7 +22,8 @@ public class Food {
     public Food() {
     }
 
-    public Food(int foodId, String name, ArrayList<String> dietaryInfo, String unit, Dictionary<String, Integer> nutritional_info, double carbonFootprint) {
+
+    public Food(int foodId, String name, ArrayList<String> dietaryInfo, String unit, HashMap<String, Integer> nutritional_info, double carbonFootprint) {
         this.foodId = foodId;
         this.name = name;
         this.dietaryInfo = dietaryInfo;

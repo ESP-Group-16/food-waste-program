@@ -1,10 +1,12 @@
 package com.example.espappversion2;
 
-import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.lang.reflect.Type;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class Recipe {
     private int recipeId;
@@ -13,7 +15,7 @@ public class Recipe {
     private int duration; // In minutes
     private ArrayList<String> dietaryInfo;
     private ArrayList<Ingredient> ingredients;
-    private ArrayList<String> steps;
+    private String steps;
     private ArrayList<String> category;
     private User creator;
 
@@ -21,7 +23,43 @@ public class Recipe {
 
     }
 
-    public Recipe(int recipeId, String name, String imageURL, int duration, ArrayList<String> dietaryInfo, ArrayList<Ingredient> ingredients, ArrayList<String> steps, ArrayList<String> category, User creator) {
+    public Recipe(JSONObject recipe) throws JSONException {
+        this.recipeId = Integer.parseInt(recipe.getString("idMeal"));
+        this.name = recipe.getString("strMeal");
+        this.imageURL = recipe.getString("strMealThumb");
+        this.duration = 10;  // TODO: we don't have a duration right now
+        this.dietaryInfo = dietaryInfo; // TODO: get this from some API
+        Pattern patternUnit = Pattern.compile("\\b(?![a-zA-Z]*\\d)\\w+\\b"); // gets any word that doesnt have a number in it i.e. 1/2 used for unit
+        Pattern patternQuantity = Pattern.compile("\\b\\w*\\d\\w*\\b"); // gets any word that doesnt have a number in it i.e. 1/2 used for unit
+
+        for (int i = 1; i <= 20; i++) {
+            if (recipe.getString("strIngredient" + i) == ""  || recipe.getString("strIngredient" + i) == null) break;
+            Food food = new Food(
+                    1,
+                    recipe.getString("strIngredient" + i),
+                    new ArrayList<String>(),    // TODO: this is dietaryInfo
+                    patternUnit.matcher(recipe.getString("strMeasure"+i)).find() ? patternUnit.matcher(recipe.getString("strMeasure"+i)).group() : "g",
+                    new HashMap<String, Integer>(), // TODO: this is nutritionalInfo
+                    0.0 // TODO: get carbon using API
+            );
+
+            Ingredient ingredient = new Ingredient(
+                    food,
+                    patternQuantity.matcher(recipe.getString("strMeasure"+i)).find() ? Double.parseDouble(patternQuantity.matcher(recipe.getString("strMeasure"+i)).group()) : 1.0
+            );
+
+            this.ingredients.add(ingredient);
+        }
+        this.steps = recipe.getString("strInstructions");
+        ArrayList<String> categories = new ArrayList<String>();
+        categories.add(recipe.getString("strCategory"));
+        categories.add(recipe.getString("strArea"));
+        this.category = categories;
+        this.creator = new User();
+
+    }
+
+    public Recipe(int recipeId, String name, String imageURL, int duration, ArrayList<String> dietaryInfo, ArrayList<Ingredient> ingredients, String steps, ArrayList<String> category, User creator) {
         this.recipeId = recipeId;
         this.name = name;
         this.imageURL = imageURL;

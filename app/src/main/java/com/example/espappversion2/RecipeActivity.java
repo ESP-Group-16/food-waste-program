@@ -1,13 +1,13 @@
 package com.example.espappversion2;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -47,7 +47,7 @@ public class RecipeActivity extends AppCompatActivity {
         ArrayList<String> steps = new ArrayList<>();
 
         Recipe recipe = new Recipe(1, "Spaghetti Bolognese", "https://food-images.files.bbci.co.uk/food/recipes/easy_spaghetti_bolognese_93639_16x9.jpg",
-                10, new ArrayList<String>(), new ArrayList<Ingredient>(), new ArrayList<String>(), new ArrayList<>(), user1);
+                10, new ArrayList<String>(), new ArrayList<Ingredient>(), "", new ArrayList<>(), user1);
         recipes.add(recipe);
 
         //recipe = new Recipe(2, "Lasagne", )
