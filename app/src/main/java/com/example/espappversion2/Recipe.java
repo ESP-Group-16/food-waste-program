@@ -32,8 +32,11 @@ public class Recipe {
         Pattern patternUnit = Pattern.compile("\\b(?![a-zA-Z]*\\d)\\w+\\b"); // gets any word that doesnt have a number in it i.e. 1/2 used for unit
         Pattern patternQuantity = Pattern.compile("\\b\\w*\\d\\w*\\b"); // gets any word that doesnt have a number in it i.e. 1/2 used for unit
 
+        // iterating through the 20 ingredients and measures. Not 0-indexed so that's why we start at 1
         for (int i = 1; i <= 20; i++) {
             if (recipe.getString("strIngredient" + i) == ""  || recipe.getString("strIngredient" + i) == null) break;
+
+
             Food food = new Food(
                     1,
                     recipe.getString("strIngredient" + i),
@@ -43,17 +46,21 @@ public class Recipe {
                     0.0 // TODO: get carbon using API
             );
 
+
             Ingredient ingredient = new Ingredient(
                     food,
                     patternQuantity.matcher(recipe.getString("strMeasure"+i)).find() ? Double.parseDouble(patternQuantity.matcher(recipe.getString("strMeasure"+i)).group()) : 1.0
             );
 
+
             this.ingredients.add(ingredient);
         }
         this.steps = recipe.getString("strInstructions");
+
         ArrayList<String> categories = new ArrayList<String>();
         categories.add(recipe.getString("strCategory"));
         categories.add(recipe.getString("strArea"));
+
         this.category = categories;
         this.creator = new User();
 
