@@ -9,12 +9,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
+    public interface NavigateToRecipeFragment {
+        void onGoToRecipeFragment();
+    }
+
+    private NavigateToRecipeFragment navigateToRecipeFragment;
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Context context;
 
@@ -56,10 +63,24 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             }
         });
 
+        // remove this?
         holder.btnAddIngredientsToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // TODO: add the ingredients of the recipe to cart
+            }
+        });
+
+        holder.parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // navigate user to RecipeFragment to display details about recipe
+                try {
+                    navigateToRecipeFragment = (NavigateToRecipeFragment) context;
+                    navigateToRecipeFragment.onGoToRecipeFragment();
+                } catch (ClassCastException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -77,6 +98,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private CardView parent;
         private Button btnAddIngredientsToCart, btnFavourite;
         private TextView txtRecipeName;
 
@@ -86,6 +108,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             btnFavourite = itemView.findViewById(R.id.recipeItemFavouriteButton);
             btnAddIngredientsToCart = itemView.findViewById(R.id.recipeItemAddIngredientsToCartButton);
             txtRecipeName = itemView.findViewById(R.id.recipeItemRecipeNameTxt);
+            parent = itemView.findViewById(R.id.recipeItemParent);
         }
     }
 }

@@ -17,7 +17,15 @@ import com.google.gson.Gson;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class RecipeActivity extends AppCompatActivity {
+public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.NavigateToRecipeFragment {
+
+    @Override
+    public void onGoToRecipeFragment() {
+        // navigate user to RecipeFragment to display details about recipe
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activityRecipeFragmentContainer, new RecipeFragment());
+        transaction.commit();
+    }
 
     private BottomNavigationView bottomNavigationView;
     private FrameLayout container;
