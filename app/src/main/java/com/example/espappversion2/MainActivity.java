@@ -45,13 +45,13 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
         initViews();
         //Utils.getInstance(this).clearUsers();
         //Utils.getInstance(this).clearCurrentUser();
+        login(Utils.getInstance(this).getCurrentUserFromMemory());
 
-        //System.out.println("Current user: " + Utils.getInstance(this).userExists(Utils.getInstance(this).getCurrentUser().getUserName()));
-        if(Utils.getInstance(this).getCurrentUser() != null) {
-            if(Utils.getInstance(this).userExists(Utils.getInstance(this).getCurrentUser().getUserName())) {
-                login(Utils.getInstance(this).getCurrentUser());
-            }
-        }
+//        if(Utils.getInstance(this).getCurrentUser() != null) {
+//            if(Utils.getInstance(this).userExists(Utils.getInstance(this).getCurrentUser().getUserName())) {
+//                login(Utils.getInstance(this).getCurrentUserFromMemory());
+//            }
+//        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,8 +138,8 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
         Log.d(TAG, "login: called");
         if(user != null) {
             Utils.getInstance(this).setCurrentUser(user, checkBoxStayLoggedIn.isChecked());
-            Intent intent = new Intent(MainActivity.this, PantryActivity.class);
             Toast.makeText(this, "Logged in as " + user.getUserName(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, PantryActivity.class);
             startActivity(intent);
         }
     }

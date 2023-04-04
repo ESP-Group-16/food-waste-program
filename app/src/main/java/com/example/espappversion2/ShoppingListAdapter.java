@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ViewHolder> {
 
@@ -82,7 +83,9 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 // delete the item form pantry
                                 //Toast.makeText(context, "Deleted from shopping list", Toast.LENGTH_SHORT).show();
-                                repository.removeItemFromShoppingList(items.get(holder.getAdapterPosition()), storageLocation);
+                                //repository.removeItemFromShoppingList(items.get(holder.getAdapterPosition()), storageLocation);
+                                Utils.getInstance(context).removeShoppingListItem(Pantry.STORAGE_LOCATIONS[storageLocation], holder.getAdapterPosition());
+                                updateItems();
                                 notifyDataSetChanged();
                             }
                         })
@@ -95,6 +98,10 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                 builder.create().show();
             }
         });
+    }
+
+    private void updateItems() {
+        setItems(Utils.getInstance(context).getCurrentUser().getShoppingList().get(Pantry.STORAGE_LOCATIONS[storageLocation]));
     }
 
     public ArrayList<Stock> getSelectedItems() {

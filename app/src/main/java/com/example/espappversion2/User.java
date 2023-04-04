@@ -1,9 +1,11 @@
 package com.example.espappversion2;
 
+import static com.example.espappversion2.Pantry.STORAGE_LOCATIONS;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User {
-    // TODO: verify the need for this class - if Firebase takes care of it
     private int userId;
     private String userName;
     private String password;
@@ -12,13 +14,17 @@ public class User {
     private ArrayList<Food> allergies;
     private ArrayList<Recipe> favouriteRecipes;
     private int socialCreditScore;
-    private ArrayList<Ingredient> shoppingList;
+    private HashMap<String, ArrayList<Stock>> shoppingList;
     private Pantry pantry;
 
     public User(String userName, String password) {
         this.userName=userName;
         this.password=password;
         this.pantry = new Pantry();
+        shoppingList = new HashMap<>();
+        shoppingList.put(STORAGE_LOCATIONS[0], new ArrayList<>());
+        shoppingList.put(STORAGE_LOCATIONS[1], new ArrayList<>());
+        shoppingList.put(STORAGE_LOCATIONS[2], new ArrayList<>());
     }
 
     // TODO: finish getPreferences()
@@ -91,12 +97,31 @@ public class User {
         this.socialCreditScore = socialCreditScore;
     }
 
-    public ArrayList<Ingredient> getShoppingList() {
+    public HashMap<String, ArrayList<Stock>> getShoppingList() {
         return shoppingList;
     }
 
-    public void setShoppingList(ArrayList<Ingredient> shoppingList) {
+    public void setShoppingList(HashMap<String, ArrayList<Stock>> shoppingList) {
         this.shoppingList = shoppingList;
+    }
+
+    public void addItemToShoppingList(int storageLocationIndex, Stock item) {
+        String key = STORAGE_LOCATIONS[storageLocationIndex];
+        if(this.shoppingList.containsKey(key) && this.shoppingList.get(key) != null) {
+            this.shoppingList.get(STORAGE_LOCATIONS[storageLocationIndex]).add(item);
+        }
+    }
+
+    public void removeItemFromShoppingList(int storageLocationIndex, int index) {
+        String key = STORAGE_LOCATIONS[storageLocationIndex];
+        System.out.println("1");
+        if(storageLocationIndex >=0 && storageLocationIndex <= 2) {
+            System.out.println("2");
+            if(index >= 0 && index < this.shoppingList.get(key).size()) {
+                System.out.println("3");
+                this.shoppingList.get(key).remove(index);
+            }
+        }
     }
 
     public void addItemToPantry(int storageLocation, Stock item) {

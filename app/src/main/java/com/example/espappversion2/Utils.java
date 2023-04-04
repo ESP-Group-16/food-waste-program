@@ -9,6 +9,7 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -24,6 +25,7 @@ public class Utils {
     private SharedPreferences sharedPreferences;
 
     private static Utils instance;
+    private User currentUser;
 
     // private constructor
     private Utils(Context context) {
@@ -47,25 +49,40 @@ public class Utils {
         return instance;
     }
 
+    public void saveState() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        HashMap<String, User> users = getUsers();
+        //System.out.println("Users in saved state: " + gson.toJson(users));
+        editor.remove(USERS_KEY);
+        editor.putString(USERS_KEY, gson.toJson(users));
+        editor.commit();
+    }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // User Methods
 
     public User getCurrentUser() {
+        return this.currentUser;
+    }
+
+    public User getCurrentUserFromMemory() {
         Type type = new TypeToken<String>(){}.getType();
-        //System.out.println(sharedPreferences.getString(CURRENT_USER_KEY, null));
         String userName = gson.fromJson(sharedPreferences.getString(CURRENT_USER_KEY, null), type);
         if (getUser(userName) != null) {
+            this.currentUser = getUser(userName);
             return getUser(userName);
         }
         return null;
     }
 
     public void setCurrentUser(User user, boolean stayLoggedIn) {
+        this.currentUser = user;
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(CURRENT_USER_KEY);
         if(stayLoggedIn) {
-            editor.putString(CURRENT_USER_KEY, gson.toJson(user.getUserName()));
+            editor.putString(CURRENT_USER_KEY, gson.toJson(currentUser.getUserName()));
+            //Toast.makeText(context, user.getUserName() + " set as current user in memory", Toast.LENGTH_SHORT).show();
         }
         editor.commit();
     }
@@ -124,9 +141,11 @@ public class Utils {
     }
 
     public void clearCurrentUser() {
+        this.currentUser = null;
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(CURRENT_USER_KEY);
         editor.commit();
+        //Toast.makeText(context, "Current user removed from memory", Toast.LENGTH_SHORT).show();
     }
 
     // clears all users - for debugging purposes
@@ -179,13 +198,44 @@ public class Utils {
 
     // End of Pantry Methods
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Shopping List Methods
 
-    public void saveState() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        HashMap<String, User> users = getUsers();
-        //System.out.println("Users in saved state: " + gson.toJson(users));
-        editor.remove(USERS_KEY);
-        editor.putString(USERS_KEY, gson.toJson(users));
-        editor.commit();
+    public HashMap<String, ArrayList<Stock>> getShoppingListByUser(User user) {
+        if(user != null) {
+            return getUser(user.getUserName()).getShoppingList();
+        }
+        return null;
     }
+
+    public void addShoppingListItem(String storageLocation, Stock stock) {
+        User currentUser = getCurrentUser();
+        currentUser.addItemToShoppingList(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), stock);
+        updateUser(currentUser);
+        saveState();
+    }
+
+    public void removeShoppingListItem(String storageLocation, int index) {
+        System.out.println("0");
+        User currentUser = getCurrentUser();
+        currentUser.removeItemFromShoppingList(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), index);
+        updateUser(currentUser);
+        saveState();
+    }
+
+    public boolean isShoppingListEmpty(User user) {
+        return getShoppingListByUser(user).isEmpty();
+    }
+
+    // add selected items to pantry and remove them from shopping list
+    public void addShoppingListItemsToPantry(String storageLocation, ArrayList<Stock> items) {
+        for(Stock s : items) {
+            addPantryItem(storageLocation, s);
+            removeShoppingListItem(storageLocation, items.indexOf(s));
+        }
+    }
+
+
+    // End of Shopping List Methods
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 }
