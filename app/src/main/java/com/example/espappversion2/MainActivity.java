@@ -78,9 +78,6 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<String> arr = new ArrayList<String>();
-                arr.add("chicken_breast");
-                arr.add("garlic");
                 RecipeAPI huh = new RecipeAPI(getApplicationContext());
                 huh.getRecipeByName(new VolleyCallback() {
                     @Override
@@ -89,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
                         // This will now have a JSON object if API call is successful
                         // we can make this into a recipe object
                         System.out.println(response.toString());
-                        Recipe recipe = new Recipe(response.getJSONArray("meals").getJSONObject(0));
+                        ArrayList<Recipe> recipeS = Recipe.generateRecipesGivenJSON(response);
+                        System.out.println(recipeS.toString());
                     }
 
                     @Override
@@ -97,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         // Handle error response
                         error.printStackTrace();
                     }
-                }, "pasta");
+                }, "chicken");
             }
         });
     }
