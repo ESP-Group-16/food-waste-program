@@ -110,11 +110,4 @@ public class SearchFragment extends Fragment implements VolleyCallback {
         btnSearch = view.findViewById(R.id.fragmentSearchButton);
         searchEdtTxt = view.findViewById(R.id.fragmentSearchBarEdtTxt);
     }
-
-    public void openRecipePageByCuisine(String cuisine) {
-        // show PantryFragment TODO: send cuisine over to RecipeListFragment
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activityRecipeFragmentContainer, new RecipeListFragment());
-        transaction.commit();
-    }
 }

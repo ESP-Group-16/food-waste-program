@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,6 +62,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
         initViews(view);
         recipeAPI = new RecipeAPI(getActivity());
         recipes = new ArrayList<>();
+        System.out.println("Favourite recipes when opening RecipeListFragment: " + new Gson().toJson(Utils.getInstance(getActivity()).getFavouriteRecipes()));
 
         // get the mode and the corresponding list of recipes
         Bundle bundle = getArguments();
@@ -71,6 +73,19 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                 if(mode.equals("favourites")){
                     // TODO: get favourite recipes list
                     txtTitle.setText("Favourite Recipes");
+                    ArrayList<String> favouriteRecipeNames = new ArrayList<>();
+                    ArrayList<Recipe> favourites = new ArrayList<>();
+                    for(String name : favouriteRecipeNames) {
+                        // TODO: need a method to get recipe by name (exact match)
+                        //favourites.add(recipeAPI.getRecipeByName(name));
+                    }
+
+                    // set adapter for recycler view to display recipes
+                    adapter = new RecipeAdapter(getActivity());
+                    adapter.setItems(favourites);
+                    recipeRecView.setAdapter(adapter);
+                    recipeRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
                 } else if(mode.equals("pantry_recipes")) {
                     // TODO: get pantry recipes list
                     txtTitle.setText("Pantry Recipes");
@@ -117,7 +132,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                 } else {
                     Toast.makeText(getActivity(), "Cannot set back button", Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(getActivity(), "Back button set to " + backFragment, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Back button set to " + backFragment, Toast.LENGTH_SHORT).show();
             }
         }
 

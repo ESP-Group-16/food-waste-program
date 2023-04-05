@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +28,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     private Context context;
 
     private Repository repository;
+    private User currentUser;
 
     public RecipeAdapter(Context context) {
         this.context = context;
@@ -48,26 +48,38 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         Recipe currentRecipe = recipes.get(holder.getAdapterPosition());
 
         holder.txtRecipeName.setText(currentRecipe.getName());
-        holder.btnFavourite.setText(repository.containsRecipeInFavourites(currentRecipe)? "Unfavourite" : "Favourite");
+        holder.favouriteImg.setVisibility(Utils.getInstance(context).isRecipeInFavourites(currentRecipe.getName())? View.VISIBLE : View.GONE);
+        holder.notFavouriteImg.setVisibility(!Utils.getInstance(context).isRecipeInFavourites(currentRecipe.getName())? View.VISIBLE : View.GONE);
+        if(Utils.getInstance(context).isRecipeInFavourites(currentRecipe.getName())) {
+            Toast.makeText(context, currentRecipe.getName() + " is in favourites", Toast.LENGTH_SHORT).show();
+        }
 
         Glide.with(context)
                 .asBitmap()
                 .load(recipes.get(holder.getAdapterPosition()).getImageURL())
                 .into(holder.recipeImage);
 
-        holder.btnFavourite.setOnClickListener(new View.OnClickListener() {
+        holder.favouriteImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: add recipe to favourites
-                if(!repository.containsRecipeInFavourites(currentRecipe)) {
-                    repository.addRecipeToFavourites(currentRecipe);
-                    holder.btnFavourite.setText("Unfavourite");
-                    Toast.makeText(context, currentRecipe.getName() + " added to favourite recipes", Toast.LENGTH_SHORT).show();
-                } else {
-                    repository.removeRecipeFromFavourites(currentRecipe);
-                    holder.btnFavourite.setText("Favourite");
-                    Toast.makeText(context, currentRecipe.getName() + " removed from favourite recipes", Toast.LENGTH_SHORT).show();
+                if(!Utils.getInstance(context).isRecipeInFavourites(recipes.get(holder.getAdapterPosition()).getName())) {
+
                 }
+                Utils.getInstance(context).removeRecipeFromFavourites(recipes.get(holder.getAdapterPosition()).getName());
+                holder.favouriteImg.setVisibility(View.GONE);
+                holder.notFavouriteImg.setVisibility(View.VISIBLE);
+            }
+        });
+
+        holder.notFavouriteImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Utils.getInstance(context).isRecipeInFavourites(recipes.get(holder.getAdapterPosition()).getName())) {
+
+                }
+                Utils.getInstance(context).addRecipeToFavourites(recipes.get(holder.getAdapterPosition()).getName());
+                holder.favouriteImg.setVisibility(View.VISIBLE);
+                holder.notFavouriteImg.setVisibility(View.GONE);
             }
         });
 
@@ -99,17 +111,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private CardView parent;
-        private Button btnFavourite;
-        private ImageView recipeImage;
+        private ImageView recipeImage, favouriteImg, notFavouriteImg;
         private TextView txtRecipeName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             // initialize UI components
-            btnFavourite = itemView.findViewById(R.id.recipeItemFavouriteButton);
             txtRecipeName = itemView.findViewById(R.id.recipeItemRecipeNameTxt);
             parent = itemView.findViewById(R.id.recipeItemParent);
             recipeImage = itemView.findViewById(R.id.recipeItemImg);
+            favouriteImg = itemView.findViewById(R.id.recipeItemFavourite);
+            notFavouriteImg = itemView.findViewById(R.id.recipeItemNotFavourite);
         }
     }
 }

@@ -88,9 +88,14 @@ public class Utils {
     }
 
     public HashMap<String, User> getUsers() {
-        //System.out.println("getUsers: " + sharedPreferences.getString(USERS_KEY, null));
+        System.out.println("getUsers: " + sharedPreferences.getString(USERS_KEY, null));
         Type type = new TypeToken<HashMap<String, User>>(){}.getType();
-        return gson.fromJson(sharedPreferences.getString(USERS_KEY, null), type);
+        try {
+            return gson.fromJson(sharedPreferences.getString(USERS_KEY, null), type);
+        } catch(IllegalStateException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public boolean userExists(String username) {
@@ -229,14 +234,35 @@ public class Utils {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Recipe Methods
 
-    public ArrayList<Recipe> getFavouriteRecipes(User user) {
-        ArrayList<Recipe> favourites = new ArrayList<>();
-        if(user != null) {
-            // ...
+    public ArrayList<String> getFavouriteRecipes() {
+        ArrayList<String> favourites = new ArrayList<>();
+        if(currentUser != null) {
+            return currentUser.getFavouriteRecipes();
         }
         return favourites;
     }
 
+    public void addRecipeToFavourites(String recipeName) {
+        User currentUser = getCurrentUser();
+        currentUser.addRecipeToFavourites(recipeName);
+        updateUser(currentUser);
+        saveState();
+        //System.out.println("Users after adding recipe to favourites: " + gson.toJson(getUsers()));
+        //Toast.makeText(context, recipeName + " added to favourite recipes", Toast.LENGTH_SHORT).show();
+    }
+
+    public void removeRecipeFromFavourites(String recipeName) {
+        User currentUser = getCurrentUser();
+        currentUser.removeRecipeFromFavourites(recipeName);
+        updateUser(currentUser);
+        saveState();
+        //System.out.println("Users after removing recipe from favourites: " + gson.toJson(getUsers()));
+        //Toast.makeText(context, recipeName + " removed from favourite recipes", Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean isRecipeInFavourites(String recipeName) {
+        return getFavouriteRecipes().contains(recipeName);
+    }
 
 
     // End of Recipe Methods
