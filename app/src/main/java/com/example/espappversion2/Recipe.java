@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Recipe {
@@ -23,6 +24,7 @@ public class Recipe {
     }
 
     public Recipe(JSONObject recipe) throws JSONException {
+        recipe = recipe.getJSONArray("meals").getJSONObject(0);
         this.recipeId = Integer.parseInt(recipe.getString("idMeal"));
         this.name = recipe.getString("strMeal");
         this.imageURL = recipe.getString("strMealThumb");
@@ -31,16 +33,20 @@ public class Recipe {
         Pattern patternUnit = Pattern.compile("\\b(?![a-zA-Z]*\\d)\\w+\\b"); // gets any word that doesnt have a number in it i.e. 1/2 used for unit
         Pattern patternQuantity = Pattern.compile("\\b\\w*\\d\\w*\\b"); // gets any word that doesnt have a number in it i.e. 1/2 used for unit
 
+        this.ingredients = new ArrayList<Ingredient>();
         // iterating through the 20 ingredients and measures. Not 0-indexed so that's why we start at 1
         for (int i = 1; i <= 20; i++) {
-            if (recipe.getString("strIngredient" + i) == ""  || recipe.getString("strIngredient" + i) == null) break;
+            if (recipe.getString("strIngredient" + i) == "") break;
+            Matcher m_unit = patternUnit.matcher(recipe.getString("strMeasure"+i));
+            String unit = m_unit.find() ? m_unit.group() : "g";
 
-
+            Matcher m_quantity = patternQuantity.matcher(recipe.getString("strMeasure"+i));
+            double quantity = Double.parseDouble(m_quantity.find() ? m_quantity.group() : "1");
             Food food = new Food(
                     1,
                     recipe.getString("strIngredient" + i),
                     new ArrayList<String>(),    // TODO: this is dietaryInfo
-                    patternUnit.matcher(recipe.getString("strMeasure"+i)).find() ? patternUnit.matcher(recipe.getString("strMeasure"+i)).group() : "g",
+                    unit,
                     new HashMap<String, Integer>(), // TODO: this is nutritionalInfo
                     0.0 // TODO: get carbon using API
             );
@@ -48,7 +54,7 @@ public class Recipe {
 
             Ingredient ingredient = new Ingredient(
                     food,
-                    patternQuantity.matcher(recipe.getString("strMeasure"+i)).find() ? Double.parseDouble(patternQuantity.matcher(recipe.getString("strMeasure"+i)).group()) : 1.0
+                    quantity
             );
 
 
@@ -61,8 +67,6 @@ public class Recipe {
         categories.add(recipe.getString("strArea"));
 
         this.category = categories;
-        this.creator = new User();
-
     }
 
     public Recipe(int recipeId, String name, String imageURL, int duration, ArrayList<String> dietaryInfo, ArrayList<Ingredient> ingredients, String steps, ArrayList<String> category, User creator) {
