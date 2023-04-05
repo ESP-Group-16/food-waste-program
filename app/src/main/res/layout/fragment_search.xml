@@ -4,61 +4,73 @@
     android:layout_height="match_parent"
     android:padding="10dp">
 
-    <RelativeLayout
-        android:id="@+id/fragmentSearchTopRelLayout"
-        android:layout_width="402dp"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/fragmentSearchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Search" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/fragmentSearchBarEdtTxt"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_toEndOf="@+id/fragmentSearchButton"
-            android:hint="Search for a recipe..."
-            android:textColorHint="@color/text_color_hint" />
+            <RelativeLayout
+                android:id="@+id/fragmentSearchTopRelLayout"
+                android:layout_width="402dp"
+                android:layout_height="wrap_content">
 
-    </RelativeLayout>
+                <Button
+                    android:id="@+id/fragmentSearchButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Search" />
 
-    <TextView
-        android:id="@+id/fragmentSearchCategoryTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fragmentSearchTopRelLayout"
-        android:layout_marginTop="20dp"
-        android:text="Search by Category"
-        android:textColor="@color/text_color"
-        android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/fragmentSearchBarEdtTxt"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/fragmentSearchButton"
+                    android:hint="Search for a recipe..."
+                    android:textColorHint="@color/text_color_hint" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/fragmentSearchCategoryTxt"
-        android:id="@+id/fragmentSearchByCategoryRecView" />
+            </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search by Cuisine"
-        android:id="@+id/fragmentSearchByCuisineTxt"
-        android:layout_below="@+id/fragmentSearchByCategoryRecView"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"
-        android:textColor="@color/text_color" />
+            <TextView
+                android:id="@+id/fragmentSearchCategoryTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fragmentSearchTopRelLayout"
+                android:layout_marginTop="20dp"
+                android:text="Search by Category"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragmentSearchByCuisineRecView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/fragmentSearchByCuisineTxt" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/fragmentSearchCategoryTxt"
+                android:id="@+id/fragmentSearchByCategoryRecView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search by Cuisine"
+                android:id="@+id/fragmentSearchByCuisineTxt"
+                android:layout_below="@+id/fragmentSearchByCategoryRecView"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/text_color" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragmentSearchByCuisineRecView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/fragmentSearchByCuisineTxt" />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
@@ -35,12 +36,20 @@ import java.util.Map;
 public class SearchFragment extends Fragment implements VolleyCallback {
 
     @Override
-    public void onSuccess(JSONObject response, String resultFor) {
+    public void onSuccess(JSONObject response, String resultFor) throws JSONException {
         if(resultFor.equals("cuisines")) {
-
+            cuisines = recipeAPI.convertJSONCuisinesToArrList(response);
         } else if(resultFor.equals("categories")) {
-
+            categories = recipeAPI.convertJSONCategoriesToArrList(response);
+            System.out.println(categories);
         }
+        // set adapter for lists
+        categoryAdapter.setList(categories);
+        cuisineAdapter.setList(cuisines);
+        recViewCategories.setAdapter(categoryAdapter);
+        recViewCuisines.setAdapter(cuisineAdapter);
+        recViewCategories.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recViewCuisines.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
@@ -65,19 +74,12 @@ public class SearchFragment extends Fragment implements VolleyCallback {
         initViews(view);
         recipeAPI = new RecipeAPI(getActivity());
         recipeAPI.getAllCategories(this);
+        recipeAPI.getAllCuisines(this);
 
         categoryAdapter = new CategoryCuisineAdapter("category", getActivity());
         cuisineAdapter = new CategoryCuisineAdapter("cuisine", getActivity());
         categories = new ArrayList<>();
         cuisines = new ArrayList<>();
-
-        // set adapter for lists
-        //categoryAdapter.setList();
-        //cuisineAdapter.setList();
-        //recViewCategories.setAdapter(categoryAdapter);
-        //recViewCuisines.setAdapter(cuisineAdapter);
-        //recViewCategories.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //recViewCuisines.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override

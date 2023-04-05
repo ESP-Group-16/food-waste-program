@@ -27,7 +27,7 @@ public class CategoryCuisineAdapter extends RecyclerView.Adapter<CategoryCuisine
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pantry_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_cuisine_item, parent, false);
         return new ViewHolder(view);
     }
 

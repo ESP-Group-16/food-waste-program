@@ -30,8 +30,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
     @Override
     public void onSuccess(JSONObject response, String resultFor) {
         // TODO: map response to recipes
-        System.out.println(response);
-        //HashMap<String, Object> map = new Gson().fromJson(response.toString(), HashMap.class);
+        
     }
 
     @Override
@@ -71,20 +70,20 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                 } else if(mode.equals("search_by_cuisine")) {
                     // TODO: get recipes corresponding with the search
                     String cuisine = bundle.getString("cuisine");
-                    txtTitle.setText("Search by cuisine " + cuisine);
-
+                    txtTitle.setText("Search by cuisine: " + cuisine);
+                    recipeAPI.getRecipesByCuisine(this, cuisine);
                 } else if(mode.equals("search_by_category")) {
                     // TODO: get recipes corresponding with the category
                     String category = bundle.getString("category");
-                    txtTitle.setText("Search by category " + category);
-
+                    txtTitle.setText("Search by category: " + category);
+                    recipeAPI.getRecipesByCategory(this, category);
                 } else if(mode.equals("search")) {
                     // TODO: get recipes corresponding with partial matches of the search
                     String search = bundle.getString("search");
-                    txtTitle.setText("Search results for " + search);
+                    txtTitle.setText("Search results for: " + search);
 
                 } else {
-                    Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
             }
 

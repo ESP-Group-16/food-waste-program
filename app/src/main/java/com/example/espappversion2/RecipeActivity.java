@@ -28,6 +28,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.N
         Bundle bundle = new Bundle();
         bundle.putString(RECIPE_MODE, "search_by_" + categoryOrCuisine);
         bundle.putString(categoryOrCuisine, selection);
+        bundle.putString("back_fragment", "search_fragment");
         RecipeListFragment receiverFragment = new RecipeListFragment();
         receiverFragment.setArguments(bundle);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
