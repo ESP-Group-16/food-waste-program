@@ -25,8 +25,9 @@ public class Recipe {
     }
 
     public Recipe(JSONObject recipe) throws JSONException {
-        if (recipe.isNull("meals")) return;
+        
         if (recipe.has("meals")) {
+            if (recipe.isNull("meals")) return;
             recipe = recipe.getJSONArray("meals").getJSONObject(0); // this line is necessary only if you pass the full json object
         }
         this.recipeId = Integer.parseInt(recipe.getString("idMeal"));
