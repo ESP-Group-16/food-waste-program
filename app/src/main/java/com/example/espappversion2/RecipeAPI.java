@@ -317,6 +317,37 @@ public class RecipeAPI {
         }, "https://www.themealdb.com/api/json/v2/9973533/filter.php?a="+cuisine);
     }
 
+    public void getRecipeByExactName(final VolleyCallback callback, String name) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
+                // Handle API response
+                if (!response.isNull("meals")) {
+                    JSONArray recipes = response.getJSONArray("meals");
+                    for (int i = 0; i < recipes.length(); i++) {
+                        if (recipes.getJSONObject(i).getString("strMeal").equalsIgnoreCase(name)) {
+                            callback.onSuccess(recipes.getJSONObject(i), "recipe_by_exact_name");
+                            return;
+                        }
+                    }
+                } else {
+                    callback.onSuccess(response, "recipe_by_exact_name");
+                }
+                JSONObject noneFound = new JSONObject();
+                noneFound.put("meals", null);
+                callback.onSuccess(noneFound, "recipe_by_exact_name");
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v2/9973533/search.php?s="+name);
+    }
+
+
     private void getData(final VolleyCallback callback, String url) {
         RequestQueue queue = Volley.newRequestQueue(mContext);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
