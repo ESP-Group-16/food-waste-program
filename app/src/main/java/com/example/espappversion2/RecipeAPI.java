@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -322,4 +323,32 @@ public class RecipeAPI {
                 });
         queue.add(request);
     }
+
+    public ArrayList<String> convertJSONCategoriesToArrList(JSONObject json) throws JSONException {
+        JSONArray listOfCategories = json.getJSONArray("meals");
+        ArrayList<String> arrayListOfCategories = new ArrayList<String>();
+        for (int i = 0; i < listOfCategories.length(); i++) {
+            arrayListOfCategories.add(listOfCategories.getJSONObject(i).getString("strCategory"));
+        }
+        return arrayListOfCategories;
+    }
+
+    public ArrayList<String> convertJSONCuisinesToArrList(JSONObject json) throws JSONException {
+        JSONArray listOfCuisines = json.getJSONArray("meals");
+        ArrayList<String> arrayListOfCuisines = new ArrayList<String>();
+        for (int i = 0; i < listOfCuisines.length(); i++) {
+            arrayListOfCuisines.add(listOfCuisines.getJSONObject(i).getString("strArea"));
+        }
+        return arrayListOfCuisines;
+    }
+
+    public ArrayList<String> convertJSONIngredientsToArrList(JSONObject json) throws JSONException {
+        JSONArray listOfIngredients = json.getJSONArray("meals");
+        ArrayList<String> arrayListOfIngredients = new ArrayList<String>();
+        for (int i = 0; i < listOfIngredients.length(); i++) {
+            arrayListOfIngredients.add(listOfIngredients.getJSONObject(i).getString("strIngredient"));
+        }
+        return arrayListOfIngredients;
+    }
+
 }
