@@ -57,7 +57,7 @@ import java.util.ArrayList;
 
 
 
-     if the name of a function is plural, the following applies:
+     (EXCEPTION getRecipesByName) if the name of a function is plural, the following applies:
      response is a JSONObject of the format:
 
     {
@@ -145,6 +145,23 @@ public class RecipeAPI {
                 error.printStackTrace();
             }
         }, "https://www.themealdb.com/api/json/v2/9973533/list.php?c=list");
+    }
+
+    public void getAllRecipes(VolleyCallback callback) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
+                // Handle API response
+                callback.onSuccess(response, "all_recipes");
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v2/9973533/search.php?s=");
     }
 
     public void getAllCuisines(final VolleyCallback callback) {
@@ -266,7 +283,7 @@ public class RecipeAPI {
         }, "https://www.themealdb.com/api/json/v2/9973533/filter.php?c=" + category);
     }
 
-    public void getRecipeByName(final VolleyCallback callback, String name) {
+    public void getRecipesByName(final VolleyCallback callback, String name) {
         getData(new VolleyCallback() {
             @Override
             public void onSuccess(JSONObject response, String resultFor) throws JSONException {
