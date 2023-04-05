@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.VolleyError;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -27,10 +28,16 @@ import java.util.Arrays;
 
 public class RecipeListFragment extends Fragment implements VolleyCallback {
 
+
     @Override
-    public void onSuccess(JSONObject response, String resultFor) {
-        // TODO: map response to recipes
-        
+    public void onSuccess(JSONObject response, String resultFor) throws JSONException {
+        recipes = Recipe.generateRecipesGivenJSON(response);
+
+        // set adapter for recycler view to display recipes
+        adapter = new RecipeAdapter(getActivity());
+        adapter.setItems(recipes);
+        recipeRecView.setAdapter(adapter);
+        recipeRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
@@ -60,7 +67,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
         if(bundle != null) {
             String mode = bundle.getString(RECIPE_MODE);
             if(mode != null) {
-                Toast.makeText(getActivity(), mode, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), mode, Toast.LENGTH_SHORT).show();
                 if(mode.equals("favourites")){
                     // TODO: get favourite recipes list
                     txtTitle.setText("Favourite Recipes");
@@ -68,20 +75,17 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                     // TODO: get pantry recipes list
                     txtTitle.setText("Pantry Recipes");
                 } else if(mode.equals("search_by_cuisine")) {
-                    // TODO: get recipes corresponding with the search
                     String cuisine = bundle.getString("cuisine");
                     txtTitle.setText("Search by cuisine: " + cuisine);
                     recipeAPI.getRecipesByCuisine(this, cuisine);
                 } else if(mode.equals("search_by_category")) {
-                    // TODO: get recipes corresponding with the category
                     String category = bundle.getString("category");
                     txtTitle.setText("Search by category: " + category);
                     recipeAPI.getRecipesByCategory(this, category);
                 } else if(mode.equals("search")) {
-                    // TODO: get recipes corresponding with partial matches of the search
                     String search = bundle.getString("search");
                     txtTitle.setText("Search results for: " + search);
-
+                    recipeAPI.getRecipesByName(this, search);
                 } else {
                     //Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
@@ -116,12 +120,6 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                 Toast.makeText(getActivity(), "Back button set to " + backFragment, Toast.LENGTH_SHORT).show();
             }
         }
-
-        // set adapter for recycler view to display recipes
-        adapter = new RecipeAdapter(getActivity());
-        adapter.setItems(recipes);
-        recipeRecView.setAdapter(adapter);
-        recipeRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
     }

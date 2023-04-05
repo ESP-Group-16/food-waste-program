@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="3dp"
+    android:layout_margin="5dp"
     android:id="@+id/recipeItemParent"
     app:cardBackgroundColor="@color/main_background"
     app:cardElevation="2dp">
@@ -52,15 +52,8 @@
                     android:id="@+id/recipeItemFavouriteButton"
                     android:layout_alignParentStart="true"/>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add Ingredients To Cart"
-                    android:textAllCaps="false"
-                    android:textSize="12sp"
-                    android:layout_alignParentEnd="true"
-                    android:id="@+id/recipeItemAddIngredientsToCartButton" />
             </RelativeLayout>
+
         </RelativeLayout>
 
     </RelativeLayout>

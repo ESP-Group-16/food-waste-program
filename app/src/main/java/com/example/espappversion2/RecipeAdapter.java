@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -47,6 +50,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         holder.txtRecipeName.setText(currentRecipe.getName());
         holder.btnFavourite.setText(repository.containsRecipeInFavourites(currentRecipe)? "Unfavourite" : "Favourite");
 
+        Glide.with(context)
+                .asBitmap()
+                .load(recipes.get(holder.getAdapterPosition()).getImageURL())
+                .into(holder.recipeImage);
+
         holder.btnFavourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,14 +68,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                     holder.btnFavourite.setText("Favourite");
                     Toast.makeText(context, currentRecipe.getName() + " removed from favourite recipes", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-        // remove this?
-        holder.btnAddIngredientsToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO: add the ingredients of the recipe to cart
             }
         });
 
@@ -99,16 +99,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private CardView parent;
-        private Button btnAddIngredientsToCart, btnFavourite;
+        private Button btnFavourite;
+        private ImageView recipeImage;
         private TextView txtRecipeName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             // initialize UI components
             btnFavourite = itemView.findViewById(R.id.recipeItemFavouriteButton);
-            btnAddIngredientsToCart = itemView.findViewById(R.id.recipeItemAddIngredientsToCartButton);
             txtRecipeName = itemView.findViewById(R.id.recipeItemRecipeNameTxt);
             parent = itemView.findViewById(R.id.recipeItemParent);
+            recipeImage = itemView.findViewById(R.id.recipeItemImg);
         }
     }
 }
