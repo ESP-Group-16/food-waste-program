@@ -14,8 +14,6 @@ import com.android.volley.VolleyError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     private EditText edtTxtPassword, edtTxtEmail;
@@ -86,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
                         // This will now have a JSON object if API call is successful
                         // we can make this into a recipe object
                         System.out.println(response.toString());
-                        ArrayList<Recipe> recipeS = Recipe.generateRecipesGivenJSON(response);
-                        System.out.println(recipeS.toString());
+                        Recipe recipe = new Recipe(response);
                     }
 
                     @Override
@@ -95,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                         // Handle error response
                         error.printStackTrace();
                     }
-                }, "chicken");
+                }, "ssafa");
             }
         });
     }
