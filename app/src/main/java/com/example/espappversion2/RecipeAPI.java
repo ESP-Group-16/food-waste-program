@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -102,7 +103,7 @@ public class RecipeAPI {
                 .replace(" ", "");
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) {
+            public void onSuccess(JSONObject response) throws JSONException {
                 // Handle API response
                 callback.onSuccess(response);
             }
@@ -119,7 +120,7 @@ public class RecipeAPI {
     public void get10RandomRecipes(final VolleyCallback callback) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) {
+            public void onSuccess(JSONObject response) throws JSONException {
                 // Handle API response
                 callback.onSuccess(response);
             }
@@ -136,7 +137,7 @@ public class RecipeAPI {
     public void getLatestRecipes(final VolleyCallback callback) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) {
+            public void onSuccess(JSONObject response) throws JSONException {
                 // Handle API response
                 callback.onSuccess(response);
             }
@@ -153,7 +154,7 @@ public class RecipeAPI {
     public void getRecipesByMainIngredient(final VolleyCallback callback, String mainIngredient) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) {
+            public void onSuccess(JSONObject response) throws JSONException {
                 // Handle API response
                 callback.onSuccess(response);
             }
@@ -170,7 +171,7 @@ public class RecipeAPI {
     public void getRecipeById(final VolleyCallback callback, int id) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) {
+            public void onSuccess(JSONObject response) throws JSONException {
                 // Handle API response
                 callback.onSuccess(response);
             }
@@ -187,7 +188,7 @@ public class RecipeAPI {
     public void getRecipesByCategory(final VolleyCallback callback, String category) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) {
+            public void onSuccess(JSONObject response) throws JSONException {
                 // Handle API response
                 callback.onSuccess(response);
             }
@@ -204,7 +205,7 @@ public class RecipeAPI {
     public void getRecipeByName(final VolleyCallback callback, String name) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) {
+            public void onSuccess(JSONObject response) throws JSONException {
                 // Handle API response
                 callback.onSuccess(response);
             }
@@ -221,7 +222,7 @@ public class RecipeAPI {
     public void getRecipesByCuisine(final VolleyCallback callback, String cuisine) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) {
+            public void onSuccess(JSONObject response) throws JSONException {
                 // Handle API response
                 callback.onSuccess(response);
             }
@@ -242,7 +243,11 @@ public class RecipeAPI {
                     @Override
                     public void onResponse(JSONObject response) {
                         // Handle API response
-                        callback.onSuccess(response);
+                        try {
+                            callback.onSuccess(response);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
 
                     }
                 },

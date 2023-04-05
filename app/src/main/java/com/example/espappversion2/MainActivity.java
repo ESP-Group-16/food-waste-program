@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.VolleyError;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -81,13 +82,14 @@ public class MainActivity extends AppCompatActivity {
                 arr.add("chicken_breast");
                 arr.add("garlic");
                 RecipeAPI huh = new RecipeAPI(getApplicationContext());
-                huh.getRecipesByMultipleIngredients(new VolleyCallback() {
+                huh.getRecipeByName(new VolleyCallback() {
                     @Override
-                    public void onSuccess(JSONObject response) {
+                    public void onSuccess(JSONObject response) throws JSONException {
                         // Handle API response
                         // This will now have a JSON object if API call is successful
                         // we can make this into a recipe object
                         System.out.println(response.toString());
+                        Recipe recipe = new Recipe(response);
                     }
 
                     @Override
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         // Handle error response
                         error.printStackTrace();
                     }
-                }, arr);
+                }, "pasta");
             }
         });
     }
