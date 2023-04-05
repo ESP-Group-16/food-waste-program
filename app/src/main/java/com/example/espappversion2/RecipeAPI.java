@@ -147,6 +147,23 @@ public class RecipeAPI {
         }, "https://www.themealdb.com/api/json/v2/9973533/list.php?c=list");
     }
 
+    public void getAllRecipes(VolleyCallback callback) {
+        getData(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
+                // Handle API response
+                callback.onSuccess(response, "all_recipes");
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, "https://www.themealdb.com/api/json/v2/9973533/search.php?s=");
+    }
+
     public void getAllCuisines(final VolleyCallback callback) {
         getData(new VolleyCallback() {
             @Override
