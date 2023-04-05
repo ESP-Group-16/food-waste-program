@@ -28,58 +28,37 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/fragmentSearchWhatsNewTxt"
+        android:id="@+id/fragmentSearchCategoryTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fragmentSearchTopRelLayout"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Search by Category"
         android:textColor="@color/text_color"
         android:textSize="20sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fragmentSearchWhatsNewTxt"
-        android:id="@+id/fragmentSearchRecipeRecyclerView" />
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/fragmentSearchCategoryTxt"
+        android:id="@+id/fragmentSearchByCategoryRecView" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search by cuisine"
+        android:text="Search by Cuisine"
         android:id="@+id/fragmentSearchByCuisineTxt"
-        android:layout_below="@+id/fragmentSearchRecipeRecyclerView"
+        android:layout_below="@+id/fragmentSearchByCategoryRecView"
         android:layout_marginTop="20dp"
         android:textSize="20sp"
         android:textColor="@color/text_color" />
 
-    <Button
-        android:layout_width="200dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragmentSearchByCuisineRecView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Asian"
-        android:layout_below="@+id/fragmentSearchByCuisineTxt"
-        android:id="@+id/fragmentSearchAsianCuisineButton" />
-
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fragmentSearchAsianCuisineButton"
-        android:text="Soup"
-        android:id="@+id/fragmentSearchSoupCuisineButton" />
-
-    <Button
-        android:id="@+id/fragmentSearchCurryCuisineButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fragmentSearchSoupCuisineButton"
-        android:layout_marginTop="2dp"
-        android:text="Curry" />
-
-    <Button
-        android:id="@+id/fragmentSearchItalianCuisineButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fragmentSearchCurryCuisineButton"
-        android:layout_marginTop="2dp"
-        android:text="Italian" />
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/fragmentSearchByCuisineTxt" />
 
 </RelativeLayout>

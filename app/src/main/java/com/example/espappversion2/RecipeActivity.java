@@ -1,5 +1,7 @@
 package com.example.espappversion2;
 
+import static com.example.espappversion2.RecipeMenuFragment.RECIPE_MODE;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,7 +19,26 @@ import com.google.gson.Gson;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class RecipeActivity extends AppCompatActivity {
+public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.NavigateToRecipeFragment, CategoryCuisineAdapter.CategoryCuisineSelection {
+
+    // comes from CategoryCuisineAdapter in SearchFragment
+    @Override
+    public void onCategoryCuisineSelected(String categoryOrCuisine, String selection) {
+        // open RecipeListFragment with correct list to display
+        Bundle bundle = new Bundle();
+        bundle.putString(RECIPE_MODE, "search_by_" + categoryOrCuisine);
+        bundle.putString(categoryOrCuisine, selection);
+        RecipeListFragment receiverFragment = new RecipeListFragment();
+        receiverFragment.setArguments(bundle);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activityRecipeFragmentContainer, receiverFragment);
+        transaction.commit();
+    }
+
+    @Override
+    public void onGoToRecipeFragment() {
+
+    }
 
     private BottomNavigationView bottomNavigationView;
     private FrameLayout container;
@@ -34,25 +55,6 @@ public class RecipeActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.activityRecipeFragmentContainer, new RecipeMenuFragment());
         transaction.commit();
-    }
-
-    private ArrayList<Recipe> getDemoRecipes() {
-        ArrayList<Recipe> recipes = new ArrayList<>();
-        Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<Recipe>>(){}.getType();
-
-        User user1 = new User();
-        user1.setUserName("Bob");
-
-        ArrayList<String> steps = new ArrayList<>();
-
-        Recipe recipe = new Recipe(1, "Spaghetti Bolognese", "https://food-images.files.bbci.co.uk/food/recipes/easy_spaghetti_bolognese_93639_16x9.jpg",
-                10, new ArrayList<String>(), new ArrayList<Ingredient>(), "", new ArrayList<>(), user1);
-        recipes.add(recipe);
-
-        //recipe = new Recipe(2, "Lasagne", )
-
-        return recipes;
     }
 
     private void initViews() {

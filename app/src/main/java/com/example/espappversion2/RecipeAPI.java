@@ -114,9 +114,9 @@ public class RecipeAPI {
                 .replace(" ", "");
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws JSONException {
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException{
                 // Handle API response
-                callback.onSuccess(response);
+                callback.onSuccess(response, "recipes_by_multiple_ingredients");
             }
 
             @Override
@@ -129,12 +129,12 @@ public class RecipeAPI {
     }
 
 
-    public void getAllCategories(final VolleyCallback callback) {
+    public void getAllCategories(VolleyCallback callback) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws JSONException {
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
                 // Handle API response
-                callback.onSuccess(response);
+                callback.onSuccess(response, "categories");
             }
 
             @Override
@@ -146,12 +146,12 @@ public class RecipeAPI {
         }, "https://www.themealdb.com/api/json/v2/9973533/list.php?c=list");
     }
 
-    public void getAllCusisines(final VolleyCallback callback) {
+    public void getAllCuisines(final VolleyCallback callback) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws JSONException {
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
                 // Handle API response
-                callback.onSuccess(response);
+                callback.onSuccess(response, "cuisines");
             }
 
             @Override
@@ -166,9 +166,9 @@ public class RecipeAPI {
     public void getAllIngredients(final VolleyCallback callback) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws JSONException {
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
                 // Handle API response
-                callback.onSuccess(response);
+                callback.onSuccess(response, "ingredients");
             }
 
             @Override
@@ -183,9 +183,9 @@ public class RecipeAPI {
     public void get10RandomRecipes(final VolleyCallback callback) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws JSONException {
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
                 // Handle API response
-                callback.onSuccess(response);
+                callback.onSuccess(response, "10_random_recipes");
             }
 
             @Override
@@ -200,9 +200,9 @@ public class RecipeAPI {
     public void getLatestRecipes(final VolleyCallback callback) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws JSONException {
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
                 // Handle API response
-                callback.onSuccess(response);
+                callback.onSuccess(response, "latest_recipes");
             }
 
             @Override
@@ -217,9 +217,9 @@ public class RecipeAPI {
     public void getRecipesByMainIngredient(final VolleyCallback callback, String mainIngredient) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws JSONException {
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
                 // Handle API response
-                callback.onSuccess(response);
+                callback.onSuccess(response, "recipes_by_main_ingredients");
             }
 
             @Override
@@ -234,9 +234,9 @@ public class RecipeAPI {
     public void getRecipeById(final VolleyCallback callback, int id) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws JSONException {
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException{
                 // Handle API response
-                callback.onSuccess(response);
+                callback.onSuccess(response, "recipe_by_id");
             }
 
             @Override
@@ -251,9 +251,9 @@ public class RecipeAPI {
     public void getRecipesByCategory(final VolleyCallback callback, String category) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws JSONException {
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
                 // Handle API response
-                callback.onSuccess(response);
+                callback.onSuccess(response, "recipes_by_category");
             }
 
             @Override
@@ -268,9 +268,9 @@ public class RecipeAPI {
     public void getRecipeByName(final VolleyCallback callback, String name) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws JSONException {
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
                 // Handle API response
-                callback.onSuccess(response);
+                callback.onSuccess(response, "recipe_by_name");
             }
 
             @Override
@@ -285,9 +285,9 @@ public class RecipeAPI {
     public void getRecipesByCuisine(final VolleyCallback callback, String cuisine) {
         getData(new VolleyCallback() {
             @Override
-            public void onSuccess(JSONObject response) throws JSONException {
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
                 // Handle API response
-                callback.onSuccess(response);
+                callback.onSuccess(response, "recipes_by_cuisine");
             }
 
             @Override
@@ -307,11 +307,10 @@ public class RecipeAPI {
                     public void onResponse(JSONObject response) {
                         // Handle API response
                         try {
-                            callback.onSuccess(response);
+                            callback.onSuccess(response, "data");
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -322,7 +321,5 @@ public class RecipeAPI {
                     }
                 });
         queue.add(request);
-
     }
-
 }

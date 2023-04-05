@@ -11,32 +11,40 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.volley.VolleyError;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class RecipeMenuFragment extends Fragment {
 
+    /**
+     * key to the list to be displayed by RecipeListFragment
+     * <p> "favourites" - display favourite recipes </p>
+     * <p> "pantry_recipes" - display recipes with ingredients in pantry </p>
+     * <p> null - otherwise (e.g. this is not the calling fragment, like when searching) </p>
+     */
+    public static final String RECIPE_MODE = "recipe_mode";
     private Button btnMyRecipes, btnPantryRecipes, btnSearch;
-    private Repository repo;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_menu, container, false);
-        repo = new Repository(getActivity());
 
         initViews(view);
 
         btnMyRecipes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // navigate user to recipe list fragment TODO: pass correct list to display to fragment
-                ArrayList<Recipe> outputrecipes= repo.GetFavouriteRecipes();
+                // navigate user to RecipeListFragment and pass "favourites" as message
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("recipes_key", outputrecipes);
-                RecipeListFragment receiverFragment = new RecipeListFragment();
-                receiverFragment.setArguments(bundle);
+                bundle.putString(RECIPE_MODE, "favourites");
+                RecipeListFragment fragment = new RecipeListFragment();
+                fragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.activityRecipeFragmentContainer, receiverFragment);
+                transaction.replace(R.id.activityRecipeFragmentContainer, fragment);
                 transaction.commit();
             }
         });
@@ -44,10 +52,9 @@ public class RecipeMenuFragment extends Fragment {
         btnPantryRecipes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // navigate user to recipe list fragment TODO: pass correct list to display to fragment
-                ArrayList<Recipe> outputrecipes= repo.GetAllRecipes();
+                // navigate user to RecipeListFragment and pass "pantry_recipes" as message
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("recipes_key", outputrecipes);
+                bundle.putSerializable(RECIPE_MODE, "pantry_recipes");
                 RecipeListFragment receiverFragment = new RecipeListFragment();
                 receiverFragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -59,7 +66,7 @@ public class RecipeMenuFragment extends Fragment {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // navigate user to search fragment
+                // navigate user to SearchFragment
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.activityRecipeFragmentContainer, new SearchFragment());
                 transaction.commit();

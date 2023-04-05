@@ -8,6 +8,7 @@ import com.google.android.gms.common.util.ArrayUtils;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,17 +16,16 @@ import java.util.HashMap;
 import java.util.Hashtable;
 
 
-// singleton class to handle all SharedPreferences methods
+// singleton class to handle all SharedPreferences (local storage) methods
 public class Utils {
     public static final String CURRENT_USER_KEY = "current_user";
     public static final String USERS_KEY = "users";
-
     private Context context;
     private Gson gson;
     private SharedPreferences sharedPreferences;
-
     private static Utils instance;
     private User currentUser;
+
 
     // private constructor
     private Utils(Context context) {
@@ -87,7 +87,6 @@ public class Utils {
         editor.commit();
     }
 
-    // get all existing users
     public HashMap<String, User> getUsers() {
         //System.out.println("getUsers: " + sharedPreferences.getString(USERS_KEY, null));
         Type type = new TypeToken<HashMap<String, User>>(){}.getType();
@@ -95,11 +94,17 @@ public class Utils {
     }
 
     public boolean userExists(String username) {
-        return getUsers().containsKey(username);
+        if(username != null) {
+            return getUsers().containsKey(username);
+        }
+        return false;
     }
 
     public boolean userExists(User user) {
-        return getUsers().containsValue(user);
+        if(user != null) {
+            return userExists(user.getUserName());
+        }
+        return false;
     }
 
     public User getUser(String username) {
@@ -120,7 +125,6 @@ public class Utils {
         System.out.println("registerUser: " + getUsers());
     }
 
-    // will implement later - low priority
     public void updateUser(User user) {
         HashMap<String, User> users = getUsers();
         users.remove(user.getUserName());
@@ -135,11 +139,6 @@ public class Utils {
         //System.out.println("Users after saving: " + gson.toJson(users));
     }
 
-    // might not need this
-    public void removeUser(User user) {
-
-    }
-
     public void clearCurrentUser() {
         this.currentUser = null;
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -148,7 +147,6 @@ public class Utils {
         //Toast.makeText(context, "Current user removed from memory", Toast.LENGTH_SHORT).show();
     }
 
-    // clears all users - for debugging purposes
     public void clearUsers() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(USERS_KEY);
@@ -169,20 +167,14 @@ public class Utils {
 
     public void addPantryItem(String storageLocation, Stock stock) {
         User currentUser = getCurrentUser();
-        //System.out.println("All users before adding: " + gson.toJson(getUsers()));
-        //System.out.println("Items in pantry before adding: " + gson.toJson(currentUser.getPantry()));
         currentUser.addItemToPantry(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), stock);
-        //System.out.println("Items in pantry after adding: " + gson.toJson(currentUser.getPantry()));
         updateUser(currentUser);
         saveState();
     }
 
     public void removePantryItem(String storageLocation, int index) {
         User currentUser = getCurrentUser();
-        //System.out.println("All users before removing: " + gson.toJson(getUsers()));
-        //System.out.println("Items in pantry before removing: " + gson.toJson(currentUser.getPantry()));
         currentUser.removeItemFromPantry(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), index);
-        //System.out.println("Items in pantry after removing: " + gson.toJson(currentUser.getPantry()));
         updateUser(currentUser);
         saveState();
     }
@@ -193,7 +185,6 @@ public class Utils {
         updateUser(currentUser);
         saveState();
     }
-
 
 
     // End of Pantry Methods
@@ -215,7 +206,6 @@ public class Utils {
     }
 
     public void removeShoppingListItem(String storageLocation, int index) {
-        System.out.println("0");
         User currentUser = getCurrentUser();
         currentUser.removeItemFromShoppingList(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), index);
         updateUser(currentUser);
@@ -237,5 +227,17 @@ public class Utils {
 
     // End of Shopping List Methods
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Recipe Methods
 
+    public ArrayList<Recipe> getFavouriteRecipes(User user) {
+        ArrayList<Recipe> favourites = new ArrayList<>();
+        if(user != null) {
+            // ...
+        }
+        return favourites;
+    }
+
+
+
+    // End of Recipe Methods
 }
