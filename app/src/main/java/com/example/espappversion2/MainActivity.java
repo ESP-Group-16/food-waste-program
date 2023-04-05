@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                         // This will now have a JSON object if API call is successful
                         // we can make this into a recipe object
                         System.out.println(response.toString());
-                        Recipe recipe = new Recipe(response);
+                        Recipe recipe = new Recipe(response.getJSONArray("meals").getJSONObject(0));
                     }
 
                     @Override
