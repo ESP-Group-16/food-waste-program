@@ -1,5 +1,6 @@
 package com.example.espappversion2;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,49 +25,52 @@ public class Recipe {
     }
 
     public Recipe(JSONObject recipe) throws JSONException {
-        recipe = recipe.getJSONArray("meals").getJSONObject(0);
+        if (recipe.isNull("meals")) return;
+        if (recipe.has("meals")) {
+            recipe = recipe.getJSONArray("meals").getJSONObject(0); // this line is necessary only if you pass the full json object
+        }
         this.recipeId = Integer.parseInt(recipe.getString("idMeal"));
         this.name = recipe.getString("strMeal");
         this.imageURL = recipe.getString("strMealThumb");
         this.duration = 10;  // TODO: we don't have a duration right now
         this.dietaryInfo = dietaryInfo; // TODO: get this from some API
         Pattern patternUnit = Pattern.compile("\\b(?![a-zA-Z]*\\d)\\w+\\b"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
-        Pattern patternQuantity = Pattern.compile("\\b\\w*\\d\\w*\\b"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
+        Pattern patternQuantity = Pattern.compile("\\d+"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
 
+        this.category = new ArrayList<String>();
         this.ingredients = new ArrayList<Ingredient>();
-        // iterating through the 20 ingredients and measures. Not 0-indexed so that's why we start at 1
-        for (int i = 1; i <= 20; i++) {
-            if (recipe.getString("strIngredient" + i) == "") break;
-            Matcher m_unit = patternUnit.matcher(recipe.getString("strMeasure"+i));
-            String unit = m_unit.find() ? m_unit.group() : "g";
+        if (recipe.has("strInstructions")) { // if we pass the detailed version of the recipe
+            // iterating through the 20 ingredients and measures. Not 0-indexed so that's why we start at 1
+            for (int i = 1; i <= 20; i++) {
+                if (recipe.getString("strIngredient" + i) == "") break;
+                Matcher m_unit = patternUnit.matcher(recipe.getString("strMeasure" + i));
+                String unit = m_unit.find() ? m_unit.group() : "g";
 
-            Matcher m_quantity = patternQuantity.matcher(recipe.getString("strMeasure"+i));
-            double quantity = Double.parseDouble(m_quantity.find() ? m_quantity.group() : "1");
-            Food food = new Food(
-                    1,
-                    recipe.getString("strIngredient" + i),
-                    new ArrayList<String>(),    // TODO: this is dietaryInfo
-                    unit,
-                    new HashMap<String, Integer>(), // TODO: this is nutritionalInfo
-                    0.0 // TODO: get carbon using API
-            );
-
-
-            Ingredient ingredient = new Ingredient(
-                    food,
-                    quantity
-            );
+                Matcher m_quantity = patternQuantity.matcher(recipe.getString("strMeasure" + i));
+                double quantity = Double.parseDouble(m_quantity.find() ? m_quantity.group() : "1");
+                Food food = new Food(
+                        1,
+                        recipe.getString("strIngredient" + i),
+                        new ArrayList<String>(),    // TODO: this is dietaryInfo
+                        unit,
+                        new HashMap<String, Integer>(), // TODO: this is nutritionalInfo
+                        0.0 // TODO: get carbon using API
+                );
 
 
-            this.ingredients.add(ingredient);
+                Ingredient ingredient = new Ingredient(
+                        food,
+                        quantity
+                );
+
+
+                this.ingredients.add(ingredient);
+            }
+            this.steps = recipe.getString("strInstructions");
+
+            category.add(recipe.getString("strCategory"));
+            category.add(recipe.getString("strArea"));
         }
-        this.steps = recipe.getString("strInstructions");
-
-        ArrayList<String> categories = new ArrayList<String>();
-        categories.add(recipe.getString("strCategory"));
-        categories.add(recipe.getString("strArea"));
-
-        this.category = categories;
     }
 
     public Recipe(int recipeId, String name, String imageURL, int duration, ArrayList<String> dietaryInfo, ArrayList<Ingredient> ingredients, String steps, ArrayList<String> category, User creator) {
@@ -79,6 +83,17 @@ public class Recipe {
         this.steps = steps;
         this.category = category;
         this.creator = creator;
+    }
+
+    public static ArrayList<Recipe> generateRecipesGivenJSON(JSONObject json) throws JSONException {
+        ArrayList<Recipe> recipeArrayList = new ArrayList<Recipe>();
+        if (!json.isNull("meals")) {
+            JSONArray jsonArr = json.getJSONArray("meals");
+            for (int i = 0; i < jsonArr.length(); i++) {
+                recipeArrayList.add(new Recipe(jsonArr.getJSONObject(i)));
+            }
+        }
+        return recipeArrayList;
     }
 
     // Attribute Getters and Setters
