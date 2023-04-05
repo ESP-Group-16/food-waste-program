@@ -1,5 +1,6 @@
 package com.example.espappversion2;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,7 +25,9 @@ public class Recipe {
     }
 
     public Recipe(JSONObject recipe) throws JSONException {
-        recipe = recipe.getJSONArray("meals").getJSONObject(0);
+        if (recipe.has("meals")) {
+            recipe = recipe.getJSONArray("meals").getJSONObject(0); // this line is necessary only if you pass the full json object
+        }
         this.recipeId = Integer.parseInt(recipe.getString("idMeal"));
         this.name = recipe.getString("strMeal");
         this.imageURL = recipe.getString("strMealThumb");
@@ -79,6 +82,15 @@ public class Recipe {
         this.steps = steps;
         this.category = category;
         this.creator = creator;
+    }
+
+    public ArrayList<Recipe> generateRecipesGivenJSON(JSONObject json) throws JSONException {
+        ArrayList<Recipe> recipeArrayList = new ArrayList<Recipe>();
+        JSONArray jsonArr = json.getJSONArray("meals");
+        for (int i = 0; i < jsonArr.length(); i++) {
+            recipeArrayList.add(new Recipe(jsonArr.getJSONObject(i)));
+        }
+        return recipeArrayList;
     }
 
     // Attribute Getters and Setters
