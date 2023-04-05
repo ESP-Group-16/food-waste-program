@@ -37,14 +37,9 @@ public class SearchFragment extends Fragment implements VolleyCallback {
     @Override
     public void onSuccess(JSONObject response, String resultFor) {
         if(resultFor.equals("cuisines")) {
-            System.out.println(response);
+
         } else if(resultFor.equals("categories")) {
-            System.out.println(response);
-            Type type = new TypeToken<List<Map<String, Object>>>(){}.getType();
-            List<Map<String, Object>> mapList = gson.fromJson(response.toString(), type);
-            System.out.println(mapList.toString());
-            System.out.println(mapList.get(0));
-            //categories = gson.fromJson(response.toString(), type);
+
         }
     }
 
@@ -92,6 +87,7 @@ public class SearchFragment extends Fragment implements VolleyCallback {
                     Bundle bundle = new Bundle();
                     bundle.putString(RECIPE_MODE, "search");
                     bundle.putString("search", input);
+                    bundle.putString("back_fragment", "search_fragment");
                     RecipeListFragment receiverFragment = new RecipeListFragment();
                     receiverFragment.setArguments(bundle);
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

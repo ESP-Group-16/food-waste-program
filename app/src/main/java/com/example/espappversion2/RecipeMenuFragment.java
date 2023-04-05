@@ -41,6 +41,7 @@ public class RecipeMenuFragment extends Fragment {
                 // navigate user to RecipeListFragment and pass "favourites" as message
                 Bundle bundle = new Bundle();
                 bundle.putString(RECIPE_MODE, "favourites");
+                bundle.putString("back_fragment", "recipe_menu_fragment");
                 RecipeListFragment fragment = new RecipeListFragment();
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -54,7 +55,8 @@ public class RecipeMenuFragment extends Fragment {
             public void onClick(View view) {
                 // navigate user to RecipeListFragment and pass "pantry_recipes" as message
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(RECIPE_MODE, "pantry_recipes");
+                bundle.putString(RECIPE_MODE, "pantry_recipes");
+                bundle.putString("back_fragment", "recipe_menu_fragment");
                 RecipeListFragment receiverFragment = new RecipeListFragment();
                 receiverFragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

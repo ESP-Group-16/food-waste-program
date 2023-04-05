@@ -1,31 +1,29 @@
 package com.example.espappversion2;
 
-import static android.content.ContentValues.TAG;
-
 import static com.example.espappversion2.RecipeMenuFragment.RECIPE_MODE;
 
+import android.icu.util.ICUUncheckedIOException;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.VolleyError;
-import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class RecipeListFragment extends Fragment implements VolleyCallback {
 
@@ -43,7 +41,8 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
         System.out.println(Arrays.toString(error.getStackTrace()));
     }
 
-    private TextView txtSearchResult;
+    private TextView txtTitle;
+    private Button btnBack;
     private RecyclerView recipeRecView;
     private RecipeAdapter adapter;
     private ArrayList<Recipe> recipes;
@@ -62,25 +61,60 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
         if(bundle != null) {
             String mode = bundle.getString(RECIPE_MODE);
             if(mode != null) {
+                Toast.makeText(getActivity(), mode, Toast.LENGTH_SHORT).show();
                 if(mode.equals("favourites")){
                     // TODO: get favourite recipes list
+                    txtTitle.setText("Favourite Recipes");
                 } else if(mode.equals("pantry_recipes")) {
                     // TODO: get pantry recipes list
+                    txtTitle.setText("Pantry Recipes");
                 } else if(mode.equals("search_by_cuisine")) {
                     // TODO: get recipes corresponding with the search
-                    String category = bundle.getString("cuisine");
+                    String cuisine = bundle.getString("cuisine");
+                    txtTitle.setText("Search by cuisine " + cuisine);
 
                 } else if(mode.equals("search_by_category")) {
                     // TODO: get recipes corresponding with the category
                     String category = bundle.getString("category");
+                    txtTitle.setText("Search by category " + category);
 
-                } else if(mode.equals("search_by_name")) {
+                } else if(mode.equals("search")) {
                     // TODO: get recipes corresponding with partial matches of the search
                     String search = bundle.getString("search");
+                    txtTitle.setText("Search results for " + search);
 
                 } else {
                     Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
+            }
+
+            // set back button function based on previous fragment
+            String backFragment = bundle.getString("back_fragment");
+            if(backFragment != null) {
+                if(backFragment.equals("search_fragment")) {
+                    btnBack.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            SearchFragment fragment = new SearchFragment();
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.activityRecipeFragmentContainer, fragment);
+                            transaction.commit();
+                        }
+                    });
+                } else if(backFragment.equals("recipe_menu_fragment")) {
+                    btnBack.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            RecipeMenuFragment fragment = new RecipeMenuFragment();
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.activityRecipeFragmentContainer, fragment);
+                            transaction.commit();
+                        }
+                    });
+                } else {
+                    Toast.makeText(getActivity(), "Cannot set back button", Toast.LENGTH_SHORT).show();
+                }
+                Toast.makeText(getActivity(), "Back button set to " + backFragment, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -94,7 +128,8 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
     }
 
     private void initViews(View view) {
-        txtSearchResult = view.findViewById(R.id.fragmentRecipeListSearchResultTxt);
+        txtTitle = view.findViewById(R.id.fragmentRecipeListTitleTxt);
         recipeRecView = view.findViewById(R.id.fragmentRecipeListRecyclerView);
+        btnBack = view.findViewById(R.id.fragmentRecipeListBackBtn);
     }
 }
