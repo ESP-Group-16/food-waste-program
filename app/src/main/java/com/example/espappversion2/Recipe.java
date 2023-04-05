@@ -34,7 +34,7 @@ public class Recipe {
         this.duration = 10;  // TODO: we don't have a duration right now
         this.dietaryInfo = dietaryInfo; // TODO: get this from some API
         Pattern patternUnit = Pattern.compile("\\b(?![a-zA-Z]*\\d)\\w+\\b"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
-        Pattern patternQuantity = Pattern.compile("\\b\\w*\\d\\w*\\b"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
+        Pattern patternQuantity = Pattern.compile("\\d+"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
 
         this.ingredients = new ArrayList<Ingredient>();
         // iterating through the 20 ingredients and measures. Not 0-indexed so that's why we start at 1
@@ -84,7 +84,7 @@ public class Recipe {
         this.creator = creator;
     }
 
-    public ArrayList<Recipe> generateRecipesGivenJSON(JSONObject json) throws JSONException {
+    public static ArrayList<Recipe> generateRecipesGivenJSON(JSONObject json) throws JSONException {
         ArrayList<Recipe> recipeArrayList = new ArrayList<Recipe>();
         JSONArray jsonArr = json.getJSONArray("meals");
         for (int i = 0; i < jsonArr.length(); i++) {
