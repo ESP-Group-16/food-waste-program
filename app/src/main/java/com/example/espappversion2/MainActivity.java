@@ -11,15 +11,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.VolleyError;
-
-import org.json.JSONObject;
-
-import java.io.DataOutputStream;
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
-
 public class MainActivity extends AppCompatActivity implements RegisterDialog.RegisterUser {
 
     @Override
@@ -110,14 +101,18 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
 //        btnLogin.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                ArrayList<String> arr = new ArrayList<String>();
-//                arr.add("chicken_breast");
-//                arr.add("garlic");
+////                ArrayList<Stock> arr = new ArrayList<>();
+////                Food food = new Food();
+////                food.setName("chicken");
+////                Stock st = new Stock();
+////                st.setFood(food);
+////                arr.add(st);
 //                RecipeAPI huh = new RecipeAPI(getApplicationContext());
 //                System.out.println("Huh");
-//                huh.getRecipesByMultipleIngredients(new VolleyCallback() {
+//
+//                huh.getRecipesByMainIngredient(new VolleyCallback() {
 //                    @Override
-//                    public void onSuccess(JSONObject response) {
+//                    public void onSuccess(JSONObject response, String responseFor) {
 //                        // Handle API response
 //                        // This will now have a JSON object if API call is successful
 //                        // we can make this into a recipe object
@@ -129,10 +124,11 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
 //                        // Handle error response
 //                        error.printStackTrace();
 //                    }
-//                }, arr);
+//                }, "chicken");
 //            }
-//        });
-    }
+//            });
+       };
+
 
     private void login(User user) {
         Log.d(TAG, "login: called");
