@@ -35,7 +35,7 @@ public class Recipe {
         this.imageURL = recipe.getString("strMealThumb");
         this.duration = 10;  // TODO: we don't have a duration right now
         this.dietaryInfo = dietaryInfo; // TODO: get this from some API
-        Pattern patternUnit = Pattern.compile("\\b(?![a-zA-Z]*\\d)\\w+\\b"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
+        Pattern patternUnit = Pattern.compile("(\\d+\\/\\d+|\\d+)?\\s*([a-zA-Z]+(?:\\s+[a-zA-Z]+)*)(?:\\s*)$"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
         Pattern patternQuantity = Pattern.compile("\\d+(?:\\/\\d+)?"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
         Pattern patternUnitSpace = Pattern.compile("\\d+(?:\\/\\d+)?(?=\\s)"); // checks if the quantity has a space after it
         this.category = new ArrayList<String>();
@@ -44,20 +44,6 @@ public class Recipe {
             // iterating through the 20 ingredients and measures. Not 0-indexed so that's why we start at 1
             for (int i = 1; i <= 20; i++) {
                 if (recipe.getString("strIngredient" + i).equalsIgnoreCase("")) break;
-                Matcher m_unit = patternUnit.matcher(recipe.getString("strMeasure" + i));
-                Matcher m_space = patternUnitSpace.matcher(recipe.getString("strMeasure" + i));
-                String unit;
-                StringBuilder stringBuilder = new StringBuilder();
-                if (m_space.find()) stringBuilder.append(" ");
-                if (m_unit.find()) {
-                    while (m_unit.find()) {
-                        stringBuilder.append(m_unit.group());
-                    }
-                    unit = String.valueOf(stringBuilder);
-                } else {
-                    unit = "";
-                }
-
 
                 Matcher m_quantity = patternQuantity.matcher(recipe.getString("strMeasure" + i));
                 double quantity;
@@ -67,6 +53,22 @@ public class Recipe {
                 } else {
                     quantity = -1.0;
                 }
+                Matcher m_unit = patternUnit.matcher(recipe.getString("strMeasure" + i));
+                System.out.println(recipe.getString("strMeasure" + i));
+
+                Matcher m_space = patternUnitSpace.matcher(recipe.getString("strMeasure" + i));
+                String unit;
+                StringBuilder stringBuilder = new StringBuilder();
+                if (m_space.find()) stringBuilder.append(" ");
+                if (m_unit.find()) {
+                    stringBuilder.append(m_unit.group(2));
+                    unit = String.valueOf(stringBuilder);
+                } else {
+                    unit = "";
+                }
+
+
+
                 Food food = new Food(
                         1,
                         recipe.getString("strIngredient" + i),
