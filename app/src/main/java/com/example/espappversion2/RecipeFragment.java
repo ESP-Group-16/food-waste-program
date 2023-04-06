@@ -3,6 +3,7 @@ package com.example.espappversion2;
 import static com.example.espappversion2.RecipeMenuFragment.RECIPE_MODE;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,12 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
     public void onSuccess(JSONObject response, String resultFor) throws JSONException {
         if(resultFor.equals("recipe_by_exact_name")) {
             recipe = new Recipe(response);
+
+            try {
+                recipeAPI.getRecipeCarbon(this, recipe);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
 
             // set UI components to display details of selected recipe
             txtRecipeName.setText(recipe.getName());
@@ -81,6 +88,7 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
                                     // do nothing
                                 }
                             });
+                    builder.create().show();
                 }
             });
 
@@ -111,6 +119,25 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
                     Utils.getInstance(getActivity()).addRecipeToFavourites(recipe.getName());
                 }
             });
+        } else if(resultFor.equals("recipe_carbon")) {
+            if(displayCarbon) {
+                String carbonEmission = response.getString("carbon");
+                txtCarbonEmission.setText("Carbon emission: " + carbonEmission);
+                txtCarbonEmission.setTextColor(getResources().getColor(R.color.text_color));
+                if(carbonEmission.equals("Very Low")) {
+                    txtCarbonEmission.setTextColor(getResources().getColor(R.color.very_low));
+                } else if(carbonEmission.equals("Low")){
+                    txtCarbonEmission.setTextColor(getResources().getColor(R.color.low));
+                } else if(carbonEmission.equals("Medium")) {
+                    txtCarbonEmission.setTextColor(getResources().getColor(R.color.medium));
+                } else if(carbonEmission.equals("High")) {
+                        txtCarbonEmission.setTextColor(getResources().getColor(R.color.high));
+                } else if((carbonEmission.equals("Very High"))) {
+                    txtCarbonEmission.setTextColor(getResources().getColor(R.color.very_high));
+                }
+            } else {
+                txtCarbonEmission.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -119,8 +146,10 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
 
     }
 
+    public static final boolean displayCarbon = true;
+
     private Button btnBack, btnFavouriteRecipe, btnUnFavouriteRecipe, btnAddIngredientsToCart;
-    private TextView txtRecipeName, txtInstructions;
+    private TextView txtRecipeName, txtInstructions, txtCarbonEmission;
     private ImageView imgRecipe;
     private RecyclerView recViewIngredients;
 
@@ -144,6 +173,7 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
             recipeName = bundle.getString("recipe", null);
             if(recipeName != null) {
                 recipeAPI.getRecipeByExactName(this, recipeName);
+
             }
         }
 
@@ -181,6 +211,7 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
         btnAddIngredientsToCart = view.findViewById(R.id.fragmentRecipeAddToShopBtn);
         txtRecipeName = view.findViewById(R.id.fragmentRecipeNameTxt);
         txtInstructions = view.findViewById(R.id.fragmentRecipeInstructionsTxt);
+        txtCarbonEmission = view.findViewById(R.id.fragmentRecipeCarbonEmission);
         imgRecipe = view.findViewById(R.id.fragmentRecipeImg);
         recViewIngredients = view.findViewById(R.id.fragmentRecipeIngredientsRecycler);
     }

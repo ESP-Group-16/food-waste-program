@@ -3,35 +3,99 @@ package com.example.espappversion2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class ProfileActivity extends AppCompatActivity implements AddAllergyDialog.AddAllergyDialogListener {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Locale;
+
+public class ProfileActivity extends AppCompatActivity implements AddAllergyDialog.AddAllergyDialogListener, VolleyCallback {
+
+    @Override
+    public void onSuccess(JSONObject response, String resultFor) throws JSONException {
+        // get list of all allergies and pass it to recycler view
+        ingredients = RecipeAPI.convertJSONIngredientsToArrList(response);
+        Collections.sort(ingredients);
+        adapter.setList(ingredients);
+        recViewAllergies.setAdapter(adapter);
+        recViewAllergies.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void onFailure(VolleyError error) {
+
+    }
 
     private Button btnLogOut;
     private TextView txtTitle;
+    private EditText edtTxtFilter;
+    private RecyclerView recViewAllergies;
     private BottomNavigationView bottomNavigationView;
+
+    private RecipeAPI recipeAPI;
+    private AllergyItemAdapter adapter;
+    private ArrayList<String> ingredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_profile);
+        recipeAPI = new RecipeAPI(this);
+        recipeAPI.getAllIngredients(this);
+        adapter = new AllergyItemAdapter(this);
+        ingredients = new ArrayList<>();
 
         initViews();
         initBottomNavBar();
 
         txtTitle.setText("Welcome, " + Utils.getInstance(this).getCurrentUser().getUserName() + "!");
+
+        edtTxtFilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // filter ingredients
+                String search = edtTxtFilter.getText().toString();
+                ArrayList<String> newList = new ArrayList<>();
+                for(String s : ingredients) {
+                    if(s.toLowerCase().contains(search.toLowerCase())) {
+                        newList.add(s);
+                    }
+                }
+                adapter.setList(newList);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,15 +118,15 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
             }
         });
 
-        Button allergyProfileButton = (Button) findViewById(R.id.activityProfileAllergiesButton); // Could be in initviews but is here for simplicity of viewing.
-        allergyProfileButton.setOnClickListener(view -> { // Lambda does same as View.OnClickListener
-            openAllergyDialog(); // calls method below
-        });
-        Button preferencesProfileButton = (Button) findViewById(R.id.activityProfilePreferencesButton); // Could be in initviews but is here for simplicity of viewing.
-        preferencesProfileButton.setOnClickListener(view -> {
-            // TODO: Implement Preferences Button.
-
-        });
+//        Button allergyProfileButton = (Button) findViewById(R.id.activityProfileAllergiesButton); // Could be in initviews but is here for simplicity of viewing.
+//        allergyProfileButton.setOnClickListener(view -> { // Lambda does same as View.OnClickListener
+//            openAllergyDialog(); // calls method below
+//        });
+//        Button preferencesProfileButton = (Button) findViewById(R.id.activityProfilePreferencesButton); // Could be in initviews but is here for simplicity of viewing.
+//        preferencesProfileButton.setOnClickListener(view -> {
+//            // TODO: Implement Preferences Button.
+//
+//        });
     }
 
     public void openAllergyDialog() { // Shows the Allergy Dialog upon 'Allergies' button click.
@@ -93,6 +157,8 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
         bottomNavigationView = findViewById(R.id.activityProfileBottomNavBar);
         txtTitle = findViewById(R.id.activityProfileTopTextUsername);
         btnLogOut = findViewById(R.id.activityProfileLogoutButton);
+        recViewAllergies = findViewById(R.id.activityProfileAllergiesRecView);
+        edtTxtFilter = findViewById(R.id.activityProfileSearchBarEdtTxt);
     }
 
     private void initBottomNavBar() {

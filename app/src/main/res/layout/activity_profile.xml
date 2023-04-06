@@ -20,114 +20,10 @@
             android:text="Welcome, name!"
             android:textSize="40sp"
             android:textColor="@color/main_background"
-            android:paddingHorizontal="10sp"
+            android:padding="10sp"
             android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/activityProfileUserStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pantry admin"
-            android:textSize="15sp"
-            android:textColor="@color/main_background"
-            android:paddingHorizontal="10sp"
-            android:paddingBottom="5sp" />
-
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/activityProfileAchievementsTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Achievements"
-        android:textColor="@color/text_color"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        android:layout_below="@id/activityProfileTopBar"
-        android:paddingHorizontal="15sp"
-        android:paddingVertical="7sp"/>
-
-    <LinearLayout
-        android:id="@+id/activityProfileAchievementsTable"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activityProfileAchievementsTxt"
-        android:paddingHorizontal="20sp">
-
-        <LinearLayout
-            android:id="@+id/activityProfileAchievementsTableLeftColumn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="3">
-
-            <TextView
-                android:id="@+id/activityProfileSavedTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="You have saved"
-                android:textColor="@color/text_color"
-                android:paddingVertical="2sp"/>
-
-            <TextView
-                android:id="@+id/activityProfileScoreTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Your score"
-                android:textSize="20sp"
-                android:textColor="@color/text_color"
-                android:paddingVertical="2sp"/>
-
-            <TextView
-                android:id="@+id/activityProfileLeaderboardTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Leaderboard position"
-                android:textColor="@color/text_color"
-                android:paddingVertical="2sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/activityProfileAchievementsTableRightColumn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2">
-
-            <TextView
-                android:id="@+id/activityProfileCO2Saved"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text=" - CO2"
-                android:textColor="@color/text_color"
-                android:paddingVertical="2sp"/>
-
-            <TextView
-                android:id="@+id/activityProfileScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text=" -X- "
-                android:textColor="@color/text_color"
-                android:paddingVertical="2sp"/>
-
-            <TextView
-                android:id="@+id/activityProfileLeaderboardPos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text=" -X- "
-                android:textColor="@color/text_color"
-                android:paddingVertical="2sp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
 
     <TextView
         android:id="@+id/activityProfileProfileTxt"
@@ -137,83 +33,50 @@
         android:textColor="@color/text_color"
         android:textSize="35sp"
         android:textStyle="bold"
-        android:layout_below="@id/activityProfileAchievementsTable"
+        android:layout_below="@id/activityProfileTopBar"
         android:paddingHorizontal="15sp"
         android:paddingTop="10sp"
         android:paddingBottom="7sp"/>
 
-    <LinearLayout
-        android:id="@+id/activityProfileProfileButtons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activityProfileProfileTxt"
-        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/activityProfilePreferencesButton"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:text="Preferences"
-            android:textSize="20sp"
-            android:textColor="@color/main_background"
-            android:layout_marginBottom="5sp"
-            android:background="@drawable/rounded_button"
-            android:drawableRight="@drawable/baseline_arrow_right_alt_24"
-            android:textAllCaps="false"
-            android:gravity="left|center_vertical"
-            android:paddingHorizontal="20sp"
-            android:layout_gravity="center"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/activityProfileAllergiesButton"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:text="Allergies"
-            android:textSize="20sp"
-            android:textColor="@color/main_background"
-            android:drawableRight="@drawable/baseline_arrow_right_alt_24"
-            android:textAllCaps="false"
-            android:background="@drawable/rounded_button"
-            android:gravity="left|center_vertical"
-            android:paddingHorizontal="20sp"
-            android:layout_gravity="center"/>
-
-    </LinearLayout>
 
     <TextView
-        android:id="@+id/activityProfileSettingsTxt"
+        android:id="@+id/activityAllergiesProfileTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:text="Allergies"
         android:textColor="@color/text_color"
         android:textSize="35sp"
         android:textStyle="bold"
-        android:layout_below="@id/activityProfileProfileButtons"
+        android:layout_below="@id/activityProfileProfileTxt"
         android:paddingHorizontal="15sp"
         android:paddingTop="10sp"
         android:paddingBottom="7sp"/>
 
     <TextView
-        android:id="@+id/activityProfileNotificationDaysTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/activityProfileSettingsTxt"
-        android:paddingHorizontal="20sp"
-        android:textColor="@color/text_color"
-        android:text="Days notice for expiry:"
-        android:textSize="25sp" />
+        android:id="@+id/activityProfileNoteTxt"
+        android:textSize="11sp"
+        android:layout_below="@id/activityAllergiesProfileTxt"
+        android:text="Recipes containing the selected ingredients will not be displayed"/>
 
     <EditText
-        android:id="@+id/activityProfileNotificationDaysInput"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/activityProfileNotificationDaysTxt"
-        android:hint="e.g. 2"
-        android:inputType="number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/activityProfileSearchBarEdtTxt"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/text_color"
         android:textColorHint="@color/text_color_hint"
-        android:paddingHorizontal="20sp"
-        android:paddingVertical="10sp"
-        android:textSize="20sp" />
+        android:hint="Search for ingredients..."
+        android:layout_below="@id/activityProfileNoteTxt" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:id="@+id/activityProfileAllergiesRecView"
+        android:layout_below="@id/activityProfileSearchBarEdtTxt" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/activityProfileLogoutButton"
@@ -221,14 +84,14 @@
         android:layout_height="wrap_content"
         android:text="LogOut"
         android:textAllCaps="false"
-        android:layout_below="@id/activityProfileNotificationDaysInput"
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:background="@drawable/rounded_button"
         android:textColor="@color/main_background"
         android:paddingHorizontal="50sp"
+        android:layout_alignParentBottom="true"
         android:paddingVertical="15sp"
-        android:layout_marginTop="20sp"/>
+        android:layout_marginBottom="70sp"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/activityProfileBottomNavBar"
