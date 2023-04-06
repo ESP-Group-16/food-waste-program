@@ -97,6 +97,7 @@ import java.util.HashMap;
 public class RecipeAPI {
 
     private Context mContext;
+    private ArrayList<JSONArray> pantryRecipeArrs;
     public RecipeAPI(Context mContext) {
         this.mContext = mContext;
     }
@@ -183,7 +184,7 @@ public class RecipeAPI {
                 callback.onFailure(error);
                 error.printStackTrace();
             }
-        }, "https://www.themealdb.com/api/json/v2/9973533/search.php?s=");
+        }, "https://www.themealdb.com/api/json/v2/9973533/search.php?s= ");
     }
 
     public void getAllCuisines(final VolleyCallback callback) {
@@ -393,6 +394,58 @@ public class RecipeAPI {
     }
 
 
+//    public ArrayList<JSONObject> getPantryRecipes(final VolleyCallback callback, ArrayList<Stock> pantryIngredients) throws JSONException {
+//        ArrayList<JSONObject> pantryRecipes = new ArrayList<>();
+//        for (Stock ingredient : pantryIngredients) {
+//            String ingredientName = ingredient.getFood().getName();
+//            ArrayList<JSONArray> recipes = new ArrayList<JSONArray>();
+//            getRecipesByMainIngredient(new VolleyCallback() {
+//                    @Override
+//                    public void onSuccess(JSONObject response, String resultFor) throws JSONException {
+//                        System.out.println("AAAA");
+//                        if (!response.isNull("meals")) {
+//                            for (int i = 0; i < response.getJSONArray("meals").length(); i++){
+//                                getRecipeById(new VolleyCallback() {
+//                                    @Override
+//                                    public void onSuccess(JSONObject response, String resultFor) throws JSONException {
+//                                        pantryRecipeArrs.add(response.getJSONArray("meals"));
+//                                        System.out.println(response);
+//                                    }
+//
+//                                    @Override
+//                                    public void onFailure(VolleyError error) {
+//                                        // Handle error response
+//                                        error.printStackTrace();
+//                                    }
+//                                }, Integer.parseInt(response.getJSONArray("meals").getJSONObject(i).getString("idMeal")));
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(VolleyError error) {
+//                        // Handle error response
+//                        error.printStackTrace();
+//                    }
+//                }, ingredientName);
+//        }
+//
+//
+//        ArrayList<String> pantryIngredientNames = new ArrayList<>();
+//        for (Stock ingredient : pantryIngredients) {
+//            pantryIngredientNames.add(ingredient.getFood().getName());
+//        }
+//        for (JSONArray possibleRecipes : pantryRecipeArrs) {
+//            for (int i = 0; i < possibleRecipes.length(); i++) {
+//                ArrayList<String> ingredientsInRecipe = convertJSONIngredientsToArrList(possibleRecipes.getJSONObject(i));
+//                if (containsAll(ingredientsInRecipe, pantryIngredientNames)) pantryRecipes.add(possibleRecipes.getJSONObject(i));
+//            }
+//        }
+//
+//        return pantryRecipes;
+//    }
+
+
     // *****************************************************************************
     //                             MAIN FUNCTION USED
     // *****************************************************************************
@@ -452,5 +505,18 @@ public class RecipeAPI {
         return arrayListOfIngredients;
     }
 
+    private boolean containsAll(ArrayList<String> subset, ArrayList<String> superset) {
+        for (String s : subset) {
+            boolean found = false;
+            for (String t : superset) {
+                if (s.equalsIgnoreCase(t)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) return false;
+        }
+        return true;
+    }
 
 }
