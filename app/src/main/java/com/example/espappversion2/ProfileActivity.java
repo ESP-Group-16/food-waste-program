@@ -10,9 +10,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -30,7 +33,7 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
     @Override
     public void onSuccess(JSONObject response, String resultFor) throws JSONException {
         // get list of all allergies and pass it to recycler view
-        ArrayList<String> ingredients = RecipeAPI.convertJSONIngredientsToArrList(response);
+        ingredients = RecipeAPI.convertJSONIngredientsToArrList(response);
         Collections.sort(ingredients);
         adapter.setList(ingredients);
         recViewAllergies.setAdapter(adapter);
@@ -44,11 +47,13 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
 
     private Button btnLogOut;
     private TextView txtTitle;
+    private EditText edtTxtFilter;
     private RecyclerView recViewAllergies;
     private BottomNavigationView bottomNavigationView;
 
     private RecipeAPI recipeAPI;
     private AllergyItemAdapter adapter;
+    private ArrayList<String> ingredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +63,38 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
         recipeAPI = new RecipeAPI(this);
         recipeAPI.getAllIngredients(this);
         adapter = new AllergyItemAdapter(this);
+        ingredients = new ArrayList<>();
 
         initViews();
         initBottomNavBar();
 
         txtTitle.setText("Welcome, " + Utils.getInstance(this).getCurrentUser().getUserName() + "!");
+
+        edtTxtFilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // filter ingredients
+                String search = edtTxtFilter.getText().toString();
+                ArrayList<String> newList = new ArrayList<>();
+                for(String s : ingredients) {
+                    if(s.contains(search)) {
+                        newList.add(s);
+                    }
+                }
+                adapter.setList(newList);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,6 +157,7 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
         txtTitle = findViewById(R.id.activityProfileTopTextUsername);
         btnLogOut = findViewById(R.id.activityProfileLogoutButton);
         recViewAllergies = findViewById(R.id.activityProfileAllergiesRecView);
+        edtTxtFilter = findViewById(R.id.activityProfileSearchBarEdtTxt);
     }
 
     private void initBottomNavBar() {
