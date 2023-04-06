@@ -3,6 +3,8 @@ package com.example.espappversion2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,20 +15,49 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class ProfileActivity extends AppCompatActivity implements AddAllergyDialog.AddAllergyDialogListener {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class ProfileActivity extends AppCompatActivity implements AddAllergyDialog.AddAllergyDialogListener, VolleyCallback {
+
+    @Override
+    public void onSuccess(JSONObject response, String resultFor) throws JSONException {
+        // get list of all allergies and pass it to recycler view
+        ArrayList<String> ingredients = RecipeAPI.convertJSONIngredientsToArrList(response);
+        Collections.sort(ingredients);
+        adapter.setList(ingredients);
+        recViewAllergies.setAdapter(adapter);
+        recViewAllergies.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void onFailure(VolleyError error) {
+
+    }
 
     private Button btnLogOut;
     private TextView txtTitle;
+    private RecyclerView recViewAllergies;
     private BottomNavigationView bottomNavigationView;
+
+    private RecipeAPI recipeAPI;
+    private AllergyItemAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_profile);
+        recipeAPI = new RecipeAPI(this);
+        recipeAPI.getAllIngredients(this);
+        adapter = new AllergyItemAdapter(this);
 
         initViews();
         initBottomNavBar();
@@ -54,15 +85,15 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
             }
         });
 
-        Button allergyProfileButton = (Button) findViewById(R.id.activityProfileAllergiesButton); // Could be in initviews but is here for simplicity of viewing.
-        allergyProfileButton.setOnClickListener(view -> { // Lambda does same as View.OnClickListener
-            openAllergyDialog(); // calls method below
-        });
-        Button preferencesProfileButton = (Button) findViewById(R.id.activityProfilePreferencesButton); // Could be in initviews but is here for simplicity of viewing.
-        preferencesProfileButton.setOnClickListener(view -> {
-            // TODO: Implement Preferences Button.
-
-        });
+//        Button allergyProfileButton = (Button) findViewById(R.id.activityProfileAllergiesButton); // Could be in initviews but is here for simplicity of viewing.
+//        allergyProfileButton.setOnClickListener(view -> { // Lambda does same as View.OnClickListener
+//            openAllergyDialog(); // calls method below
+//        });
+//        Button preferencesProfileButton = (Button) findViewById(R.id.activityProfilePreferencesButton); // Could be in initviews but is here for simplicity of viewing.
+//        preferencesProfileButton.setOnClickListener(view -> {
+//            // TODO: Implement Preferences Button.
+//
+//        });
     }
 
     public void openAllergyDialog() { // Shows the Allergy Dialog upon 'Allergies' button click.
@@ -93,6 +124,7 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
         bottomNavigationView = findViewById(R.id.activityProfileBottomNavBar);
         txtTitle = findViewById(R.id.activityProfileTopTextUsername);
         btnLogOut = findViewById(R.id.activityProfileLogoutButton);
+        recViewAllergies = findViewById(R.id.activityProfileAllergiesRecView);
     }
 
     private void initBottomNavBar() {

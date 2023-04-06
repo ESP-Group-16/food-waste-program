@@ -88,6 +88,7 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
                                     // do nothing
                                 }
                             });
+                    builder.create().show();
                 }
             });
 

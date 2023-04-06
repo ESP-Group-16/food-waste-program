@@ -2,7 +2,6 @@ package com.example.espappversion2;
 
 import static com.example.espappversion2.RecipeMenuFragment.RECIPE_MODE;
 
-import android.icu.util.ICUUncheckedIOException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +37,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
             if(favourites.size() == favouriteRecipeNames.size()) {
                 System.out.println("Favourites before setting adapter: " + favourites);
                 // set adapter for recycler view to display recipes
-                adapter = new RecipeAdapter(getActivity(), recipeList, extra);
+                adapter = new RecipeAdapter(getActivity(), recipeListMode, extra);
                 adapter.setItems(favourites);
                 recipeRecView.setAdapter(adapter);
                 recipeRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -50,7 +49,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
             recipes = Recipe.generateRecipesGivenJSON(response);
 
             // set adapter for recycler view to display recipes
-            adapter = new RecipeAdapter(getActivity(), recipeList, extra);
+            adapter = new RecipeAdapter(getActivity(), recipeListMode, extra);
             adapter.setItems(recipes);
             recipeRecView.setAdapter(adapter);
             recipeRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -72,7 +71,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
     private ArrayList<Recipe> favourites;
     private ArrayList<String> favouriteRecipeNames;
     private RecipeAPI recipeAPI;
-    private String recipeList;
+    private String recipeListMode;
     private String extra;
 
     @Nullable
@@ -87,10 +86,10 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
         // get the mode and the corresponding list of recipes
         Bundle bundle = getArguments();
         if(bundle != null) {
-            recipeList = bundle.getString(RECIPE_MODE);
-            if(recipeList != null) {
+            recipeListMode = bundle.getString(RECIPE_MODE);
+            if(recipeListMode != null) {
                 //Toast.makeText(getActivity(), mode, Toast.LENGTH_SHORT).show();
-                if(recipeList.equals("favourites")){
+                if(recipeListMode.equals("favourites")){
                     txtTitle.setText("Favourite Recipes");
                     favouriteRecipeNames = Utils.getInstance(getActivity()).getFavouriteRecipes();
                     favourites = new ArrayList<>();
@@ -106,7 +105,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                             transaction.commit();
                         }
                     });
-                } else if(recipeList.equals("pantry_recipes")) {
+                } else if(recipeListMode.equals("pantry_recipes")) {
                     // TODO: get pantry recipes list
                     txtTitle.setText("Pantry Recipes");
                     btnBack.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +117,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                             transaction.commit();
                         }
                     });
-                } else if(recipeList.equals("search_by_cuisine")) {
+                } else if(recipeListMode.equals("search_by_cuisine")) {
                     String cuisine = bundle.getString("cuisine");
                     extra = cuisine;
                     txtTitle.setText("Search by cuisine: " + cuisine);
@@ -132,7 +131,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                             transaction.commit();
                         }
                     });
-                } else if(recipeList.equals("search_by_category")) {
+                } else if(recipeListMode.equals("search_by_category")) {
                     String category = bundle.getString("category");
                     extra = category;
                     txtTitle.setText("Search by category: " + category);
@@ -146,7 +145,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                             transaction.commit();
                         }
                     });
-                } else if(recipeList.equals("search")) {
+                } else if(recipeListMode.equals("search")) {
                     String search = bundle.getString("search");
                     extra = search;
                     txtTitle.setText("Search results for: " + search);
