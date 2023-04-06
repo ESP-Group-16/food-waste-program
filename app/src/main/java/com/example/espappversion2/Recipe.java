@@ -48,7 +48,7 @@ public class Recipe {
                 String unit = m_unit.find() ? m_unit.group() : "g";
 
                 Matcher m_quantity = patternQuantity.matcher(recipe.getString("strMeasure" + i));
-                double quantity = Double.parseDouble(m_quantity.find() ? m_quantity.group() : "1");
+                double quantity = Double.parseDouble(m_quantity.find() ? m_quantity.group() : "-1");
                 Food food = new Food(
                         1,
                         recipe.getString("strIngredient" + i),
