@@ -372,7 +372,7 @@ public class RecipeAPI {
 
     public void getRecipeCarbon(final VolleyCallback callback, Recipe recipe) throws JSONException {
         JSONObject carbon = new JSONObject();
-        if (recipe.getCategory() != null) {
+        if (recipe.getCategory().size() > 0) {
             callback.onSuccess(carbon.put("carbon", processCarbon(recipe.getCategory().get(0))), "recipe_carbon");
             return;
         }
