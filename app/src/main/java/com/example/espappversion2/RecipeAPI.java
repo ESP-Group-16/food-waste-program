@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // Ok so this API actually goes hard
 // Have a look at the documentation https://www.themealdb.com/api.php
@@ -98,6 +99,27 @@ public class RecipeAPI {
     private Context mContext;
     public RecipeAPI(Context mContext) {
         this.mContext = mContext;
+    }
+
+    private String processCarbon(String categs) {
+        HashMap<String, String> foodMap = new HashMap<String, String>() {{
+            put("Beef", "Very High");
+            put("Breakfast", "Low");
+            put("Chicken", "Medium");
+            put("Dessert", "Low");
+            put("Goat", "Very High");
+            put("Lamb", "High");
+            put("Miscellaneous", "Medium");
+            put("Pasta", "Low");
+            put("Pork", "Medium");
+            put("Seafood", "Medium");
+            put("Side", "Low");
+            put("Starter", "Low");
+            put("Vegan", "Very Low");
+            put("Vegetarian", "Very Low");
+        }};
+        if (foodMap.containsKey(categs)) return foodMap.get(categs);
+        return "Unknown";
     }
 
     /**
@@ -348,6 +370,33 @@ public class RecipeAPI {
     }
 
 
+    public void getRecipeCarbon(final VolleyCallback callback, Recipe recipe) throws JSONException {
+        JSONObject carbon = new JSONObject();
+        if (recipe.getCategory() != null) {
+            callback.onSuccess(carbon.put("carbon", processCarbon(recipe.getCategory().get(0))), "recipe_carbon");
+            return;
+        }
+        getRecipeByExactName(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
+                // Handle API response
+                callback.onSuccess(carbon.put("carbon", processCarbon(response.getString("strCategory"))), "recipe_carbon");
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, recipe.getName());
+    }
+
+
+    // *****************************************************************************
+    //                             MAIN FUNCTION USED
+    // *****************************************************************************
+
     private void getData(final VolleyCallback callback, String url) {
         RequestQueue queue = Volley.newRequestQueue(mContext);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -372,7 +421,11 @@ public class RecipeAPI {
         queue.add(request);
     }
 
-    public ArrayList<String> convertJSONCategoriesToArrList(JSONObject json) throws JSONException {
+    // *****************************************************************************
+    //                                HELPER FUNCS
+    // *****************************************************************************
+
+    public static ArrayList<String> convertJSONCategoriesToArrList(JSONObject json) throws JSONException {
         JSONArray listOfCategories = json.getJSONArray("meals");
         ArrayList<String> arrayListOfCategories = new ArrayList<String>();
         for (int i = 0; i < listOfCategories.length(); i++) {
@@ -381,7 +434,7 @@ public class RecipeAPI {
         return arrayListOfCategories;
     }
 
-    public ArrayList<String> convertJSONCuisinesToArrList(JSONObject json) throws JSONException {
+    public static ArrayList<String> convertJSONCuisinesToArrList(JSONObject json) throws JSONException {
         JSONArray listOfCuisines = json.getJSONArray("meals");
         ArrayList<String> arrayListOfCuisines = new ArrayList<String>();
         for (int i = 0; i < listOfCuisines.length(); i++) {
@@ -390,7 +443,7 @@ public class RecipeAPI {
         return arrayListOfCuisines;
     }
 
-    public ArrayList<String> convertJSONIngredientsToArrList(JSONObject json) throws JSONException {
+    public static ArrayList<String> convertJSONIngredientsToArrList(JSONObject json) throws JSONException {
         JSONArray listOfIngredients = json.getJSONArray("meals");
         ArrayList<String> arrayListOfIngredients = new ArrayList<String>();
         for (int i = 0; i < listOfIngredients.length(); i++) {
@@ -398,5 +451,6 @@ public class RecipeAPI {
         }
         return arrayListOfIngredients;
     }
+
 
 }
