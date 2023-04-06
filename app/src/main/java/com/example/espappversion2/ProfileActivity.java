@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 public class ProfileActivity extends AppCompatActivity implements AddAllergyDialog.AddAllergyDialogListener, VolleyCallback {
 
@@ -82,7 +83,7 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
                 String search = edtTxtFilter.getText().toString();
                 ArrayList<String> newList = new ArrayList<>();
                 for(String s : ingredients) {
-                    if(s.contains(search)) {
+                    if(s.toLowerCase().contains(search.toLowerCase())) {
                         newList.add(s);
                     }
                 }
