@@ -124,7 +124,7 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
                 txtCarbonEmission.setText("Carbon emission: " + carbonEmission);
                 txtCarbonEmission.setTextColor(getResources().getColor(R.color.text_color));
                 if(carbonEmission.equals("Very Low")) {
-                    txtCarbonEmission.setTextColor(getResources().getColor(R.color.very_high));
+                    txtCarbonEmission.setTextColor(getResources().getColor(R.color.very_low));
                 } else if(carbonEmission.equals("Low")){
                     txtCarbonEmission.setTextColor(getResources().getColor(R.color.low));
                 } else if(carbonEmission.equals("Medium")) {
