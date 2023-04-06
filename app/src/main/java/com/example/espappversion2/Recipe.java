@@ -67,7 +67,6 @@ public class Recipe {
                 } else {
                     quantity = -1.0;
                 }
-                String q = m_quantity.group();
                 Food food = new Food(
                         1,
                         recipe.getString("strIngredient" + i),
