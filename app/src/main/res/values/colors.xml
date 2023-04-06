@@ -13,4 +13,9 @@
     <color name="main_background">#FFF0F0F0</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="very_high">#E92B25</color>
+    <color name="high">#FF6C03</color>
+    <color name="medium">#FFC303</color>
+    <color name="low">#C8DD17</color>
+    <color name="very_low">#69C63C</color>
 </resources>

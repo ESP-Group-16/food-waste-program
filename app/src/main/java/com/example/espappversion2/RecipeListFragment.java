@@ -44,6 +44,8 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                 recipeRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 System.out.println("Favourites after setting adapter: " + favourites);
             }
+        } else if(resultFor.equals("recipe_carbon")) {
+            txtCarbonEmission.setText(response.getString("carbon"));
         } else {
             recipes = Recipe.generateRecipesGivenJSON(response);
 
@@ -62,7 +64,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
         System.out.println(Arrays.toString(error.getStackTrace()));
     }
 
-    private TextView txtTitle;
+    private TextView txtTitle, txtCarbonEmission;
     private Button btnBack;
     private RecyclerView recipeRecView;
     private RecipeAdapter adapter;
@@ -169,6 +171,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
 
     private void initViews(View view) {
         txtTitle = view.findViewById(R.id.fragmentRecipeListTitleTxt);
+        txtCarbonEmission = view.findViewById(R.id.fragmentRecipeCarbonEmission);
         recipeRecView = view.findViewById(R.id.fragmentRecipeListRecyclerView);
         btnBack = view.findViewById(R.id.fragmentRecipeListBackBtn);
     }

@@ -56,9 +56,17 @@
             android:paddingBottom="500sp"
             >
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragmentRecipeCarbonEmission"
+                android:text="Carbon produced by this recipe: "
+                android:layout_margin="5dp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/fragmentRecipeCarbonEmission"
                 android:id="@+id/fragmentRecipeIconLinLay"
                 android:gravity="center">
 
