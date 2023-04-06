@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // Ok so this API actually goes hard
 // Have a look at the documentation https://www.themealdb.com/api.php
@@ -98,6 +99,27 @@ public class RecipeAPI {
     private Context mContext;
     public RecipeAPI(Context mContext) {
         this.mContext = mContext;
+    }
+
+    private String processCarbon(String categs) {
+        HashMap<String, String> foodMap = new HashMap<String, String>() {{
+            put("Beef", "Very High");
+            put("Breakfast", "Low");
+            put("Chicken", "Medium");
+            put("Dessert", "Low");
+            put("Goat", "Very High");
+            put("Lamb", "High");
+            put("Miscellaneous", "Medium");
+            put("Pasta", "Low");
+            put("Pork", "Medium");
+            put("Seafood", "Medium");
+            put("Side", "Low");
+            put("Starter", "Low");
+            put("Vegan", "Very Low");
+            put("Vegetarian", "Very Low");
+        }};
+        if (foodMap.containsKey(categs)) return foodMap.get(categs);
+        return "Unknown";
     }
 
     /**
@@ -348,25 +370,27 @@ public class RecipeAPI {
     }
 
 
-//    public void getRecipeCarbon(final VolleyCallback callback, Recipe recipe) {
-//        if (recipe.getCategory() != null) {
-//            callback.onSuccess(recipe.getCategory().processCarbon(), "recipe_carbon");
-//        }
-//        getData(new VolleyCallback() {
-//            @Override
-//            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
-//                // Handle API response
-//                callback.onSuccess(response, "recipe_carbon");
-//            }
-//
-//            @Override
-//            public void onFailure(VolleyError error) {
-//                // Handle error response
-//                callback.onFailure(error);
-//                error.printStackTrace();
-//            }
-//        }, "https://www.themealdb.com/api/json/v2/9973533/filter.php?a="+cuisine);
-//    }
+    public void getRecipeCarbon(final VolleyCallback callback, Recipe recipe) throws JSONException {
+        JSONObject carbon = new JSONObject();
+        if (recipe.getCategory() != null) {
+            callback.onSuccess(carbon.put("carbon", processCarbon(recipe.getCategory().get(0))), "recipe_carbon");
+            return;
+        }
+        getRecipeByExactName(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
+                // Handle API response
+                callback.onSuccess(carbon.put("carbon", processCarbon(response.getString("strCategory"))), "recipe_carbon");
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        }, recipe.getName());
+    }
 
 
     // *****************************************************************************
@@ -428,12 +452,5 @@ public class RecipeAPI {
         return arrayListOfIngredients;
     }
 
-
-//    private String processCarbon(ArrayList<String> categs) {
-//        int co2Score = 0;
-//        if (categs.get(0) != null) {
-//            co2Score +=
-//        }
-//    }
 
 }
