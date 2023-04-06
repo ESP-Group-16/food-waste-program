@@ -36,8 +36,8 @@ public class Recipe {
         this.duration = 10;  // TODO: we don't have a duration right now
         this.dietaryInfo = dietaryInfo; // TODO: get this from some API
         Pattern patternUnit = Pattern.compile("\\b(?![a-zA-Z]*\\d)\\w+\\b"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
-        Pattern patternQuantity = Pattern.compile("\\d+"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
-
+        Pattern patternQuantity = Pattern.compile("\\d+(?:\\/\\d+)?"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
+        Pattern patternUnitSpace = Pattern.compile("\\d+(?:\\/\\d+)?(?=\\s)"); // checks if the quantity has a space after it
         this.category = new ArrayList<String>();
         this.ingredients = new ArrayList<Ingredient>();
         if (recipe.has("strInstructions")) { // if we pass the detailed version of the recipe
@@ -45,10 +45,29 @@ public class Recipe {
             for (int i = 1; i <= 20; i++) {
                 if (recipe.getString("strIngredient" + i).equalsIgnoreCase("")) break;
                 Matcher m_unit = patternUnit.matcher(recipe.getString("strMeasure" + i));
-                String unit = m_unit.find() ? m_unit.group() : "g";
+                Matcher m_space = patternUnitSpace.matcher(recipe.getString("strMeasure" + i));
+                String unit;
+                StringBuilder stringBuilder = new StringBuilder();
+                if (m_space.find()) stringBuilder.append(" ");
+                if (m_unit.find()) {
+                    while (m_unit.find()) {
+                        stringBuilder.append(m_unit.group());
+                    }
+                    unit = String.valueOf(stringBuilder);
+                } else {
+                    unit = "";
+                }
+
 
                 Matcher m_quantity = patternQuantity.matcher(recipe.getString("strMeasure" + i));
-                double quantity = Double.parseDouble(m_quantity.find() ? m_quantity.group() : "-1");
+                double quantity;
+                if (m_quantity.find()) {
+                    if (m_quantity.group().contains("/")) quantity = fractionToDouble(m_quantity.group());
+                    else quantity = Double.parseDouble(m_quantity.group());
+                } else {
+                    quantity = -1.0;
+                }
+                String q = m_quantity.group();
                 Food food = new Food(
                         1,
                         recipe.getString("strIngredient" + i),
@@ -95,6 +114,13 @@ public class Recipe {
             }
         }
         return recipeArrayList;
+    }
+
+    private double fractionToDouble(String fraction) {
+        String[] parts = fraction.split("/");
+        double numerator = Double.parseDouble(parts[0]);
+        double denominator = parts.length > 1 ? Double.parseDouble(parts[1]) : 1.0;
+        return numerator / denominator;
     }
 
     // Attribute Getters and Setters
