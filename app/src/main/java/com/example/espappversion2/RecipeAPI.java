@@ -348,6 +348,31 @@ public class RecipeAPI {
     }
 
 
+//    public void getRecipeCarbon(final VolleyCallback callback, Recipe recipe) {
+//        if (recipe.getCategory() != null) {
+//            callback.onSuccess(recipe.getCategory().processCarbon(), "recipe_carbon");
+//        }
+//        getData(new VolleyCallback() {
+//            @Override
+//            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
+//                // Handle API response
+//                callback.onSuccess(response, "recipe_carbon");
+//            }
+//
+//            @Override
+//            public void onFailure(VolleyError error) {
+//                // Handle error response
+//                callback.onFailure(error);
+//                error.printStackTrace();
+//            }
+//        }, "https://www.themealdb.com/api/json/v2/9973533/filter.php?a="+cuisine);
+//    }
+
+
+    // *****************************************************************************
+    //                             MAIN FUNCTION USED
+    // *****************************************************************************
+
     private void getData(final VolleyCallback callback, String url) {
         RequestQueue queue = Volley.newRequestQueue(mContext);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -372,7 +397,11 @@ public class RecipeAPI {
         queue.add(request);
     }
 
-    public ArrayList<String> convertJSONCategoriesToArrList(JSONObject json) throws JSONException {
+    // *****************************************************************************
+    //                                HELPER FUNCS
+    // *****************************************************************************
+
+    public static ArrayList<String> convertJSONCategoriesToArrList(JSONObject json) throws JSONException {
         JSONArray listOfCategories = json.getJSONArray("meals");
         ArrayList<String> arrayListOfCategories = new ArrayList<String>();
         for (int i = 0; i < listOfCategories.length(); i++) {
@@ -381,7 +410,7 @@ public class RecipeAPI {
         return arrayListOfCategories;
     }
 
-    public ArrayList<String> convertJSONCuisinesToArrList(JSONObject json) throws JSONException {
+    public static ArrayList<String> convertJSONCuisinesToArrList(JSONObject json) throws JSONException {
         JSONArray listOfCuisines = json.getJSONArray("meals");
         ArrayList<String> arrayListOfCuisines = new ArrayList<String>();
         for (int i = 0; i < listOfCuisines.length(); i++) {
@@ -390,7 +419,7 @@ public class RecipeAPI {
         return arrayListOfCuisines;
     }
 
-    public ArrayList<String> convertJSONIngredientsToArrList(JSONObject json) throws JSONException {
+    public static ArrayList<String> convertJSONIngredientsToArrList(JSONObject json) throws JSONException {
         JSONArray listOfIngredients = json.getJSONArray("meals");
         ArrayList<String> arrayListOfIngredients = new ArrayList<String>();
         for (int i = 0; i < listOfIngredients.length(); i++) {
@@ -398,5 +427,13 @@ public class RecipeAPI {
         }
         return arrayListOfIngredients;
     }
+
+
+//    private String processCarbon(ArrayList<String> categs) {
+//        int co2Score = 0;
+//        if (categs.get(0) != null) {
+//            co2Score +=
+//        }
+//    }
 
 }

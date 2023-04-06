@@ -43,7 +43,7 @@ public class Recipe {
         if (recipe.has("strInstructions")) { // if we pass the detailed version of the recipe
             // iterating through the 20 ingredients and measures. Not 0-indexed so that's why we start at 1
             for (int i = 1; i <= 20; i++) {
-                if (recipe.getString("strIngredient" + i) == "") break;
+                if (recipe.getString("strIngredient" + i).equalsIgnoreCase("")) break;
                 Matcher m_unit = patternUnit.matcher(recipe.getString("strMeasure" + i));
                 String unit = m_unit.find() ? m_unit.group() : "g";
 
