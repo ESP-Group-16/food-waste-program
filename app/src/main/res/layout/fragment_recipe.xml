@@ -65,8 +65,18 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:id="@+id/fragmentRecipeFavouriteBtn"
+                    android:id="@+id/fragmentRecipeNotFavouriteBtn"
                     android:background="@drawable/baseline_favorite_unclicked_30"
+                    android:contentDescription="Favourite button"
+                    android:layout_marginHorizontal="30sp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/fragmentRecipeFavouriteBtn"
+                    android:visibility="gone"
+                    android:background="@drawable/baseline_favorite_clicked_30"
                     android:contentDescription="Favourite button"
                     android:layout_marginHorizontal="30sp"
                     />

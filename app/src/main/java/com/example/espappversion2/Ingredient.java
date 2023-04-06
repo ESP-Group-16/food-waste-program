@@ -13,6 +13,10 @@ public class Ingredient {
         this.quantity = quantity;
     }
 
+    public Stock makeStock() {
+        return new Stock(this.food, this.quantity, null, false, null);
+    }
+
     public Food getFood() {
         return food;
     }

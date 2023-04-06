@@ -32,13 +32,27 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
 
     @Override
     public void onSuccess(JSONObject response, String resultFor) throws JSONException {
-        recipes = Recipe.generateRecipesGivenJSON(response);
+        if(resultFor.equals("recipe_by_exact_name")) {
+            favourites.add(new Recipe(response));
+            System.out.println("Favourites when reading in recipes: " + favourites);
+            if(favourites.size() == favouriteRecipeNames.size()) {
+                System.out.println("Favourites before setting adapter: " + favourites);
+                // set adapter for recycler view to display recipes
+                adapter = new RecipeAdapter(getActivity(), recipeList, extra);
+                adapter.setItems(favourites);
+                recipeRecView.setAdapter(adapter);
+                recipeRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                System.out.println("Favourites after setting adapter: " + favourites);
+            }
+        } else {
+            recipes = Recipe.generateRecipesGivenJSON(response);
 
-        // set adapter for recycler view to display recipes
-        adapter = new RecipeAdapter(getActivity());
-        adapter.setItems(recipes);
-        recipeRecView.setAdapter(adapter);
-        recipeRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            // set adapter for recycler view to display recipes
+            adapter = new RecipeAdapter(getActivity(), recipeList, extra);
+            adapter.setItems(recipes);
+            recipeRecView.setAdapter(adapter);
+            recipeRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
     }
 
     @Override
@@ -53,7 +67,11 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
     private RecyclerView recipeRecView;
     private RecipeAdapter adapter;
     private ArrayList<Recipe> recipes;
+    private ArrayList<Recipe> favourites;
+    private ArrayList<String> favouriteRecipeNames;
     private RecipeAPI recipeAPI;
+    private String recipeList;
+    private String extra;
 
     @Nullable
     @Override
@@ -67,59 +85,16 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
         // get the mode and the corresponding list of recipes
         Bundle bundle = getArguments();
         if(bundle != null) {
-            String mode = bundle.getString(RECIPE_MODE);
-            if(mode != null) {
+            recipeList = bundle.getString(RECIPE_MODE);
+            if(recipeList != null) {
                 //Toast.makeText(getActivity(), mode, Toast.LENGTH_SHORT).show();
-                if(mode.equals("favourites")){
-                    // TODO: get favourite recipes list
+                if(recipeList.equals("favourites")){
                     txtTitle.setText("Favourite Recipes");
-                    ArrayList<String> favouriteRecipeNames = new ArrayList<>();
-                    ArrayList<Recipe> favourites = new ArrayList<>();
+                    favouriteRecipeNames = Utils.getInstance(getActivity()).getFavouriteRecipes();
+                    favourites = new ArrayList<>();
                     for(String name : favouriteRecipeNames) {
-                        // TODO: need a method to get recipe by name (exact match)
-                        //favourites.add(recipeAPI.getRecipeByName(name));
+                        recipeAPI.getRecipeByExactName(this, name);
                     }
-
-                    // set adapter for recycler view to display recipes
-                    adapter = new RecipeAdapter(getActivity());
-                    adapter.setItems(favourites);
-                    recipeRecView.setAdapter(adapter);
-                    recipeRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-                } else if(mode.equals("pantry_recipes")) {
-                    // TODO: get pantry recipes list
-                    txtTitle.setText("Pantry Recipes");
-                } else if(mode.equals("search_by_cuisine")) {
-                    String cuisine = bundle.getString("cuisine");
-                    txtTitle.setText("Search by cuisine: " + cuisine);
-                    recipeAPI.getRecipesByCuisine(this, cuisine);
-                } else if(mode.equals("search_by_category")) {
-                    String category = bundle.getString("category");
-                    txtTitle.setText("Search by category: " + category);
-                    recipeAPI.getRecipesByCategory(this, category);
-                } else if(mode.equals("search")) {
-                    String search = bundle.getString("search");
-                    txtTitle.setText("Search results for: " + search);
-                    recipeAPI.getRecipesByName(this, search);
-                } else {
-                    //Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            // set back button function based on previous fragment
-            String backFragment = bundle.getString("back_fragment");
-            if(backFragment != null) {
-                if(backFragment.equals("search_fragment")) {
-                    btnBack.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            SearchFragment fragment = new SearchFragment();
-                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                            transaction.replace(R.id.activityRecipeFragmentContainer, fragment);
-                            transaction.commit();
-                        }
-                    });
-                } else if(backFragment.equals("recipe_menu_fragment")) {
                     btnBack.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -129,10 +104,63 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                             transaction.commit();
                         }
                     });
+                } else if(recipeList.equals("pantry_recipes")) {
+                    // TODO: get pantry recipes list
+                    txtTitle.setText("Pantry Recipes");
+                    btnBack.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            RecipeMenuFragment fragment = new RecipeMenuFragment();
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.activityRecipeFragmentContainer, fragment);
+                            transaction.commit();
+                        }
+                    });
+                } else if(recipeList.equals("search_by_cuisine")) {
+                    String cuisine = bundle.getString("cuisine");
+                    extra = cuisine;
+                    txtTitle.setText("Search by cuisine: " + cuisine);
+                    recipeAPI.getRecipesByCuisine(this, cuisine);
+                    btnBack.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            SearchFragment fragment = new SearchFragment();
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.activityRecipeFragmentContainer, fragment);
+                            transaction.commit();
+                        }
+                    });
+                } else if(recipeList.equals("search_by_category")) {
+                    String category = bundle.getString("category");
+                    extra = category;
+                    txtTitle.setText("Search by category: " + category);
+                    recipeAPI.getRecipesByCategory(this, category);
+                    btnBack.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            SearchFragment fragment = new SearchFragment();
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.activityRecipeFragmentContainer, fragment);
+                            transaction.commit();
+                        }
+                    });
+                } else if(recipeList.equals("search")) {
+                    String search = bundle.getString("search");
+                    extra = search;
+                    txtTitle.setText("Search results for: " + search);
+                    recipeAPI.getRecipesByName(this, search);
+                    btnBack.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            SearchFragment fragment = new SearchFragment();
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.activityRecipeFragmentContainer, fragment);
+                            transaction.commit();
+                        }
+                    });
                 } else {
-                    Toast.makeText(getActivity(), "Cannot set back button", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
-                //Toast.makeText(getActivity(), "Back button set to " + backFragment, Toast.LENGTH_SHORT).show();
             }
         }
 

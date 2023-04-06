@@ -58,7 +58,7 @@ public class SearchFragment extends Fragment implements VolleyCallback {
     }
 
     private RecyclerView recViewCategories, recViewCuisines;
-    private Button btnSearch;
+    private Button btnSearch, btnBack;
     private EditText searchEdtTxt;
 
     private CategoryCuisineAdapter categoryAdapter, cuisineAdapter;
@@ -101,6 +101,16 @@ public class SearchFragment extends Fragment implements VolleyCallback {
             }
         });
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // go back to RecipeMenuFragment
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.activityRecipeFragmentContainer, new RecipeMenuFragment());
+                transaction.commit();
+            }
+        });
+
         return view;
     }
 
@@ -108,6 +118,7 @@ public class SearchFragment extends Fragment implements VolleyCallback {
         recViewCategories = view.findViewById(R.id.fragmentSearchByCategoryRecView);
         recViewCuisines = view.findViewById(R.id.fragmentSearchByCuisineRecView);
         btnSearch = view.findViewById(R.id.fragmentSearchButton);
+        btnBack = view.findViewById(R.id.fragmentSearchBackButton);
         searchEdtTxt = view.findViewById(R.id.fragmentSearchBarEdtTxt);
     }
 }

@@ -37,8 +37,17 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.N
     }
 
     @Override
-    public void onGoToRecipeFragment() {
-
+    public void onGoToRecipeFragment(String recipeSelection, String backList, String extra) {
+        // open RecipeListFragment with correct list to display
+        Bundle bundle = new Bundle();
+        bundle.putString("recipe", recipeSelection);
+        bundle.putString("recipe_list", backList);
+        bundle.putString("extra", extra);
+        RecipeFragment receiverFragment = new RecipeFragment();
+        receiverFragment.setArguments(bundle);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activityRecipeFragmentContainer, receiverFragment);
+        transaction.commit();
     }
 
     private BottomNavigationView bottomNavigationView;

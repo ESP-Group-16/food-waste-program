@@ -20,19 +20,18 @@ import java.util.ArrayList;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     public interface NavigateToRecipeFragment {
-        void onGoToRecipeFragment();
+        void onGoToRecipeFragment(String selectedRecipe, String backList, String extra);
     }
 
     private NavigateToRecipeFragment navigateToRecipeFragment;
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private Context context;
+    private String recipeList, extra;
 
-    private Repository repository;
-    private User currentUser;
-
-    public RecipeAdapter(Context context) {
+    public RecipeAdapter(Context context, String recipeList, String extra) {
         this.context = context;
-        this.repository = new Repository(context);
+        this.recipeList = recipeList;
+        this.extra = extra;
     }
 
     @NonNull
@@ -50,9 +49,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         holder.txtRecipeName.setText(currentRecipe.getName());
         holder.favouriteImg.setVisibility(Utils.getInstance(context).isRecipeInFavourites(currentRecipe.getName())? View.VISIBLE : View.GONE);
         holder.notFavouriteImg.setVisibility(!Utils.getInstance(context).isRecipeInFavourites(currentRecipe.getName())? View.VISIBLE : View.GONE);
-        if(Utils.getInstance(context).isRecipeInFavourites(currentRecipe.getName())) {
-            Toast.makeText(context, currentRecipe.getName() + " is in favourites", Toast.LENGTH_SHORT).show();
-        }
 
         Glide.with(context)
                 .asBitmap()
@@ -89,7 +85,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 // navigate user to RecipeFragment to display details about recipe
                 try {
                     navigateToRecipeFragment = (NavigateToRecipeFragment) context;
-                    navigateToRecipeFragment.onGoToRecipeFragment();
+                    navigateToRecipeFragment.onGoToRecipeFragment(recipes.get(holder.getAdapterPosition()).getName(), recipeList, extra);
                 } catch (ClassCastException e) {
                     e.printStackTrace();
                 }
