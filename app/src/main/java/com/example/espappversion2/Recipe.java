@@ -43,7 +43,8 @@ public class Recipe {
         if (recipe.has("strInstructions")) { // if we pass the detailed version of the recipe
             // iterating through the 20 ingredients and measures. Not 0-indexed so that's why we start at 1
             for (int i = 1; i <= 20; i++) {
-                if (recipe.getString("strIngredient" + i).equalsIgnoreCase("")) break;
+                String ing = recipe.getString("strIngredient" + i);
+                if (ing.equalsIgnoreCase("") || ing.equalsIgnoreCase(" ") || recipe.isNull("strIngredient" + i)) break;
 
                 Matcher m_quantity = patternQuantity.matcher(recipe.getString("strMeasure" + i));
                 double quantity;
