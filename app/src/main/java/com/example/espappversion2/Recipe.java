@@ -89,7 +89,8 @@ public class Recipe {
                 this.ingredients.add(ingredient);
             }
             this.steps = recipe.getString("strInstructions");
-
+            this.steps = this.steps.replace("\n", "\n\n");
+            this.steps = this.steps.replace(".", ".\r\n");
             category.add(recipe.getString("strCategory"));
             category.add(recipe.getString("strArea"));
         }
