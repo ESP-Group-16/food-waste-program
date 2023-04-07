@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shoppingListItemParent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/main_background"
     android:layout_margin="3dp"
-    android:id="@+id/shoppingListItemParent"
     app:cardElevation="2dp">
 
     <RelativeLayout
@@ -14,25 +13,23 @@
         android:padding="15dp">
 
         <CheckBox
+            android:id="@+id/shoppingListItemCheckbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Item name"
             android:layout_centerVertical="true"
-            android:textColor="@color/text_color"
-            android:textSize="15sp"
             android:layout_marginStart="10dp"
-            android:id="@+id/shoppingListItemCheckbox" />
+            android:text="Item name"
+            android:textSize="15sp" />
 
 
         <TextView
+            android:id="@+id/shoppingListItemUnitNumberTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Number of units"
-            android:textColor="@color/text_color"
-            android:layout_centerVertical="true"
-            android:textSize="15sp"
             android:layout_alignParentEnd="true"
-            android:id="@+id/shoppingListItemUnitNumberTxt"/>
+            android:layout_centerVertical="true"
+            android:text="Number of units"
+            android:textSize="15sp" />
 
     </RelativeLayout>
 

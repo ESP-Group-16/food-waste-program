@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recipeItemParent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
-    android:id="@+id/recipeItemParent"
-    app:cardBackgroundColor="@color/main_background"
     app:cardElevation="2dp">
 
     <RelativeLayout
@@ -17,57 +16,54 @@
             android:id="@+id/recipeItemImg"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/default_recipe_img"
             android:scaleType="centerCrop"
-
-            />
+            android:src="@drawable/default_recipe_img" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/recipeItemImg"
-            android:layout_marginLeft="15sp">
+            android:layout_marginLeft="15sp"
+            android:layout_toRightOf="@id/recipeItemImg">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Recipe Name"
-            android:textSize="20sp"
-            android:textColor="@color/text_color"
-            android:paddingVertical="2sp"
-            android:id="@+id/recipeItemRecipeNameTxt" />
+            <TextView
+                android:id="@+id/recipeItemRecipeNameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="2sp"
+                android:text="Recipe Name"
+                android:textSize="20sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_below="@+id/recipeItemRecipeNameTxt">
+                android:layout_below="@+id/recipeItemRecipeNameTxt"
+                android:layout_marginTop="10dp">
 
                 <ImageView
+                    android:id="@+id/recipeItemFavourite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
                     android:src="@drawable/baseline_favorite_clicked_30"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="5dp"
-                    android:visibility="gone"
-                    android:id="@+id/recipeItemFavourite" />
+                    android:visibility="gone" />
 
                 <ImageView
+                    android:id="@+id/recipeItemNotFavourite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_favorite_unclicked_30"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="5dp"
-                    android:id="@+id/recipeItemNotFavourite" />
+                    android:src="@drawable/baseline_favorite_unclicked_30" />
 
                 <TextView
+                    android:id="@+id/recipeItemCarbonEmission"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/recipeItemCarbonEmission"
-                    android:text="Carbon emission"
                     android:layout_alignParentEnd="true"
-                    android:visibility="gone"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:text="Carbon emission"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 

@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
     tools:context=".RecipeActivity">
 
     <FrameLayout
+        android:id="@+id/activityRecipeFragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="70dp"
-        android:id="@+id/activityRecipeFragmentContainer" />
+        android:layout_marginBottom="70dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/activityRecipeBottomNavBar"
