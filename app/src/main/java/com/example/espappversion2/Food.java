@@ -11,7 +11,6 @@ public class Food {
     private HashMap<String, Integer> nutritional_info;
     private double carbonFootprint;
 
-    // TODO: clarify the functionality of this
     enum StorageLocation {
         FRIDGE,
         FREEZER,

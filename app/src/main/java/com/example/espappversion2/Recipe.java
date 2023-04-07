@@ -75,7 +75,7 @@ public class Recipe {
                         new ArrayList<String>(),    // TODO: this is dietaryInfo
                         unit,
                         new HashMap<String, Integer>(), // TODO: this is nutritionalInfo
-                        0.0 // TODO: get carbon using API
+                        0.0
                 );
 
 

@@ -180,8 +180,7 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // navigate user back to RecipeListFragment
-                // TODO: go back to the list of search results that was displayed previously
+                // navigate user back to RecipeListFragment to the list of search results that was displayed previously
                 RecipeListFragment fragment = new RecipeListFragment();
                 Bundle bundle1 = new Bundle();
                 bundle1.putString(RECIPE_MODE, backList);

@@ -29,7 +29,6 @@ public class User {
         shoppingList.put(STORAGE_LOCATIONS[2], new ArrayList<>());
     }
 
-    // TODO: finish getPreferences()
     public ArrayList<String> getPreferences(){
         ArrayList<String> foo = null;
         return foo;

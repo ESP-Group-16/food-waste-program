@@ -146,7 +146,6 @@ public class Repository {
 
 
     // Ryan's special allergio methodinio extrodinario
-    // TODO: Adapt into User details once the user side of things has figured itself out.
     // Implementation: Once a key is created it is never removed, just switched on and off (can be changed later)
     // I chose to implement it this way since if we have a spinner with all the allergies or want to list them off it also might be easier to list ones the user does not have
     // something something maybe flatmate has peanut allergy and we are cooking for flatmate?
@@ -197,7 +196,7 @@ public class Repository {
 
     public void viewAllergyList(){
         System.out.println(source.AllergyInformation);
-    } // TODO: Remove Debugging method
+    }
 
 
     // returns shopping list, which a list of lists with items separated based on location
@@ -238,7 +237,6 @@ public class Repository {
     }
 
     // Ryan's special pantrino methodinio extrodinario
-    // TODO: Adapt into PANTRY details once the PANTRY side of things has figured itself out.
 
     // Add Stock Item to x place.
     public boolean addStockItem(String storageloc, Stock stockitem){
@@ -320,7 +318,6 @@ public class Repository {
         return false;
     }
 
-    //TODO: Remove two debugging methods below
 
     // View Stock Items in x place.
     public void viewPantry(String storageloc){

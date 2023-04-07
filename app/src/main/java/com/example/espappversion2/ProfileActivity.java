@@ -124,7 +124,6 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
 //        });
 //        Button preferencesProfileButton = (Button) findViewById(R.id.activityProfilePreferencesButton); // Could be in initviews but is here for simplicity of viewing.
 //        preferencesProfileButton.setOnClickListener(view -> {
-//            // TODO: Implement Preferences Button.
 //
 //        });
     }
