@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/fragmentRecipeMainRelLay"
-    android:background="@color/main_background">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/fragmentRecipeTitleRelLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fragmentRecipeTitleRelLay"
         android:background="@color/secondary_color_light">
 
-        <!-- Back button takes you back to the list of recipes -->
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragmentRecipeBackBtn"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:id="@+id/fragmentRecipeBackBtn"
-            android:drawableLeft="@drawable/baseline_arrow_back_30"
+            android:layout_centerVertical="true"
             android:backgroundTint="@color/secondary_color_light"
             android:contentDescription="Back button"
-            android:layout_centerVertical="true"/>
+            android:drawableLeft="@drawable/baseline_arrow_back_30" />
 
         <TextView
+            android:id="@+id/fragmentRecipeNameTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/fragmentRecipeNameTxt"
-            android:text="Recipe name"
-            android:textColor="@color/text_color_alt"
-            android:textSize="40sp"
-            android:layout_toRightOf="@id/fragmentRecipeBackBtn"
             android:layout_centerVertical="true"
-            android:paddingVertical="5sp"/>
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:text="Recipe name"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/text_color_alt"
+            android:textSize="40sp" />
 
     </RelativeLayout>
 
@@ -38,113 +37,98 @@
         android:id="@+id/fragmentRecipeImg"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:src="@drawable/default_recipe_img"
+        android:layout_below="@id/fragmentRecipeTitleRelLay"
         android:scaleType="centerCrop"
-        android:layout_below="@id/fragmentRecipeTitleRelLay"/>
+        android:src="@drawable/default_recipe_img" />
 
     <ScrollView
+        android:id="@+id/fragmentRecipeScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fragmentRecipeScrollView"
         android:layout_below="@id/fragmentRecipeTitleRelLay">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="250dp"
-            android:background="@color/main_background"
-            android:paddingBottom="500sp"
-            >
+            android:paddingBottom="500sp">
 
             <TextView
+                android:id="@+id/fragmentRecipeCarbonEmission"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/fragmentRecipeCarbonEmission"
-                android:text="Carbon produced by this recipe: "
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:text="Carbon produced by this recipe: " />
 
             <LinearLayout
+                android:id="@+id/fragmentRecipeIconLinLay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fragmentRecipeCarbonEmission"
-                android:id="@+id/fragmentRecipeIconLinLay"
                 android:gravity="center">
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/fragmentRecipeNotFavouriteBtn"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:id="@+id/fragmentRecipeNotFavouriteBtn"
-                    android:background="@drawable/baseline_favorite_unclicked_30"
-                    android:contentDescription="Favourite button"
                     android:layout_marginHorizontal="30sp"
-                    />
+                    android:background="@drawable/baseline_favorite_unclicked_30"
+                    android:contentDescription="Favourite button" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/fragmentRecipeFavouriteBtn"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:id="@+id/fragmentRecipeFavouriteBtn"
-                    android:visibility="gone"
+                    android:layout_marginHorizontal="30sp"
                     android:background="@drawable/baseline_favorite_clicked_30"
                     android:contentDescription="Favourite button"
-                    android:layout_marginHorizontal="30sp"
-                    />
+                    android:visibility="gone" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/fragmentRecipeAddToShopBtn"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:id="@+id/fragmentRecipeAddToShopBtn"
-                    android:background="@drawable/baseline_add_shopping_cart_blue_30"
-                    android:contentDescription="Favourite button"
                     android:layout_marginHorizontal="30sp"
-                    />
+                    android:background="@drawable/baseline_add_shopping_cart_blue_30"
+                    android:contentDescription="Favourite button" />
 
             </LinearLayout>
 
             <TextView
+                android:id="@+id/fragmentRecipeIngredientsTitleTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/fragmentRecipeIngredientsTitleTxt"
-                android:text="Ingredients"
-                android:textColor="@color/text_color"
                 android:layout_below="@id/fragmentRecipeIconLinLay"
-                android:textSize="35sp"
                 android:padding="10sp"
-                />
+                android:text="Ingredients"
+                android:textSize="35sp" />
 
-            <!-- This is not gonna scroll because of wrap_content height
-            so it's fine to have it in a scrollview, right? -->
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragmentRecipeIngredientsRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/fragmentRecipeIngredientsRecycler"
-                android:layout_below="@id/fragmentRecipeIngredientsTitleTxt"
-                />
+                android:layout_below="@id/fragmentRecipeIngredientsTitleTxt" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/fragmentRecipeInstructionsTitleTxt"
-                android:text="Instructions"
-                android:textColor="@color/text_color"
-                android:textSize="35sp"
-                android:padding="10sp"
-                android:layout_below="@id/fragmentRecipeIngredientsRecycler"
-                />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/fragmentRecipeIngredientsRecycler"
+                android:padding="10sp"
+                android:text="Instructions"
+                android:textSize="35sp" />
+
+            <TextView
                 android:id="@+id/fragmentRecipeInstructionsTxt"
-                android:text="This is some sample text for the instructions of a recipe.\n This is provided by the API."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/fragmentRecipeInstructionsTitleTxt"
                 android:paddingHorizontal="18sp"
-                android:textColor="@color/text_color"
-                android:textSize="18sp"
-                />
+                android:text="This is some sample text for the instructions of a recipe.\n This is provided by the API."
+                android:textSize="18sp" />
 
         </RelativeLayout>
 
     </ScrollView>
-
 
 </RelativeLayout>

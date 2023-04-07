@@ -5,58 +5,54 @@
     android:padding="20dp">
 
     <TextView
+        android:id="@+id/dialogRegisterMainTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
         android:layout_marginBottom="20dp"
-        android:id="@+id/dialogRegisterMainTxt"
-        android:textSize="50sp"
-        android:textColor="@color/text_color"/>
+        android:text="Register"
+        android:textSize="50sp" />
 
     <TextView
+        android:id="@+id/dialogRegisterEmailTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/dialogRegisterMainTxt"
         android:text="Email"
-        android:id="@+id/dialogRegisterEmailTxt"
-        android:textColor="@color/text_color"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/dialogRegisterEmailEdtTxt"
         android:layout_width="match_parent"
         android:layout_height="50sp"
         android:layout_below="@+id/dialogRegisterEmailTxt"
         android:layout_alignStart="@+id/dialogRegisterEmailTxt"
-        android:id="@+id/dialogRegisterEmailEdtTxt"
-        android:hint="e.g. abc@mail.com"/>
+        android:hint="e.g. abc@mail.com" />
 
     <TextView
+        android:id="@+id/dialogRegisterPasswordTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
-        android:layout_marginTop="10dp"
         android:layout_below="@+id/dialogRegisterEmailEdtTxt"
-        android:id="@+id/dialogRegisterPasswordTxt"
-        android:textColor="@color/text_color"
-        android:textSize="20sp"/>
+        android:layout_marginTop="10dp"
+        android:text="Password"
+        android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/dialogRegisterPasswordEdtTxt"
         android:layout_width="match_parent"
         android:layout_height="50sp"
-        android:id="@+id/dialogRegisterPasswordEdtTxt"
-        android:inputType="textPassword"
         android:layout_below="@+id/dialogRegisterPasswordTxt"
-        android:hint="Enter password"/>
+        android:hint="Enter password"
+        android:inputType="textPassword" />
 
     <TextView
+        android:id="@+id/dialogRegisterRepeatPasswordTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Repeat Password"
-        android:layout_marginTop="10dp"
         android:layout_below="@+id/dialogRegisterPasswordEdtTxt"
-        android:id="@+id/dialogRegisterRepeatPasswordTxt"
-        android:textColor="@color/text_color"
-        android:textSize="20sp"/>
+        android:layout_marginTop="10dp"
+        android:text="Repeat Password"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/dialogRegisterRepeatPasswordEdtTxt"

@@ -4,94 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
     tools:context=".ProfileActivity">
 
-    <LinearLayout
-        android:id="@+id/activityProfileTopBar"
+    <TextView
+        android:id="@+id/activityProfileTopTextUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:text="User's Profile"
         android:background="@color/secondary_color_light"
-        android:orientation="vertical" >
-        <TextView
-            android:id="@+id/activityProfileTopTextUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Welcome, name!"
-            android:textSize="40sp"
-            android:textColor="@color/main_background"
-            android:padding="10sp"
-            android:textStyle="bold"/>
-
-    </LinearLayout>
+        android:textAlignment="center"
+        android:textColor="@color/main_background"
+        android:textSize="40sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/activityProfileProfileTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile"
-        android:textColor="@color/text_color"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        android:layout_below="@id/activityProfileTopBar"
+        android:layout_below="@id/activityProfileTopTextUsername"
         android:paddingHorizontal="15sp"
         android:paddingTop="10sp"
-        android:paddingBottom="7sp"/>
-
+        android:paddingBottom="7sp"
+        android:text="Profile"
+        android:textSize="35sp"
+        android:textStyle="bold" />
 
 
     <TextView
         android:id="@+id/activityAllergiesProfileTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Allergies"
-        android:textColor="@color/text_color"
-        android:textSize="35sp"
-        android:textStyle="bold"
         android:layout_below="@id/activityProfileProfileTxt"
         android:paddingHorizontal="15sp"
         android:paddingTop="10sp"
-        android:paddingBottom="7sp"/>
+        android:paddingBottom="7sp"
+        android:text="Allergies"
+        android:textSize="35sp"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/activityProfileNoteTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/activityProfileNoteTxt"
-        android:textSize="11sp"
         android:layout_below="@id/activityAllergiesProfileTxt"
-        android:text="Recipes containing the selected ingredients will not be displayed"/>
+        android:layout_marginStart="10dp"
+        android:text="Recipes containing the selected ingredients will not be displayed"
+        android:textSize="11sp" />
 
     <EditText
+        android:id="@+id/activityProfileSearchBarEdtTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/activityProfileSearchBarEdtTxt"
+        android:layout_below="@id/activityProfileNoteTxt"
         android:layout_marginStart="10dp"
-        android:textColor="@color/text_color"
-        android:textColorHint="@color/text_color_hint"
         android:hint="Search for ingredients..."
-        android:layout_below="@id/activityProfileNoteTxt" />
+        android:textColor="@color/text_color"
+        android:textColorHint="@color/text_color_hint" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activityProfileAllergiesRecView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/activityProfileSearchBarEdtTxt"
         android:layout_marginTop="5dp"
-        android:id="@+id/activityProfileAllergiesRecView"
-        android:layout_below="@id/activityProfileSearchBarEdtTxt" />
+        android:paddingBottom="150dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/activityProfileLogoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70sp"
+        android:background="@drawable/rounded_button"
+        android:paddingHorizontal="50sp"
+        android:paddingVertical="15sp"
         android:text="LogOut"
         android:textAllCaps="false"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:background="@drawable/rounded_button"
         android:textColor="@color/main_background"
-        android:paddingHorizontal="50sp"
-        android:layout_alignParentBottom="true"
-        android:paddingVertical="15sp"
-        android:layout_marginBottom="70sp"/>
+        android:textSize="20sp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/activityProfileBottomNavBar"

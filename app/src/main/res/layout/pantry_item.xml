@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pantryItemParent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="3dp"
-    android:id="@+id/pantryItemParent"
-    app:cardBackgroundColor="@color/main_background"
     app:cardElevation="2dp">
 
     <RelativeLayout
@@ -14,29 +13,26 @@
         android:padding="15dp">
 
         <TextView
+            android:id="@+id/txtPantryItemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Item name"
-            android:textSize="20sp"
-            android:textColor="@color/text_color"
             android:paddingVertical="2sp"
-            android:id="@+id/txtPantryItemName"/>
+            android:text="Item name"
+            android:textSize="20sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_color"
             android:id="@+id/txtPantryItemQuantity"
-            android:text="Quantity"
-            android:layout_below="@+id/txtPantryItemName" />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color"
+            android:layout_below="@+id/txtPantryItemName"
+            android:text="Quantity" />
+
+        <TextView
             android:id="@+id/txtPantryItemExpiryDate"
-            android:text="Expiry Date"
-            android:layout_below="@+id/txtPantryItemQuantity" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtPantryItemQuantity"
+            android:text="Expiry Date" />
 
     </RelativeLayout>
 

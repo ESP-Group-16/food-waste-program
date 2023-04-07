@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
-public class ProfileActivity extends AppCompatActivity implements AddAllergyDialog.AddAllergyDialogListener, VolleyCallback {
+public class ProfileActivity extends AppCompatActivity implements VolleyCallback {
 
     @Override
     public void onSuccess(JSONObject response, String resultFor) throws JSONException {
@@ -69,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
         initViews();
         initBottomNavBar();
 
-        txtTitle.setText("Welcome, " + Utils.getInstance(this).getCurrentUser().getUserName() + "!");
+        txtTitle.setText(Utils.getInstance(this).getCurrentUser().getUserName() + "'s Profile");
 
         edtTxtFilter.addTextChangedListener(new TextWatcher() {
             @Override
@@ -117,33 +117,6 @@ public class ProfileActivity extends AppCompatActivity implements AddAllergyDial
                 builder.create().show();
             }
         });
-
-//        Button allergyProfileButton = (Button) findViewById(R.id.activityProfileAllergiesButton); // Could be in initviews but is here for simplicity of viewing.
-//        allergyProfileButton.setOnClickListener(view -> { // Lambda does same as View.OnClickListener
-//            openAllergyDialog(); // calls method below
-//        });
-//        Button preferencesProfileButton = (Button) findViewById(R.id.activityProfilePreferencesButton); // Could be in initviews but is here for simplicity of viewing.
-//        preferencesProfileButton.setOnClickListener(view -> {
-//
-//        });
-    }
-
-    public void openAllergyDialog() { // Shows the Allergy Dialog upon 'Allergies' button click.
-        AddAllergyDialog addAllergyDialog = new AddAllergyDialog();
-        addAllergyDialog.show(getSupportFragmentManager(), "add or remove allergy dialog");
-    }
-
-    @Override
-    public void applyAllergyChanges(String allergy, boolean adremBool) { // Runs the allergy dialog calculations
-        // DO CALCULATIONS HERE TO CHANGE THE DATA IN THE DATASTORE
-        Repository repo = new Repository(this);
-        if (adremBool){ // Add allergy to store
-            repo.addAllergy(allergy);
-        }
-        else{ // remove allergy to store
-            repo.removeAllergy(allergy);
-        }
-//        repo.viewAllergyList();
     }
 
     public void logOut() {

@@ -8,12 +8,11 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/activityMainLoginTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:textSize="40sp"
-        android:id="@+id/activityMainLoginTxt"
-        android:textColor="@color/text_color"/>
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/activityMainEmailTxt"
@@ -22,53 +21,51 @@
         android:layout_below="@+id/activityMainLoginTxt"
         android:layout_marginTop="30dp"
         android:text="Email"
-        android:textSize="20sp"
-        android:textColor="@color/text_color" />
+        android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/activityMainEmailEdtTxt"
         android:layout_width="250dp"
         android:layout_height="50sp"
         android:layout_below="@+id/activityMainEmailTxt"
-        android:id="@+id/activityMainEmailEdtTxt"
-        android:hint="e.g. abc@mail.com"/>
+        android:hint="e.g. abc@mail.com" />
 
     <TextView
+        android:id="@+id/activityMainPasswordTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
-        android:textSize="20sp"
         android:layout_below="@+id/activityMainEmailEdtTxt"
         android:layout_marginTop="20dp"
-        android:id="@+id/activityMainPasswordTxt"
-        android:textColor="@color/text_color"/>
+        android:text="Password"
+        android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/activityMainPasswordEdtTxt"
         android:layout_width="250dp"
         android:layout_height="50sp"
         android:layout_below="@+id/activityMainPasswordTxt"
-        android:inputType="textPassword"
-        android:id="@+id/activityMainPasswordEdtTxt"
-        android:hint="Enter your password"/>
+        android:hint="Enter your password"
+        android:inputType="textPassword" />
 
     <CheckBox
+        android:id="@+id/activityMainStayLoggedInCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stay logged in"
-        android:id="@+id/activityMainStayLoggedInCheckBox"
+        android:layout_below="@+id/activityMainPasswordEdtTxt"
         android:checked="true"
-        android:layout_below="@+id/activityMainPasswordEdtTxt" />
+        android:text="Stay logged in" />
 
     <Button
+        android:id="@+id/activityMainLoginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
         android:layout_below="@+id/activityMainStayLoggedInCheckBox"
-        android:layout_marginTop="30dp"
-        android:textAllCaps="false"
         android:layout_centerHorizontal="true"
-        android:id="@+id/activityMainLoginButton"
+        android:layout_marginTop="30dp"
         android:background="@drawable/rounded_button"
-        android:textSize="20sp"/>
+        android:text="Login"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/activityMainNoAccountTxt"
@@ -82,14 +79,14 @@
         android:textSize="15sp" />
 
     <Button
+        android:id="@+id/activityMainRegisterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/activityMainNoAccountTxt"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_button"
         android:text="Register"
         android:textAllCaps="false"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/activityMainRegisterButton"
-        android:background="@drawable/rounded_button"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
 </RelativeLayout>

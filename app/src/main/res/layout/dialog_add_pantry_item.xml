@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/main_background"
     android:padding="10dp">
 
     <TextView
@@ -13,49 +12,45 @@
         android:layout_height="wrap_content"
         android:padding="10sp"
         android:text="Add Pantry Item:"
-        android:textColor="@color/text_color"
         android:textSize="35sp" />
 
     <EditText
         android:id="@+id/pantryAddIngredientName"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:textColorHint="@color/text_color_hint"
         android:hint="Ingredient name"
-        android:textColor="@color/text_color"
         android:inputType="text"
+        android:textColor="@color/text_color"
+        android:textColorHint="@color/text_color_hint"
         android:textSize="25sp" />
 
     <RadioGroup
+        android:id="@+id/dialogAddPantryItemStorageLocationRG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/pantryAddIngredientName"
-        android:id="@+id/dialogAddPantryItemStorageLocationRG">
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
 
         <RadioButton
+            android:id="@+id/dialogAddPantryItemFridgeRB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fridge"
-            android:textColor="@color/text_color"
-            android:id="@+id/dialogAddPantryItemFridgeRB" />
+            android:text="Fridge" />
 
         <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/dialogAddPantryItemFreezerRB"
-            android:text="Freezer"
-            android:textColor="@color/text_color"
-            android:layout_marginStart="25dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:text="Freezer" />
 
         <RadioButton
+            android:id="@+id/dialogAddPantryItemCupboardRB"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/dialogAddPantryItemCupboardRB"
-            android:text="Cupboard"
-            android:textColor="@color/text_color"
-            android:layout_marginStart="25dp" />
+            android:layout_marginStart="25dp"
+            android:text="Cupboard" />
 
     </RadioGroup>
 
@@ -68,56 +63,41 @@
             android:id="@+id/pantryAddIngredientQuantity"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
+            android:layout_weight="8"
             android:hint="Quantity"
-            android:textColorHint="@color/text_color_hint"
-            android:textSize="25sp"
-            android:textColor="@color/text_color"
             android:inputType="numberDecimal"
-            android:layout_weight="8" />
+            android:textSize="25sp" />
 
         <Spinner
             android:id="@+id/pantryAddIngredientUnitSelector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
             android:contentDescription="Checkbox for sharing this item"
-            />
+            android:spinnerMode="dropdown" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/pantryAddIngredientExpiryDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select expiry date"
-        android:textSize="30sp"
-        android:textColor="@color/text_color"
+        android:layout_marginTop="20sp"
         android:paddingHorizontal="10sp"
-        android:layout_marginTop="20sp"/>
+        android:text="Select expiry date"
+        android:textSize="30sp" />
 
     <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:calendarTextColor="@color/text_color"
         android:id="@+id/pantryAddIngredientDatePicker"
-        android:datePickerMode="spinner" />
-
-
-    <CheckBox
-        android:id="@+id/pantryAddIngredientShareBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share this item"
-        android:checked="true"
-        android:textColor="@color/text_color"
-        android:textSize="15sp"
-        android:paddingHorizontal="10sp"/>
+        android:datePickerMode="spinner"/>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pantryAddIngredientButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="5dp"
         android:background="@drawable/rounded_button"
         android:drawableLeft="@drawable/baseline_add_24"
         android:padding="10sp"
@@ -125,7 +105,6 @@
         android:paddingVertical="10sp"
         android:text="Add Item"
         android:textAllCaps="false"
-        android:textColor="@color/main_background"
         android:textSize="25sp" />
 
 

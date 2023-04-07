@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/fragmentSearchTitleTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/secondary_color_light"
+        android:padding="10dp"
+        android:text="Recipe Search"
+        android:textAlignment="center"
+        android:textColor="@color/main_background"
+        android:textSize="40sp"
+        android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragmentSearchTitleTxt"
+        android:padding="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,8 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_toEndOf="@+id/fragmentSearchBackButton"
-                    android:hint="Search for a recipe..."
-                    android:textColorHint="@color/text_color_hint" />
+                    android:hint="Search for a recipe..." />
 
                 <Button
                     android:id="@+id/fragmentSearchButton"
@@ -51,7 +63,6 @@
                 android:layout_below="@+id/fragmentSearchTopRelLayout"
                 android:layout_marginTop="20dp"
                 android:text="Search by Category"
-                android:textColor="@color/text_color"
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -68,8 +79,7 @@
                 android:id="@+id/fragmentSearchByCuisineTxt"
                 android:layout_below="@+id/fragmentSearchByCategoryRecView"
                 android:layout_marginTop="20dp"
-                android:textSize="20sp"
-                android:textColor="@color/text_color" />
+                android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragmentSearchByCuisineRecView"

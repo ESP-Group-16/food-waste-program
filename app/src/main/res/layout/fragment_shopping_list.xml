@@ -4,32 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShoppingListFragment"
-    android:background="@color/main_background">
+    tools:context=".ShoppingListFragment">
 
     <TextView
+        android:id="@+id/fragmentShoppingListTitleTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/secondary_color_light"
         android:padding="10dp"
-        android:textAlignment="center"
         android:text="Shopping List"
-        android:textColor="@color/text_color"
-        android:textSize="40dp"
-        android:id="@+id/fragmentShoppingListTitleTxt"
-        android:background="@color/main_background"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_alt"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
     <RelativeLayout
         android:id="@+id/RelativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@id/fragmentShoppingListTitleTxt">
+        android:layout_below="@id/fragmentShoppingListTitleTxt"
+        android:layout_marginTop="15dp">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragmentShoppingListAddItem"
             android:layout_width="300dp"
-            android:layout_marginStart="5dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
             android:background="@drawable/rounded_button"
             android:text="Add items"
             android:textColor="@color/text_color_alt" />
@@ -41,8 +41,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_marginEnd="30dp"
-            android:text="5 items"
-            android:textColor="@color/text_color" />
+            android:text="5 items" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -51,19 +50,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/RelativeLayout2"
         android:paddingHorizontal="10sp"
-        android:paddingTop="10sp" />
+        android:paddingTop="10sp"
+        android:paddingBottom="70dp"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_alignParentBottom="true"
         android:id="@+id/fragmentShoppingListFinishButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:text="Finish Shop"
         android:layout_marginBottom="10dp"
-        android:textColor="@color/text_color_alt"
-        android:background="@drawable/rounded_button"/>
+        android:background="@drawable/rounded_button"
+        android:text="Finish Shop"
+        android:textColor="@color/text_color_alt" />
 
 
 </RelativeLayout>

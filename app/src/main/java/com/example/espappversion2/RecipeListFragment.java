@@ -135,7 +135,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                 } else if(recipeListMode.equals("search_by_cuisine")) {
                     String cuisine = bundle.getString("cuisine");
                     extra = cuisine;
-                    txtTitle.setText("Search by cuisine: " + cuisine);
+                    txtTitle.setText("Cuisine: " + cuisine);
                     recipeAPI.getRecipesByCuisine(this, cuisine);
                     btnBack.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -149,7 +149,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                 } else if(recipeListMode.equals("search_by_category")) {
                     String category = bundle.getString("category");
                     extra = category;
-                    txtTitle.setText("Search by category: " + category);
+                    txtTitle.setText("Category: " + category);
                     recipeAPI.getRecipesByCategory(this, category);
                     btnBack.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -163,7 +163,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                 } else if(recipeListMode.equals("search")) {
                     String search = bundle.getString("search");
                     extra = search;
-                    txtTitle.setText("Search results for: " + search);
+                    txtTitle.setText("Search: " + search);
                     recipeAPI.getRecipesByName(this, search);
                     btnBack.setOnClickListener(new View.OnClickListener() {
                         @Override
