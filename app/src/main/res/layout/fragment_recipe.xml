@@ -139,7 +139,7 @@
                 android:layout_below="@id/fragmentRecipeInstructionsTitleTxt"
                 android:paddingHorizontal="18sp"
                 android:textColor="@color/text_color"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 />
 
         </RelativeLayout>
