@@ -394,56 +394,40 @@ public class RecipeAPI {
     }
 
 
-//    public ArrayList<JSONObject> getPantryRecipes(final VolleyCallback callback, ArrayList<Stock> pantryIngredients) throws JSONException {
-//        ArrayList<JSONObject> pantryRecipes = new ArrayList<>();
-//        for (Stock ingredient : pantryIngredients) {
-//            String ingredientName = ingredient.getFood().getName();
-//            ArrayList<JSONArray> recipes = new ArrayList<JSONArray>();
-//            getRecipesByMainIngredient(new VolleyCallback() {
-//                    @Override
-//                    public void onSuccess(JSONObject response, String resultFor) throws JSONException {
-//                        System.out.println("AAAA");
-//                        if (!response.isNull("meals")) {
-//                            for (int i = 0; i < response.getJSONArray("meals").length(); i++){
-//                                getRecipeById(new VolleyCallback() {
-//                                    @Override
-//                                    public void onSuccess(JSONObject response, String resultFor) throws JSONException {
-//                                        pantryRecipeArrs.add(response.getJSONArray("meals"));
-//                                        System.out.println(response);
-//                                    }
-//
-//                                    @Override
-//                                    public void onFailure(VolleyError error) {
-//                                        // Handle error response
-//                                        error.printStackTrace();
-//                                    }
-//                                }, Integer.parseInt(response.getJSONArray("meals").getJSONObject(i).getString("idMeal")));
-//                            }
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(VolleyError error) {
-//                        // Handle error response
-//                        error.printStackTrace();
-//                    }
-//                }, ingredientName);
-//        }
-//
-//
-//        ArrayList<String> pantryIngredientNames = new ArrayList<>();
-//        for (Stock ingredient : pantryIngredients) {
-//            pantryIngredientNames.add(ingredient.getFood().getName());
-//        }
-//        for (JSONArray possibleRecipes : pantryRecipeArrs) {
-//            for (int i = 0; i < possibleRecipes.length(); i++) {
-//                ArrayList<String> ingredientsInRecipe = convertJSONIngredientsToArrList(possibleRecipes.getJSONObject(i));
-//                if (containsAll(ingredientsInRecipe, pantryIngredientNames)) pantryRecipes.add(possibleRecipes.getJSONObject(i));
-//            }
-//        }
-//
-//        return pantryRecipes;
-//    }
+    public void getPantryRecipes(final VolleyCallback callback, ArrayList<Stock> pantryIngredients) throws JSONException {
+
+        getAllRecipes(new VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject response, String resultFor) throws JSONException {
+                // Handle API response
+                // response is all recipes
+                // get just the names of the pantry ingredients rather than objects
+                ArrayList<String> pantryIngredientNames = new ArrayList<>();
+                JSONObject pantryRecipes = new JSONObject();
+                pantryRecipes.put("meals", new JSONArray());
+
+                for (Stock ingredient : pantryIngredients) {
+                    pantryIngredientNames.add(ingredient.getFood().getName());
+                }
+
+                JSONArray recipes = response.getJSONArray("meals");
+                for (int i = 0; i < recipes.length(); i++) {
+                        ArrayList<String> ingredientsInRecipe = convertJSONIngredientsToArrList(recipes.getJSONObject(i));
+                        if (containsAll(ingredientsInRecipe, pantryIngredientNames)) pantryRecipes.getJSONArray("meals").put(recipes.getJSONObject(i));
+                }
+
+                callback.onSuccess(pantryRecipes, "recipes_pantry");
+            }
+
+            @Override
+            public void onFailure(VolleyError error) {
+                // Handle error response
+                callback.onFailure(error);
+                error.printStackTrace();
+            }
+        });
+
+    }
 
 
     // *****************************************************************************
