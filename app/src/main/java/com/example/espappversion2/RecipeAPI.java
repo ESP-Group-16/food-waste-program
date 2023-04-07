@@ -410,10 +410,14 @@ public class RecipeAPI {
                     pantryIngredientNames.add(ingredient.getFood().getName());
                 }
 
-                JSONArray recipes = response.getJSONArray("meals");
-                for (int i = 0; i < recipes.length(); i++) {
+                if (!response.isNull("meals")) {
+                    JSONArray recipes = response.getJSONArray("meals");
+
+                    for (int i = 0; i < recipes.length(); i++) {
                         ArrayList<String> ingredientsInRecipe = convertJSONIngredientsToArrList(recipes.getJSONObject(i));
-                        if (containsAll(ingredientsInRecipe, pantryIngredientNames)) pantryRecipes.getJSONArray("meals").put(recipes.getJSONObject(i));
+                        if (containsAll(ingredientsInRecipe, pantryIngredientNames))
+                            pantryRecipes.getJSONArray("meals").put(recipes.getJSONObject(i));
+                    }
                 }
 
                 callback.onSuccess(pantryRecipes, "recipes_pantry");
