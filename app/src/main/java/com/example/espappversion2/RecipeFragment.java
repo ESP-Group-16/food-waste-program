@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,8 +79,9 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     // TODO: add all ingredients to shopping list
                                     for(Ingredient ingredient : ingredients) {
-                                        //Utils.getInstance(getActivity()).addShoppingListItem(ingredient.makeStock());
+                                        Utils.getInstance(getActivity()).addShoppingListItem(ingredient.makeStock());
                                     }
+                                    //System.out.println(new Gson().toJson(ingredients));
                                 }
                             })
                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -138,6 +140,8 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
             } else {
                 txtCarbonEmission.setVisibility(View.GONE);
             }
+        } else if(resultFor.equals("recipe_by_id")) {
+
         }
     }
 

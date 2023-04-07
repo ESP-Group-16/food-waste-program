@@ -14,7 +14,7 @@ public class User {
     private ArrayList<String> allergies;
     private ArrayList<String> favouriteRecipes;
     private int socialCreditScore;
-    private HashMap<String, ArrayList<Stock>> shoppingList;
+    private ArrayList<Stock> shoppingList;
     private Pantry pantry;
 
     public User(String userName, String password) {
@@ -23,10 +23,7 @@ public class User {
         this.pantry = new Pantry();
         this.allergies = new ArrayList<>();
         this.favouriteRecipes = new ArrayList<>();
-        shoppingList = new HashMap<>();
-        shoppingList.put(STORAGE_LOCATIONS[0], new ArrayList<>());
-        shoppingList.put(STORAGE_LOCATIONS[1], new ArrayList<>());
-        shoppingList.put(STORAGE_LOCATIONS[2], new ArrayList<>());
+        shoppingList = new ArrayList<>();
     }
 
     public ArrayList<String> getPreferences(){
@@ -114,30 +111,21 @@ public class User {
         this.socialCreditScore = socialCreditScore;
     }
 
-    public HashMap<String, ArrayList<Stock>> getShoppingList() {
+    public ArrayList<Stock> getShoppingList() {
         return shoppingList;
     }
 
-    public void setShoppingList(HashMap<String, ArrayList<Stock>> shoppingList) {
+    public void setShoppingList(ArrayList<Stock> shoppingList) {
         this.shoppingList = shoppingList;
     }
 
-    public void addItemToShoppingList(int storageLocationIndex, Stock item) {
-        String key = STORAGE_LOCATIONS[storageLocationIndex];
-        if(this.shoppingList.containsKey(key) && this.shoppingList.get(key) != null) {
-            this.shoppingList.get(STORAGE_LOCATIONS[storageLocationIndex]).add(item);
-        }
+    public void addItemToShoppingList(Stock item) {
+        this.shoppingList.add(item);
     }
 
-    public void removeItemFromShoppingList(int storageLocationIndex, int index) {
-        String key = STORAGE_LOCATIONS[storageLocationIndex];
-        System.out.println("1");
-        if(storageLocationIndex >=0 && storageLocationIndex <= 2) {
-            System.out.println("2");
-            if(index >= 0 && index < this.shoppingList.get(key).size()) {
-                System.out.println("3");
-                this.shoppingList.get(key).remove(index);
-            }
+    public void removeItemFromShoppingList(int index) {
+        if(index >= 0 && index < this.shoppingList.size()) {
+            this.shoppingList.remove(index);
         }
     }
 

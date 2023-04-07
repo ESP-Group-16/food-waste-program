@@ -196,23 +196,23 @@ public class Utils {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Shopping List Methods
 
-    public HashMap<String, ArrayList<Stock>> getShoppingListByUser(User user) {
+    public ArrayList<Stock> getShoppingListByUser(User user) {
         if(user != null) {
             return getUser(user.getUserName()).getShoppingList();
         }
         return null;
     }
 
-    public void addShoppingListItem(String storageLocation, Stock stock) {
+    public void addShoppingListItem(Stock stock) {
         User currentUser = getCurrentUser();
-        currentUser.addItemToShoppingList(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), stock);
+        currentUser.addItemToShoppingList(stock);
         updateUser(currentUser);
         saveState();
     }
 
     public void removeShoppingListItem(String storageLocation, int index) {
         User currentUser = getCurrentUser();
-        currentUser.removeItemFromShoppingList(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), index);
+        currentUser.removeItemFromShoppingList(index);
         updateUser(currentUser);
         saveState();
     }

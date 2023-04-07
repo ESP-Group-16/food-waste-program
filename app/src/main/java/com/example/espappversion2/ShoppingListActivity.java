@@ -17,7 +17,7 @@ public class ShoppingListActivity extends AppCompatActivity implements AddShoppi
     @Override
     public void onAddShoppingListItem(Stock item, String storageLocation) {
         // add the new item to shopping list in DB
-        Utils.getInstance(this).addShoppingListItem(storageLocation, item);
+        Utils.getInstance(this).addShoppingListItem(item);
 
         // restart ShoppingListFragment to display updated list
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
