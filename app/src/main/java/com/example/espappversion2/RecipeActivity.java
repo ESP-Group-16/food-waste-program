@@ -56,6 +56,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.N
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_recipe);
 
         initViews();
@@ -105,5 +106,11 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.N
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }
