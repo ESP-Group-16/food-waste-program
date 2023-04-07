@@ -16,6 +16,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 // Ok so this API actually goes hard
 // Have a look at the documentation https://www.themealdb.com/api.php
@@ -414,11 +416,6 @@ public class RecipeAPI {
                     JSONArray recipes = response.getJSONArray("meals");
 
                     for (int i = 0; i < recipes.length(); i++) {
-                        if(recipes.getJSONObject(i).getString("strMeal").equalsIgnoreCase("chicken enchilada casserole")) {
-                            System.out.println("AAAAAA");
-                            ArrayList<String> ingredientsInRecipe = getRecipeIngredients(recipes.getJSONObject(i));
-                            System.out.println(ingredientsInRecipe.toString());
-                        }
                         ArrayList<String> ingredientsInRecipe = getRecipeIngredients(recipes.getJSONObject(i));
                         if (containsAll(ingredientsInRecipe, pantryIngredientNames))
                             pantryRecipes.getJSONArray("meals").put(recipes.getJSONObject(i));
@@ -501,7 +498,7 @@ public class RecipeAPI {
     public static ArrayList<String> getRecipeIngredients(JSONObject json) throws  JSONException {
         int i = 1;
         ArrayList<String> ingredients = new ArrayList<>();
-        while (!json.isNull("strIngredient"+i)) {
+        while (!json.isNull("strIngredient"+i) && !(json.getString("strIngredient"+i).equalsIgnoreCase("")) && !(json.getString("strIngredient"+i).equalsIgnoreCase(" "))) {
             ingredients.add(json.getString("strIngredient" + i));
             i++;
         }
@@ -509,17 +506,20 @@ public class RecipeAPI {
     }
 
     private boolean containsAll(ArrayList<String> subset, ArrayList<String> superset) {
-        System.out.println(superset);
+        //System.out.println(superset + "\n" + subset + "\n\n");
         for (String s : subset) {
             boolean found = false;
             for (String t : superset) {
-                if (s.equalsIgnoreCase(t)) {
+                Pattern p_ing = Pattern.compile("\\b\\w*"+s+"\\w*\\b");
+                Matcher m_ing = p_ing.matcher(t);
+                if (m_ing.find()) {
                     found = true;
                     break;
                 }
             }
             if (!found) return false;
         }
+        System.out.println(subset.toString());
         return true;
     }
 
