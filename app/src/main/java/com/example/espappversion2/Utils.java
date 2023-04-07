@@ -170,6 +170,17 @@ public class Utils {
         return null;
     }
 
+    public ArrayList<Stock> getAllPantryItems() {
+        ArrayList<Stock> items = new ArrayList<>();
+        System.out.println("getAllPantryItems: " + getCurrentUser());
+        System.out.println("getAllPantryItems: " + getCurrentUser().getPantry());
+        System.out.println("getAllPantryItems: " + getCurrentUser().getPantry().getPantryItems());
+        items.addAll(getCurrentUser().getPantry().getPantryItems().get(Pantry.STORAGE_LOCATIONS[0]));
+        items.addAll(getCurrentUser().getPantry().getPantryItems().get(Pantry.STORAGE_LOCATIONS[1]));
+        items.addAll(getCurrentUser().getPantry().getPantryItems().get(Pantry.STORAGE_LOCATIONS[2]));
+        return items;
+    }
+
     public void addPantryItem(String storageLocation, Stock stock) {
         User currentUser = getCurrentUser();
         currentUser.addItemToPantry(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), stock);

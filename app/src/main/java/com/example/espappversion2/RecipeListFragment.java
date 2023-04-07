@@ -123,6 +123,11 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
                 } else if(recipeListMode.equals("pantry_recipes")) {
                     // TODO: get pantry recipes list
                     txtTitle.setText("Pantry Recipes");
+                    try {
+                        recipeAPI.getPantryRecipes(this, Utils.getInstance(getActivity()).getAllPantryItems());
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
                     btnBack.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
