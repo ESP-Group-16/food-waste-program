@@ -88,7 +88,7 @@ public class Utils {
     }
 
     public HashMap<String, User> getUsers() {
-        System.out.println("getUsers: " + sharedPreferences.getString(USERS_KEY, null));
+        //System.out.println("getUsers: " + sharedPreferences.getString(USERS_KEY, null));
         Type type = new TypeToken<HashMap<String, User>>(){}.getType();
         try {
             return gson.fromJson(sharedPreferences.getString(USERS_KEY, null), type);
@@ -267,4 +267,23 @@ public class Utils {
 
     // End of Recipe Methods
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Allergies Methods
+
+    public void addAllergy(String allergy) {
+        getCurrentUser().addAllergy(allergy);
+        updateUser(currentUser);
+        saveState();
+    }
+
+    public void removeAllergy(int index) {
+        getCurrentUser().removeAllergy(index);
+        updateUser(currentUser);
+        saveState();
+    }
+
+    public ArrayList<String> getAllergies() {
+        return currentUser.getAllergies();
+    }
+
+
 }

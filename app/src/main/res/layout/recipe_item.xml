@@ -66,6 +66,7 @@
                     android:id="@+id/recipeItemCarbonEmission"
                     android:text="Carbon emission"
                     android:layout_alignParentEnd="true"
+                    android:visibility="gone"
                     android:layout_centerVertical="true"/>
 
             </RelativeLayout>

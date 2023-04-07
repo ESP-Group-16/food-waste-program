@@ -37,6 +37,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
             if(favourites.size() == favouriteRecipeNames.size()) {
                 System.out.println("Favourites before setting adapter: " + favourites);
                 // set adapter for recycler view to display recipes
+                //filterRecipes(favourites);
                 adapter = new RecipeAdapter(getActivity(), recipeListMode, extra);
                 adapter.setItems(favourites);
                 recipeRecView.setAdapter(adapter);
@@ -47,12 +48,26 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
             txtCarbonEmission.setText(response.getString("carbon"));
         } else {
             recipes = Recipe.generateRecipesGivenJSON(response);
-
+            //filterRecipes(recipes);
             // set adapter for recycler view to display recipes
             adapter = new RecipeAdapter(getActivity(), recipeListMode, extra);
             adapter.setItems(recipes);
             recipeRecView.setAdapter(adapter);
             recipeRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
+    }
+
+    public void filterRecipes(ArrayList<Recipe> recipes) {
+        ArrayList<String> allergies = Utils.getInstance(getContext()).getAllergies();
+        System.out.println("User allergies: " + allergies);
+        for(Recipe recipe : recipes) {
+            System.out.println("Recipe ingredient: " + recipe.getIngredients());
+            for(Ingredient ingredient : recipe.getIngredients()) {
+                if(allergies.contains(ingredient.getFood().getName())) {
+                    Toast.makeText(getActivity(), "Removing " + recipe.getName() + " from recipes because it contains " + ingredient.getFood().getName(), Toast.LENGTH_SHORT).show();
+                    recipes.remove(recipe);
+                }
+            }
         }
     }
 

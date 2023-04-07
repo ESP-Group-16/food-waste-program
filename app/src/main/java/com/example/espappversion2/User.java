@@ -11,7 +11,7 @@ public class User {
     private String password;
     private ArrayList<Food> dislikes;
     private boolean hasDoneTutorial;
-    private ArrayList<Food> allergies;
+    private ArrayList<String> allergies;
     private ArrayList<String> favouriteRecipes;
     private int socialCreditScore;
     private HashMap<String, ArrayList<Stock>> shoppingList;
@@ -21,6 +21,7 @@ public class User {
         this.userName=userName;
         this.password=password;
         this.pantry = new Pantry();
+        this.allergies = new ArrayList<>();
         this.favouriteRecipes = new ArrayList<>();
         shoppingList = new HashMap<>();
         shoppingList.put(STORAGE_LOCATIONS[0], new ArrayList<>());
@@ -74,12 +75,20 @@ public class User {
         this.hasDoneTutorial = hasDoneTutorial;
     }
 
-    public ArrayList<Food> getAllergies() {
+    public ArrayList<String> getAllergies() {
         return allergies;
     }
 
-    public void setAllergies(ArrayList<Food> allergies) {
+    public void setAllergies(ArrayList<String> allergies) {
         this.allergies = allergies;
+    }
+
+    public void addAllergy(String allergy) {
+        this.allergies.add(allergy);
+    }
+
+    public void removeAllergy(int i) {
+        this.allergies.remove(i);
     }
 
     public void addRecipeToFavourites(String recipeName) {
