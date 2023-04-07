@@ -32,8 +32,6 @@ public class AddShoppingListItemDialog extends DialogFragment {
     private Button btnAddItem;
     private EditText edtTxtItemName, edtTxtQuantity;
     private Spinner unitSpinner;
-    private RadioGroup rgStorageLocation;
-    private DatePicker datePicker;
 
     private ArrayList<String> units;
     private String storageLocation;
@@ -78,12 +76,6 @@ public class AddShoppingListItemDialog extends DialogFragment {
                         newItem.setFood(food);
                         newItem.setQuantity(Double.parseDouble(edtTxtQuantity.getText().toString()));
 
-                        int day = datePicker.getDayOfMonth();
-                        int month = datePicker.getMonth() + 1;
-                        int year = datePicker.getYear();
-
-                        newItem.setExpiresAt(day+"/"+month+"/"+year);
-
                         // send the new item back to ShoppingListFragment
                         try {
                             addShoppingListItem = (AddShoppingListItem) getActivity();
@@ -102,26 +94,6 @@ public class AddShoppingListItemDialog extends DialogFragment {
             }
         });
 
-        rgStorageLocation.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch(i) {
-                    case R.id.dialogAddShoppingListItemFridgeRB:
-                        storageLocation = "fridge";
-                        break;
-                    case R.id.dialogAddShoppingListItemFreezerRB:
-                        storageLocation = "freezer";
-                        break;
-                    case R.id.dialogAddShoppingListItemCupboardRB:
-                        storageLocation = "cupboard";
-                        break;
-                    default:
-                        break;
-                }
-                //Toast.makeText(getActivity(), "Storage location: " + storageLocation, Toast.LENGTH_SHORT).show();
-            }
-        });
-
         return builder.create();
     }
 
@@ -130,8 +102,6 @@ public class AddShoppingListItemDialog extends DialogFragment {
         edtTxtItemName = view.findViewById(R.id.dialogAddShoppingListItemNameEdtTxt);
         edtTxtQuantity = view.findViewById(R.id.dialogAddShoppingListItemQuantityEdtTxt);
         unitSpinner = view.findViewById(R.id.dialogAddShoppingListItemUnitSpinner);
-        rgStorageLocation = view.findViewById(R.id.dialogAddShoppingListItemStorageLocationRG);
-        datePicker = view.findViewById(R.id.dialogAddShoppingListItemDatePicker);
     }
 
     private ArrayList<String> getUnits() {

@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,8 +79,9 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     // TODO: add all ingredients to shopping list
                                     for(Ingredient ingredient : ingredients) {
-                                        //Utils.getInstance(getActivity()).addShoppingListItem(ingredient.makeStock());
+                                        Utils.getInstance(getActivity()).addShoppingListItem(ingredient.makeStock());
                                     }
+                                    //System.out.println(new Gson().toJson(ingredients));
                                 }
                             })
                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -138,6 +140,8 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
             } else {
                 txtCarbonEmission.setVisibility(View.GONE);
             }
+        } else if(resultFor.equals("recipe_by_id")) {
+
         }
     }
 
@@ -180,8 +184,7 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // navigate user back to RecipeListFragment
-                // TODO: go back to the list of search results that was displayed previously
+                // navigate user back to RecipeListFragment to the list of search results that was displayed previously
                 RecipeListFragment fragment = new RecipeListFragment();
                 Bundle bundle1 = new Bundle();
                 bundle1.putString(RECIPE_MODE, backList);

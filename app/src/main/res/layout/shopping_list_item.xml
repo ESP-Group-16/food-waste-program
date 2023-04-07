@@ -23,15 +23,6 @@
             android:layout_marginStart="10dp"
             android:id="@+id/shoppingListItemCheckbox" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/shoppingListItemExpiryDateText"
-            android:layout_below="@+id/shoppingListItemCheckbox"
-            android:text="Date"
-            android:textColor="@color/text_color"
-            android:layout_marginStart="15dp"/>
-
 
         <TextView
             android:layout_width="wrap_content"

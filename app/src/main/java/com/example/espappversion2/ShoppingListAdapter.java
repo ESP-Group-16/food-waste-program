@@ -46,7 +46,6 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             holder.txtItemName.setText(items.get(holder.getAdapterPosition()).getFood().getName());
         }
         holder.txtUnitNumber.setText(items.get(holder.getAdapterPosition()).getQuantity() + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
-        holder.txtExpiryDate.setText(items.get(holder.getAdapterPosition()).getExpiresAt());
         holder.txtItemName.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -101,7 +100,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     }
 
     private void updateItems() {
-        setItems(Utils.getInstance(context).getCurrentUser().getShoppingList().get(Pantry.STORAGE_LOCATIONS[storageLocation]));
+        setItems(Utils.getInstance(context).getCurrentUser().getShoppingList());
     }
 
     public ArrayList<Stock> getSelectedItems() {
@@ -120,7 +119,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView txtUnitNumber, txtExpiryDate;
+        private TextView txtUnitNumber;
         private CheckBox txtItemName;
         private CardView parent;
 
@@ -130,7 +129,6 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             txtUnitNumber = itemView.findViewById(R.id.shoppingListItemUnitNumberTxt);
             txtItemName = itemView.findViewById(R.id.shoppingListItemCheckbox);
             parent = itemView.findViewById(R.id.shoppingListItemParent);
-            txtExpiryDate = itemView.findViewById(R.id.shoppingListItemExpiryDateText);
         }
     }
 }

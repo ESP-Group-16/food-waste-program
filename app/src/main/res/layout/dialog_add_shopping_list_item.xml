@@ -56,52 +56,10 @@
 
     </LinearLayout>
 
-    <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:calendarTextColor="@color/text_color"
-        android:id="@+id/dialogAddShoppingListItemDatePicker"
-        android:layout_below="@+id/dialogAddShoppingListItemQuantityLinLayout"
-        android:datePickerMode="spinner" />
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/dialogAddShoppingListItemDatePicker"
-        android:id="@+id/dialogAddShoppingListItemStorageLocationRG">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fridge"
-            android:textColor="@color/text_color"
-            android:id="@+id/dialogAddShoppingListItemFridgeRB" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/dialogAddShoppingListItemFreezerRB"
-            android:text="Freezer"
-            android:textColor="@color/text_color"
-            android:layout_marginStart="25dp" />
-
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/dialogAddShoppingListItemCupboardRB"
-            android:text="Cupboard"
-            android:textColor="@color/text_color"
-            android:layout_marginStart="25dp" />
-
-    </RadioGroup>
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dialogAddShoppingListItemStorageLocationRG"
+        android:layout_below="@+id/dialogAddShoppingListItemQuantityLinLayout"
         android:text="Add Item"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"

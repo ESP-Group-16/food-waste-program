@@ -88,7 +88,7 @@ public class Utils {
     }
 
     public HashMap<String, User> getUsers() {
-        System.out.println("getUsers: " + sharedPreferences.getString(USERS_KEY, null));
+        //System.out.println("getUsers: " + sharedPreferences.getString(USERS_KEY, null));
         Type type = new TypeToken<HashMap<String, User>>(){}.getType();
         try {
             return gson.fromJson(sharedPreferences.getString(USERS_KEY, null), type);
@@ -196,23 +196,23 @@ public class Utils {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Shopping List Methods
 
-    public HashMap<String, ArrayList<Stock>> getShoppingListByUser(User user) {
+    public ArrayList<Stock> getShoppingListByUser(User user) {
         if(user != null) {
             return getUser(user.getUserName()).getShoppingList();
         }
         return null;
     }
 
-    public void addShoppingListItem(String storageLocation, Stock stock) {
+    public void addShoppingListItem(Stock stock) {
         User currentUser = getCurrentUser();
-        currentUser.addItemToShoppingList(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), stock);
+        currentUser.addItemToShoppingList(stock);
         updateUser(currentUser);
         saveState();
     }
 
     public void removeShoppingListItem(String storageLocation, int index) {
         User currentUser = getCurrentUser();
-        currentUser.removeItemFromShoppingList(Arrays.asList(Pantry.STORAGE_LOCATIONS).indexOf(storageLocation), index);
+        currentUser.removeItemFromShoppingList(index);
         updateUser(currentUser);
         saveState();
     }
@@ -267,4 +267,23 @@ public class Utils {
 
     // End of Recipe Methods
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Allergies Methods
+
+    public void addAllergy(String allergy) {
+        getCurrentUser().addAllergy(allergy);
+        updateUser(currentUser);
+        saveState();
+    }
+
+    public void removeAllergy(int index) {
+        getCurrentUser().removeAllergy(index);
+        updateUser(currentUser);
+        saveState();
+    }
+
+    public ArrayList<String> getAllergies() {
+        return currentUser.getAllergies();
+    }
+
+
 }

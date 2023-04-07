@@ -1,7 +1,6 @@
 package com.example.espappversion2;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,21 +18,17 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ShoppingListFragment extends Fragment {
 
     private Button btnAddItem, btnFinishShop;
     private TextView txtItemCounter;
-    private RecyclerView recViewFridgeItems, recViewFreezerItems, recViewCupboardItems;
+    private RecyclerView recViewFridgeItems;
 
     private Repository repository;
-    private HashMap<String, ArrayList<Stock>> shoppingList;
-    private ArrayList<Stock> fridgeItemsList, freezerItemsList, cupboardItemsList;
-    private ShoppingListAdapter fridgeAdapter, freezerAdapter, cupboardAdapter;
+    private ArrayList<Stock> shoppingList;
+    private ShoppingListAdapter adapter;
     private User currentUser;
 
     @Nullable
@@ -53,31 +48,16 @@ public class ShoppingListFragment extends Fragment {
 
         // get the lists from DB
         shoppingList = currentUser.getShoppingList();
-        fridgeItemsList = shoppingList.get(Pantry.STORAGE_LOCATIONS[0]);
-        freezerItemsList = shoppingList.get(Pantry.STORAGE_LOCATIONS[1]);
-        cupboardItemsList = shoppingList.get(Pantry.STORAGE_LOCATIONS[2]);
 
 
-        // fridge
-        fridgeAdapter = new ShoppingListAdapter(getActivity(), 0);
-        fridgeAdapter.setItems(fridgeItemsList);
-        recViewFridgeItems.setAdapter(fridgeAdapter);
+        // setting the adapter for shopping list
+        adapter = new ShoppingListAdapter(getActivity(), 0);
+        adapter.setItems(shoppingList);
+        recViewFridgeItems.setAdapter(adapter);
         recViewFridgeItems.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // freezer
-        freezerAdapter = new ShoppingListAdapter(getActivity(), 1);
-        freezerAdapter.setItems(freezerItemsList);
-        recViewFreezerItems.setAdapter(freezerAdapter);
-        recViewFreezerItems.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        // cupboard
-        cupboardAdapter = new ShoppingListAdapter(getActivity(), 2);
-        cupboardAdapter.setItems(cupboardItemsList);
-        recViewCupboardItems.setAdapter(cupboardAdapter);
-        recViewCupboardItems.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         // set text of counter text
-        int itemNumber = fridgeItemsList.size() + freezerItemsList.size() + cupboardItemsList.size();
+        int itemNumber = shoppingList.size();
         txtItemCounter.setText(itemNumber + " items");
 
         btnAddItem.setOnLongClickListener(new View.OnLongClickListener() {
@@ -94,10 +74,7 @@ public class ShoppingListFragment extends Fragment {
                 // check if shopping list is empty
                 if(!Utils.getInstance(getActivity()).isShoppingListEmpty(currentUser)) {
                     // check if selected items list is empty
-                    ArrayList<Stock> selectedItems = new ArrayList<>();
-                    selectedItems.addAll(freezerAdapter.getSelectedItems());
-                    selectedItems.addAll(fridgeAdapter.getSelectedItems());
-                    selectedItems.addAll(cupboardAdapter.getSelectedItems());
+                    ArrayList<Stock> selectedItems = adapter.getSelectedItems();
                     if (!selectedItems.isEmpty()) {
                         // ask for verification before proceeding
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
@@ -111,27 +88,18 @@ public class ShoppingListFragment extends Fragment {
 //                                        for (Stock s : selectedItems) {
 //                                            allItems += " " + s.getFood().getName();
 //                                        }
-                                        String fridgeItems = "";
-                                        for (Stock s : fridgeAdapter.getSelectedItems()) {
-                                            fridgeItems += " " + s.getFood().getName();
-                                        }
-                                        String freezerItems = "";
-                                        for (Stock s : freezerAdapter.getSelectedItems()) {
-                                            freezerItems += " " + s.getFood().getName();
-                                        }
-                                        String cupboardItems = "";
-                                        for (Stock s : cupboardAdapter.getSelectedItems()) {
-                                            cupboardItems += " " + s.getFood().getName();
+                                        String selectedItemsString = "";
+                                        for (Stock s : adapter.getSelectedItems()) {
+                                            selectedItemsString += " " + s.getFood().getName();
                                         }
 
+                                        // TODO: add the shopping list items to the correct storage compartment
                                         // add selected items to pantry components
-                                        Utils.getInstance(getActivity()).addShoppingListItemsToPantry(Pantry.STORAGE_LOCATIONS[0], fridgeAdapter.getSelectedItems());
-                                        Utils.getInstance(getActivity()).addShoppingListItemsToPantry(Pantry.STORAGE_LOCATIONS[1], freezerAdapter.getSelectedItems());
-                                        Utils.getInstance(getActivity()).addShoppingListItemsToPantry(Pantry.STORAGE_LOCATIONS[2], cupboardAdapter.getSelectedItems());
+                                        Utils.getInstance(getActivity()).addShoppingListItemsToPantry(Pantry.STORAGE_LOCATIONS[0], adapter.getSelectedItems());
 
                                         AlertDialog.Builder selectedItemsDialog = new AlertDialog.Builder(getActivity())
                                                 .setTitle("Items added to pantry")
-                                                .setMessage("Fridge: " + fridgeItems + "\nFreezer: " + freezerItems + "\nCupboard: " + cupboardItems)
+                                                .setMessage("Items: " + selectedItemsString)
                                                 .setPositiveButton("Go To Pantry", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -184,8 +152,6 @@ public class ShoppingListFragment extends Fragment {
         btnAddItem = view.findViewById(R.id.fragmentShoppingListAddItem);
         btnFinishShop = view.findViewById(R.id.fragmentShoppingListFinishButton);
         txtItemCounter = view.findViewById(R.id.fragmentShoppingListQuantityTxt);
-        recViewCupboardItems = view.findViewById(R.id.fragmentShoppingListCupboardRecyclerView);
-        recViewFreezerItems = view.findViewById(R.id.fragmentShoppingListFreezerRecyclerView);
         recViewFridgeItems = view.findViewById(R.id.fragmentShoppingListFridgeRecyclerView);
     }
 }
