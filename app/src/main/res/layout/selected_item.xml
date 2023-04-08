@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/selectedItemParent"
+    android:layout_margin="3dp"
+    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item name"
+            android:textSize="20sp"
+            android:id="@+id/selectedItemName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/selectedItemUnitTxt"
+            android:textSize="20sp"
+            android:text="Number of units" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter expiry date:"
+            android:id="@+id/selectedItemExpiryDateTxt"
+            android:layout_below="@+id/selectedItemUnitTxt"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/selectedItemExpiryEdtTxt"
+            android:hint="Enter expiry date of item"
+            android:inputType="text"
+            android:focusable="true"
+            android:layout_below="@+id/selectedItemExpiryDateTxt" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/selectedItemExpiryEdtTxt"
+            android:id="@+id/selectedItemStorageLocationRG"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fridge"
+                android:checked="true"
+                android:id="@+id/selectedItemFridgeRB" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Freezer"
+                android:layout_marginStart="10dp"
+                android:id="@+id/selectedItemFreezerRB" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cupboard"
+                android:layout_marginStart="10dp"
+                android:id="@+id/selectedItemCupboardRB" />
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

@@ -69,25 +69,21 @@ public class AddShoppingListItemDialog extends DialogFragment {
                 // get details of new item from UI components
                 Stock newItem = new Stock();
                 if(!edtTxtItemName.getText().toString().isEmpty() && !edtTxtQuantity.getText().toString().isEmpty()) {
-                    if(storageLocation != null) {
-                        Food food = new Food();
-                        food.setName(edtTxtItemName.getText().toString());
-                        food.setUnit(unitSpinner.getSelectedItem().toString());
-                        newItem.setFood(food);
-                        newItem.setQuantity(Double.parseDouble(edtTxtQuantity.getText().toString()));
+                    Food food = new Food();
+                    food.setName(edtTxtItemName.getText().toString());
+                    food.setUnit(unitSpinner.getSelectedItem().toString());
+                    newItem.setFood(food);
+                    newItem.setQuantity(Double.parseDouble(edtTxtQuantity.getText().toString()));
 
-                        // send the new item back to ShoppingListFragment
-                        try {
-                            addShoppingListItem = (AddShoppingListItem) getActivity();
-                            addShoppingListItem.onAddShoppingListItem(newItem, storageLocation);
-                        } catch(ClassCastException e) {
-                            e.printStackTrace();
-                        }
-
-                        dismiss();
-                    } else {
-                        Toast.makeText(getActivity(), "Please select a storage location", Toast.LENGTH_SHORT).show();
+                    // send the new item back to ShoppingListFragment
+                    try {
+                        addShoppingListItem = (AddShoppingListItem) getActivity();
+                        addShoppingListItem.onAddShoppingListItem(newItem, storageLocation);
+                    } catch(ClassCastException e) {
+                        e.printStackTrace();
                     }
+
+                    dismiss();
                 } else {
                     Toast.makeText(getActivity(), "Please fill out all the required fields!", Toast.LENGTH_SHORT).show();
                 }

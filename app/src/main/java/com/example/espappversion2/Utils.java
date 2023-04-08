@@ -221,7 +221,7 @@ public class Utils {
         saveState();
     }
 
-    public void removeShoppingListItem(String storageLocation, int index) {
+    public void removeShoppingListItem(int index) {
         User currentUser = getCurrentUser();
         currentUser.removeItemFromShoppingList(index);
         updateUser(currentUser);
@@ -236,7 +236,7 @@ public class Utils {
     public void addShoppingListItemsToPantry(String storageLocation, ArrayList<Stock> items) {
         for(Stock s : items) {
             addPantryItem(storageLocation, s);
-            removeShoppingListItem(storageLocation, items.indexOf(s));
+            removeShoppingListItem(items.indexOf(s));
         }
     }
 

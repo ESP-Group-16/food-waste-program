@@ -83,7 +83,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                                 // delete the item form pantry
                                 //Toast.makeText(context, "Deleted from shopping list", Toast.LENGTH_SHORT).show();
                                 //repository.removeItemFromShoppingList(items.get(holder.getAdapterPosition()), storageLocation);
-                                Utils.getInstance(context).removeShoppingListItem(Pantry.STORAGE_LOCATIONS[storageLocation], holder.getAdapterPosition());
+                                Utils.getInstance(context).removeShoppingListItem(holder.getAdapterPosition());
                                 updateItems();
                                 notifyDataSetChanged();
                             }

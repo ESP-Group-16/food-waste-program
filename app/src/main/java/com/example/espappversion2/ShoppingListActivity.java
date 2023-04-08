@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,7 +14,34 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class ShoppingListActivity extends AppCompatActivity implements AddShoppingListItemDialog.AddShoppingListItem {
+public class ShoppingListActivity extends AppCompatActivity implements AddShoppingListItemDialog.AddShoppingListItem, SelectedItemsDialog.UpdateShoppingList {
+
+    @Override
+    public void onUpdateShoppingList() {
+        // restart ShoppingListFragment to display updated list
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.activityShoppingListFragmentContainer, new ShoppingListFragment());
+        transaction.commit();
+
+        // give the user the option to go to pantry
+        AlertDialog.Builder builder2 = new AlertDialog.Builder(this).setTitle("Go to pantry?").setMessage("Do you want to go to the pantry?");
+        builder2.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // navigate user to PantryActivity
+                Intent intent = new Intent(ShoppingListActivity.this, PantryActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        builder2.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // do nothing
+            }
+        });
+        builder2.create().show();
+    }
 
     @Override
     public void onAddShoppingListItem(Stock item, String storageLocation) {

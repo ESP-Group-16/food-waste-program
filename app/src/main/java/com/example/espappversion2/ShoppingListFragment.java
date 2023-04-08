@@ -1,12 +1,14 @@
 package com.example.espappversion2;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +27,6 @@ public class ShoppingListFragment extends Fragment {
     private Button btnAddItem, btnFinishShop;
     private TextView txtItemCounter;
     private RecyclerView recViewFridgeItems;
-
-    private Repository repository;
     private ArrayList<Stock> shoppingList;
     private ShoppingListAdapter adapter;
     private User currentUser;
@@ -38,13 +38,6 @@ public class ShoppingListFragment extends Fragment {
 
         initViews(view);
         currentUser = Utils.getInstance(getActivity()).getCurrentUser();
-        //repository = new Repository(getActivity());
-
-        // get the lists from DB
-//        shoppingList = repository.getShoppingList();
-//        fridgeItemsList = shoppingList.get(0);
-//        freezerItemsList = shoppingList.get(1);
-//        cupboardItemsList = shoppingList.get(2);
 
         // get the lists from DB
         shoppingList = currentUser.getShoppingList();
@@ -64,6 +57,7 @@ public class ShoppingListFragment extends Fragment {
             @Override
             public boolean onLongClick(View view) {
                 System.out.println("Shopping list: " + Utils.getInstance(getActivity()).getShoppingListByUser(currentUser));
+                Toast.makeText(getActivity(), "Update list", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -76,58 +70,17 @@ public class ShoppingListFragment extends Fragment {
                     // check if selected items list is empty
                     ArrayList<Stock> selectedItems = adapter.getSelectedItems();
                     if (!selectedItems.isEmpty()) {
-                        // ask for verification before proceeding
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                                .setTitle("Finish shop?")
-                                .setMessage("Do you want to remove the selected items from your shopping list and add them to the pantry?")
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        // a bunch of stuff used for debugging - please ignore
-//                                        String allItems = "";
-//                                        for (Stock s : selectedItems) {
-//                                            allItems += " " + s.getFood().getName();
-//                                        }
-                                        String selectedItemsString = "";
-                                        for (Stock s : adapter.getSelectedItems()) {
-                                            selectedItemsString += " " + s.getFood().getName();
-                                        }
 
-                                        // TODO: add the shopping list items to the correct storage compartment
-                                        // add selected items to pantry components
-                                        Utils.getInstance(getActivity()).addShoppingListItemsToPantry(Pantry.STORAGE_LOCATIONS[0], adapter.getSelectedItems());
+                        String selectedItemsString = "";
+                        for (Stock s : adapter.getSelectedItems()) {
+                            selectedItemsString += " " + s.getFood().getName();
+                        }
 
-                                        AlertDialog.Builder selectedItemsDialog = new AlertDialog.Builder(getActivity())
-                                                .setTitle("Items added to pantry")
-                                                .setMessage("Items: " + selectedItemsString)
-                                                .setPositiveButton("Go To Pantry", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                                        // navigate user to Pantry
-                                                        Intent shoppingListIntent = new Intent(getActivity(), PantryActivity.class);
-                                                        shoppingListIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                        startActivity(shoppingListIntent);
-                                                    }
-                                                })
-                                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                                        // restart ShoppingListFragment to display updated list
-                                                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                                        transaction.replace(R.id.activityShoppingListFragmentContainer, new ShoppingListFragment());
-                                                        transaction.commit();
-                                                    }
-                                                });
-                                        selectedItemsDialog.create().show();
-                                    }
-                                })
-                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        // don't do anything
-                                    }
-                                });
-                        builder.create().show();
+                        // open SelectedItemsDialog to display items to be added to the pantry
+                        SelectedItemsDialog dialog = new SelectedItemsDialog(selectedItems);
+
+                        dialog.show(getActivity().getSupportFragmentManager(), "selected_items_dialog");
+
                     } else {
                         Toast.makeText(getActivity(), "Please select purchased items!", Toast.LENGTH_SHORT).show();
                     }

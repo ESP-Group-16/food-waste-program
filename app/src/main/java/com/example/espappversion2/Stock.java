@@ -7,7 +7,7 @@ public class Stock {
     private boolean isShared;
     private User owner;
 
-    public Stock(){
+    public Stock() {
 
     }
 
@@ -20,7 +20,7 @@ public class Stock {
     }
 
     // Methods
-    public boolean checkExpired(){
+    public boolean checkExpired() {
         // TODO: make functionality for checkExpired.
         return true;
     }
