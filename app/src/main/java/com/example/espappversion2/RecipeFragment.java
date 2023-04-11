@@ -137,23 +137,19 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
                 }
             });
         } else if(resultFor.equals("recipe_carbon")) {
-            if(displayCarbon) {
-                String carbonEmission = response.getString("carbon");
-                txtCarbonEmission.setText("Carbon emission: " + carbonEmission);
-                txtCarbonEmission.setTextColor(getResources().getColor(R.color.text_color));
-                if(carbonEmission.equals("Very Low")) {
-                    txtCarbonEmission.setTextColor(getResources().getColor(R.color.very_low));
-                } else if(carbonEmission.equals("Low")){
-                    txtCarbonEmission.setTextColor(getResources().getColor(R.color.low));
-                } else if(carbonEmission.equals("Medium")) {
-                    txtCarbonEmission.setTextColor(getResources().getColor(R.color.medium));
-                } else if(carbonEmission.equals("High")) {
-                        txtCarbonEmission.setTextColor(getResources().getColor(R.color.high));
-                } else if((carbonEmission.equals("Very High"))) {
-                    txtCarbonEmission.setTextColor(getResources().getColor(R.color.very_high));
-                }
-            } else {
-                txtCarbonEmission.setVisibility(View.GONE);
+            String carbonEmission = response.getString("carbon");
+            txtCarbonEmission.setText("Carbon emission: " + carbonEmission);
+            txtCarbonEmission.setTextColor(getResources().getColor(R.color.text_color));
+            if(carbonEmission.equals("Very Low")) {
+                txtCarbonEmission.setTextColor(getResources().getColor(R.color.very_low));
+            } else if(carbonEmission.equals("Low")){
+                txtCarbonEmission.setTextColor(getResources().getColor(R.color.low));
+            } else if(carbonEmission.equals("Medium")) {
+                txtCarbonEmission.setTextColor(getResources().getColor(R.color.medium));
+            } else if(carbonEmission.equals("High")) {
+                txtCarbonEmission.setTextColor(getResources().getColor(R.color.high));
+            } else if((carbonEmission.equals("Very High"))) {
+                txtCarbonEmission.setTextColor(getResources().getColor(R.color.very_high));
             }
         } else if(resultFor.equals("recipe_by_id")) {
 
@@ -164,8 +160,6 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
     public void onFailure(VolleyError error) {
 
     }
-
-    public static final boolean displayCarbon = true;
 
     private Button btnBack, btnFavouriteRecipe, btnUnFavouriteRecipe, btnAddIngredientsToCart;
     private TextView txtRecipeName, txtInstructions, txtCarbonEmission;

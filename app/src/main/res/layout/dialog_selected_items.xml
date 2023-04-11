@@ -22,35 +22,35 @@
                 android:textSize="30sp" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dialogSelectedItemsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/dialogSelectedItemsRecyclerView"
                 android:layout_below="@+id/dialogSelectedItemsTitleTxt" />
 
             <RelativeLayout
+                android:id="@+id/selectedItemsButtonRelLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/dialogSelectedItemsRecyclerView"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/selectedItemsButtonRelLayout">
+                android:layout_centerHorizontal="true">
 
                 <Button
+                    android:id="@+id/dialogSelectedItemsCancelButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cancel"
                     android:textAllCaps="false"
-                    android:textColor="@color/text_color_alt"
-                    android:id="@+id/dialogSelectedItemsCancelButton" />
+                    android:textColor="@color/text_color_alt" />
 
                 <Button
+                    android:id="@+id/dialogSelectedItemsAddButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add Items"
                     android:layout_marginStart="20dp"
                     android:layout_toEndOf="@+id/dialogSelectedItemsCancelButton"
+                    android:text="Add Items"
                     android:textAllCaps="false"
-                    android:textColor="@color/text_color_alt"
-                    android:id="@+id/dialogSelectedItemsAddButton" />
+                    android:textColor="@color/text_color_alt" />
 
             </RelativeLayout>
 
@@ -58,9 +58,9 @@
             <EditText
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/selectedItemsButtonRelLayout"
                 android:hint="Test"
-                android:visibility="gone"
-                android:layout_below="@+id/selectedItemsButtonRelLayout" />
+                android:visibility="gone" />
 
         </RelativeLayout>
 

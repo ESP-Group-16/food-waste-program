@@ -7,12 +7,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:background="@color/secondary_color_light"
         android:padding="10sp"
         android:text="Recipe Menu"
         android:textAlignment="center"
-        android:background="@color/secondary_color_light"
-        android:textSize="40sp"
         android:textColor="@color/text_color_alt"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
     <LinearLayout

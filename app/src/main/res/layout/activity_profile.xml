@@ -10,9 +10,9 @@
         android:id="@+id/activityProfileTopTextUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/secondary_color_light"
         android:padding="10sp"
         android:text="User's Profile"
-        android:background="@color/secondary_color_light"
         android:textAlignment="center"
         android:textColor="@color/main_background"
         android:textSize="40sp"
@@ -28,7 +28,8 @@
         android:paddingBottom="7sp"
         android:text="Profile"
         android:textSize="35sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 
     <TextView
@@ -58,9 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/activityProfileNoteTxt"
         android:layout_marginStart="10dp"
-        android:hint="Search for ingredients..."
-        android:textColor="@color/text_color"
-        android:textColorHint="@color/text_color_hint" />
+        android:hint="Search for ingredients..." />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activityProfileAllergiesRecView"
@@ -68,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/activityProfileSearchBarEdtTxt"
         android:layout_marginTop="5dp"
-        android:paddingBottom="150dp"/>
+        android:paddingBottom="150dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/activityProfileLogoutButton"

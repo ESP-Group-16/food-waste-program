@@ -46,7 +46,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
             }
         } else if(resultFor.equals("recipe_carbon")) {
             txtCarbonEmission.setText(response.getString("carbon"));
-        } else {
+        } else { // get recipes by category or cuisine
             recipes = Recipe.generateRecipesGivenJSON(response);
             //filterRecipes(recipes);
             // set adapter for recycler view to display recipes
@@ -58,10 +58,9 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
     }
 
     public void filterRecipes(ArrayList<Recipe> recipes) {
-        ArrayList<String> allergies = Utils.getInstance(getContext()).getAllergies();
         System.out.println("User allergies: " + allergies);
         for(Recipe recipe : recipes) {
-            System.out.println("Recipe ingredient: " + recipe.getIngredients());
+            //System.out.println("Recipe ingredient: " + recipe.getIngredients());
             for(Ingredient ingredient : recipe.getIngredients()) {
                 if(allergies.contains(ingredient.getFood().getName())) {
                     Toast.makeText(getActivity(), "Removing " + recipe.getName() + " from recipes because it contains " + ingredient.getFood().getName(), Toast.LENGTH_SHORT).show();
@@ -88,6 +87,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
     private RecipeAPI recipeAPI;
     private String recipeListMode;
     private String extra;
+    ArrayList<String> allergies;
 
     @Nullable
     @Override
@@ -96,6 +96,7 @@ public class RecipeListFragment extends Fragment implements VolleyCallback {
         initViews(view);
         recipeAPI = new RecipeAPI(getActivity());
         recipes = new ArrayList<>();
+        allergies = Utils.getInstance(getContext()).getAllergies();
         System.out.println("Favourite recipes when opening RecipeListFragment: " + new Gson().toJson(Utils.getInstance(getActivity()).getFavouriteRecipes()));
 
         // get the mode and the corresponding list of recipes

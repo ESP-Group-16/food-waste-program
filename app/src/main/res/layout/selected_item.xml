@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/selectedItemParent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="3dp"
     app:cardElevation="2dp">
 
@@ -13,66 +13,66 @@
         android:padding="15dp">
 
         <TextView
+            android:id="@+id/selectedItemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Item name"
-            android:textSize="20sp"
-            android:id="@+id/selectedItemName" />
+            android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/selectedItemUnitTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:id="@+id/selectedItemUnitTxt"
-            android:textSize="20sp"
-            android:text="Number of units" />
+            android:text="Number of units"
+            android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/selectedItemExpiryDateTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enter expiry date:"
-            android:id="@+id/selectedItemExpiryDateTxt"
             android:layout_below="@+id/selectedItemUnitTxt"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:text="Enter expiry date:" />
 
         <EditText
+            android:id="@+id/selectedItemExpiryEdtTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/selectedItemExpiryEdtTxt"
-            android:hint="Enter expiry date of item"
-            android:inputType="text"
+            android:layout_below="@+id/selectedItemExpiryDateTxt"
             android:focusable="true"
-            android:layout_below="@+id/selectedItemExpiryDateTxt" />
+            android:hint="Enter expiry date of item"
+            android:inputType="text" />
 
         <RadioGroup
+            android:id="@+id/selectedItemStorageLocationRG"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/selectedItemExpiryEdtTxt"
-            android:id="@+id/selectedItemStorageLocationRG"
-            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/selectedItemFridgeRB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fridge"
                 android:checked="true"
-                android:id="@+id/selectedItemFridgeRB" />
+                android:text="Fridge" />
 
             <RadioButton
+                android:id="@+id/selectedItemFreezerRB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Freezer"
                 android:layout_marginStart="10dp"
-                android:id="@+id/selectedItemFreezerRB" />
+                android:text="Freezer" />
 
             <RadioButton
+                android:id="@+id/selectedItemCupboardRB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cupboard"
                 android:layout_marginStart="10dp"
-                android:id="@+id/selectedItemCupboardRB" />
+                android:text="Cupboard" />
 
         </RadioGroup>
 

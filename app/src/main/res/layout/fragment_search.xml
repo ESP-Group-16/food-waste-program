@@ -31,11 +31,12 @@
                 android:layout_height="wrap_content">
 
                 <Button
+                    android:id="@+id/fragmentSearchBackButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Back"
                     android:textAllCaps="false"
-                    android:id="@+id/fragmentSearchBackButton" />
+                    android:textColor="@color/text_color_alt" />
 
                 <EditText
                     android:id="@+id/fragmentSearchBarEdtTxt"
@@ -49,10 +50,11 @@
                     android:id="@+id/fragmentSearchButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAllCaps="false"
-                    android:layout_toEndOf="@+id/fragmentSearchBarEdtTxt"
                     android:layout_marginStart="10dp"
-                    android:text="Search" />
+                    android:layout_toEndOf="@+id/fragmentSearchBarEdtTxt"
+                    android:text="Search"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color_alt" />
 
             </RelativeLayout>
 
@@ -66,27 +68,27 @@
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragmentSearchByCategoryRecView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_below="@+id/fragmentSearchCategoryTxt"
-                android:id="@+id/fragmentSearchByCategoryRecView" />
+                android:layout_marginTop="5dp" />
 
             <TextView
+                android:id="@+id/fragmentSearchByCuisineTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Search by Cuisine"
-                android:id="@+id/fragmentSearchByCuisineTxt"
                 android:layout_below="@+id/fragmentSearchByCategoryRecView"
                 android:layout_marginTop="20dp"
+                android:text="Search by Cuisine"
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragmentSearchByCuisineRecView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/fragmentSearchByCuisineTxt" />
+                android:layout_below="@+id/fragmentSearchByCuisineTxt"
+                android:layout_marginTop="5dp" />
 
         </RelativeLayout>
 

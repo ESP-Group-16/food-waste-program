@@ -23,18 +23,18 @@
             android:id="@+id/fragmentRecipeNameTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/fragmentRecipeBackBtn"
             android:autoSizeMaxTextSize="40sp"
             android:autoSizeMinTextSize="20sp"
             android:autoSizeTextType="uniform"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/fragmentRecipeBackBtn"
-            android:textStyle="bold"
             android:padding="10dp"
             android:text="Recipe name"
-            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
             android:textColor="@color/text_color_alt"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
@@ -60,15 +60,20 @@
                 android:id="@+id/fragmentRecipeCarbonEmission"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:layout_below="@+id/fragmentRecipeImg"
-                android:text="Carbon produced by this recipe: " />
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Carbon produced by this recipe: "
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/fragmentRecipeIconLinLay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fragmentRecipeCarbonEmission"
+                android:layout_marginTop="5dp"
                 android:gravity="center">
 
                 <androidx.appcompat.widget.AppCompatButton

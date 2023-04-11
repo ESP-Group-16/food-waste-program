@@ -51,7 +51,7 @@
         android:layout_below="@+id/RelativeLayout2"
         android:paddingHorizontal="10sp"
         android:paddingTop="10sp"
-        android:paddingBottom="70dp"/>
+        android:paddingBottom="70dp" />
 
 
     <androidx.appcompat.widget.AppCompatButton
