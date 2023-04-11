@@ -4,6 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -35,9 +37,9 @@ public class Recipe {
         this.imageURL = recipe.getString("strMealThumb");
         this.duration = 10;  // TODO: we don't have a duration right now
         this.dietaryInfo = dietaryInfo; // TODO: get this from some API
-        Pattern patternUnit = Pattern.compile("(\\d+\\/\\d+|\\d+)?\\s*([a-zA-Z]+(?:\\s+[a-zA-Z]+)*)(?:\\s*)$"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
-        Pattern patternQuantity = Pattern.compile("\\d+(?:\\/\\d+)?"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
-        Pattern patternUnitSpace = Pattern.compile("\\d+(?:\\/\\d+)?(?=\\s)"); // checks if the quantity has a space after it
+        Pattern patternUnit = Pattern.compile("(\\d+\\/\\d+|\\d+)?\\s*([a-zA-Z]+(?:\\s+[a-zA-Z]+)*)(?:\\s*)"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
+        Pattern patternQuantity = Pattern.compile("\\d+(?:\\/\\d+)?|^(?:[\\xbc-\\xbe])+"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
+        Pattern patternUnitSpace = Pattern.compile("(\\d+(?:\\/\\d+)?|^(?:[\\xbc-\\xbe])+)(?=\\s)"); // checks if the quantity has a space after it
         this.category = new ArrayList<String>();
         this.ingredients = new ArrayList<Ingredient>();
         if (recipe.has("strInstructions")) { // if we pass the detailed version of the recipe
@@ -49,8 +51,15 @@ public class Recipe {
                 Matcher m_quantity = patternQuantity.matcher(recipe.getString("strMeasure" + i));
                 double quantity;
                 if (m_quantity.find()) {
+                    String[] fraction = Normalizer.normalize(m_quantity.group(), Normalizer.Form.NFKD).split("\u2044");
+                    if (fraction.length == 2) {
+                        double val = (double) Integer.parseInt(fraction[0]) / Integer.parseInt(fraction[1]);
+                        DecimalFormat df = new DecimalFormat("#.##");
+                        quantity = Double.parseDouble(df.format(val));
+                    } else {
                     if (m_quantity.group().contains("/")) quantity = fractionToDouble(m_quantity.group());
                     else quantity = Double.parseDouble(m_quantity.group());
+                    }
                 } else {
                     quantity = -1.0;
                 }
@@ -123,7 +132,9 @@ public class Recipe {
         String[] parts = fraction.split("/");
         double numerator = Double.parseDouble(parts[0]);
         double denominator = parts.length > 1 ? Double.parseDouble(parts[1]) : 1.0;
-        return numerator / denominator;
+        DecimalFormat df = new DecimalFormat("#.##");
+        return Double.parseDouble(df.format(numerator / denominator));
+
     }
 
     // Attribute Getters and Setters
