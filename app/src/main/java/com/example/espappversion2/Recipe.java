@@ -35,7 +35,7 @@ public class Recipe {
         this.imageURL = recipe.getString("strMealThumb");
         this.duration = 10;  // TODO: we don't have a duration right now
         this.dietaryInfo = dietaryInfo; // TODO: get this from some API
-        Pattern patternUnit = Pattern.compile("(\\d+\\/\\d+|\\d+)?\\s*([a-zA-Z]+(?:\\s+[a-zA-Z]+)*)(?:\\s*)$"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
+        Pattern patternUnit = Pattern.compile("(\\d+\\/\\d+|\\d+)?\\s*([a-zA-Z]+(?:\\s+[a-zA-Z]+)*)(?:\\s*)"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
         Pattern patternQuantity = Pattern.compile("\\d+(?:\\/\\d+)?"); // gets any word that doesn't have a number in it i.e. 1/2 used for unit
         Pattern patternUnitSpace = Pattern.compile("\\d+(?:\\/\\d+)?(?=\\s)"); // checks if the quantity has a space after it
         this.category = new ArrayList<String>();
