@@ -169,6 +169,11 @@ public class ProfileActivity extends AppCompatActivity implements VolleyCallback
     }
 
     @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);

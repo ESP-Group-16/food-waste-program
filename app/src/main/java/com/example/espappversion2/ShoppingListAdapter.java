@@ -45,7 +45,12 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         if(items.get(holder.getAdapterPosition()).getFood() != null) {
             holder.txtItemName.setText(items.get(holder.getAdapterPosition()).getFood().getName());
         }
-        holder.txtUnitNumber.setText(items.get(holder.getAdapterPosition()).getQuantity() + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
+        if(items.get(holder.getAdapterPosition()).getQuantity() > 0) {
+            holder.txtUnitNumber.setText(items.get(holder.getAdapterPosition()).getQuantity() + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
+        } else {
+            holder.txtUnitNumber.setText(items.get(holder.getAdapterPosition()).getFood().getUnit());
+        }
+
         holder.txtItemName.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -83,7 +88,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                                 // delete the item form pantry
                                 //Toast.makeText(context, "Deleted from shopping list", Toast.LENGTH_SHORT).show();
                                 //repository.removeItemFromShoppingList(items.get(holder.getAdapterPosition()), storageLocation);
-                                Utils.getInstance(context).removeShoppingListItem(Pantry.STORAGE_LOCATIONS[storageLocation], holder.getAdapterPosition());
+                                Utils.getInstance(context).removeShoppingListItem(holder.getAdapterPosition());
                                 updateItems();
                                 notifyDataSetChanged();
                             }

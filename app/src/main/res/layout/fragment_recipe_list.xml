@@ -19,8 +19,13 @@
 
         <TextView
             android:id="@+id/fragmentRecipeListTitleTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textAlignment="center"
+            android:autoSizeMaxTextSize="40sp"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeTextType="uniform"
+            android:layout_toEndOf="@+id/fragmentRecipeListBackBtn"
             android:layout_centerInParent="true"
             android:padding="10dp"
             android:text="Search: ..."

@@ -13,7 +13,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragmentRecipeBackBtn"
             android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40sp"
             android:layout_centerVertical="true"
             android:backgroundTint="@color/secondary_color_light"
             android:contentDescription="Back button"
@@ -21,25 +21,22 @@
 
         <TextView
             android:id="@+id/fragmentRecipeNameTxt"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:autoSizeMaxTextSize="40sp"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeTextType="uniform"
             android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/fragmentRecipeBackBtn"
             android:textStyle="bold"
             android:padding="10dp"
             android:text="Recipe name"
             android:layout_centerHorizontal="true"
             android:textColor="@color/text_color_alt"
-            android:textSize="40sp" />
+            android:textSize="20sp" />
 
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/fragmentRecipeImg"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_below="@id/fragmentRecipeTitleRelLay"
-        android:scaleType="centerCrop"
-        android:src="@drawable/default_recipe_img" />
 
     <ScrollView
         android:id="@+id/fragmentRecipeScrollView"
@@ -50,14 +47,21 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="250dp"
             android:paddingBottom="500sp">
+
+            <ImageView
+                android:id="@+id/fragmentRecipeImg"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/default_recipe_img" />
 
             <TextView
                 android:id="@+id/fragmentRecipeCarbonEmission"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:layout_below="@+id/fragmentRecipeImg"
                 android:text="Carbon produced by this recipe: " />
 
             <LinearLayout
