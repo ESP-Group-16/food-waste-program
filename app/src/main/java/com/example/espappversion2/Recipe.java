@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -123,7 +124,9 @@ public class Recipe {
         String[] parts = fraction.split("/");
         double numerator = Double.parseDouble(parts[0]);
         double denominator = parts.length > 1 ? Double.parseDouble(parts[1]) : 1.0;
-        return numerator / denominator;
+        DecimalFormat df = new DecimalFormat("#.##");
+        return Double.parseDouble(df.format(numerator / denominator));
+
     }
 
     // Attribute Getters and Setters

@@ -115,8 +115,10 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
                     // if statement to determine step size of the counter
                     if (qty < 10) {
                         // set step size of 0.05
+                        sliderQty.setValueTo(0.05f * (float)Math.ceil(items.get(holder.getAdapterPosition()).getQuantity() / 0.05)); // rounding UP to the nearest 0.05 to allow step size of 5
                         sliderQty.setStepSize(0.05f);
                     } else if (qty < 50) {
+                        sliderQty.setValueTo(0.5f * (float)Math.ceil(items.get(holder.getAdapterPosition()).getQuantity() / 0.5)); // rounding UP to the nearest 0.05 to allow step size of 5
                         // set step size of 0.5
                         sliderQty.setStepSize(0.5f);
                     } else if (qty < 200) {
