@@ -14,9 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.slider.RangeSlider;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.ViewHolder> {
 
@@ -50,7 +53,11 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
             holder.txtItemName.setText(items.get(holder.getAdapterPosition()).getFood().getName());
         }
         if(items.get(holder.getAdapterPosition()).getQuantity() > 0) {
-            holder.txtQuantity.setText(items.get(holder.getAdapterPosition()).getQuantity() + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
+            // This is to show symbol . instead of ,
+            DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.UK);
+            // Define the maximum number of decimals (number of symbols #)
+            DecimalFormat df = new DecimalFormat("#.##########", otherSymbols);
+            holder.txtQuantity.setText(df.format(items.get(holder.getAdapterPosition()).getQuantity()) + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
         } else {
             holder.txtQuantity.setText(items.get(holder.getAdapterPosition()).getFood().getUnit());
         }

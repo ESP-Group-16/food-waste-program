@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,15 +74,29 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
                 public void onClick(View view) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                             .setTitle("Add items to shopping list")
-                            .setMessage("Do you want to add all the ingredients to the shopping list?")
+                            .setMessage("Do you want to add all the ingredients of this recipe to the shopping list?")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     // TODO: add all ingredients to shopping list
-                                    for(Ingredient ingredient : ingredients) {
-                                        Utils.getInstance(getActivity()).addShoppingListItem(ingredient.makeStock());
-                                    }
-                                    //System.out.println(new Gson().toJson(ingredients));
+                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity()).setTitle("Add Ingredients to Shopping List")
+                                            .setMessage("Do you want to add all the ingredients of this recipe to the shopping list?")
+                                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    for(Ingredient ingredient : ingredients) {
+                                                        Utils.getInstance(getActivity()).addShoppingListItem(ingredient.makeStock());
+                                                    }
+                                                    Toast.makeText(getActivity(), "Ingredients added to shopping list", Toast.LENGTH_SHORT).show();
+                                                }
+                                            })
+                                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    // do nothing
+                                                }
+                                            });
+                                    builder1.create().show();
                                 }
                             })
                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
