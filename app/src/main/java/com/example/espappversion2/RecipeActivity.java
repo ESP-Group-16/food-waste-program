@@ -109,6 +109,11 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.N
     }
 
     @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);

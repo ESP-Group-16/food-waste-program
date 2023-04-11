@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
     private Button btnLogin, btnRegister;
     private CheckBox checkBoxStayLoggedIn;
 
-    //private Repository repo=new Repository(this);
-
     private String TAG = "MainActivity";
 
     @Override
@@ -70,15 +68,6 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
             }
         });
 
-//        btnLogin.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, PantryActivity.class);
-//                startActivity(intent);
-//                return false;
-//            }
-//        });
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,37 +86,7 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
                 return false;
             }
         });
-
-//        btnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                ArrayList<Stock> arr = new ArrayList<>();
-////                Food food = new Food();
-////                food.setName("chicken");
-////                Stock st = new Stock();
-////                st.setFood(food);
-////                arr.add(st);
-//                RecipeAPI huh = new RecipeAPI(getApplicationContext());
-//                System.out.println("Huh");
-//
-//                huh.getRecipesByMainIngredient(new VolleyCallback() {
-//                    @Override
-//                    public void onSuccess(JSONObject response, String responseFor) {
-//                        // Handle API response
-//                        // This will now have a JSON object if API call is successful
-//                        // we can make this into a recipe object
-//                        System.out.println(response.toString());
-//                    }
-//
-//                    @Override
-//                    public void onFailure(VolleyError error) {
-//                        // Handle error response
-//                        error.printStackTrace();
-//                    }
-//                }, "chicken");
-//            }
-//            });
-       };
+    }
 
 
     private void login(User user) {
@@ -147,6 +106,11 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
         edtTxtEmail = findViewById(R.id.activityMainEmailEdtTxt);
         edtTxtPassword = findViewById(R.id.activityMainPasswordEdtTxt);
         checkBoxStayLoggedIn = findViewById(R.id.activityMainStayLoggedInCheckBox);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 
     @Override

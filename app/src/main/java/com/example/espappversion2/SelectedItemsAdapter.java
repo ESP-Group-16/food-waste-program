@@ -39,7 +39,11 @@ public class SelectedItemsAdapter extends RecyclerView.Adapter<SelectedItemsAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Stock currentItem = items.get(holder.getAdapterPosition());
         holder.txtItemName.setText(currentItem.getFood().getName());
-        holder.txtUnitNumber.setText(currentItem.getQuantity() + " " + currentItem.getFood().getUnit());
+        if(currentItem.getQuantity() > 0) {
+            holder.txtUnitNumber.setText(currentItem.getQuantity() + " " + currentItem.getFood().getUnit());
+        } else {
+            holder.txtUnitNumber.setText(currentItem.getFood().getUnit());
+        }
 
         if(currentItem.getExpiresAt() != null) {
             holder.expiryDateEdtTxt.setText(currentItem.getExpiresAt());

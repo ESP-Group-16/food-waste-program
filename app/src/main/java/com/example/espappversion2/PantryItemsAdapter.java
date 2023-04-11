@@ -49,9 +49,17 @@ public class PantryItemsAdapter extends RecyclerView.Adapter<PantryItemsAdapter.
         if(items.get(holder.getAdapterPosition()).getFood() != null && items.get(holder.getAdapterPosition()).getFood().getName() != null) {
             holder.txtItemName.setText(items.get(holder.getAdapterPosition()).getFood().getName());
         }
-        holder.txtQuantity.setText(items.get(holder.getAdapterPosition()).getQuantity() + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
+        if(items.get(holder.getAdapterPosition()).getQuantity() > 0) {
+            holder.txtQuantity.setText(items.get(holder.getAdapterPosition()).getQuantity() + " " + items.get(holder.getAdapterPosition()).getFood().getUnit());
+        } else {
+            holder.txtQuantity.setText(items.get(holder.getAdapterPosition()).getFood().getUnit());
+        }
 
-        holder.txtExpiryDate.setText(String.valueOf(items.get(holder.getAdapterPosition()).getExpiresAt()));
+        if(items.get(holder.getAdapterPosition()).getExpiresAt() != null) {
+            holder.txtExpiryDate.setText(String.valueOf(items.get(holder.getAdapterPosition()).getExpiresAt()));
+        } else {
+            holder.txtExpiryDate.setText("Expiry date missing");
+        }
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
