@@ -20,6 +20,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 public class ShoppingListFragment extends Fragment {
@@ -98,6 +100,16 @@ public class ShoppingListFragment extends Fragment {
                 dialog.show(getActivity().getSupportFragmentManager(), "add shopping list item");
             }
         });
+
+        btnAddItem.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                System.out.println(new Gson().toJson(adapter.getSelectedItems()));
+                System.out.println(adapter.getSelectedItems().size());
+                return false;
+            }
+        });
+
         return view;
     }
 

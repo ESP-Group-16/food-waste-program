@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -58,6 +60,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             holder.txtUnitNumber.setText(items.get(holder.getAdapterPosition()).getFood().getUnit());
         }
 
+        holder.txtItemName.setChecked(selectedItems.contains(items.get(holder.getAdapterPosition())));
+
         holder.txtItemName.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -65,9 +69,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                 if(b) {
                     //Toast.makeText(context, selectedItem.getFood().getName() + " selected", Toast.LENGTH_SHORT).show();
                     if(!selectedItems.contains(selectedItem)) {
-                        if(selectedItems.add(selectedItem)) {
-                            //Toast.makeText(context, selectedItem.getFood().getName() + " added to list", Toast.LENGTH_SHORT).show();
-                        }
+                        selectedItems.add(selectedItem);
                     }
                 } else {
                     //Toast.makeText(context, selectedItem.getFood().getName() + " unselected", Toast.LENGTH_SHORT).show();
@@ -75,6 +77,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
                         //Toast.makeText(context, selectedItem.getFood().getName() + " removed from list", Toast.LENGTH_SHORT).show();
                     }
                 }
+                System.out.println(new Gson().toJson(selectedItem));
             }
         });
 
