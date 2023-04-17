@@ -72,6 +72,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/rounded_button"
         android:paddingHorizontal="20sp"
+        android:textColor="@color/text_color_alt"
         android:text="Register"
         android:textAllCaps="false"
         android:textSize="20sp" />
