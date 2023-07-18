@@ -19,7 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class AddPantryItemDialog extends DialogFragment {
 
@@ -62,6 +61,8 @@ public class AddPantryItemDialog extends DialogFragment {
                 }
                 else if (storageLocation == null) { // if storage location doesn't exist.
                     Toast.makeText(getActivity(), "Please select a storage location!", Toast.LENGTH_SHORT).show();
+                } else if (Integer.parseInt(edtTxtQuantity.getText().toString()) >= 2147483647) {
+                    Toast.makeText(getActivity(), "Please enter a valid quantity!", Toast.LENGTH_SHORT).show();
                 } else {
 
                     Stock newPantryItem = new Stock();
