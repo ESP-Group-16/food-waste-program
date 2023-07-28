@@ -50,11 +50,11 @@ public class RecipeFragment extends Fragment implements VolleyCallback {
                     .load(recipe.getImageURL())
                     .into(imgRecipe);
 
-            System.out.println("Recipe ingredients: " + recipe.getIngredients());
-            System.out.println("Recipe instructions: " + recipe.getSteps());
-            System.out.println(recipe.getIngredients().getClass().getName());
-            System.out.println(recipe.getIngredients().get(0).getClass().getName());
-            System.out.println(recipe.getSteps().getClass().getName());
+            //System.out.println("Recipe ingredients: " + recipe.getIngredients());
+            //System.out.println("Recipe instructions: " + recipe.getSteps());
+            //System.out.println(recipe.getIngredients().getClass().getName());
+            //System.out.println(recipe.getIngredients().get(0).getClass().getName());
+            //System.out.println(recipe.getSteps().getClass().getName());
 
             txtInstructions.setText(recipe.getSteps());
 

@@ -61,7 +61,7 @@ public class AddPantryItemDialog extends DialogFragment {
                 }
                 else if (storageLocation == null) { // if storage location doesn't exist.
                     Toast.makeText(getActivity(), "Please select a storage location!", Toast.LENGTH_SHORT).show();
-                } else if (Integer.parseInt(edtTxtQuantity.getText().toString()) >= 2147483647) {
+                } else if (edtTxtQuantity.getText().toString().length() >= 9) {
                     Toast.makeText(getActivity(), "Please enter a valid quantity!", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -154,13 +154,6 @@ public class AddPantryItemDialog extends DialogFragment {
     }
 
     private ArrayList<String> getUnits() {
-        ArrayList<String> units = new ArrayList<>();
-        units.add("Kg");
-        units.add("L");
-        units.add("Pc");
-        units.add("Ml");
-        units.add("Pint");
-        units.add("g");
-        return units;
+        return UnitConverter.getStandardUnits();
     }
 }

@@ -64,7 +64,6 @@ public class Recipe {
                     quantity = -1.0;
                 }
                 Matcher m_unit = patternUnit.matcher(recipe.getString("strMeasure" + i));
-                System.out.println(recipe.getString("strMeasure" + i));
 
                 Matcher m_space = patternUnitSpace.matcher(recipe.getString("strMeasure" + i));
                 String unit;
@@ -72,7 +71,7 @@ public class Recipe {
                 if (m_space.find()) stringBuilder.append(" ");
                 if (m_unit.find()) {
                     stringBuilder.append(m_unit.group(2));
-                    unit = String.valueOf(stringBuilder);
+                    unit = String.valueOf(stringBuilder).trim();
                 } else {
                     unit = "";
                 }
@@ -83,7 +82,7 @@ public class Recipe {
                         1,
                         recipe.getString("strIngredient" + i),
                         new ArrayList<String>(),    // TODO: this is dietaryInfo
-                        unit,
+                        UnitConverter.convertToStandardUnit(unit),
                         new HashMap<String, Integer>(), // TODO: this is nutritionalInfo
                         0.0
                 );

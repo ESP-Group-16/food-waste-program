@@ -104,6 +104,7 @@ public class RecipeAPI {
         this.mContext = mContext;
     }
 
+    // TODO: get a more accurate value of carbon of recipes
     private String processCarbon(String categs) {
         HashMap<String, String> foodMap = new HashMap<String, String>() {{
             put("Beef", "Very High");
@@ -519,7 +520,7 @@ public class RecipeAPI {
             }
             if (!found) return false;
         }
-        System.out.println(subset.toString());
+        //System.out.println(subset.toString());
         return true;
     }
 
