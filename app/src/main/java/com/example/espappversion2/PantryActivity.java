@@ -34,6 +34,9 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
         Utils.getInstance(this).addPantryItem(storageloc, stock);
         //System.out.println("Users before restarting PantryFragment: " + new Gson().toJson(Utils.getInstance(this).getUsers()));
 
+        // add item to FireStore
+
+
         // restart the fragment to display updated list
         pantryFragment = new PantryFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -95,11 +98,6 @@ public class PantryActivity extends AppCompatActivity implements AddPantryItemDi
                 return false;
             }
         });
-    }
-
-    @Override
-    public void onBackPressed() {
-
     }
 
     @Override

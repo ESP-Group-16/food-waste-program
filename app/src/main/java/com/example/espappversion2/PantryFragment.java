@@ -1,17 +1,13 @@
 package com.example.espappversion2;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class PantryFragment extends Fragment{
@@ -39,6 +34,7 @@ public class PantryFragment extends Fragment{
         System.out.println("Pantry of current user: " + new Gson().toJson(currentUser.getPantry()));
 
         initViews(view);
+        setUpRecyclerViews();
 
         btnAddIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,37 +44,6 @@ public class PantryFragment extends Fragment{
                 dialog.show(requireActivity().getSupportFragmentManager(), "add ingredient");
             }
         });
-
-        // Step 1: EXTRACT ITEMS FROM DATASOURCE.
-//        ArrayList<Stock> cupboardPantryItems = Datasource.getInstance().PantryInformation.get(Pantry.STORAGE_LOCATIONS[2]);
-//        ArrayList<Stock> freezerPantryItems = Datasource.getInstance().PantryInformation.get(Pantry.STORAGE_LOCATIONS[1]);
-//        ArrayList<Stock> fridgePantryItems = Datasource.getInstance().PantryInformation.get(Pantry.STORAGE_LOCATIONS[0]);
-
-        // extract items from local storage
-        ArrayList<Stock> fridgePantryItems = Utils.getInstance(getActivity()).getPantryByUser(currentUser).getPantryItems().get(Pantry.STORAGE_LOCATIONS[0]);
-        System.out.println("Fridge items in PantryFragment: " + fridgePantryItems);
-        ArrayList<Stock> freezerPantryItems = Utils.getInstance(getActivity()).getPantryByUser(currentUser).getPantryItems().get(Pantry.STORAGE_LOCATIONS[1]);
-        ArrayList<Stock> cupboardPantryItems = Utils.getInstance(getActivity()).getPantryByUser(currentUser).getPantryItems().get(Pantry.STORAGE_LOCATIONS[2]);
-
-
-        // Step 2: ASSIGN DATA ITEMS TO CREATE NEW RECYCLERVIEW (instanced) ITEMS.
-        // set adapter for fridge
-        fridgeAdapter = new PantryItemsAdapter(getActivity(), Pantry.STORAGE_LOCATIONS[0]);
-        fridgeAdapter.setItems(fridgePantryItems);
-        recViewFridge.setAdapter(fridgeAdapter);
-        recViewFridge.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        // set adapter for freezer
-        freezerAdapter = new PantryItemsAdapter(getActivity(), Pantry.STORAGE_LOCATIONS[1]);
-        freezerAdapter.setItems(freezerPantryItems);
-        recViewFreezer.setAdapter(freezerAdapter);
-        recViewFreezer.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        // set adapter for cupboard
-        cupboardAdapter = new PantryItemsAdapter(getActivity(), Pantry.STORAGE_LOCATIONS[2]);
-        cupboardAdapter.setItems(cupboardPantryItems);
-        recViewCupboard.setAdapter(cupboardAdapter);
-        recViewCupboard.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         btnAddIngredient.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -100,4 +65,29 @@ public class PantryFragment extends Fragment{
         btnAddIngredient = view.findViewById(R.id.addIngredientButton);
     }
 
+    private void setUpRecyclerViews() {
+        // extract items from local storage
+        ArrayList<Stock> fridgePantryItems = Utils.getInstance(getActivity()).getPantryByUser(currentUser).getPantryItems().get(Pantry.STORAGE_LOCATIONS[0]);
+        System.out.println("Fridge items in PantryFragment: " + fridgePantryItems);
+        ArrayList<Stock> freezerPantryItems = Utils.getInstance(getActivity()).getPantryByUser(currentUser).getPantryItems().get(Pantry.STORAGE_LOCATIONS[1]);
+        ArrayList<Stock> cupboardPantryItems = Utils.getInstance(getActivity()).getPantryByUser(currentUser).getPantryItems().get(Pantry.STORAGE_LOCATIONS[2]);
+
+        // set adapter for fridge
+        fridgeAdapter = new PantryItemsAdapter(getActivity(), Pantry.STORAGE_LOCATIONS[0]);
+        fridgeAdapter.setItems(fridgePantryItems);
+        recViewFridge.setAdapter(fridgeAdapter);
+        recViewFridge.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        // set adapter for freezer
+        freezerAdapter = new PantryItemsAdapter(getActivity(), Pantry.STORAGE_LOCATIONS[1]);
+        freezerAdapter.setItems(freezerPantryItems);
+        recViewFreezer.setAdapter(freezerAdapter);
+        recViewFreezer.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        // set adapter for cupboard
+        cupboardAdapter = new PantryItemsAdapter(getActivity(), Pantry.STORAGE_LOCATIONS[2]);
+        cupboardAdapter.setItems(cupboardPantryItems);
+        recViewCupboard.setAdapter(cupboardAdapter);
+        recViewCupboard.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
 }

@@ -83,4 +83,5 @@ public class RecipeMenuFragment extends Fragment {
         btnPantryRecipes = view.findViewById(R.id.fragmentRecipeMenuPantryRecipesButton);
         btnSearch = view.findViewById(R.id.fragmentRecipeMenuSearchButton);
     }
+
 }

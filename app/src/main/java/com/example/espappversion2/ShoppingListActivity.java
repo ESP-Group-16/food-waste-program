@@ -114,11 +114,6 @@ public class ShoppingListActivity extends AppCompatActivity implements AddShoppi
     }
 
     @Override
-    public void onBackPressed() {
-
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);

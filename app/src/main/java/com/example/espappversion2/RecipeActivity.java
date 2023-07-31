@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -110,7 +111,18 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.N
 
     @Override
     public void onBackPressed() {
-
+        // TODO: 31/07/2023 finish this
+        // get active fragment and set functionality accordingly
+        System.out.println("Current fragment:");
+        System.out.println(getSupportFragmentManager().findFragmentById(R.id.activityRecipeFragmentContainer));
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.activityRecipeFragmentContainer);
+        if(fragment instanceof RecipeListFragment || fragment instanceof SearchFragment) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.activityRecipeFragmentContainer, new RecipeMenuFragment());
+            transaction.commit();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override

@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
             Utils.getInstance(this).setCurrentUser(user, checkBoxStayLoggedIn.isChecked());
             Toast.makeText(this, "Logged in as " + user.getUserName(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, PantryActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
     }
@@ -106,11 +107,6 @@ public class MainActivity extends AppCompatActivity implements RegisterDialog.Re
         edtTxtEmail = findViewById(R.id.activityMainEmailEdtTxt);
         edtTxtPassword = findViewById(R.id.activityMainPasswordEdtTxt);
         checkBoxStayLoggedIn = findViewById(R.id.activityMainStayLoggedInCheckBox);
-    }
-
-    @Override
-    public void onBackPressed() {
-
     }
 
     @Override
