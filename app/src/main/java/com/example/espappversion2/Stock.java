@@ -1,5 +1,13 @@
 package com.example.espappversion2;
 
+import android.os.Build;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Locale;
+
 public class Stock {
     private Food food;
     private double quantity;
@@ -22,7 +30,32 @@ public class Stock {
     // Methods
     public boolean checkExpired() {
         // TODO: make functionality for checkExpired.
-        return true;
+        String dateString = expiresAt;
+
+        // Parse the stored date-time string to LocalDateTime
+        // Parse the stored date string to LocalDate
+        DateTimeFormatter formatter = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            formatter = DateTimeFormatter.ofPattern("d/M/yyyy", Locale.ENGLISH);
+        }
+        LocalDate storedDate = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            storedDate = LocalDate.parse(dateString, formatter);
+        }
+
+        // Get the current date
+        LocalDate currentDate = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            currentDate = LocalDate.now();
+        }
+
+        // Compare the stored date with the current date
+        boolean isPast = false;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            isPast = storedDate.isBefore(currentDate);
+        }
+
+        return isPast;
     }
 
     // Getters and Setters

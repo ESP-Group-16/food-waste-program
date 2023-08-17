@@ -9,7 +9,7 @@ import android.content.Intent;
 
 public class AlarmReceiver extends BroadcastReceiver {
     public static final int REQUEST_CODE = 12345;
-    public static final String ACTION = "hmm";
+    public static final String ACTION = "com.example.espappversion2.alarm";
 
     @Override
     public void onReceive(Context context, Intent intent) {
