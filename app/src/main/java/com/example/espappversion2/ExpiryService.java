@@ -61,8 +61,8 @@ public class ExpiryService extends IntentService {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         this.createNotificationChannel();
-        startForeground(1, builderAlreadyExpired.build());
         startForeground(2, builderWillExpire.build());
+        startForeground(1, builderAlreadyExpired.build());
 
 
 

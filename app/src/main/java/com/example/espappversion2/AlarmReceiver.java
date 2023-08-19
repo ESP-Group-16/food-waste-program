@@ -16,13 +16,10 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         // https://developer.android.com/develop/ui/views/notifications/build-notification
         Intent i = new Intent(context, ExpiryService.class);
-        Intent j = new Intent(context, ExpiredService.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(i);
-            context.startForegroundService(j);
         } else {
             context.startService(i);
-            context.startService(j);
         }
     }
 }
