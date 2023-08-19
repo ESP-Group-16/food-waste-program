@@ -5,6 +5,7 @@ import static com.google.android.material.internal.ContextUtils.getActivity;
 import static java.security.AccessController.getContext;
 
 import android.app.IntentService;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -26,10 +27,12 @@ public class ExpiryService extends IntentService {
     public ExpiryService() {
         super("ExpiryService");  // allegedly deprecated, if it works, then it can respectfully go away :)
         currentUser = Utils.getInstance(this).getCurrentUser();
+
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
+
         // check expiry dates here
         ArrayList<Stock> fridgePantryItems = Utils.getInstance(this).getPantryByUser(currentUser).getPantryItems().get(Pantry.STORAGE_LOCATIONS[0]);
         ArrayList<Stock> freezerPantryItems = Utils.getInstance(this).getPantryByUser(currentUser).getPantryItems().get(Pantry.STORAGE_LOCATIONS[1]);
@@ -58,6 +61,10 @@ public class ExpiryService extends IntentService {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         this.createNotificationChannel();
+        startForeground(1, builderAlreadyExpired.build());
+        startForeground(2, builderWillExpire.build());
+
+
 
         for (int i = 0; i < allPantry.size(); i++) {
             if (allPantry.get(i).checkExpired() && !alreadySentExpired) {
